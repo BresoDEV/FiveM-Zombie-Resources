@@ -377,25 +377,6 @@ function drawOption(texto, x, y)
     EndTextCommandDisplayText(x, y);
 end
 
-local graficos = false;
-
-local propX = {
-    valor = 1.0
-}
-local propY = {
-    valor = 1.0
-}
-local propZ = {
-    valor = 1.0
-}
-local propA = {
-    valor = 1.0
-}
-local propB = {
-    valor = 1.0
-}
-
-
 function DrawText3D(text, x, y, z)
     local onScreen, _x, _y = World3dToScreen2d(x, y, z)
     local px, py, pz = table.unpack(GetGameplayCamCoords())
@@ -413,6 +394,16 @@ function DrawText3D(text, x, y, z)
     DrawRect(_x, _y + 0.0125, 0.015 + factor, 0.03, 41, 11, 41, 68)
 end
 
+local propR = {
+    valor = 1.0
+}
+local propG = {
+    valor = 1.0
+}
+local propB = {
+    valor = 1.0
+}
+
 function drawLineProps()
     local pedPool = GetGamePool("CObject")
     local coords = GetEntityCoords(PlayerPedId())
@@ -421,25 +412,29 @@ function drawLineProps()
     for _, ped in pairs(pedPool) do
         -- if not IsPedAPlayer(ped) and not IsPedDeadOrDying(ped) then
 
-        local bool = false
+        local Lixeira = false
+        local ATM = false
 
         if (GetEntityModel(ped) == GetHashKey('prop_dumpster_02a')) then
-            bool = true
+            Lixeira = true
         end
         if (GetEntityModel(ped) == GetHashKey('prop_dumpster_3a')) then
-            bool = true
+            Lixeira = true
         end
         if (GetEntityModel(ped) == GetHashKey('prop_dumpster_4a')) then
-            bool = true
+            Lixeira = true
         end
         if (GetEntityModel(ped) == GetHashKey('prop_dumpster_4b')) then
-            bool = true
+            Lixeira = true
         end
         if (GetEntityModel(ped) == GetHashKey('prop_dumpster_01a')) then
-            bool = true
+            Lixeira = true
+        end
+        if (GetEntityModel(ped) == GetHashKey('prop_atm_01')) then
+            ATM = true
         end
 
-        if bool == true then
+        if Lixeira == true then
             if GetEntityAlpha(ped) == 255 then
                 local myCor = GetEntityCoords(PlayerPedId())
                 local pedCor = GetOffsetFromEntityInWorldCoords(ped, 0.0, -1.0, 1.0)
@@ -449,10 +444,11 @@ function drawLineProps()
                     200, false, true, 2, nil, nil, false)
 
                 if IsEntityAtCoord(PlayerPedId(), pedCor.x, pedCor.y, pedCor.z, 10.0, 10.0, 10.0, 0, 1, 0) then
-                    
-                    DrawText3D('Se aproxime para coletar',pedCor.x, pedCor.y, pedCor.z)
 
-                    if IsPedOnFoot(PlayerPedId()) and IsEntityAtCoord(PlayerPedId(), pedCor.x, pedCor.y, pedCor.z, 1.0, 1.0, 1.0, 0, 1, 0) then
+                    DrawText3D('Se aproxime para coletar', pedCor.x, pedCor.y, pedCor.z)
+
+                    if IsPedOnFoot(PlayerPedId()) and
+                        IsEntityAtCoord(PlayerPedId(), pedCor.x, pedCor.y, pedCor.z, 1.0, 1.0, 1.0, 0, 1, 0) then
                         SetEntityAlpha(ped, 254, false)
                         SetTextFont(0)
                         SetNotificationTextEntry("STRING")
@@ -464,37 +460,52 @@ function drawLineProps()
             end
 
         end
+        if ATM == true then
+            if GetEntityAlpha(ped) == 255 then
+                local myCor = GetEntityCoords(PlayerPedId())
+                local pedCor = GetOffsetFromEntityInWorldCoords(ped, 0.0, -0.5, 1.5)
+                DrawLine(myCor.x, myCor.y, myCor.z, pedCor.x, pedCor.y, pedCor.z, 0, 255, 0, 255)
+
+                DrawMarker(2, pedCor.x, pedCor.y, pedCor.z, 0.0, 0.0, 0.0, 0.0, 180.0, 0.0, 0.5, 0.5, 0.5, 0, 255, 0,
+                    180, false, true, 2, nil, nil, false)
+
+                if IsEntityAtCoord(PlayerPedId(), pedCor.x, pedCor.y, pedCor.z, 10.0, 10.0, 10.0, 0, 1, 0) then
+
+                    DrawText3D('Se aproxime para roubar', pedCor.x, pedCor.y, pedCor.z)
+
+                    if IsPedOnFoot(PlayerPedId()) and
+                        IsEntityAtCoord(PlayerPedId(), pedCor.x, pedCor.y, pedCor.z, 1.0, 1.0, 1.0, 0, 1, 0) then
+                        SetEntityAlpha(ped, 254, false)
+                        SetTextFont(0)
+                        SetNotificationTextEntry("STRING")
+                        AddTextComponentString('Dinheiro Coletados')
+                        DrawNotification(false, true)
+
+                        local _, pm = StatGetInt("MP0_WALLET_BALANCE", -1)
+                        local final = tonumber(pm) + tonumber(GetRandomIntInRange(1,50))
+                        StatSetInt('MP0_WALLET_BALANCE', tonumber(final), true)
+                    end
+                end
+
+            end
+
+        end
     end
 end
-
-
-local propR = {
-    valor = 1
-}
-local propG = {
-    valor = 1
-}
-local propB = {
-    valor = 1
-}
 
 function DevMenu()
     Topo('Dev Menu', 1, 0)
 
-    addFloatOption('X', propX, 5.0, -100.0, 100.0)
-    addFloatOption('Y', propY, 5.0, -100.0, 100.0)
-    addIntOption('R',propR,1,0,255) 
-    addIntOption('G',propG,1,0,255) 
-    addIntOption('B',propB,1,0,255) 
-
-
-    local myCor = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 0.0, 0.0)
-    --local myCor2 = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 0.0, 1.0)
-
-    DrawLightWithRange(myCor.x,myCor.y,myCor.z, propR.valor,propG.valor,propB.valor, propX.valor, propY.valor)
+    addFloatOption('X', propR, 0.05, -10.0, 10.0)
+    addFloatOption('Y', propG, 0.05, -10.0, 10.0)
+    addFloatOption('Z', propB, 0.05, -10.0, 10.0)
 
      
+    -- local myCor2 = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 0.0, 1.0)
 
+    drawLineProps()
+
+    --DrawLightWithRange(myCor.x, myCor.y, myCor.z, propR.valor, propG.valor, propB.valor, propX.valor, propY.valor)
 
     if addOption('mesa') then
 

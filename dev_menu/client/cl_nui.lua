@@ -66,12 +66,12 @@ end)
 RegisterNUICallback("spawnamigo", function(data)
     local hash = GetHashKey(data.ped)
     RequestModel(hash)
-    local c = GetEntityCoords(PlayerPedId(), 1)
+    local c = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0,5.0,0.0)
 
     while not HasModelLoaded(hash) do
         Wait(500)
     end
-    local Ped = CreatePed(26, hash, c.x, c.y - 10, c.z, 0, 1, 0)
+    local Ped = CreatePed(26, hash, c.x, c.y , c.z, 0, 1, 0)
     while not DoesEntityExist(Ped) do
         Wait(500)
     end
@@ -83,6 +83,7 @@ RegisterNUICallback("spawnamigo", function(data)
     local my_group = GetPlayerGroup(PlayerPedId())
     SetPedAsGroupLeader(PlayerPedId(), my_group)
     SetPedAsGroupMember(Ped, my_group)
+    GiveWeaponToPed(Ped, 453432689, 9999, 0, 1)
     SetPedNeverLeavesGroup(Ped, my_group)
     SetPedCombatAbility(Ped, 100000)
     SetPedCanSwitchWeapon(Ped, 1)
@@ -91,7 +92,7 @@ end)
 RegisterNUICallback("spawninimigo", function(data)
     local hash = GetHashKey(data.ped)
     RequestModel(hash)
-    local c = GetEntityCoords(PlayerPedId(), 1)
+    local c = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0,5.0,0.0)
 
     while not HasModelLoaded(hash) do
         Wait(500)

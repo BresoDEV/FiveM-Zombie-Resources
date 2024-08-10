@@ -201,10 +201,12 @@ Citizen.CreateThread(function()
                                     Citizen.Wait(10)
                                 end
 
-                                TaskPlayAnim(Zombie, 'melee@unarmed@streamed_core_fps', 'ground_attack_0_psycho', 8.0,
-                                    1.0, -1, 48, 0.001, false, false, false)
+                                --TaskPlayAnim(Zombie, 'melee@unarmed@streamed_core_fps', 'ground_attack_0_psycho', 8.0,
+                                --    1.0, -1, 48, 0.001, false, false, false)
 
-                                ApplyDamageToPed(PlayerPedId(), 5, false)
+                               -- ApplyDamageToPed(PlayerPedId(), 5, false)
+                                TaskCombatPed(Zombie,PlayerPedId(),0,16)
+                                SetPedAsEnemy(Zombie,true)
                             end
                         end
                     end
