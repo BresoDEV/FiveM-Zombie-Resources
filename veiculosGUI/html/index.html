@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css" type="text/css">
+    <link rel="stylesheet" href="reset.css" type="text/css">
+    <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+    <title>PenisMan</title>
+</head>
+
+<style>
+    table {
+        width: 100%;
+    }
+</style>
+
+<body>
+
+
+    <div class="menu" id="container">
+        <form id="form">
+
+            <button class="Sair" id="Sair">X</button>
+
+            <h1 style="font-size: x-large;">Veiculos:</h1>
+            <p id="nomePlayer">Bem Vindo(a) </p>
+            <p id="meuDinheiro"></p>
+            <hr style="width: 100%;">
+
+
+            <center>
+                <div style="overflow-y: auto; max-height: 350px;" id="tabela_veiculos">
+
+                    <!------------------------------------------------------------>
+
+                    <!------------------------------------------------------------>
+
+                </div>
+            </center>
+
+
+
+
+        </form>
+    </div>
+    <script src="./script.js" type="text/javascript"></script>
+
+</body>
+<script>
+
+    if (localStorage.getItem('nomeJogador'))
+        document.getElementById('nomePlayer').innerHTML = 'Bem Vindo(a) <b>' + localStorage.getItem('nomeJogador') + '</b>'
+
+
+    var veiculos = [
+        [10, 'deathbike', 'img/deathbike.jpg', 'Moto da morte'],
+        [10, 'enduro', 'img/enduro.jpg', ''],
+        [10, 'gargoyle', 'img/gargoyle.jpg', ''],
+        [10, 'ratbike', 'img/ratbike.jpg', ''],
+        [10, 'dukes2', 'img/dukes2.jpg', ''],
+        [10, 'caddy3', 'img/caddy3.jpg', ''],
+        [10, 'zr3802', 'img/zr3802.jpg', ''],
+        [10, 'dune3', 'img/dune3.jpg', ''],
+        [10, 'insurgent', 'img/insurgent.jpg', ''],
+        [10, 'technical2', 'img/technical2.jpg', ''],
+        [10, 'apc', 'img/apc.jpg', ''],
+        [10, 'issi4', 'img/issi4.jpg', ''],
+        [10, 'barrage', 'img/barrage.jpg', ''],
+        [10, 'cerberus', 'img/cerberus.jpg', ''],
+        [10, 'phantom2', 'img/phantom2.jpeg', ''],
+        [10, 'thruster', 'img/thruster.jpg', ''],
+        [10, 'havok', 'img/havok.jpg', ''],
+    ]
+
+    veiculos.sort()
+
+    veiculos.forEach(e => {
+        document.getElementById('tabela_veiculos').innerHTML += `
+        <table>
+                    <tr>
+                        <td rowspan="5"><img src="${e[2]}" alt=""></td>
+                    </tr>
+                    <tr>
+                        <td style="padding:4px ;">
+                            ${e[3]}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Valor: <font style="color: lime; border:none">
+                                    $${e[0]}
+                                </font></b></td>
+                        <td>
+                            <center>
+                                <div id="comprou_${e[1]}" class="button">Comprar</div>
+                            </center>
+                        </td>
+                    </tr>
+                </table>
+                <hr>
+
+                
+        `
+
+
+    });
+
+
+
+
+     
+    setInterval(() => {
+        document.getElementById('meuDinheiro').innerHTML = 'Seu dinheiro: <font style="color: lime; border:none">$' + localStorage.getItem('dinheiro')
+    }, 1000);
+    //------------------------------------------------------------------------------------------
+
+    criarStorages()
+
+    //----------------------------------------------------------
+
+    function hexToRgb(hex) {
+        hex = hex.replace(/^#/, '');
+        let bigint = parseInt(hex, 16);
+        let r = (bigint >> 16) & 255;
+        let g = (bigint >> 8) & 255;
+        let b = bigint & 255;
+        return { r: r, g: g, b: b };
+    }
+
+    //document.getElementById('cor').addEventListener('input', () => {
+    //    let cor = $("#cor").val()
+    //    const rgb = hexToRgb(cor);
+    //     $.post("http://veiculosGUI/corCarro", JSON.stringify({
+    //        r: rgb.r,
+    //        g: rgb.g,
+    //        b: rgb.b,
+    //    }));
+    //})
+
+
+    //----------------------------------------------------------
+
+
+
+    document.getElementById('Sair').addEventListener('click', () => {
+
+        $.post("http://veiculosGUI/exit", JSON.stringify({
+            vazio: 'vazio'
+        }));
+    })
+
+
+
+
+    function criarStorages() {
+        document.getElementById('meuDinheiro').innerHTML = 'Seu dinheiro: <font style="color: lime; border:none">$' + localStorage.getItem('dinheiro')
+
+        veiculos.forEach(e => {
+            storages(e[1])
+
+
+
+        });
+
+
+    }
+
+
+
+//----------------------------
+    const novaTagScript = document.createElement('script')
+    veiculos.forEach(e => {
+        novaTagScript.innerHTML += `
+            document.getElementById('comprou_${e[1]}').addEventListener('click', () => {
+                btClick('${e[1]}', ${e[0]})
+                criarStorages()
+            })
+        `
+    });
+    document.body.append(novaTagScript)
+//---------------------------------------------------
+
+    function storages(veiculo) {
+        if (!localStorage.getItem('comprou_' + veiculo)) {
+            localStorage.setItem('comprou_' + veiculo, 0)
+        }
+        if (parseInt(localStorage.getItem('comprou_' + veiculo)) === 1) {
+            document.getElementById('comprou_' + veiculo).textContent = 'Solicitar'
+            document.getElementById('comprou_' + veiculo).style.backgroundColor = 'rgb(100,200,100)'
+            document.getElementById('comprou_' + veiculo).style.color = 'black'
+            document.getElementById('comprou_' + veiculo).style.border = 'none'
+        }
+    }
+
+    function btClick(veiculo, valorVeh) {
+        if (parseInt(localStorage.getItem('comprou_' + veiculo)) === 1) {
+
+            alerta('Sucesso', 'Seu veiculo está disponivel proximo a você', 4000)
+            setTimeout(() => {
+                $.post("http://veiculosGUI/encomendou_" + veiculo, JSON.stringify({
+                    valor: "encomendou_" + veiculo
+                }));
+            }
+                , 1000)
+        }
+        else {
+            if (parseInt(localStorage.getItem('dinheiro')) >= valorVeh) {
+                var antes = parseInt(localStorage.getItem('dinheiro'))
+                localStorage.setItem('dinheiro', antes - valorVeh)
+                localStorage.setItem('comprou_' + veiculo, 1)
+
+                criarStorages()
+                alerta('Sucesso', 'Veiculo comprado com sucesso!!', 4000)
+
+                setTimeout(() => {
+                    $.post("http://veiculosGUI/comprou", JSON.stringify({
+                        dinheiro: parseInt(localStorage.getItem('dinheiro')),
+                        valor: "comprou_" + veiculo
+                    }));
+                }, 1000);
+
+            } else {
+                semDinheiro()
+            }
+        }
+    }
+
+    function semDinheiro() {
+        alertaErro('Erro', 'Dinheiro insuficiente!', 3000)
+
+    }
+
+    console.log(localStorage.length)
+
+    function alerta(tit, txt, tempo) {
+        const d = document.createElement('div')
+        d.style.backgroundColor = 'rgba(17, 17, 17, 0.767)'
+        d.style.position = 'fixed'
+        d.style.left = '-500px'
+        d.style.top = '10px'
+        d.style.maxWidth = '200px'
+        // d.style.height='100px'
+        d.style.borderRadius = '5px'
+        d.style.padding = '15px'
+
+
+        const titulo = document.createElement('p')
+        titulo.style.border = 'none'
+        titulo.style.color = 'lime'
+        titulo.style.fontSize = '20px'
+        titulo.innerHTML = tit
+
+        const texto = document.createElement('p')
+        texto.style.border = 'none'
+        texto.style.color = 'white'
+        texto.innerHTML = txt
+
+        d.appendChild(titulo)
+        d.appendChild(texto)
+        document.body.appendChild(d)
+
+        var i = -250
+
+        var ino = true
+        var voltano = false
+
+        var loop = setInterval(() => {
+
+            if (ino) {
+                if (i >= 10) {
+                    setTimeout(() => {
+                        ino = false
+                        voltano = true
+                    }, tempo);
+                } else { i++ }
+            }
+            if (voltano) {
+                if (i === -500) {
+
+                    ino = false
+                    voltano = false
+                    d.remove()
+                    clearInterval(loop)
+
+                } else { i-- }
+            }
+            d.style.left = i + 'px'
+
+        }, 1);
+    }
+
+
+    function alertaErro(tit, txt, tempo) {
+        const d = document.createElement('div')
+        d.style.backgroundColor = 'rgba(17, 17, 17, 0.767)'
+        d.style.position = 'fixed'
+        d.style.left = '-500px'
+        d.style.top = '10px'
+        d.style.maxWidth = '200px'
+        // d.style.height='100px'
+        d.style.borderRadius = '5px'
+        d.style.padding = '15px'
+
+
+        const titulo = document.createElement('p')
+        titulo.style.border = 'none'
+        titulo.style.color = 'red'
+        titulo.style.fontSize = '20px'
+        titulo.innerHTML = tit
+
+        const texto = document.createElement('p')
+        texto.style.border = 'none'
+        texto.style.color = 'white'
+        texto.innerHTML = txt
+
+        d.appendChild(titulo)
+        d.appendChild(texto)
+        document.body.appendChild(d)
+
+        var i = -250
+
+        var ino = true
+        var voltano = false
+
+        var loop = setInterval(() => {
+
+            if (ino) {
+                if (i >= 10) {
+                    setTimeout(() => {
+                        ino = false
+                        voltano = true
+                    }, tempo);
+                } else { i++ }
+            }
+            if (voltano) {
+                if (i === -500) {
+
+                    ino = false
+                    voltano = false
+                    d.remove()
+                    clearInterval(loop)
+
+                } else { i-- }
+            }
+            d.style.left = i + 'px'
+
+        }, 1);
+    }
+
+</script>
+
+</html>

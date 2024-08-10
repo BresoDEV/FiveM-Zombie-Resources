@@ -1,0 +1,2632 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css" type="text/css">
+    <link rel="stylesheet" href="reset.css" type="text/css">
+    <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+
+    <title>PenisMan</title>
+</head>
+<style>
+    h1 {
+        font-size: xx-large;
+        color: rgb(214, 38, 38);
+    }
+
+    hr {
+        height: 0px;
+        border: 2px solid rgb(87, 165, 42);
+    }
+
+    .gui {
+        background-color: rgba(0, 0, 0, 0.4);
+        border-radius: 5px;
+        padding: 5px;
+        border: 1px solid brown;
+        margin-bottom: 8px;
+    }
+</style>
+
+<body>
+
+
+
+
+    <div class="menu" id="container">
+        <form id="form">
+
+            <div class="rodape">
+                <input type="range" name="rodape" id="rodape" max="100" value="100">
+            </div>
+
+
+            <button class="Sair" id="Sair">Sair</button>
+
+
+            <center>
+                <br>
+                <div class="gui">
+                    <p>Cor do Carro:</p>
+                    <input type="color" name="cor" id="cor">
+                    <input type="color" name="cor2" id="cor2">
+
+                </div>
+
+
+                <div class="gui">
+                    <label for="hora">Horario:</label><input type="range" name="hora" id="hora" min="0" max="23">
+                </div>
+
+
+
+
+                <div class="gui">
+                    <label for="clima">Clima:</label>
+                    <select name="clima" id="Clima">
+                        <option value="CLEAR">CLEAR</option>
+                        <option value="EXTRASUNNY">EXTRASUNNY</option>
+                        <option value="CLOUDS">CLOUDS</option>
+                        <option value="OVERCAST">OVERCAST</option>
+                        <option value="RAIN">RAIN</option>
+                        <option value="CLEARING">CLEARING</option>
+                        <option value="THUNDER">THUNDER</option>
+                        <option value="SMOG">SMOG</option>
+                        <option value="FOGGY">FOGGY</option>
+                        <option value="XMAS">XMAS</option>
+                        <option value="SNOW">SNOW</option>
+                        <option value="SNOWLIGHT">SNOWLIGHT</option>
+                        <option value="BLIZZARD">BLIZZARD</option>
+                        <option value="HALLOWEEN">HALLOWEEN</option>
+                        <option value="NEUTRAL">NEUTRAL</option>
+                    </select>
+
+                </div>
+
+                <div class="gui">
+
+                    <p>Car Spawn:</p>
+                    <input type="text" class="button" name="nomecarro" id="nomecarro" value="oppressor2"
+                        style="width:180px;">
+                    <div id="opressor" class="button">Spawn</div>
+
+                </div>
+
+                <div class="gui">
+                    <p>Spawn Aliado</p>
+                    <select name="nomepedamigo" id="nomepedamigo" style="width:180px;">
+                        <option value="CSB_Alan">CSB_Alan</option>
+                        <option value="CSB_Bryony">CSB_Bryony</option>
+                        <option value="IG_Sacha">IG_Sacha</option>
+                        <option value="MP_F_BennyMech_01">MP_F_BennyMech_01</option>
+                        <option value="mp_m_freemode_01">mp_m_freemode_01</option>
+                        <option value="player_zero">player_zero</option>
+                        <option value="player_one">player_one</option>
+                        <option value="player_two">player_two</option>
+                        <option value="s_m_m_movalien_01">s_m_m_movalien_01</option>
+                        <option value="u_m_y_zombie_01">u_m_y_zombie_01</option>
+                        <option value="u_m_y_imporage">u_m_y_imporage</option>
+                        <option value="s_m_y_fireman_01">s_m_y_fireman_01</option>
+                        <option value="a_f_y_topless_01">a_f_y_topless_01</option>
+                        <option value="u_f_y_poppymich">u_f_y_poppymich</option>
+                        <option value="a_m_y_acult_01">a_m_y_acult_01</option>
+                        <option value="ig_lamardavis">ig_lamardavis</option>
+                        <option value="ig_jimmydisanto">ig_jimmydisanto</option>
+                        <option value="ig_tracydisanto">ig_tracydisanto</option>
+                        <option value="ig_johnnyklebitz">ig_johnnyklebitz</option>
+                        <option value="ig_wade">ig_wade</option>
+                        <option value="a_f_y_juggalo_01">a_f_y_juggalo_01</option>
+                        <option value="A_C_Boar">A_C_Boar</option>
+                        <option value="A_C_Chickenhawk">A_C_Chickenhawk</option>
+                        <option value="A_C_Chimp">A_C_Chimp</option>
+                        <option value="A_C_Chop">A_C_Chop</option>
+                        <option value="A_C_Cormorant">A_C_Cormorant</option>
+                        <option value="A_C_Cow">A_C_Cow</option>
+                        <option value="A_C_Coyote">A_C_Coyote</option>
+                        <option value="A_C_Crow">A_C_Crow</option>
+                        <option value="A_C_Deer">A_C_Deer</option>
+                        <option value="A_C_Fish">A_C_Fish</option>
+                        <option value="A_C_Hen">A_C_Hen</option>
+                        <option value="A_C_Husky">A_C_Husky</option>
+                        <option value="A_C_MtLion">A_C_MtLion</option>
+                        <option value="A_C_Pig">A_C_Pig</option>
+                        <option value="A_C_Pigeon">A_C_Pigeon</option>
+                        <option value="A_C_Rat">A_C_Rat</option>
+                        <option value="A_C_Retriever">A_C_Retriever</option>
+                        <option value="A_C_Rhesus">A_C_Rhesus</option>
+                        <option value="A_C_Rottweiler">A_C_Rottweiler</option>
+                        <option value="A_C_Seagull">A_C_Seagull</option>
+                        <option value="A_C_SharkTiger">A_C_SharkTiger</option>
+                        <option value="A_C_shepherd">A_C_shepherd</option>
+                        <option value="A_F_M_Beach_01">A_F_M_Beach_01</option>
+                        <option value="A_F_M_BevHills_01">A_F_M_BevHills_01</option>
+                        <option value="A_F_M_BevHills_02">A_F_M_BevHills_02</option>
+                        <option value="A_F_M_BodyBuild_01">A_F_M_BodyBuild_01</option>
+                        <option value="A_F_M_Business_02">A_F_M_Business_02</option>
+                        <option value="A_F_M_Downtown_01">A_F_M_Downtown_01</option>
+                        <option value="A_F_M_EastSA_01">A_F_M_EastSA_01</option>
+                        <option value="A_F_M_EastSA_02">A_F_M_EastSA_02</option>
+                        <option value="A_F_M_FatBla_01">A_F_M_FatBla_01</option>
+                        <option value="A_F_M_FatCult_01">A_F_M_FatCult_01</option>
+                        <option value="A_F_M_FatWhite_01">A_F_M_FatWhite_01</option>
+                        <option value="A_F_M_KTown_01">A_F_M_KTown_01</option>
+                        <option value="A_F_M_KTown_02">A_F_M_KTown_02</option>
+                        <option value="A_F_M_ProlHost_01">A_F_M_ProlHost_01</option>
+                        <option value="A_F_M_Salton_01">A_F_M_Salton_01</option>
+                        <option value="A_F_M_SkidRow_01">A_F_M_SkidRow_01</option>
+                        <option value="A_F_M_SouCentMC_01">A_F_M_SouCentMC_01</option>
+                        <option value="A_F_M_SouCent_01">A_F_M_SouCent_01</option>
+                        <option value="A_F_M_SouCent_02">A_F_M_SouCent_02</option>
+                        <option value="A_F_M_Tourist_01">A_F_M_Tourist_01</option>
+                        <option value="A_F_M_TrampBeac_01">A_F_M_TrampBeac_01</option>
+                        <option value="A_F_M_Tramp_01">A_F_M_Tramp_01</option>
+                        <option value="A_F_O_GenStreet_01">A_F_O_GenStreet_01</option>
+                        <option value="A_F_O_Indian_01">A_F_O_Indian_01</option>
+                        <option value="A_F_O_KTown_01">A_F_O_KTown_01</option>
+                        <option value="A_F_O_Salton_01">A_F_O_Salton_01</option>
+                        <option value="A_F_O_SouCent_01">A_F_O_SouCent_01</option>
+                        <option value="A_F_O_SouCent_02">A_F_O_SouCent_02</option>
+                        <option value="A_F_Y_Beach_01">A_F_Y_Beach_01</option>
+                        <option value="A_F_Y_BevHills_01">A_F_Y_BevHills_01</option>
+                        <option value="A_F_Y_BevHills_02">A_F_Y_BevHills_02</option>
+                        <option value="A_F_Y_BevHills_03">A_F_Y_BevHills_03</option>
+                        <option value="A_F_Y_BevHills_04">A_F_Y_BevHills_04</option>
+                        <option value="A_F_Y_Business_01">A_F_Y_Business_01</option>
+                        <option value="A_F_Y_Business_02">A_F_Y_Business_02</option>
+                        <option value="A_F_Y_Business_03">A_F_Y_Business_03</option>
+                        <option value="A_F_Y_Business_04">A_F_Y_Business_04</option>
+                        <option value="A_F_Y_EastSA_01">A_F_Y_EastSA_01</option>
+                        <option value="A_F_Y_EastSA_02">A_F_Y_EastSA_02</option>
+                        <option value="A_F_Y_EastSA_03">A_F_Y_EastSA_03</option>
+                        <option value="A_F_Y_Epsilon_01">A_F_Y_Epsilon_01</option>
+                        <option value="A_F_Y_Fitness_01">A_F_Y_Fitness_01</option>
+                        <option value="A_F_Y_Fitness_02">A_F_Y_Fitness_02</option>
+                        <option value="A_F_Y_GenHot_01">A_F_Y_GenHot_01</option>
+                        <option value="A_F_Y_Golfer_01">A_F_Y_Golfer_01</option>
+                        <option value="A_F_Y_Hiker_01">A_F_Y_Hiker_01</option>
+                        <option value="A_F_Y_Hippie_01">A_F_Y_Hippie_01</option>
+                        <option value="A_F_Y_Hipster_01">A_F_Y_Hipster_01</option>
+                        <option value="A_F_Y_Hipster_02">A_F_Y_Hipster_02</option>
+                        <option value="A_F_Y_Hipster_03">A_F_Y_Hipster_03</option>
+                        <option value="A_F_Y_Hipster_04">A_F_Y_Hipster_04</option>
+                        <option value="A_F_Y_Indian_01">A_F_Y_Indian_01</option>
+                        <option value="A_F_Y_Juggalo_01">A_F_Y_Juggalo_01</option>
+                        <option value="A_F_Y_Runner_01">A_F_Y_Runner_01</option>
+                        <option value="A_F_Y_RurMeth_01">A_F_Y_RurMeth_01</option>
+                        <option value="A_F_Y_SCDressy_01">A_F_Y_SCDressy_01</option>
+                        <option value="A_F_Y_Skater_01">A_F_Y_Skater_01</option>
+                        <option value="A_F_Y_SouCent_01">A_F_Y_SouCent_01</option>
+                        <option value="A_F_Y_SouCent_02">A_F_Y_SouCent_02</option>
+                        <option value="A_F_Y_SouCent_03">A_F_Y_SouCent_03</option>
+                        <option value="A_F_Y_Tennis_01">A_F_Y_Tennis_01</option>
+                        <option value="A_F_Y_Topless_01">A_F_Y_Topless_01</option>
+                        <option value="A_F_Y_Tourist_01">A_F_Y_Tourist_01</option>
+                        <option value="A_F_Y_Tourist_02">A_F_Y_Tourist_02</option>
+                        <option value="A_F_Y_Vinewood_01">A_F_Y_Vinewood_01</option>
+                        <option value="A_F_Y_Vinewood_02">A_F_Y_Vinewood_02</option>
+                        <option value="A_F_Y_Vinewood_03">A_F_Y_Vinewood_03</option>
+                        <option value="A_F_Y_Vinewood_04">A_F_Y_Vinewood_04</option>
+                        <option value="A_F_Y_Yoga_01">A_F_Y_Yoga_01</option>
+                        <option value="A_M_M_ACult_01">A_M_M_ACult_01</option>
+                        <option value="A_M_M_AfriAmer_01">A_M_M_AfriAmer_01</option>
+                        <option value="A_M_M_Beach_01">A_M_M_Beach_01</option>
+                        <option value="A_M_M_Beach_02">A_M_M_Beach_02</option>
+                        <option value="A_M_M_BevHills_01">A_M_M_BevHills_01</option>
+                        <option value="A_M_M_BevHills_02">A_M_M_BevHills_02</option>
+                        <option value="A_M_M_Business_01">A_M_M_Business_01</option>
+                        <option value="A_M_M_EastSA_01">A_M_M_EastSA_01</option>
+                        <option value="A_M_M_EastSA_02">A_M_M_EastSA_02</option>
+                        <option value="A_M_M_Farmer_01">A_M_M_Farmer_01</option>
+                        <option value="A_M_M_FatLatin_01">A_M_M_FatLatin_01</option>
+                        <option value="A_M_M_GenFat_01">A_M_M_GenFat_01</option>
+                        <option value="A_M_M_GenFat_02">A_M_M_GenFat_02</option>
+                        <option value="A_M_M_Golfer_01">A_M_M_Golfer_01</option>
+                        <option value="A_M_M_HasJew_01">A_M_M_HasJew_01</option>
+                        <option value="A_M_M_Hillbilly_01">A_M_M_Hillbilly_01</option>
+                        <option value="A_M_M_Hillbilly_02">A_M_M_Hillbilly_02</option>
+                        <option value="A_M_M_Indian_01">A_M_M_Indian_01</option>
+                        <option value="A_M_M_KTown_01">A_M_M_KTown_01</option>
+                        <option value="A_M_M_Malibu_01">A_M_M_Malibu_01</option>
+                        <option value="A_M_M_MexCntry_01">A_M_M_MexCntry_01</option>
+                        <option value="A_M_M_MexLabor_01">A_M_M_MexLabor_01</option>
+                        <option value="A_M_M_OG_Boss_01">A_M_M_OG_Boss_01</option>
+                        <option value="A_M_M_Paparazzi_01">A_M_M_Paparazzi_01</option>
+                        <option value="A_M_M_Polynesian_01">A_M_M_Polynesian_01</option>
+                        <option value="A_M_M_ProlHost_01">A_M_M_ProlHost_01</option>
+                        <option value="A_M_M_RurMeth_01">A_M_M_RurMeth_01</option>
+                        <option value="A_M_M_Salton_01">A_M_M_Salton_01</option>
+                        <option value="A_M_M_Salton_02">A_M_M_Salton_02</option>
+                        <option value="A_M_M_Salton_03">A_M_M_Salton_03</option>
+                        <option value="A_M_M_Salton_04">A_M_M_Salton_04</option>
+                        <option value="A_M_M_Skater_01">A_M_M_Skater_01</option>
+                        <option value="A_M_M_Skidrow_01">A_M_M_Skidrow_01</option>
+                        <option value="A_M_M_SoCenLat_01">A_M_M_SoCenLat_01</option>
+                        <option value="A_M_M_SouCent_01">A_M_M_SouCent_01</option>
+                        <option value="A_M_M_SouCent_02">A_M_M_SouCent_02</option>
+                        <option value="A_M_M_SouCent_03">A_M_M_SouCent_03</option>
+                        <option value="A_M_M_SouCent_04">A_M_M_SouCent_04</option>
+                        <option value="A_M_M_StLat_02">A_M_M_StLat_02</option>
+                        <option value="A_M_M_Tennis_01">A_M_M_Tennis_01</option>
+                        <option value="A_M_M_Tourist_01">A_M_M_Tourist_01</option>
+                        <option value="A_M_M_TrampBeac_01">A_M_M_TrampBeac_01</option>
+                        <option value="A_M_M_Tramp_01">A_M_M_Tramp_01</option>
+                        <option value="A_M_M_TranVest_01">A_M_M_TranVest_01</option>
+                        <option value="A_M_M_TranVest_02">A_M_M_TranVest_02</option>
+                        <option value="A_M_O_ACult_01">A_M_O_ACult_01</option>
+                        <option value="A_M_O_ACult_02">A_M_O_ACult_02</option>
+                        <option value="A_M_O_Beach_01">A_M_O_Beach_01</option>
+                        <option value="A_M_O_GenStreet_01">A_M_O_GenStreet_01</option>
+                        <option value="A_M_O_KTown_01">A_M_O_KTown_01</option>
+                        <option value="A_M_O_Salton_01">A_M_O_Salton_01</option>
+                        <option value="A_M_O_SouCent_01">A_M_O_SouCent_01</option>
+                        <option value="A_M_O_SouCent_02">A_M_O_SouCent_02</option>
+                        <option value="A_M_O_SouCent_03">A_M_O_SouCent_03</option>
+                        <option value="A_M_O_Tramp_01">A_M_O_Tramp_01</option>
+                        <option value="A_M_Y_ACult_01">A_M_Y_ACult_01</option>
+                        <option value="A_M_Y_ACult_02">A_M_Y_ACult_02</option>
+                        <option value="A_M_Y_BeachVesp_01">A_M_Y_BeachVesp_01</option>
+                        <option value="A_M_Y_BeachVesp_02">A_M_Y_BeachVesp_02</option>
+                        <option value="A_M_Y_Beach_01">A_M_Y_Beach_01</option>
+                        <option value="A_M_Y_Beach_02">A_M_Y_Beach_02</option>
+                        <option value="A_M_Y_Beach_03">A_M_Y_Beach_03</option>
+                        <option value="A_M_Y_BevHills_01">A_M_Y_BevHills_01</option>
+                        <option value="A_M_Y_BevHills_02">A_M_Y_BevHills_02</option>
+                        <option value="A_M_Y_BreakDance_01">A_M_Y_BreakDance_01</option>
+                        <option value="A_M_Y_BusiCas_01">A_M_Y_BusiCas_01</option>
+                        <option value="A_M_Y_Business_01">A_M_Y_Business_01</option>
+                        <option value="A_M_Y_Business_02">A_M_Y_Business_02</option>
+                        <option value="A_M_Y_Business_03">A_M_Y_Business_03</option>
+                        <option value="A_M_Y_Cyclist_01">A_M_Y_Cyclist_01</option>
+                        <option value="A_M_Y_DHill_01">A_M_Y_DHill_01</option>
+                        <option value="A_M_Y_Downtown_01">A_M_Y_Downtown_01</option>
+                        <option value="A_M_Y_EastSA_01">A_M_Y_EastSA_01</option>
+                        <option value="A_M_Y_EastSA_02">A_M_Y_EastSA_02</option>
+                        <option value="A_M_Y_Epsilon_01">A_M_Y_Epsilon_01</option>
+                        <option value="A_M_Y_Epsilon_02">A_M_Y_Epsilon_02</option>
+                        <option value="A_M_Y_Gay_01">A_M_Y_Gay_01</option>
+                        <option value="A_M_Y_Gay_02">A_M_Y_Gay_02</option>
+                        <option value="A_M_Y_GenStreet_01">A_M_Y_GenStreet_01</option>
+                        <option value="A_M_Y_GenStreet_02">A_M_Y_GenStreet_02</option>
+                        <option value="A_M_Y_Golfer_01">A_M_Y_Golfer_01</option>
+                        <option value="A_M_Y_HasJew_01">A_M_Y_HasJew_01</option>
+                        <option value="A_M_Y_Hiker_01">A_M_Y_Hiker_01</option>
+                        <option value="A_M_Y_Hippy_01">A_M_Y_Hippy_01</option>
+                        <option value="A_M_Y_Hipster_01">A_M_Y_Hipster_01</option>
+                        <option value="A_M_Y_Hipster_02">A_M_Y_Hipster_02</option>
+                        <option value="A_M_Y_Hipster_03">A_M_Y_Hipster_03</option>
+                        <option value="A_M_Y_Indian_01">A_M_Y_Indian_01</option>
+                        <option value="A_M_Y_Jetski_01">A_M_Y_Jetski_01</option>
+                        <option value="A_M_Y_Juggalo_01">A_M_Y_Juggalo_01</option>
+                        <option value="A_M_Y_KTown_01">A_M_Y_KTown_01</option>
+                        <option value="A_M_Y_KTown_02">A_M_Y_KTown_02</option>
+                        <option value="A_M_Y_Latino_01">A_M_Y_Latino_01</option>
+                        <option value="A_M_Y_MethHead_01">A_M_Y_MethHead_01</option>
+                        <option value="A_M_Y_MexThug_01">A_M_Y_MexThug_01</option>
+                        <option value="A_M_Y_MotoX_01">A_M_Y_MotoX_01</option>
+                        <option value="A_M_Y_MotoX_02">A_M_Y_MotoX_02</option>
+                        <option value="A_M_Y_MusclBeac_01">A_M_Y_MusclBeac_01</option>
+                        <option value="A_M_Y_MusclBeac_02">A_M_Y_MusclBeac_02</option>
+                        <option value="A_M_Y_Polynesian_01">A_M_Y_Polynesian_01</option>
+                        <option value="A_M_Y_RoadCyc_01">A_M_Y_RoadCyc_01</option>
+                        <option value="A_M_Y_Runner_01">A_M_Y_Runner_01</option>
+                        <option value="A_M_Y_Runner_02">A_M_Y_Runner_02</option>
+                        <option value="A_M_Y_Salton_01">A_M_Y_Salton_01</option>
+                        <option value="A_M_Y_Skater_01">A_M_Y_Skater_01</option>
+                        <option value="A_M_Y_Skater_02">A_M_Y_Skater_02</option>
+                        <option value="A_M_Y_SouCent_01">A_M_Y_SouCent_01</option>
+                        <option value="A_M_Y_SouCent_02">A_M_Y_SouCent_02</option>
+                        <option value="A_M_Y_SouCent_03">A_M_Y_SouCent_03</option>
+                        <option value="A_M_Y_SouCent_04">A_M_Y_SouCent_04</option>
+                        <option value="A_M_Y_StBla_01">A_M_Y_StBla_01</option>
+                        <option value="A_M_Y_StBla_02">A_M_Y_StBla_02</option>
+                        <option value="A_M_Y_StLat_01">A_M_Y_StLat_01</option>
+                        <option value="A_M_Y_StWhi_01">A_M_Y_StWhi_01</option>
+                        <option value="A_M_Y_StWhi_02">A_M_Y_StWhi_02</option>
+                        <option value="A_M_Y_Sunbathe_01">A_M_Y_Sunbathe_01</option>
+                        <option value="A_M_Y_Surfer_01">A_M_Y_Surfer_01</option>
+                        <option value="A_M_Y_VinDouche_01">A_M_Y_VinDouche_01</option>
+                        <option value="A_M_Y_Vinewood_01">A_M_Y_Vinewood_01</option>
+                        <option value="A_M_Y_Vinewood_02">A_M_Y_Vinewood_02</option>
+                        <option value="A_M_Y_Vinewood_03">A_M_Y_Vinewood_03</option>
+                        <option value="A_M_Y_Vinewood_04">A_M_Y_Vinewood_04</option>
+                        <option value="A_M_Y_Yoga_01">A_M_Y_Yoga_01</option>
+                        <option value="CSB_Abigail">CSB_Abigail</option>
+                        <option value="CSB_Anita">CSB_Anita</option>
+                        <option value="CSB_Anton">CSB_Anton</option>
+                        <option value="CSB_BallasOG">CSB_BallasOG</option>
+                        <option value="CSB_Bride">CSB_Bride</option>
+                        <option value="CSB_BurgerDrug">CSB_BurgerDrug</option>
+                        <option value="CSB_Car3guy1">CSB_Car3guy1</option>
+                        <option value="CSB_Car3guy2">CSB_Car3guy2</option>
+                        <option value="CSB_Chef">CSB_Chef</option>
+                        <option value="CSB_Chin_goon">CSB_Chin_goon</option>
+                        <option value="CSB_Cletus">CSB_Cletus</option>
+                        <option value="CSB_Cop">CSB_Cop</option>
+                        <option value="CSB_Customer">CSB_Customer</option>
+                        <option value="CSB_Denise_friend">CSB_Denise_friend</option>
+                        <option value="CSB_FOS_rep">CSB_FOS_rep</option>
+                        <option value="CSB_G">CSB_G</option>
+                        <option value="CSB_Groom">CSB_Groom</option>
+                        <option value="CSB_Grove_str_dlr">CSB_Grove_str_dlr</option>
+                        <option value="CSB_Hao">CSB_Hao</option>
+                        <option value="CSB_Hugh">CSB_Hugh</option>
+                        <option value="CSB_Imran">CSB_Imran</option>
+                        <option value="CSB_Janitor">CSB_Janitor</option>
+                        <option value="CSB_Maude">CSB_Maude</option>
+                        <option value="CSB_MWeather">CSB_MWeather</option>
+                        <option value="CSB_Ortega">CSB_Ortega</option>
+                        <option value="CSB_Oscar">CSB_Oscar</option>
+                        <option value="CSB_PornDudes">CSB_PornDudes</option>
+                        <option value="CSB_PrologueDriver">CSB_PrologueDriver</option>
+                        <option value="CSB_ProlSec">CSB_ProlSec</option>
+                        <option value="CSB_Ramp_gang">CSB_Ramp_gang</option>
+                        <option value="CSB_Ramp_hic">CSB_Ramp_hic</option>
+                        <option value="CSB_Ramp_hipster">CSB_Ramp_hipster</option>
+                        <option value="CSB_Ramp_marine">CSB_Ramp_marine</option>
+                        <option value="CSB_Ramp_mex">CSB_Ramp_mex</option>
+                        <option value="CSB_Reporter">CSB_Reporter</option>
+                        <option value="CSB_RoccoPelosi">CSB_RoccoPelosi</option>
+                        <option value="CSB_Screen_Writer">CSB_Screen_Writer</option>
+                        <option value="CSB_Stripper_01">CSB_Stripper_01</option>
+                        <option value="CSB_Stripper_02">CSB_Stripper_02</option>
+                        <option value="CSB_Tonya">CSB_Tonya</option>
+                        <option value="CSB_TrafficWarden">CSB_TrafficWarden</option>
+                        <option value="CS_AmandaTownley">CS_AmandaTownley</option>
+                        <option value="CS_Andreas">CS_Andreas</option>
+                        <option value="cs_ashley">cs_ashley</option>
+                        <option value="CS_Bankman">CS_Bankman</option>
+                        <option value="CS_Barry">CS_Barry</option>
+                        <option value="CS_Beverly">CS_Beverly</option>
+                        <option value="CS_Brad">CS_Brad</option>
+                        <option value="CS_BradCadaver">CS_BradCadaver</option>
+                        <option value="CS_Carbuyer">CS_Carbuyer</option>
+                        <option value="CS_Casey">CS_Casey</option>
+                        <option value="CS_ChengSr">CS_ChengSr</option>
+                        <option value="CS_ChrisFormage">CS_ChrisFormage</option>
+                        <option value="CS_Clay">CS_Clay</option>
+                        <option value="CS_Dale">CS_Dale</option>
+                        <option value="CS_DaveNorton">CS_DaveNorton</option>
+                        <option value="cs_debra">cs_debra</option>
+                        <option value="cs_denise">cs_denise</option>
+                        <option value="CS_Devin">CS_Devin</option>
+                        <option value="CS_Dom">CS_Dom</option>
+                        <option value="CS_Dreyfuss">CS_Dreyfuss</option>
+                        <option value="CS_DrFriedlander">CS_DrFriedlander</option>
+                        <option value="CS_Fabien">CS_Fabien</option>
+                        <option value="CS_FBISuit_01">CS_FBISuit_01</option>
+                        <option value="CS_Floyd">CS_Floyd</option>
+                        <option value="CS_Guadalope">CS_Guadalope</option>
+                        <option value="cs_gurk">cs_gurk</option>
+                        <option value="CS_Hunter">CS_Hunter</option>
+                        <option value="CS_Janet">CS_Janet</option>
+                        <option value="CS_JewelAss">CS_JewelAss</option>
+                        <option value="CS_JimmyBoston">CS_JimmyBoston</option>
+                        <option value="CS_JimmyDiSanto">CS_JimmyDiSanto</option>
+                        <option value="CS_JoeMinuteMan">CS_JoeMinuteMan</option>
+                        <option value="CS_JohnnyKlebitz">CS_JohnnyKlebitz</option>
+                        <option value="CS_Josef">CS_Josef</option>
+                        <option value="CS_Josh">CS_Josh</option>
+                        <option value="CS_LamarDavis">CS_LamarDavis</option>
+                        <option value="CS_Lazlow">CS_Lazlow</option>
+                        <option value="CS_LesterCrest">CS_LesterCrest</option>
+                        <option value="CS_LifeInvad_01">CS_LifeInvad_01</option>
+                        <option value="CS_Magenta">CS_Magenta</option>
+                        <option value="CS_Manuel">CS_Manuel</option>
+                        <option value="CS_Marnie">CS_Marnie</option>
+                        <option value="CS_MartinMadrazo">CS_MartinMadrazo</option>
+                        <option value="CS_MaryAnn">CS_MaryAnn</option>
+                        <option value="CS_Michelle">CS_Michelle</option>
+                        <option value="CS_Milton">CS_Milton</option>
+                        <option value="CS_Molly">CS_Molly</option>
+                        <option value="CS_MovPremF_01">CS_MovPremF_01</option>
+                        <option value="CS_MovPremMale">CS_MovPremMale</option>
+                        <option value="CS_MRK">CS_MRK</option>
+                        <option value="CS_MrsPhillips">CS_MrsPhillips</option>
+                        <option value="CS_MRS_Thornhill">CS_MRS_Thornhill</option>
+                        <option value="CS_Natalia">CS_Natalia</option>
+                        <option value="CS_NervousRon">CS_NervousRon</option>
+                        <option value="CS_Nigel">CS_Nigel</option>
+                        <option value="CS_Old_Man1A">CS_Old_Man1A</option>
+                        <option value="CS_Old_Man2">CS_Old_Man2</option>
+                        <option value="CS_Omega">CS_Omega</option>
+                        <option value="CS_Orleans">CS_Orleans</option>
+                        <option value="CS_Paper">CS_Paper</option>
+                        <option value="CS_Patricia">CS_Patricia</option>
+                        <option value="CS_Priest">CS_Priest</option>
+                        <option value="CS_ProlSec_02">CS_ProlSec_02</option>
+                        <option value="CS_RussianDrunk">CS_RussianDrunk</option>
+                        <option value="CS_SiemonYetarian">CS_SiemonYetarian</option>
+                        <option value="CS_Solomon">CS_Solomon</option>
+                        <option value="CS_SteveHains">CS_SteveHains</option>
+                        <option value="CS_Stretch">CS_Stretch</option>
+                        <option value="CS_Tanisha">CS_Tanisha</option>
+                        <option value="CS_TaoCheng">CS_TaoCheng</option>
+                        <option value="CS_TaosTranslator">CS_TaosTranslator</option>
+                        <option value="CS_TennisCoach">CS_TennisCoach</option>
+                        <option value="CS_Terry">CS_Terry</option>
+                        <option value="CS_Tom">CS_Tom</option>
+                        <option value="CS_TomEpsilon">CS_TomEpsilon</option>
+                        <option value="CS_TracyDiSanto">CS_TracyDiSanto</option>
+                        <option value="CS_Wade">CS_Wade</option>
+                        <option value="CS_Zimbor">CS_Zimbor</option>
+                        <option value="G_F_Y_ballas_01">G_F_Y_ballas_01</option>
+                        <option value="G_F_Y_Families_01">G_F_Y_Families_01</option>
+                        <option value="G_F_Y_Lost_01">G_F_Y_Lost_01</option>
+                        <option value="G_F_Y_Vagos_01">G_F_Y_Vagos_01</option>
+                        <option value="G_M_M_ArmBoss_01">G_M_M_ArmBoss_01</option>
+                        <option value="G_M_M_ArmGoon_01">G_M_M_ArmGoon_01</option>
+                        <option value="G_M_M_ArmLieut_01">G_M_M_ArmLieut_01</option>
+                        <option value="G_M_M_ChemWork_01">G_M_M_ChemWork_01</option>
+                        <option value="G_M_M_ChiBoss_01">G_M_M_ChiBoss_01</option>
+                        <option value="G_M_M_ChiCold_01">G_M_M_ChiCold_01</option>
+                        <option value="G_M_M_ChiGoon_01">G_M_M_ChiGoon_01</option>
+                        <option value="G_M_M_ChiGoon_02">G_M_M_ChiGoon_02</option>
+                        <option value="G_M_M_KorBoss_01">G_M_M_KorBoss_01</option>
+                        <option value="G_M_M_MexBoss_01">G_M_M_MexBoss_01</option>
+                        <option value="G_M_M_MexBoss_02">G_M_M_MexBoss_02</option>
+                        <option value="G_M_Y_ArmGoon_02">G_M_Y_ArmGoon_02</option>
+                        <option value="G_M_Y_Azteca_01">G_M_Y_Azteca_01</option>
+                        <option value="G_M_Y_BallaEast_01">G_M_Y_BallaEast_01</option>
+                        <option value="G_M_Y_BallaOrig_01">G_M_Y_BallaOrig_01</option>
+                        <option value="G_M_Y_BallaSout_01">G_M_Y_BallaSout_01</option>
+                        <option value="G_M_Y_FamCA_01">G_M_Y_FamCA_01</option>
+                        <option value="G_M_Y_FamDNF_01">G_M_Y_FamDNF_01</option>
+                        <option value="G_M_Y_FamFor_01">G_M_Y_FamFor_01</option>
+                        <option value="G_M_Y_Korean_01">G_M_Y_Korean_01</option>
+                        <option value="G_M_Y_Korean_02">G_M_Y_Korean_02</option>
+                        <option value="G_M_Y_KorLieut_01">G_M_Y_KorLieut_01</option>
+                        <option value="G_M_Y_Lost_01">G_M_Y_Lost_01</option>
+                        <option value="G_M_Y_Lost_02">G_M_Y_Lost_02</option>
+                        <option value="G_M_Y_Lost_03">G_M_Y_Lost_03</option>
+                        <option value="G_M_Y_MexGang_01">G_M_Y_MexGang_01</option>
+                        <option value="G_M_Y_MexGoon_01">G_M_Y_MexGoon_01</option>
+                        <option value="G_M_Y_MexGoon_02">G_M_Y_MexGoon_02</option>
+                        <option value="G_M_Y_MexGoon_03">G_M_Y_MexGoon_03</option>
+                        <option value="G_M_Y_PoloGoon_01">G_M_Y_PoloGoon_01</option>
+                        <option value="G_M_Y_PoloGoon_02">G_M_Y_PoloGoon_02</option>
+                        <option value="G_M_Y_SalvaBoss_01">G_M_Y_SalvaBoss_01</option>
+                        <option value="G_M_Y_SalvaGoon_01">G_M_Y_SalvaGoon_01</option>
+                        <option value="G_M_Y_SalvaGoon_02">G_M_Y_SalvaGoon_02</option>
+                        <option value="G_M_Y_SalvaGoon_03">G_M_Y_SalvaGoon_03</option>
+                        <option value="G_M_Y_StrPunk_01">G_M_Y_StrPunk_01</option>
+                        <option value="G_M_Y_StrPunk_02">G_M_Y_StrPunk_02</option>
+                        <option value="HC_Driver">HC_Driver</option>
+                        <option value="HC_Gunman">HC_Gunman</option>
+                        <option value="HC_Hacker">HC_Hacker</option>
+                        <option value="IG_Abigail">IG_Abigail</option>
+                        <option value="IG_AmandaTownley">IG_AmandaTownley</option>
+                        <option value="IG_Andreas">IG_Andreas</option>
+                        <option value="IG_Ashley">IG_Ashley</option>
+                        <option value="IG_BallasOG">IG_BallasOG</option>
+                        <option value="IG_Bankman">IG_Bankman</option>
+                        <option value="IG_Barry">IG_Barry</option>
+                        <option value="IG_BestMen">IG_BestMen</option>
+                        <option value="IG_Beverly">IG_Beverly</option>
+                        <option value="IG_Brad">IG_Brad</option>
+                        <option value="IG_Bride">IG_Bride</option>
+                        <option value="IG_Car3guy1">IG_Car3guy1</option>
+                        <option value="IG_Car3guy2">IG_Car3guy2</option>
+                        <option value="IG_Casey">IG_Casey</option>
+                        <option value="IG_Chef">IG_Chef</option>
+                        <option value="IG_ChengSr">IG_ChengSr</option>
+                        <option value="IG_ChrisFormage">IG_ChrisFormage</option>
+                        <option value="IG_Clay">IG_Clay</option>
+                        <option value="IG_ClayPain">IG_ClayPain</option>
+                        <option value="IG_Cletus">IG_Cletus</option>
+                        <option value="IG_Dale">IG_Dale</option>
+                        <option value="IG_DaveNorton">IG_DaveNorton</option>
+                        <option value="IG_Denise">IG_Denise</option>
+                        <option value="IG_Devin">IG_Devin</option>
+                        <option value="IG_Dom">IG_Dom</option>
+                        <option value="IG_Dreyfuss">IG_Dreyfuss</option>
+                        <option value="IG_DrFriedlander">IG_DrFriedlander</option>
+                        <option value="IG_Fabien">IG_Fabien</option>
+                        <option value="IG_FBISuit_01">IG_FBISuit_01</option>
+                        <option value="IG_Floyd">IG_Floyd</option>
+                        <option value="IG_Groom">IG_Groom</option>
+                        <option value="IG_Hao">IG_Hao</option>
+                        <option value="IG_Hunter">IG_Hunter</option>
+                        <option value="IG_Janet">IG_Janet</option>
+                        <option value="ig_JAY_Norris">ig_JAY_Norris</option>
+                        <option value="IG_JewelAss">IG_JewelAss</option>
+                        <option value="IG_JimmyBoston">IG_JimmyBoston</option>
+                        <option value="IG_JimmyDiSanto">IG_JimmyDiSanto</option>
+                        <option value="IG_JoeMinuteMan">IG_JoeMinuteMan</option>
+                        <option value="ig_JohnnyKlebitz">ig_JohnnyKlebitz</option>
+                        <option value="IG_Josef">IG_Josef</option>
+                        <option value="IG_Josh">IG_Josh</option>
+                        <option value="IG_KerryMcIntosh">IG_KerryMcIntosh</option>
+                        <option value="IG_LamarDavis">IG_LamarDavis</option>
+                        <option value="IG_Lazlow">IG_Lazlow</option>
+                        <option value="IG_LesterCrest">IG_LesterCrest</option>
+                        <option value="IG_LifeInvad_01">IG_LifeInvad_01</option>
+                        <option value="IG_LifeInvad_02">IG_LifeInvad_02</option>
+                        <option value="IG_Magenta">IG_Magenta</option>
+                        <option value="IG_Manuel">IG_Manuel</option>
+                        <option value="IG_Marnie">IG_Marnie</option>
+                        <option value="IG_MaryAnn">IG_MaryAnn</option>
+                        <option value="IG_Maude">IG_Maude</option>
+                        <option value="IG_Michelle">IG_Michelle</option>
+                        <option value="IG_Milton">IG_Milton</option>
+                        <option value="IG_Molly">IG_Molly</option>
+                        <option value="IG_MRK">IG_MRK</option>
+                        <option value="IG_MrsPhillips">IG_MrsPhillips</option>
+                        <option value="IG_MRS_Thornhill">IG_MRS_Thornhill</option>
+                        <option value="IG_Natalia">IG_Natalia</option>
+                        <option value="IG_NervousRon">IG_NervousRon</option>
+                        <option value="IG_Nigel">IG_Nigel</option>
+                        <option value="IG_Old_Man1A">IG_Old_Man1A</option>
+                        <option value="IG_Old_Man2">IG_Old_Man2</option>
+                        <option value="IG_Omega">IG_Omega</option>
+                        <option value="IG_ONeil">IG_ONeil</option>
+                        <option value="IG_Orleans">IG_Orleans</option>
+                        <option value="IG_Ortega">IG_Ortega</option>
+                        <option value="IG_Paper">IG_Paper</option>
+                        <option value="IG_Patricia">IG_Patricia</option>
+                        <option value="IG_Priest">IG_Priest</option>
+                        <option value="IG_ProlSec_02">IG_ProlSec_02</option>
+                        <option value="IG_Ramp_Gang">IG_Ramp_Gang</option>
+                        <option value="IG_Ramp_Hic">IG_Ramp_Hic</option>
+                        <option value="IG_Ramp_Hipster">IG_Ramp_Hipster</option>
+                        <option value="IG_Ramp_Mex">IG_Ramp_Mex</option>
+                        <option value="IG_RoccoPelosi">IG_RoccoPelosi</option>
+                        <option value="IG_RussianDrunk">IG_RussianDrunk</option>
+                        <option value="IG_Screen_Writer">IG_Screen_Writer</option>
+                        <option value="IG_SiemonYetarian">IG_SiemonYetarian</option>
+                        <option value="IG_Solomon">IG_Solomon</option>
+                        <option value="IG_SteveHains">IG_SteveHains</option>
+                        <option value="IG_Stretch">IG_Stretch</option>
+                        <option value="IG_Talina">IG_Talina</option>
+                        <option value="IG_Tanisha">IG_Tanisha</option>
+                        <option value="IG_TaoCheng">IG_TaoCheng</option>
+                        <option value="IG_TaosTranslator">IG_TaosTranslator</option>
+                        <option value="ig_TennisCoach">ig_TennisCoach</option>
+                        <option value="IG_Terry">IG_Terry</option>
+                        <option value="IG_TomEpsilon">IG_TomEpsilon</option>
+                        <option value="IG_Tonya">IG_Tonya</option>
+                        <option value="IG_TracyDiSanto">IG_TracyDiSanto</option>
+                        <option value="IG_TrafficWarden">IG_TrafficWarden</option>
+                        <option value="IG_TylerDix">IG_TylerDix</option>
+                        <option value="IG_Wade">IG_Wade</option>
+                        <option value="IG_Zimbor">IG_Zimbor</option>
+                        <option value="MP_F_DeadHooker">MP_F_DeadHooker</option>
+                        <option value="MP_F_Freemode_01">MP_F_Freemode_01</option>
+                        <option value="MP_F_Misty_01">MP_F_Misty_01</option>
+                        <option value="MP_F_StripperLite">MP_F_StripperLite</option>
+                        <option value="MP_G_M_Pros_01">MP_G_M_Pros_01</option>
+                        <option value="MP_HeadTargets">MP_HeadTargets</option>
+                        <option value="MP_M_Claude_01">MP_M_Claude_01</option>
+                        <option value="MP_M_ExArmy_01">MP_M_ExArmy_01</option>
+                        <option value="MP_M_FamDD_01">MP_M_FamDD_01</option>
+                        <option value="MP_M_FIBSec_01">MP_M_FIBSec_01</option>
+                        <option value="MP_M_Freemode_01">MP_M_Freemode_01</option>
+                        <option value="MP_M_Marston_01">MP_M_Marston_01</option>
+                        <option value="MP_M_Niko_01">MP_M_Niko_01</option>
+                        <option value="MP_M_ShopKeep_01">MP_M_ShopKeep_01</option>
+                        <option value="MP_S_M_Armoured_01">MP_S_M_Armoured_01</option>
+                        <option value="Player_One">Player_One</option>
+                        <option value="Player_Two">Player_Two</option>
+                        <option value="Player_Zero">Player_Zero</option>
+                        <option value="slod_human">slod_human</option>
+                        <option value="slod_large_quadped">slod_large_quadped</option>
+                        <option value="slod_small_quadped">slod_small_quadped</option>
+                        <option value="S_F_M_Fembarber">S_F_M_Fembarber</option>
+                        <option value="S_F_M_Maid_01">S_F_M_Maid_01</option>
+                        <option value="S_F_M_Shop_HIGH">S_F_M_Shop_HIGH</option>
+                        <option value="S_F_M_SweatShop_01">S_F_M_SweatShop_01</option>
+                        <option value="S_F_Y_AirHostess_01">S_F_Y_AirHostess_01</option>
+                        <option value="S_F_Y_Bartender_01">S_F_Y_Bartender_01</option>
+                        <option value="S_F_Y_Baywatch_01">S_F_Y_Baywatch_01</option>
+                        <option value="S_F_Y_Cop_01">S_F_Y_Cop_01</option>
+                        <option value="S_F_Y_Factory_01">S_F_Y_Factory_01</option>
+                        <option value="S_F_Y_Hooker_01">S_F_Y_Hooker_01</option>
+                        <option value="S_F_Y_Hooker_02">S_F_Y_Hooker_02</option>
+                        <option value="S_F_Y_Hooker_03">S_F_Y_Hooker_03</option>
+                        <option value="S_F_Y_Migrant_01">S_F_Y_Migrant_01</option>
+                        <option value="S_F_Y_MovPrem_01">S_F_Y_MovPrem_01</option>
+                        <option value="S_F_Y_Ranger_01">S_F_Y_Ranger_01</option>
+                        <option value="S_F_Y_Scrubs_01">S_F_Y_Scrubs_01</option>
+                        <option value="S_F_Y_Sheriff_01">S_F_Y_Sheriff_01</option>
+                        <option value="S_F_Y_Shop_LOW">S_F_Y_Shop_LOW</option>
+                        <option value="S_F_Y_Shop_MID">S_F_Y_Shop_MID</option>
+                        <option value="S_F_Y_StripperLite">S_F_Y_StripperLite</option>
+                        <option value="S_F_Y_Stripper_01">S_F_Y_Stripper_01</option>
+                        <option value="S_F_Y_Stripper_02">S_F_Y_Stripper_02</option>
+                        <option value="S_F_Y_SweatShop_01">S_F_Y_SweatShop_01</option>
+                        <option value="S_M_M_AmmuCountry">S_M_M_AmmuCountry</option>
+                        <option value="S_M_M_Armoured_01">S_M_M_Armoured_01</option>
+                        <option value="S_M_M_Armoured_02">S_M_M_Armoured_02</option>
+                        <option value="S_M_M_AutoShop_01">S_M_M_AutoShop_01</option>
+                        <option value="S_M_M_AutoShop_02">S_M_M_AutoShop_02</option>
+                        <option value="S_M_M_Bouncer_01">S_M_M_Bouncer_01</option>
+                        <option value="S_M_M_ChemSec_01">S_M_M_ChemSec_01</option>
+                        <option value="S_M_M_CIASec_01">S_M_M_CIASec_01</option>
+                        <option value="S_M_M_CntryBar_01">S_M_M_CntryBar_01</option>
+                        <option value="S_M_M_DockWork_01">S_M_M_DockWork_01</option>
+                        <option value="S_M_M_Doctor_01">S_M_M_Doctor_01</option>
+                        <option value="S_M_M_FIBOffice_01">S_M_M_FIBOffice_01</option>
+                        <option value="S_M_M_FIBOffice_02">S_M_M_FIBOffice_02</option>
+                        <option value="S_M_M_Gaffer_01">S_M_M_Gaffer_01</option>
+                        <option value="S_M_M_Gardener_01">S_M_M_Gardener_01</option>
+                        <option value="S_M_M_GenTransport">S_M_M_GenTransport</option>
+                        <option value="S_M_M_HairDress_01">S_M_M_HairDress_01</option>
+                        <option value="S_M_M_HighSec_01">S_M_M_HighSec_01</option>
+                        <option value="S_M_M_HighSec_02">S_M_M_HighSec_02</option>
+                        <option value="S_M_M_Janitor">S_M_M_Janitor</option>
+                        <option value="S_M_M_LatHandy_01">S_M_M_LatHandy_01</option>
+                        <option value="S_M_M_LifeInvad_01">S_M_M_LifeInvad_01</option>
+                        <option value="S_M_M_Linecook">S_M_M_Linecook</option>
+                        <option value="S_M_M_LSMetro_01">S_M_M_LSMetro_01</option>
+                        <option value="S_M_M_Mariachi_01">S_M_M_Mariachi_01</option>
+                        <option value="S_M_M_Marine_01">S_M_M_Marine_01</option>
+                        <option value="S_M_M_Marine_02">S_M_M_Marine_02</option>
+                        <option value="S_M_M_Migrant_01">S_M_M_Migrant_01</option>
+                        <option value="S_M_M_MovAlien_01">S_M_M_MovAlien_01</option>
+                        <option value="S_M_M_MovPrem_01">S_M_M_MovPrem_01</option>
+                        <option value="S_M_M_MovSpace_01">S_M_M_MovSpace_01</option>
+                        <option value="S_M_M_Paramedic_01">S_M_M_Paramedic_01</option>
+                        <option value="S_M_M_Pilot_01">S_M_M_Pilot_01</option>
+                        <option value="S_M_M_Pilot_02">S_M_M_Pilot_02</option>
+                        <option value="S_M_M_Postal_01">S_M_M_Postal_01</option>
+                        <option value="S_M_M_Postal_02">S_M_M_Postal_02</option>
+                        <option value="S_M_M_PrisGuard_01">S_M_M_PrisGuard_01</option>
+                        <option value="S_M_M_Scientist_01">S_M_M_Scientist_01</option>
+                        <option value="S_M_M_Security_01">S_M_M_Security_01</option>
+                        <option value="S_M_M_SnowCop_01">S_M_M_SnowCop_01</option>
+                        <option value="S_M_M_StrPerf_01">S_M_M_StrPerf_01</option>
+                        <option value="S_M_M_StrPreach_01">S_M_M_StrPreach_01</option>
+                        <option value="S_M_M_StrVend_01">S_M_M_StrVend_01</option>
+                        <option value="S_M_M_Trucker_01">S_M_M_Trucker_01</option>
+                        <option value="S_M_M_UPS_01">S_M_M_UPS_01</option>
+                        <option value="S_M_M_UPS_02">S_M_M_UPS_02</option>
+                        <option value="S_M_O_Busker_01">S_M_O_Busker_01</option>
+                        <option value="S_M_Y_AirWorker">S_M_Y_AirWorker</option>
+                        <option value="S_M_Y_AmmuCity_01">S_M_Y_AmmuCity_01</option>
+                        <option value="S_M_Y_ArmyMech_01">S_M_Y_ArmyMech_01</option>
+                        <option value="S_M_Y_Autopsy_01">S_M_Y_Autopsy_01</option>
+                        <option value="S_M_Y_Barman_01">S_M_Y_Barman_01</option>
+                        <option value="S_M_Y_BayWatch_01">S_M_Y_BayWatch_01</option>
+                        <option value="S_M_Y_BlackOps_01">S_M_Y_BlackOps_01</option>
+                        <option value="S_M_Y_BlackOps_02">S_M_Y_BlackOps_02</option>
+                        <option value="S_M_Y_BlackOps_03">S_M_Y_BlackOps_03</option>
+                        <option value="S_M_Y_BusBoy_01">S_M_Y_BusBoy_01</option>
+                        <option value="S_M_Y_Chef_01">S_M_Y_Chef_01</option>
+                        <option value="S_M_Y_Clown_01">S_M_Y_Clown_01</option>
+                        <option value="S_M_Y_Construct_01">S_M_Y_Construct_01</option>
+                        <option value="S_M_Y_Construct_02">S_M_Y_Construct_02</option>
+                        <option value="S_M_Y_Cop_01">S_M_Y_Cop_01</option>
+                        <option value="S_M_Y_Dealer_01">S_M_Y_Dealer_01</option>
+                        <option value="S_M_Y_DevinSec_01">S_M_Y_DevinSec_01</option>
+                        <option value="S_M_Y_DockWork_01">S_M_Y_DockWork_01</option>
+                        <option value="S_M_Y_Doorman_01">S_M_Y_Doorman_01</option>
+                        <option value="S_M_Y_DWService_01">S_M_Y_DWService_01</option>
+                        <option value="S_M_Y_DWService_02">S_M_Y_DWService_02</option>
+                        <option value="S_M_Y_Factory_01">S_M_Y_Factory_01</option>
+                        <option value="S_M_Y_Fireman_01">S_M_Y_Fireman_01</option>
+                        <option value="S_M_Y_Garbage">S_M_Y_Garbage</option>
+                        <option value="S_M_Y_Grip_01">S_M_Y_Grip_01</option>
+                        <option value="S_M_Y_HwayCop_01">S_M_Y_HwayCop_01</option>
+                        <option value="S_M_Y_Marine_01">S_M_Y_Marine_01</option>
+                        <option value="S_M_Y_Marine_02">S_M_Y_Marine_02</option>
+                        <option value="S_M_Y_Marine_03">S_M_Y_Marine_03</option>
+                        <option value="S_M_Y_Mime">S_M_Y_Mime</option>
+                        <option value="S_M_Y_PestCont_01">S_M_Y_PestCont_01</option>
+                        <option value="S_M_Y_Pilot_01">S_M_Y_Pilot_01</option>
+                        <option value="S_M_Y_PrisMuscl_01">S_M_Y_PrisMuscl_01</option>
+                        <option value="S_M_Y_Prisoner_01">S_M_Y_Prisoner_01</option>
+                        <option value="S_M_Y_Ranger_01">S_M_Y_Ranger_01</option>
+                        <option value="S_M_Y_Robber_01">S_M_Y_Robber_01</option>
+                        <option value="S_M_Y_Sheriff_01">S_M_Y_Sheriff_01</option>
+                        <option value="S_M_Y_Shop_MASK">S_M_Y_Shop_MASK</option>
+                        <option value="S_M_Y_StrVend_01">S_M_Y_StrVend_01</option>
+                        <option value="S_M_Y_Swat_01">S_M_Y_Swat_01</option>
+                        <option value="S_M_Y_USCG_01">S_M_Y_USCG_01</option>
+                        <option value="S_M_Y_Valet_01">S_M_Y_Valet_01</option>
+                        <option value="S_M_Y_Waiter_01">S_M_Y_Waiter_01</option>
+                        <option value="S_M_Y_WinClean_01">S_M_Y_WinClean_01</option>
+                        <option value="S_M_Y_XMech_01">S_M_Y_XMech_01</option>
+                        <option value="S_M_Y_XMech_02">S_M_Y_XMech_02</option>
+                        <option value="U_F_M_Corpse_01">U_F_M_Corpse_01</option>
+                        <option value="U_F_M_Miranda">U_F_M_Miranda</option>
+                        <option value="U_F_M_ProMourn_01">U_F_M_ProMourn_01</option>
+                        <option value="U_F_O_MovieStar">U_F_O_MovieStar</option>
+                        <option value="U_F_O_ProlHost_01">U_F_O_ProlHost_01</option>
+                        <option value="U_F_Y_BikerChic">U_F_Y_BikerChic</option>
+                        <option value="U_F_Y_COMJane">U_F_Y_COMJane</option>
+                        <option value="U_F_Y_corpse_01">U_F_Y_corpse_01</option>
+                        <option value="U_F_Y_corpse_02">U_F_Y_corpse_02</option>
+                        <option value="U_F_Y_HotPosh_01">U_F_Y_HotPosh_01</option>
+                        <option value="U_F_Y_JewelAss_01">U_F_Y_JewelAss_01</option>
+                        <option value="U_F_Y_Mistress">U_F_Y_Mistress</option>
+                        <option value="U_F_Y_PoppyMich">U_F_Y_PoppyMich</option>
+                        <option value="U_F_Y_Princess">U_F_Y_Princess</option>
+                        <option value="U_F_Y_SpyActress">U_F_Y_SpyActress</option>
+                        <option value="U_M_M_Aldinapoli">U_M_M_Aldinapoli</option>
+                        <option value="U_M_M_BankMan">U_M_M_BankMan</option>
+                        <option value="U_M_M_BikeHire_01">U_M_M_BikeHire_01</option>
+                        <option value="U_M_M_FIBArchitect">U_M_M_FIBArchitect</option>
+                        <option value="U_M_M_FilmDirector">U_M_M_FilmDirector</option>
+                        <option value="U_M_M_GlenStank_01">U_M_M_GlenStank_01</option>
+                        <option value="U_M_M_Griff_01">U_M_M_Griff_01</option>
+                        <option value="U_M_M_Jesus_01">U_M_M_Jesus_01</option>
+                        <option value="U_M_M_JewelSec_01">U_M_M_JewelSec_01</option>
+                        <option value="U_M_M_JewelThief">U_M_M_JewelThief</option>
+                        <option value="U_M_M_MarkFost">U_M_M_MarkFost</option>
+                        <option value="U_M_M_PartyTarget">U_M_M_PartyTarget</option>
+                        <option value="U_M_M_ProlSec_01">U_M_M_ProlSec_01</option>
+                        <option value="U_M_M_ProMourn_01">U_M_M_ProMourn_01</option>
+                        <option value="U_M_M_RivalPap">U_M_M_RivalPap</option>
+                        <option value="U_M_M_SpyActor">U_M_M_SpyActor</option>
+                        <option value="U_M_M_WillyFist">U_M_M_WillyFist</option>
+                        <option value="U_M_O_FinGuru_01">U_M_O_FinGuru_01</option>
+                        <option value="U_M_O_TapHillBilly">U_M_O_TapHillBilly</option>
+                        <option value="U_M_O_Tramp_01">U_M_O_Tramp_01</option>
+                        <option value="U_M_Y_Abner">U_M_Y_Abner</option>
+                        <option value="U_M_Y_AntonB">U_M_Y_AntonB</option>
+                        <option value="U_M_Y_BabyD">U_M_Y_BabyD</option>
+                        <option value="U_M_Y_Baygor">U_M_Y_Baygor</option>
+                        <option value="U_M_Y_BurgerDrug_01">U_M_Y_BurgerDrug_01</option>
+                        <option value="U_M_Y_Chip">U_M_Y_Chip</option>
+                        <option value="U_M_Y_Cyclist_01">U_M_Y_Cyclist_01</option>
+                        <option value="U_M_Y_FIBMugger_01">U_M_Y_FIBMugger_01</option>
+                        <option value="U_M_Y_Guido_01">U_M_Y_Guido_01</option>
+                        <option value="U_M_Y_GunVend_01">U_M_Y_GunVend_01</option>
+                        <option value="U_M_Y_Hippie_01">U_M_Y_Hippie_01</option>
+                        <option value="U_M_Y_ImpoRage">U_M_Y_ImpoRage</option>
+                        <option value="U_M_Y_Justin">U_M_Y_Justin</option>
+                        <option value="U_M_Y_Mani">U_M_Y_Mani</option>
+                        <option value="U_M_Y_MilitaryBum">U_M_Y_MilitaryBum</option>
+                        <option value="U_M_Y_Paparazzi">U_M_Y_Paparazzi</option>
+                        <option value="U_M_Y_Party_01">U_M_Y_Party_01</option>
+                        <option value="U_M_Y_Pogo_01">U_M_Y_Pogo_01</option>
+                        <option value="U_M_Y_Prisoner_01">U_M_Y_Prisoner_01</option>
+                        <option value="U_M_Y_ProlDriver_01">U_M_Y_ProlDriver_01</option>
+                        <option value="U_M_Y_RSRanger_01">U_M_Y_RSRanger_01</option>
+                        <option value="U_M_Y_SBike">U_M_Y_SBike</option>
+                        <option value="U_M_Y_StagGrm_01">U_M_Y_StagGrm_01</option>
+                        <option value="U_M_Y_Tattoo_01">U_M_Y_Tattoo_01</option>
+                        <option value="U_M_Y_Zombie_01">U_M_Y_Zombie_01</option>
+                    </select>
+
+                    <div id="spawnpedamigo" class="button">Spawn</div>
+
+                </div>
+
+
+                <div class="gui">
+                    <p>Spawn Inimigo</p>
+
+                    <select class="button" name="nomepedinimigo" id="nomepedinimigo">
+                        <option value="CSB_Alan">CSB_Alan</option>
+                        <option value="CSB_Bryony">CSB_Bryony</option>
+                        <option value="IG_Sacha">IG_Sacha</option>
+                        <option value="MP_F_BennyMech_01">MP_F_BennyMech_01</option>
+                        <option value="mp_m_freemode_01">mp_m_freemode_01</option>
+                        <option value="player_zero">player_zero</option>
+                        <option value="player_one">player_one</option>
+                        <option value="player_two">player_two</option>
+                        <option value="s_m_m_movalien_01">s_m_m_movalien_01</option>
+                        <option value="u_m_y_zombie_01">u_m_y_zombie_01</option>
+                        <option value="u_m_y_imporage">u_m_y_imporage</option>
+                        <option value="s_m_y_fireman_01">s_m_y_fireman_01</option>
+                        <option value="a_f_y_topless_01">a_f_y_topless_01</option>
+                        <option value="u_f_y_poppymich">u_f_y_poppymich</option>
+                        <option value="a_m_y_acult_01">a_m_y_acult_01</option>
+                        <option value="ig_lamardavis">ig_lamardavis</option>
+                        <option value="ig_jimmydisanto">ig_jimmydisanto</option>
+                        <option value="ig_tracydisanto">ig_tracydisanto</option>
+                        <option value="ig_johnnyklebitz">ig_johnnyklebitz</option>
+                        <option value="ig_wade">ig_wade</option>
+                        <option value="a_f_y_juggalo_01">a_f_y_juggalo_01</option>
+                        <option value="A_C_Boar">A_C_Boar</option>
+                        <option value="A_C_Chickenhawk">A_C_Chickenhawk</option>
+                        <option value="A_C_Chimp">A_C_Chimp</option>
+                        <option value="A_C_Chop">A_C_Chop</option>
+                        <option value="A_C_Cormorant">A_C_Cormorant</option>
+                        <option value="A_C_Cow">A_C_Cow</option>
+                        <option value="A_C_Coyote">A_C_Coyote</option>
+                        <option value="A_C_Crow">A_C_Crow</option>
+                        <option value="A_C_Deer">A_C_Deer</option>
+                        <option value="A_C_Fish">A_C_Fish</option>
+                        <option value="A_C_Hen">A_C_Hen</option>
+                        <option value="A_C_Husky">A_C_Husky</option>
+                        <option value="A_C_MtLion">A_C_MtLion</option>
+                        <option value="A_C_Pig">A_C_Pig</option>
+                        <option value="A_C_Pigeon">A_C_Pigeon</option>
+                        <option value="A_C_Rat">A_C_Rat</option>
+                        <option value="A_C_Retriever">A_C_Retriever</option>
+                        <option value="A_C_Rhesus">A_C_Rhesus</option>
+                        <option value="A_C_Rottweiler">A_C_Rottweiler</option>
+                        <option value="A_C_Seagull">A_C_Seagull</option>
+                        <option value="A_C_SharkTiger">A_C_SharkTiger</option>
+                        <option value="A_C_shepherd">A_C_shepherd</option>
+                        <option value="A_F_M_Beach_01">A_F_M_Beach_01</option>
+                        <option value="A_F_M_BevHills_01">A_F_M_BevHills_01</option>
+                        <option value="A_F_M_BevHills_02">A_F_M_BevHills_02</option>
+                        <option value="A_F_M_BodyBuild_01">A_F_M_BodyBuild_01</option>
+                        <option value="A_F_M_Business_02">A_F_M_Business_02</option>
+                        <option value="A_F_M_Downtown_01">A_F_M_Downtown_01</option>
+                        <option value="A_F_M_EastSA_01">A_F_M_EastSA_01</option>
+                        <option value="A_F_M_EastSA_02">A_F_M_EastSA_02</option>
+                        <option value="A_F_M_FatBla_01">A_F_M_FatBla_01</option>
+                        <option value="A_F_M_FatCult_01">A_F_M_FatCult_01</option>
+                        <option value="A_F_M_FatWhite_01">A_F_M_FatWhite_01</option>
+                        <option value="A_F_M_KTown_01">A_F_M_KTown_01</option>
+                        <option value="A_F_M_KTown_02">A_F_M_KTown_02</option>
+                        <option value="A_F_M_ProlHost_01">A_F_M_ProlHost_01</option>
+                        <option value="A_F_M_Salton_01">A_F_M_Salton_01</option>
+                        <option value="A_F_M_SkidRow_01">A_F_M_SkidRow_01</option>
+                        <option value="A_F_M_SouCentMC_01">A_F_M_SouCentMC_01</option>
+                        <option value="A_F_M_SouCent_01">A_F_M_SouCent_01</option>
+                        <option value="A_F_M_SouCent_02">A_F_M_SouCent_02</option>
+                        <option value="A_F_M_Tourist_01">A_F_M_Tourist_01</option>
+                        <option value="A_F_M_TrampBeac_01">A_F_M_TrampBeac_01</option>
+                        <option value="A_F_M_Tramp_01">A_F_M_Tramp_01</option>
+                        <option value="A_F_O_GenStreet_01">A_F_O_GenStreet_01</option>
+                        <option value="A_F_O_Indian_01">A_F_O_Indian_01</option>
+                        <option value="A_F_O_KTown_01">A_F_O_KTown_01</option>
+                        <option value="A_F_O_Salton_01">A_F_O_Salton_01</option>
+                        <option value="A_F_O_SouCent_01">A_F_O_SouCent_01</option>
+                        <option value="A_F_O_SouCent_02">A_F_O_SouCent_02</option>
+                        <option value="A_F_Y_Beach_01">A_F_Y_Beach_01</option>
+                        <option value="A_F_Y_BevHills_01">A_F_Y_BevHills_01</option>
+                        <option value="A_F_Y_BevHills_02">A_F_Y_BevHills_02</option>
+                        <option value="A_F_Y_BevHills_03">A_F_Y_BevHills_03</option>
+                        <option value="A_F_Y_BevHills_04">A_F_Y_BevHills_04</option>
+                        <option value="A_F_Y_Business_01">A_F_Y_Business_01</option>
+                        <option value="A_F_Y_Business_02">A_F_Y_Business_02</option>
+                        <option value="A_F_Y_Business_03">A_F_Y_Business_03</option>
+                        <option value="A_F_Y_Business_04">A_F_Y_Business_04</option>
+                        <option value="A_F_Y_EastSA_01">A_F_Y_EastSA_01</option>
+                        <option value="A_F_Y_EastSA_02">A_F_Y_EastSA_02</option>
+                        <option value="A_F_Y_EastSA_03">A_F_Y_EastSA_03</option>
+                        <option value="A_F_Y_Epsilon_01">A_F_Y_Epsilon_01</option>
+                        <option value="A_F_Y_Fitness_01">A_F_Y_Fitness_01</option>
+                        <option value="A_F_Y_Fitness_02">A_F_Y_Fitness_02</option>
+                        <option value="A_F_Y_GenHot_01">A_F_Y_GenHot_01</option>
+                        <option value="A_F_Y_Golfer_01">A_F_Y_Golfer_01</option>
+                        <option value="A_F_Y_Hiker_01">A_F_Y_Hiker_01</option>
+                        <option value="A_F_Y_Hippie_01">A_F_Y_Hippie_01</option>
+                        <option value="A_F_Y_Hipster_01">A_F_Y_Hipster_01</option>
+                        <option value="A_F_Y_Hipster_02">A_F_Y_Hipster_02</option>
+                        <option value="A_F_Y_Hipster_03">A_F_Y_Hipster_03</option>
+                        <option value="A_F_Y_Hipster_04">A_F_Y_Hipster_04</option>
+                        <option value="A_F_Y_Indian_01">A_F_Y_Indian_01</option>
+                        <option value="A_F_Y_Juggalo_01">A_F_Y_Juggalo_01</option>
+                        <option value="A_F_Y_Runner_01">A_F_Y_Runner_01</option>
+                        <option value="A_F_Y_RurMeth_01">A_F_Y_RurMeth_01</option>
+                        <option value="A_F_Y_SCDressy_01">A_F_Y_SCDressy_01</option>
+                        <option value="A_F_Y_Skater_01">A_F_Y_Skater_01</option>
+                        <option value="A_F_Y_SouCent_01">A_F_Y_SouCent_01</option>
+                        <option value="A_F_Y_SouCent_02">A_F_Y_SouCent_02</option>
+                        <option value="A_F_Y_SouCent_03">A_F_Y_SouCent_03</option>
+                        <option value="A_F_Y_Tennis_01">A_F_Y_Tennis_01</option>
+                        <option value="A_F_Y_Topless_01">A_F_Y_Topless_01</option>
+                        <option value="A_F_Y_Tourist_01">A_F_Y_Tourist_01</option>
+                        <option value="A_F_Y_Tourist_02">A_F_Y_Tourist_02</option>
+                        <option value="A_F_Y_Vinewood_01">A_F_Y_Vinewood_01</option>
+                        <option value="A_F_Y_Vinewood_02">A_F_Y_Vinewood_02</option>
+                        <option value="A_F_Y_Vinewood_03">A_F_Y_Vinewood_03</option>
+                        <option value="A_F_Y_Vinewood_04">A_F_Y_Vinewood_04</option>
+                        <option value="A_F_Y_Yoga_01">A_F_Y_Yoga_01</option>
+                        <option value="A_M_M_ACult_01">A_M_M_ACult_01</option>
+                        <option value="A_M_M_AfriAmer_01">A_M_M_AfriAmer_01</option>
+                        <option value="A_M_M_Beach_01">A_M_M_Beach_01</option>
+                        <option value="A_M_M_Beach_02">A_M_M_Beach_02</option>
+                        <option value="A_M_M_BevHills_01">A_M_M_BevHills_01</option>
+                        <option value="A_M_M_BevHills_02">A_M_M_BevHills_02</option>
+                        <option value="A_M_M_Business_01">A_M_M_Business_01</option>
+                        <option value="A_M_M_EastSA_01">A_M_M_EastSA_01</option>
+                        <option value="A_M_M_EastSA_02">A_M_M_EastSA_02</option>
+                        <option value="A_M_M_Farmer_01">A_M_M_Farmer_01</option>
+                        <option value="A_M_M_FatLatin_01">A_M_M_FatLatin_01</option>
+                        <option value="A_M_M_GenFat_01">A_M_M_GenFat_01</option>
+                        <option value="A_M_M_GenFat_02">A_M_M_GenFat_02</option>
+                        <option value="A_M_M_Golfer_01">A_M_M_Golfer_01</option>
+                        <option value="A_M_M_HasJew_01">A_M_M_HasJew_01</option>
+                        <option value="A_M_M_Hillbilly_01">A_M_M_Hillbilly_01</option>
+                        <option value="A_M_M_Hillbilly_02">A_M_M_Hillbilly_02</option>
+                        <option value="A_M_M_Indian_01">A_M_M_Indian_01</option>
+                        <option value="A_M_M_KTown_01">A_M_M_KTown_01</option>
+                        <option value="A_M_M_Malibu_01">A_M_M_Malibu_01</option>
+                        <option value="A_M_M_MexCntry_01">A_M_M_MexCntry_01</option>
+                        <option value="A_M_M_MexLabor_01">A_M_M_MexLabor_01</option>
+                        <option value="A_M_M_OG_Boss_01">A_M_M_OG_Boss_01</option>
+                        <option value="A_M_M_Paparazzi_01">A_M_M_Paparazzi_01</option>
+                        <option value="A_M_M_Polynesian_01">A_M_M_Polynesian_01</option>
+                        <option value="A_M_M_ProlHost_01">A_M_M_ProlHost_01</option>
+                        <option value="A_M_M_RurMeth_01">A_M_M_RurMeth_01</option>
+                        <option value="A_M_M_Salton_01">A_M_M_Salton_01</option>
+                        <option value="A_M_M_Salton_02">A_M_M_Salton_02</option>
+                        <option value="A_M_M_Salton_03">A_M_M_Salton_03</option>
+                        <option value="A_M_M_Salton_04">A_M_M_Salton_04</option>
+                        <option value="A_M_M_Skater_01">A_M_M_Skater_01</option>
+                        <option value="A_M_M_Skidrow_01">A_M_M_Skidrow_01</option>
+                        <option value="A_M_M_SoCenLat_01">A_M_M_SoCenLat_01</option>
+                        <option value="A_M_M_SouCent_01">A_M_M_SouCent_01</option>
+                        <option value="A_M_M_SouCent_02">A_M_M_SouCent_02</option>
+                        <option value="A_M_M_SouCent_03">A_M_M_SouCent_03</option>
+                        <option value="A_M_M_SouCent_04">A_M_M_SouCent_04</option>
+                        <option value="A_M_M_StLat_02">A_M_M_StLat_02</option>
+                        <option value="A_M_M_Tennis_01">A_M_M_Tennis_01</option>
+                        <option value="A_M_M_Tourist_01">A_M_M_Tourist_01</option>
+                        <option value="A_M_M_TrampBeac_01">A_M_M_TrampBeac_01</option>
+                        <option value="A_M_M_Tramp_01">A_M_M_Tramp_01</option>
+                        <option value="A_M_M_TranVest_01">A_M_M_TranVest_01</option>
+                        <option value="A_M_M_TranVest_02">A_M_M_TranVest_02</option>
+                        <option value="A_M_O_ACult_01">A_M_O_ACult_01</option>
+                        <option value="A_M_O_ACult_02">A_M_O_ACult_02</option>
+                        <option value="A_M_O_Beach_01">A_M_O_Beach_01</option>
+                        <option value="A_M_O_GenStreet_01">A_M_O_GenStreet_01</option>
+                        <option value="A_M_O_KTown_01">A_M_O_KTown_01</option>
+                        <option value="A_M_O_Salton_01">A_M_O_Salton_01</option>
+                        <option value="A_M_O_SouCent_01">A_M_O_SouCent_01</option>
+                        <option value="A_M_O_SouCent_02">A_M_O_SouCent_02</option>
+                        <option value="A_M_O_SouCent_03">A_M_O_SouCent_03</option>
+                        <option value="A_M_O_Tramp_01">A_M_O_Tramp_01</option>
+                        <option value="A_M_Y_ACult_01">A_M_Y_ACult_01</option>
+                        <option value="A_M_Y_ACult_02">A_M_Y_ACult_02</option>
+                        <option value="A_M_Y_BeachVesp_01">A_M_Y_BeachVesp_01</option>
+                        <option value="A_M_Y_BeachVesp_02">A_M_Y_BeachVesp_02</option>
+                        <option value="A_M_Y_Beach_01">A_M_Y_Beach_01</option>
+                        <option value="A_M_Y_Beach_02">A_M_Y_Beach_02</option>
+                        <option value="A_M_Y_Beach_03">A_M_Y_Beach_03</option>
+                        <option value="A_M_Y_BevHills_01">A_M_Y_BevHills_01</option>
+                        <option value="A_M_Y_BevHills_02">A_M_Y_BevHills_02</option>
+                        <option value="A_M_Y_BreakDance_01">A_M_Y_BreakDance_01</option>
+                        <option value="A_M_Y_BusiCas_01">A_M_Y_BusiCas_01</option>
+                        <option value="A_M_Y_Business_01">A_M_Y_Business_01</option>
+                        <option value="A_M_Y_Business_02">A_M_Y_Business_02</option>
+                        <option value="A_M_Y_Business_03">A_M_Y_Business_03</option>
+                        <option value="A_M_Y_Cyclist_01">A_M_Y_Cyclist_01</option>
+                        <option value="A_M_Y_DHill_01">A_M_Y_DHill_01</option>
+                        <option value="A_M_Y_Downtown_01">A_M_Y_Downtown_01</option>
+                        <option value="A_M_Y_EastSA_01">A_M_Y_EastSA_01</option>
+                        <option value="A_M_Y_EastSA_02">A_M_Y_EastSA_02</option>
+                        <option value="A_M_Y_Epsilon_01">A_M_Y_Epsilon_01</option>
+                        <option value="A_M_Y_Epsilon_02">A_M_Y_Epsilon_02</option>
+                        <option value="A_M_Y_Gay_01">A_M_Y_Gay_01</option>
+                        <option value="A_M_Y_Gay_02">A_M_Y_Gay_02</option>
+                        <option value="A_M_Y_GenStreet_01">A_M_Y_GenStreet_01</option>
+                        <option value="A_M_Y_GenStreet_02">A_M_Y_GenStreet_02</option>
+                        <option value="A_M_Y_Golfer_01">A_M_Y_Golfer_01</option>
+                        <option value="A_M_Y_HasJew_01">A_M_Y_HasJew_01</option>
+                        <option value="A_M_Y_Hiker_01">A_M_Y_Hiker_01</option>
+                        <option value="A_M_Y_Hippy_01">A_M_Y_Hippy_01</option>
+                        <option value="A_M_Y_Hipster_01">A_M_Y_Hipster_01</option>
+                        <option value="A_M_Y_Hipster_02">A_M_Y_Hipster_02</option>
+                        <option value="A_M_Y_Hipster_03">A_M_Y_Hipster_03</option>
+                        <option value="A_M_Y_Indian_01">A_M_Y_Indian_01</option>
+                        <option value="A_M_Y_Jetski_01">A_M_Y_Jetski_01</option>
+                        <option value="A_M_Y_Juggalo_01">A_M_Y_Juggalo_01</option>
+                        <option value="A_M_Y_KTown_01">A_M_Y_KTown_01</option>
+                        <option value="A_M_Y_KTown_02">A_M_Y_KTown_02</option>
+                        <option value="A_M_Y_Latino_01">A_M_Y_Latino_01</option>
+                        <option value="A_M_Y_MethHead_01">A_M_Y_MethHead_01</option>
+                        <option value="A_M_Y_MexThug_01">A_M_Y_MexThug_01</option>
+                        <option value="A_M_Y_MotoX_01">A_M_Y_MotoX_01</option>
+                        <option value="A_M_Y_MotoX_02">A_M_Y_MotoX_02</option>
+                        <option value="A_M_Y_MusclBeac_01">A_M_Y_MusclBeac_01</option>
+                        <option value="A_M_Y_MusclBeac_02">A_M_Y_MusclBeac_02</option>
+                        <option value="A_M_Y_Polynesian_01">A_M_Y_Polynesian_01</option>
+                        <option value="A_M_Y_RoadCyc_01">A_M_Y_RoadCyc_01</option>
+                        <option value="A_M_Y_Runner_01">A_M_Y_Runner_01</option>
+                        <option value="A_M_Y_Runner_02">A_M_Y_Runner_02</option>
+                        <option value="A_M_Y_Salton_01">A_M_Y_Salton_01</option>
+                        <option value="A_M_Y_Skater_01">A_M_Y_Skater_01</option>
+                        <option value="A_M_Y_Skater_02">A_M_Y_Skater_02</option>
+                        <option value="A_M_Y_SouCent_01">A_M_Y_SouCent_01</option>
+                        <option value="A_M_Y_SouCent_02">A_M_Y_SouCent_02</option>
+                        <option value="A_M_Y_SouCent_03">A_M_Y_SouCent_03</option>
+                        <option value="A_M_Y_SouCent_04">A_M_Y_SouCent_04</option>
+                        <option value="A_M_Y_StBla_01">A_M_Y_StBla_01</option>
+                        <option value="A_M_Y_StBla_02">A_M_Y_StBla_02</option>
+                        <option value="A_M_Y_StLat_01">A_M_Y_StLat_01</option>
+                        <option value="A_M_Y_StWhi_01">A_M_Y_StWhi_01</option>
+                        <option value="A_M_Y_StWhi_02">A_M_Y_StWhi_02</option>
+                        <option value="A_M_Y_Sunbathe_01">A_M_Y_Sunbathe_01</option>
+                        <option value="A_M_Y_Surfer_01">A_M_Y_Surfer_01</option>
+                        <option value="A_M_Y_VinDouche_01">A_M_Y_VinDouche_01</option>
+                        <option value="A_M_Y_Vinewood_01">A_M_Y_Vinewood_01</option>
+                        <option value="A_M_Y_Vinewood_02">A_M_Y_Vinewood_02</option>
+                        <option value="A_M_Y_Vinewood_03">A_M_Y_Vinewood_03</option>
+                        <option value="A_M_Y_Vinewood_04">A_M_Y_Vinewood_04</option>
+                        <option value="A_M_Y_Yoga_01">A_M_Y_Yoga_01</option>
+                        <option value="CSB_Abigail">CSB_Abigail</option>
+                        <option value="CSB_Anita">CSB_Anita</option>
+                        <option value="CSB_Anton">CSB_Anton</option>
+                        <option value="CSB_BallasOG">CSB_BallasOG</option>
+                        <option value="CSB_Bride">CSB_Bride</option>
+                        <option value="CSB_BurgerDrug">CSB_BurgerDrug</option>
+                        <option value="CSB_Car3guy1">CSB_Car3guy1</option>
+                        <option value="CSB_Car3guy2">CSB_Car3guy2</option>
+                        <option value="CSB_Chef">CSB_Chef</option>
+                        <option value="CSB_Chin_goon">CSB_Chin_goon</option>
+                        <option value="CSB_Cletus">CSB_Cletus</option>
+                        <option value="CSB_Cop">CSB_Cop</option>
+                        <option value="CSB_Customer">CSB_Customer</option>
+                        <option value="CSB_Denise_friend">CSB_Denise_friend</option>
+                        <option value="CSB_FOS_rep">CSB_FOS_rep</option>
+                        <option value="CSB_G">CSB_G</option>
+                        <option value="CSB_Groom">CSB_Groom</option>
+                        <option value="CSB_Grove_str_dlr">CSB_Grove_str_dlr</option>
+                        <option value="CSB_Hao">CSB_Hao</option>
+                        <option value="CSB_Hugh">CSB_Hugh</option>
+                        <option value="CSB_Imran">CSB_Imran</option>
+                        <option value="CSB_Janitor">CSB_Janitor</option>
+                        <option value="CSB_Maude">CSB_Maude</option>
+                        <option value="CSB_MWeather">CSB_MWeather</option>
+                        <option value="CSB_Ortega">CSB_Ortega</option>
+                        <option value="CSB_Oscar">CSB_Oscar</option>
+                        <option value="CSB_PornDudes">CSB_PornDudes</option>
+                        <option value="CSB_PrologueDriver">CSB_PrologueDriver</option>
+                        <option value="CSB_ProlSec">CSB_ProlSec</option>
+                        <option value="CSB_Ramp_gang">CSB_Ramp_gang</option>
+                        <option value="CSB_Ramp_hic">CSB_Ramp_hic</option>
+                        <option value="CSB_Ramp_hipster">CSB_Ramp_hipster</option>
+                        <option value="CSB_Ramp_marine">CSB_Ramp_marine</option>
+                        <option value="CSB_Ramp_mex">CSB_Ramp_mex</option>
+                        <option value="CSB_Reporter">CSB_Reporter</option>
+                        <option value="CSB_RoccoPelosi">CSB_RoccoPelosi</option>
+                        <option value="CSB_Screen_Writer">CSB_Screen_Writer</option>
+                        <option value="CSB_Stripper_01">CSB_Stripper_01</option>
+                        <option value="CSB_Stripper_02">CSB_Stripper_02</option>
+                        <option value="CSB_Tonya">CSB_Tonya</option>
+                        <option value="CSB_TrafficWarden">CSB_TrafficWarden</option>
+                        <option value="CS_AmandaTownley">CS_AmandaTownley</option>
+                        <option value="CS_Andreas">CS_Andreas</option>
+                        <option value="cs_ashley">cs_ashley</option>
+                        <option value="CS_Bankman">CS_Bankman</option>
+                        <option value="CS_Barry">CS_Barry</option>
+                        <option value="CS_Beverly">CS_Beverly</option>
+                        <option value="CS_Brad">CS_Brad</option>
+                        <option value="CS_BradCadaver">CS_BradCadaver</option>
+                        <option value="CS_Carbuyer">CS_Carbuyer</option>
+                        <option value="CS_Casey">CS_Casey</option>
+                        <option value="CS_ChengSr">CS_ChengSr</option>
+                        <option value="CS_ChrisFormage">CS_ChrisFormage</option>
+                        <option value="CS_Clay">CS_Clay</option>
+                        <option value="CS_Dale">CS_Dale</option>
+                        <option value="CS_DaveNorton">CS_DaveNorton</option>
+                        <option value="cs_debra">cs_debra</option>
+                        <option value="cs_denise">cs_denise</option>
+                        <option value="CS_Devin">CS_Devin</option>
+                        <option value="CS_Dom">CS_Dom</option>
+                        <option value="CS_Dreyfuss">CS_Dreyfuss</option>
+                        <option value="CS_DrFriedlander">CS_DrFriedlander</option>
+                        <option value="CS_Fabien">CS_Fabien</option>
+                        <option value="CS_FBISuit_01">CS_FBISuit_01</option>
+                        <option value="CS_Floyd">CS_Floyd</option>
+                        <option value="CS_Guadalope">CS_Guadalope</option>
+                        <option value="cs_gurk">cs_gurk</option>
+                        <option value="CS_Hunter">CS_Hunter</option>
+                        <option value="CS_Janet">CS_Janet</option>
+                        <option value="CS_JewelAss">CS_JewelAss</option>
+                        <option value="CS_JimmyBoston">CS_JimmyBoston</option>
+                        <option value="CS_JimmyDiSanto">CS_JimmyDiSanto</option>
+                        <option value="CS_JoeMinuteMan">CS_JoeMinuteMan</option>
+                        <option value="CS_JohnnyKlebitz">CS_JohnnyKlebitz</option>
+                        <option value="CS_Josef">CS_Josef</option>
+                        <option value="CS_Josh">CS_Josh</option>
+                        <option value="CS_LamarDavis">CS_LamarDavis</option>
+                        <option value="CS_Lazlow">CS_Lazlow</option>
+                        <option value="CS_LesterCrest">CS_LesterCrest</option>
+                        <option value="CS_LifeInvad_01">CS_LifeInvad_01</option>
+                        <option value="CS_Magenta">CS_Magenta</option>
+                        <option value="CS_Manuel">CS_Manuel</option>
+                        <option value="CS_Marnie">CS_Marnie</option>
+                        <option value="CS_MartinMadrazo">CS_MartinMadrazo</option>
+                        <option value="CS_MaryAnn">CS_MaryAnn</option>
+                        <option value="CS_Michelle">CS_Michelle</option>
+                        <option value="CS_Milton">CS_Milton</option>
+                        <option value="CS_Molly">CS_Molly</option>
+                        <option value="CS_MovPremF_01">CS_MovPremF_01</option>
+                        <option value="CS_MovPremMale">CS_MovPremMale</option>
+                        <option value="CS_MRK">CS_MRK</option>
+                        <option value="CS_MrsPhillips">CS_MrsPhillips</option>
+                        <option value="CS_MRS_Thornhill">CS_MRS_Thornhill</option>
+                        <option value="CS_Natalia">CS_Natalia</option>
+                        <option value="CS_NervousRon">CS_NervousRon</option>
+                        <option value="CS_Nigel">CS_Nigel</option>
+                        <option value="CS_Old_Man1A">CS_Old_Man1A</option>
+                        <option value="CS_Old_Man2">CS_Old_Man2</option>
+                        <option value="CS_Omega">CS_Omega</option>
+                        <option value="CS_Orleans">CS_Orleans</option>
+                        <option value="CS_Paper">CS_Paper</option>
+                        <option value="CS_Patricia">CS_Patricia</option>
+                        <option value="CS_Priest">CS_Priest</option>
+                        <option value="CS_ProlSec_02">CS_ProlSec_02</option>
+                        <option value="CS_RussianDrunk">CS_RussianDrunk</option>
+                        <option value="CS_SiemonYetarian">CS_SiemonYetarian</option>
+                        <option value="CS_Solomon">CS_Solomon</option>
+                        <option value="CS_SteveHains">CS_SteveHains</option>
+                        <option value="CS_Stretch">CS_Stretch</option>
+                        <option value="CS_Tanisha">CS_Tanisha</option>
+                        <option value="CS_TaoCheng">CS_TaoCheng</option>
+                        <option value="CS_TaosTranslator">CS_TaosTranslator</option>
+                        <option value="CS_TennisCoach">CS_TennisCoach</option>
+                        <option value="CS_Terry">CS_Terry</option>
+                        <option value="CS_Tom">CS_Tom</option>
+                        <option value="CS_TomEpsilon">CS_TomEpsilon</option>
+                        <option value="CS_TracyDiSanto">CS_TracyDiSanto</option>
+                        <option value="CS_Wade">CS_Wade</option>
+                        <option value="CS_Zimbor">CS_Zimbor</option>
+                        <option value="G_F_Y_ballas_01">G_F_Y_ballas_01</option>
+                        <option value="G_F_Y_Families_01">G_F_Y_Families_01</option>
+                        <option value="G_F_Y_Lost_01">G_F_Y_Lost_01</option>
+                        <option value="G_F_Y_Vagos_01">G_F_Y_Vagos_01</option>
+                        <option value="G_M_M_ArmBoss_01">G_M_M_ArmBoss_01</option>
+                        <option value="G_M_M_ArmGoon_01">G_M_M_ArmGoon_01</option>
+                        <option value="G_M_M_ArmLieut_01">G_M_M_ArmLieut_01</option>
+                        <option value="G_M_M_ChemWork_01">G_M_M_ChemWork_01</option>
+                        <option value="G_M_M_ChiBoss_01">G_M_M_ChiBoss_01</option>
+                        <option value="G_M_M_ChiCold_01">G_M_M_ChiCold_01</option>
+                        <option value="G_M_M_ChiGoon_01">G_M_M_ChiGoon_01</option>
+                        <option value="G_M_M_ChiGoon_02">G_M_M_ChiGoon_02</option>
+                        <option value="G_M_M_KorBoss_01">G_M_M_KorBoss_01</option>
+                        <option value="G_M_M_MexBoss_01">G_M_M_MexBoss_01</option>
+                        <option value="G_M_M_MexBoss_02">G_M_M_MexBoss_02</option>
+                        <option value="G_M_Y_ArmGoon_02">G_M_Y_ArmGoon_02</option>
+                        <option value="G_M_Y_Azteca_01">G_M_Y_Azteca_01</option>
+                        <option value="G_M_Y_BallaEast_01">G_M_Y_BallaEast_01</option>
+                        <option value="G_M_Y_BallaOrig_01">G_M_Y_BallaOrig_01</option>
+                        <option value="G_M_Y_BallaSout_01">G_M_Y_BallaSout_01</option>
+                        <option value="G_M_Y_FamCA_01">G_M_Y_FamCA_01</option>
+                        <option value="G_M_Y_FamDNF_01">G_M_Y_FamDNF_01</option>
+                        <option value="G_M_Y_FamFor_01">G_M_Y_FamFor_01</option>
+                        <option value="G_M_Y_Korean_01">G_M_Y_Korean_01</option>
+                        <option value="G_M_Y_Korean_02">G_M_Y_Korean_02</option>
+                        <option value="G_M_Y_KorLieut_01">G_M_Y_KorLieut_01</option>
+                        <option value="G_M_Y_Lost_01">G_M_Y_Lost_01</option>
+                        <option value="G_M_Y_Lost_02">G_M_Y_Lost_02</option>
+                        <option value="G_M_Y_Lost_03">G_M_Y_Lost_03</option>
+                        <option value="G_M_Y_MexGang_01">G_M_Y_MexGang_01</option>
+                        <option value="G_M_Y_MexGoon_01">G_M_Y_MexGoon_01</option>
+                        <option value="G_M_Y_MexGoon_02">G_M_Y_MexGoon_02</option>
+                        <option value="G_M_Y_MexGoon_03">G_M_Y_MexGoon_03</option>
+                        <option value="G_M_Y_PoloGoon_01">G_M_Y_PoloGoon_01</option>
+                        <option value="G_M_Y_PoloGoon_02">G_M_Y_PoloGoon_02</option>
+                        <option value="G_M_Y_SalvaBoss_01">G_M_Y_SalvaBoss_01</option>
+                        <option value="G_M_Y_SalvaGoon_01">G_M_Y_SalvaGoon_01</option>
+                        <option value="G_M_Y_SalvaGoon_02">G_M_Y_SalvaGoon_02</option>
+                        <option value="G_M_Y_SalvaGoon_03">G_M_Y_SalvaGoon_03</option>
+                        <option value="G_M_Y_StrPunk_01">G_M_Y_StrPunk_01</option>
+                        <option value="G_M_Y_StrPunk_02">G_M_Y_StrPunk_02</option>
+                        <option value="HC_Driver">HC_Driver</option>
+                        <option value="HC_Gunman">HC_Gunman</option>
+                        <option value="HC_Hacker">HC_Hacker</option>
+                        <option value="IG_Abigail">IG_Abigail</option>
+                        <option value="IG_AmandaTownley">IG_AmandaTownley</option>
+                        <option value="IG_Andreas">IG_Andreas</option>
+                        <option value="IG_Ashley">IG_Ashley</option>
+                        <option value="IG_BallasOG">IG_BallasOG</option>
+                        <option value="IG_Bankman">IG_Bankman</option>
+                        <option value="IG_Barry">IG_Barry</option>
+                        <option value="IG_BestMen">IG_BestMen</option>
+                        <option value="IG_Beverly">IG_Beverly</option>
+                        <option value="IG_Brad">IG_Brad</option>
+                        <option value="IG_Bride">IG_Bride</option>
+                        <option value="IG_Car3guy1">IG_Car3guy1</option>
+                        <option value="IG_Car3guy2">IG_Car3guy2</option>
+                        <option value="IG_Casey">IG_Casey</option>
+                        <option value="IG_Chef">IG_Chef</option>
+                        <option value="IG_ChengSr">IG_ChengSr</option>
+                        <option value="IG_ChrisFormage">IG_ChrisFormage</option>
+                        <option value="IG_Clay">IG_Clay</option>
+                        <option value="IG_ClayPain">IG_ClayPain</option>
+                        <option value="IG_Cletus">IG_Cletus</option>
+                        <option value="IG_Dale">IG_Dale</option>
+                        <option value="IG_DaveNorton">IG_DaveNorton</option>
+                        <option value="IG_Denise">IG_Denise</option>
+                        <option value="IG_Devin">IG_Devin</option>
+                        <option value="IG_Dom">IG_Dom</option>
+                        <option value="IG_Dreyfuss">IG_Dreyfuss</option>
+                        <option value="IG_DrFriedlander">IG_DrFriedlander</option>
+                        <option value="IG_Fabien">IG_Fabien</option>
+                        <option value="IG_FBISuit_01">IG_FBISuit_01</option>
+                        <option value="IG_Floyd">IG_Floyd</option>
+                        <option value="IG_Groom">IG_Groom</option>
+                        <option value="IG_Hao">IG_Hao</option>
+                        <option value="IG_Hunter">IG_Hunter</option>
+                        <option value="IG_Janet">IG_Janet</option>
+                        <option value="ig_JAY_Norris">ig_JAY_Norris</option>
+                        <option value="IG_JewelAss">IG_JewelAss</option>
+                        <option value="IG_JimmyBoston">IG_JimmyBoston</option>
+                        <option value="IG_JimmyDiSanto">IG_JimmyDiSanto</option>
+                        <option value="IG_JoeMinuteMan">IG_JoeMinuteMan</option>
+                        <option value="ig_JohnnyKlebitz">ig_JohnnyKlebitz</option>
+                        <option value="IG_Josef">IG_Josef</option>
+                        <option value="IG_Josh">IG_Josh</option>
+                        <option value="IG_KerryMcIntosh">IG_KerryMcIntosh</option>
+                        <option value="IG_LamarDavis">IG_LamarDavis</option>
+                        <option value="IG_Lazlow">IG_Lazlow</option>
+                        <option value="IG_LesterCrest">IG_LesterCrest</option>
+                        <option value="IG_LifeInvad_01">IG_LifeInvad_01</option>
+                        <option value="IG_LifeInvad_02">IG_LifeInvad_02</option>
+                        <option value="IG_Magenta">IG_Magenta</option>
+                        <option value="IG_Manuel">IG_Manuel</option>
+                        <option value="IG_Marnie">IG_Marnie</option>
+                        <option value="IG_MaryAnn">IG_MaryAnn</option>
+                        <option value="IG_Maude">IG_Maude</option>
+                        <option value="IG_Michelle">IG_Michelle</option>
+                        <option value="IG_Milton">IG_Milton</option>
+                        <option value="IG_Molly">IG_Molly</option>
+                        <option value="IG_MRK">IG_MRK</option>
+                        <option value="IG_MrsPhillips">IG_MrsPhillips</option>
+                        <option value="IG_MRS_Thornhill">IG_MRS_Thornhill</option>
+                        <option value="IG_Natalia">IG_Natalia</option>
+                        <option value="IG_NervousRon">IG_NervousRon</option>
+                        <option value="IG_Nigel">IG_Nigel</option>
+                        <option value="IG_Old_Man1A">IG_Old_Man1A</option>
+                        <option value="IG_Old_Man2">IG_Old_Man2</option>
+                        <option value="IG_Omega">IG_Omega</option>
+                        <option value="IG_ONeil">IG_ONeil</option>
+                        <option value="IG_Orleans">IG_Orleans</option>
+                        <option value="IG_Ortega">IG_Ortega</option>
+                        <option value="IG_Paper">IG_Paper</option>
+                        <option value="IG_Patricia">IG_Patricia</option>
+                        <option value="IG_Priest">IG_Priest</option>
+                        <option value="IG_ProlSec_02">IG_ProlSec_02</option>
+                        <option value="IG_Ramp_Gang">IG_Ramp_Gang</option>
+                        <option value="IG_Ramp_Hic">IG_Ramp_Hic</option>
+                        <option value="IG_Ramp_Hipster">IG_Ramp_Hipster</option>
+                        <option value="IG_Ramp_Mex">IG_Ramp_Mex</option>
+                        <option value="IG_RoccoPelosi">IG_RoccoPelosi</option>
+                        <option value="IG_RussianDrunk">IG_RussianDrunk</option>
+                        <option value="IG_Screen_Writer">IG_Screen_Writer</option>
+                        <option value="IG_SiemonYetarian">IG_SiemonYetarian</option>
+                        <option value="IG_Solomon">IG_Solomon</option>
+                        <option value="IG_SteveHains">IG_SteveHains</option>
+                        <option value="IG_Stretch">IG_Stretch</option>
+                        <option value="IG_Talina">IG_Talina</option>
+                        <option value="IG_Tanisha">IG_Tanisha</option>
+                        <option value="IG_TaoCheng">IG_TaoCheng</option>
+                        <option value="IG_TaosTranslator">IG_TaosTranslator</option>
+                        <option value="ig_TennisCoach">ig_TennisCoach</option>
+                        <option value="IG_Terry">IG_Terry</option>
+                        <option value="IG_TomEpsilon">IG_TomEpsilon</option>
+                        <option value="IG_Tonya">IG_Tonya</option>
+                        <option value="IG_TracyDiSanto">IG_TracyDiSanto</option>
+                        <option value="IG_TrafficWarden">IG_TrafficWarden</option>
+                        <option value="IG_TylerDix">IG_TylerDix</option>
+                        <option value="IG_Wade">IG_Wade</option>
+                        <option value="IG_Zimbor">IG_Zimbor</option>
+                        <option value="MP_F_DeadHooker">MP_F_DeadHooker</option>
+                        <option value="MP_F_Freemode_01">MP_F_Freemode_01</option>
+                        <option value="MP_F_Misty_01">MP_F_Misty_01</option>
+                        <option value="MP_F_StripperLite">MP_F_StripperLite</option>
+                        <option value="MP_G_M_Pros_01">MP_G_M_Pros_01</option>
+                        <option value="MP_HeadTargets">MP_HeadTargets</option>
+                        <option value="MP_M_Claude_01">MP_M_Claude_01</option>
+                        <option value="MP_M_ExArmy_01">MP_M_ExArmy_01</option>
+                        <option value="MP_M_FamDD_01">MP_M_FamDD_01</option>
+                        <option value="MP_M_FIBSec_01">MP_M_FIBSec_01</option>
+                        <option value="MP_M_Freemode_01">MP_M_Freemode_01</option>
+                        <option value="MP_M_Marston_01">MP_M_Marston_01</option>
+                        <option value="MP_M_Niko_01">MP_M_Niko_01</option>
+                        <option value="MP_M_ShopKeep_01">MP_M_ShopKeep_01</option>
+                        <option value="MP_S_M_Armoured_01">MP_S_M_Armoured_01</option>
+                        <option value="Player_One">Player_One</option>
+                        <option value="Player_Two">Player_Two</option>
+                        <option value="Player_Zero">Player_Zero</option>
+                        <option value="slod_human">slod_human</option>
+                        <option value="slod_large_quadped">slod_large_quadped</option>
+                        <option value="slod_small_quadped">slod_small_quadped</option>
+                        <option value="S_F_M_Fembarber">S_F_M_Fembarber</option>
+                        <option value="S_F_M_Maid_01">S_F_M_Maid_01</option>
+                        <option value="S_F_M_Shop_HIGH">S_F_M_Shop_HIGH</option>
+                        <option value="S_F_M_SweatShop_01">S_F_M_SweatShop_01</option>
+                        <option value="S_F_Y_AirHostess_01">S_F_Y_AirHostess_01</option>
+                        <option value="S_F_Y_Bartender_01">S_F_Y_Bartender_01</option>
+                        <option value="S_F_Y_Baywatch_01">S_F_Y_Baywatch_01</option>
+                        <option value="S_F_Y_Cop_01">S_F_Y_Cop_01</option>
+                        <option value="S_F_Y_Factory_01">S_F_Y_Factory_01</option>
+                        <option value="S_F_Y_Hooker_01">S_F_Y_Hooker_01</option>
+                        <option value="S_F_Y_Hooker_02">S_F_Y_Hooker_02</option>
+                        <option value="S_F_Y_Hooker_03">S_F_Y_Hooker_03</option>
+                        <option value="S_F_Y_Migrant_01">S_F_Y_Migrant_01</option>
+                        <option value="S_F_Y_MovPrem_01">S_F_Y_MovPrem_01</option>
+                        <option value="S_F_Y_Ranger_01">S_F_Y_Ranger_01</option>
+                        <option value="S_F_Y_Scrubs_01">S_F_Y_Scrubs_01</option>
+                        <option value="S_F_Y_Sheriff_01">S_F_Y_Sheriff_01</option>
+                        <option value="S_F_Y_Shop_LOW">S_F_Y_Shop_LOW</option>
+                        <option value="S_F_Y_Shop_MID">S_F_Y_Shop_MID</option>
+                        <option value="S_F_Y_StripperLite">S_F_Y_StripperLite</option>
+                        <option value="S_F_Y_Stripper_01">S_F_Y_Stripper_01</option>
+                        <option value="S_F_Y_Stripper_02">S_F_Y_Stripper_02</option>
+                        <option value="S_F_Y_SweatShop_01">S_F_Y_SweatShop_01</option>
+                        <option value="S_M_M_AmmuCountry">S_M_M_AmmuCountry</option>
+                        <option value="S_M_M_Armoured_01">S_M_M_Armoured_01</option>
+                        <option value="S_M_M_Armoured_02">S_M_M_Armoured_02</option>
+                        <option value="S_M_M_AutoShop_01">S_M_M_AutoShop_01</option>
+                        <option value="S_M_M_AutoShop_02">S_M_M_AutoShop_02</option>
+                        <option value="S_M_M_Bouncer_01">S_M_M_Bouncer_01</option>
+                        <option value="S_M_M_ChemSec_01">S_M_M_ChemSec_01</option>
+                        <option value="S_M_M_CIASec_01">S_M_M_CIASec_01</option>
+                        <option value="S_M_M_CntryBar_01">S_M_M_CntryBar_01</option>
+                        <option value="S_M_M_DockWork_01">S_M_M_DockWork_01</option>
+                        <option value="S_M_M_Doctor_01">S_M_M_Doctor_01</option>
+                        <option value="S_M_M_FIBOffice_01">S_M_M_FIBOffice_01</option>
+                        <option value="S_M_M_FIBOffice_02">S_M_M_FIBOffice_02</option>
+                        <option value="S_M_M_Gaffer_01">S_M_M_Gaffer_01</option>
+                        <option value="S_M_M_Gardener_01">S_M_M_Gardener_01</option>
+                        <option value="S_M_M_GenTransport">S_M_M_GenTransport</option>
+                        <option value="S_M_M_HairDress_01">S_M_M_HairDress_01</option>
+                        <option value="S_M_M_HighSec_01">S_M_M_HighSec_01</option>
+                        <option value="S_M_M_HighSec_02">S_M_M_HighSec_02</option>
+                        <option value="S_M_M_Janitor">S_M_M_Janitor</option>
+                        <option value="S_M_M_LatHandy_01">S_M_M_LatHandy_01</option>
+                        <option value="S_M_M_LifeInvad_01">S_M_M_LifeInvad_01</option>
+                        <option value="S_M_M_Linecook">S_M_M_Linecook</option>
+                        <option value="S_M_M_LSMetro_01">S_M_M_LSMetro_01</option>
+                        <option value="S_M_M_Mariachi_01">S_M_M_Mariachi_01</option>
+                        <option value="S_M_M_Marine_01">S_M_M_Marine_01</option>
+                        <option value="S_M_M_Marine_02">S_M_M_Marine_02</option>
+                        <option value="S_M_M_Migrant_01">S_M_M_Migrant_01</option>
+                        <option value="S_M_M_MovAlien_01">S_M_M_MovAlien_01</option>
+                        <option value="S_M_M_MovPrem_01">S_M_M_MovPrem_01</option>
+                        <option value="S_M_M_MovSpace_01">S_M_M_MovSpace_01</option>
+                        <option value="S_M_M_Paramedic_01">S_M_M_Paramedic_01</option>
+                        <option value="S_M_M_Pilot_01">S_M_M_Pilot_01</option>
+                        <option value="S_M_M_Pilot_02">S_M_M_Pilot_02</option>
+                        <option value="S_M_M_Postal_01">S_M_M_Postal_01</option>
+                        <option value="S_M_M_Postal_02">S_M_M_Postal_02</option>
+                        <option value="S_M_M_PrisGuard_01">S_M_M_PrisGuard_01</option>
+                        <option value="S_M_M_Scientist_01">S_M_M_Scientist_01</option>
+                        <option value="S_M_M_Security_01">S_M_M_Security_01</option>
+                        <option value="S_M_M_SnowCop_01">S_M_M_SnowCop_01</option>
+                        <option value="S_M_M_StrPerf_01">S_M_M_StrPerf_01</option>
+                        <option value="S_M_M_StrPreach_01">S_M_M_StrPreach_01</option>
+                        <option value="S_M_M_StrVend_01">S_M_M_StrVend_01</option>
+                        <option value="S_M_M_Trucker_01">S_M_M_Trucker_01</option>
+                        <option value="S_M_M_UPS_01">S_M_M_UPS_01</option>
+                        <option value="S_M_M_UPS_02">S_M_M_UPS_02</option>
+                        <option value="S_M_O_Busker_01">S_M_O_Busker_01</option>
+                        <option value="S_M_Y_AirWorker">S_M_Y_AirWorker</option>
+                        <option value="S_M_Y_AmmuCity_01">S_M_Y_AmmuCity_01</option>
+                        <option value="S_M_Y_ArmyMech_01">S_M_Y_ArmyMech_01</option>
+                        <option value="S_M_Y_Autopsy_01">S_M_Y_Autopsy_01</option>
+                        <option value="S_M_Y_Barman_01">S_M_Y_Barman_01</option>
+                        <option value="S_M_Y_BayWatch_01">S_M_Y_BayWatch_01</option>
+                        <option value="S_M_Y_BlackOps_01">S_M_Y_BlackOps_01</option>
+                        <option value="S_M_Y_BlackOps_02">S_M_Y_BlackOps_02</option>
+                        <option value="S_M_Y_BlackOps_03">S_M_Y_BlackOps_03</option>
+                        <option value="S_M_Y_BusBoy_01">S_M_Y_BusBoy_01</option>
+                        <option value="S_M_Y_Chef_01">S_M_Y_Chef_01</option>
+                        <option value="S_M_Y_Clown_01">S_M_Y_Clown_01</option>
+                        <option value="S_M_Y_Construct_01">S_M_Y_Construct_01</option>
+                        <option value="S_M_Y_Construct_02">S_M_Y_Construct_02</option>
+                        <option value="S_M_Y_Cop_01">S_M_Y_Cop_01</option>
+                        <option value="S_M_Y_Dealer_01">S_M_Y_Dealer_01</option>
+                        <option value="S_M_Y_DevinSec_01">S_M_Y_DevinSec_01</option>
+                        <option value="S_M_Y_DockWork_01">S_M_Y_DockWork_01</option>
+                        <option value="S_M_Y_Doorman_01">S_M_Y_Doorman_01</option>
+                        <option value="S_M_Y_DWService_01">S_M_Y_DWService_01</option>
+                        <option value="S_M_Y_DWService_02">S_M_Y_DWService_02</option>
+                        <option value="S_M_Y_Factory_01">S_M_Y_Factory_01</option>
+                        <option value="S_M_Y_Fireman_01">S_M_Y_Fireman_01</option>
+                        <option value="S_M_Y_Garbage">S_M_Y_Garbage</option>
+                        <option value="S_M_Y_Grip_01">S_M_Y_Grip_01</option>
+                        <option value="S_M_Y_HwayCop_01">S_M_Y_HwayCop_01</option>
+                        <option value="S_M_Y_Marine_01">S_M_Y_Marine_01</option>
+                        <option value="S_M_Y_Marine_02">S_M_Y_Marine_02</option>
+                        <option value="S_M_Y_Marine_03">S_M_Y_Marine_03</option>
+                        <option value="S_M_Y_Mime">S_M_Y_Mime</option>
+                        <option value="S_M_Y_PestCont_01">S_M_Y_PestCont_01</option>
+                        <option value="S_M_Y_Pilot_01">S_M_Y_Pilot_01</option>
+                        <option value="S_M_Y_PrisMuscl_01">S_M_Y_PrisMuscl_01</option>
+                        <option value="S_M_Y_Prisoner_01">S_M_Y_Prisoner_01</option>
+                        <option value="S_M_Y_Ranger_01">S_M_Y_Ranger_01</option>
+                        <option value="S_M_Y_Robber_01">S_M_Y_Robber_01</option>
+                        <option value="S_M_Y_Sheriff_01">S_M_Y_Sheriff_01</option>
+                        <option value="S_M_Y_Shop_MASK">S_M_Y_Shop_MASK</option>
+                        <option value="S_M_Y_StrVend_01">S_M_Y_StrVend_01</option>
+                        <option value="S_M_Y_Swat_01">S_M_Y_Swat_01</option>
+                        <option value="S_M_Y_USCG_01">S_M_Y_USCG_01</option>
+                        <option value="S_M_Y_Valet_01">S_M_Y_Valet_01</option>
+                        <option value="S_M_Y_Waiter_01">S_M_Y_Waiter_01</option>
+                        <option value="S_M_Y_WinClean_01">S_M_Y_WinClean_01</option>
+                        <option value="S_M_Y_XMech_01">S_M_Y_XMech_01</option>
+                        <option value="S_M_Y_XMech_02">S_M_Y_XMech_02</option>
+                        <option value="U_F_M_Corpse_01">U_F_M_Corpse_01</option>
+                        <option value="U_F_M_Miranda">U_F_M_Miranda</option>
+                        <option value="U_F_M_ProMourn_01">U_F_M_ProMourn_01</option>
+                        <option value="U_F_O_MovieStar">U_F_O_MovieStar</option>
+                        <option value="U_F_O_ProlHost_01">U_F_O_ProlHost_01</option>
+                        <option value="U_F_Y_BikerChic">U_F_Y_BikerChic</option>
+                        <option value="U_F_Y_COMJane">U_F_Y_COMJane</option>
+                        <option value="U_F_Y_corpse_01">U_F_Y_corpse_01</option>
+                        <option value="U_F_Y_corpse_02">U_F_Y_corpse_02</option>
+                        <option value="U_F_Y_HotPosh_01">U_F_Y_HotPosh_01</option>
+                        <option value="U_F_Y_JewelAss_01">U_F_Y_JewelAss_01</option>
+                        <option value="U_F_Y_Mistress">U_F_Y_Mistress</option>
+                        <option value="U_F_Y_PoppyMich">U_F_Y_PoppyMich</option>
+                        <option value="U_F_Y_Princess">U_F_Y_Princess</option>
+                        <option value="U_F_Y_SpyActress">U_F_Y_SpyActress</option>
+                        <option value="U_M_M_Aldinapoli">U_M_M_Aldinapoli</option>
+                        <option value="U_M_M_BankMan">U_M_M_BankMan</option>
+                        <option value="U_M_M_BikeHire_01">U_M_M_BikeHire_01</option>
+                        <option value="U_M_M_FIBArchitect">U_M_M_FIBArchitect</option>
+                        <option value="U_M_M_FilmDirector">U_M_M_FilmDirector</option>
+                        <option value="U_M_M_GlenStank_01">U_M_M_GlenStank_01</option>
+                        <option value="U_M_M_Griff_01">U_M_M_Griff_01</option>
+                        <option value="U_M_M_Jesus_01">U_M_M_Jesus_01</option>
+                        <option value="U_M_M_JewelSec_01">U_M_M_JewelSec_01</option>
+                        <option value="U_M_M_JewelThief">U_M_M_JewelThief</option>
+                        <option value="U_M_M_MarkFost">U_M_M_MarkFost</option>
+                        <option value="U_M_M_PartyTarget">U_M_M_PartyTarget</option>
+                        <option value="U_M_M_ProlSec_01">U_M_M_ProlSec_01</option>
+                        <option value="U_M_M_ProMourn_01">U_M_M_ProMourn_01</option>
+                        <option value="U_M_M_RivalPap">U_M_M_RivalPap</option>
+                        <option value="U_M_M_SpyActor">U_M_M_SpyActor</option>
+                        <option value="U_M_M_WillyFist">U_M_M_WillyFist</option>
+                        <option value="U_M_O_FinGuru_01">U_M_O_FinGuru_01</option>
+                        <option value="U_M_O_TapHillBilly">U_M_O_TapHillBilly</option>
+                        <option value="U_M_O_Tramp_01">U_M_O_Tramp_01</option>
+                        <option value="U_M_Y_Abner">U_M_Y_Abner</option>
+                        <option value="U_M_Y_AntonB">U_M_Y_AntonB</option>
+                        <option value="U_M_Y_BabyD">U_M_Y_BabyD</option>
+                        <option value="U_M_Y_Baygor">U_M_Y_Baygor</option>
+                        <option value="U_M_Y_BurgerDrug_01">U_M_Y_BurgerDrug_01</option>
+                        <option value="U_M_Y_Chip">U_M_Y_Chip</option>
+                        <option value="U_M_Y_Cyclist_01">U_M_Y_Cyclist_01</option>
+                        <option value="U_M_Y_FIBMugger_01">U_M_Y_FIBMugger_01</option>
+                        <option value="U_M_Y_Guido_01">U_M_Y_Guido_01</option>
+                        <option value="U_M_Y_GunVend_01">U_M_Y_GunVend_01</option>
+                        <option value="U_M_Y_Hippie_01">U_M_Y_Hippie_01</option>
+                        <option value="U_M_Y_ImpoRage">U_M_Y_ImpoRage</option>
+                        <option value="U_M_Y_Justin">U_M_Y_Justin</option>
+                        <option value="U_M_Y_Mani">U_M_Y_Mani</option>
+                        <option value="U_M_Y_MilitaryBum">U_M_Y_MilitaryBum</option>
+                        <option value="U_M_Y_Paparazzi">U_M_Y_Paparazzi</option>
+                        <option value="U_M_Y_Party_01">U_M_Y_Party_01</option>
+                        <option value="U_M_Y_Pogo_01">U_M_Y_Pogo_01</option>
+                        <option value="U_M_Y_Prisoner_01">U_M_Y_Prisoner_01</option>
+                        <option value="U_M_Y_ProlDriver_01">U_M_Y_ProlDriver_01</option>
+                        <option value="U_M_Y_RSRanger_01">U_M_Y_RSRanger_01</option>
+                        <option value="U_M_Y_SBike">U_M_Y_SBike</option>
+                        <option value="U_M_Y_StagGrm_01">U_M_Y_StagGrm_01</option>
+                        <option value="U_M_Y_Tattoo_01">U_M_Y_Tattoo_01</option>
+                        <option value="U_M_Y_Zombie_01">U_M_Y_Zombie_01</option>
+                    </select>
+
+                    <div id="spawnpedinimigo" class="button">Spawn</div>
+
+                </div>
+            </center>
+
+
+
+
+
+
+
+            <div class="menu-lateral">
+                <center>
+                    <div class="gui">
+                        <label for="px">X:</label><input id="X" type="text" value="998.19"><br>
+                        <label for="py">Y:</label><input id="Y" type="text" value="-3200.26"><br>
+                        <label for="pz">Z:</label><input id="Z" type="text" value="-36.08"><br>
+                        <label for="pz">A:</label><input id="A" type="text" value=""><br>
+                        <div id="Teleport" class="button">Teleport</div>
+                        <hr>
+                        <div id="Salvar" class="button">Salvar Pos</div>
+                        <div id="Carregar" class="button">Carregar Pos</div>
+
+                    </div>
+
+                    <div class="gui">
+
+                        <p>Skin:</p>
+
+                        <select class="button" name="modelchange" id="modelchange">
+                            <option value="CSB_Alan">CSB_Alan</option>
+                            <option value="CSB_Bryony">CSB_Bryony</option>
+                            <option value="IG_Sacha">IG_Sacha</option>
+                            <option value="MP_F_BennyMech_01">MP_F_BennyMech_01</option>
+                            <option value="mp_m_freemode_01">mp_m_freemode_01</option>
+                            <option value="player_zero">player_zero</option>
+                            <option value="player_one">player_one</option>
+                            <option value="player_two">player_two</option>
+                            <option value="s_m_m_movalien_01">s_m_m_movalien_01</option>
+                            <option value="u_m_y_zombie_01">u_m_y_zombie_01</option>
+                            <option value="u_m_y_imporage">u_m_y_imporage</option>
+                            <option value="s_m_y_fireman_01">s_m_y_fireman_01</option>
+                            <option value="a_f_y_topless_01">a_f_y_topless_01</option>
+                            <option value="u_f_y_poppymich">u_f_y_poppymich</option>
+                            <option value="a_m_y_acult_01">a_m_y_acult_01</option>
+                            <option value="ig_lamardavis">ig_lamardavis</option>
+                            <option value="ig_jimmydisanto">ig_jimmydisanto</option>
+                            <option value="ig_tracydisanto">ig_tracydisanto</option>
+                            <option value="ig_johnnyklebitz">ig_johnnyklebitz</option>
+                            <option value="ig_wade">ig_wade</option>
+                            <option value="a_f_y_juggalo_01">a_f_y_juggalo_01</option>
+                            <option value="A_C_Boar">A_C_Boar</option>
+                            <option value="A_C_Chickenhawk">A_C_Chickenhawk</option>
+                            <option value="A_C_Chimp">A_C_Chimp</option>
+                            <option value="A_C_Chop">A_C_Chop</option>
+                            <option value="A_C_Cormorant">A_C_Cormorant</option>
+                            <option value="A_C_Cow">A_C_Cow</option>
+                            <option value="A_C_Coyote">A_C_Coyote</option>
+                            <option value="A_C_Crow">A_C_Crow</option>
+                            <option value="A_C_Deer">A_C_Deer</option>
+                            <option value="A_C_Fish">A_C_Fish</option>
+                            <option value="A_C_Hen">A_C_Hen</option>
+                            <option value="A_C_Husky">A_C_Husky</option>
+                            <option value="A_C_MtLion">A_C_MtLion</option>
+                            <option value="A_C_Pig">A_C_Pig</option>
+                            <option value="A_C_Pigeon">A_C_Pigeon</option>
+                            <option value="A_C_Rat">A_C_Rat</option>
+                            <option value="A_C_Retriever">A_C_Retriever</option>
+                            <option value="A_C_Rhesus">A_C_Rhesus</option>
+                            <option value="A_C_Rottweiler">A_C_Rottweiler</option>
+                            <option value="A_C_Seagull">A_C_Seagull</option>
+                            <option value="A_C_SharkTiger">A_C_SharkTiger</option>
+                            <option value="A_C_shepherd">A_C_shepherd</option>
+                            <option value="A_F_M_Beach_01">A_F_M_Beach_01</option>
+                            <option value="A_F_M_BevHills_01">A_F_M_BevHills_01</option>
+                            <option value="A_F_M_BevHills_02">A_F_M_BevHills_02</option>
+                            <option value="A_F_M_BodyBuild_01">A_F_M_BodyBuild_01</option>
+                            <option value="A_F_M_Business_02">A_F_M_Business_02</option>
+                            <option value="A_F_M_Downtown_01">A_F_M_Downtown_01</option>
+                            <option value="A_F_M_EastSA_01">A_F_M_EastSA_01</option>
+                            <option value="A_F_M_EastSA_02">A_F_M_EastSA_02</option>
+                            <option value="A_F_M_FatBla_01">A_F_M_FatBla_01</option>
+                            <option value="A_F_M_FatCult_01">A_F_M_FatCult_01</option>
+                            <option value="A_F_M_FatWhite_01">A_F_M_FatWhite_01</option>
+                            <option value="A_F_M_KTown_01">A_F_M_KTown_01</option>
+                            <option value="A_F_M_KTown_02">A_F_M_KTown_02</option>
+                            <option value="A_F_M_ProlHost_01">A_F_M_ProlHost_01</option>
+                            <option value="A_F_M_Salton_01">A_F_M_Salton_01</option>
+                            <option value="A_F_M_SkidRow_01">A_F_M_SkidRow_01</option>
+                            <option value="A_F_M_SouCentMC_01">A_F_M_SouCentMC_01</option>
+                            <option value="A_F_M_SouCent_01">A_F_M_SouCent_01</option>
+                            <option value="A_F_M_SouCent_02">A_F_M_SouCent_02</option>
+                            <option value="A_F_M_Tourist_01">A_F_M_Tourist_01</option>
+                            <option value="A_F_M_TrampBeac_01">A_F_M_TrampBeac_01</option>
+                            <option value="A_F_M_Tramp_01">A_F_M_Tramp_01</option>
+                            <option value="A_F_O_GenStreet_01">A_F_O_GenStreet_01</option>
+                            <option value="A_F_O_Indian_01">A_F_O_Indian_01</option>
+                            <option value="A_F_O_KTown_01">A_F_O_KTown_01</option>
+                            <option value="A_F_O_Salton_01">A_F_O_Salton_01</option>
+                            <option value="A_F_O_SouCent_01">A_F_O_SouCent_01</option>
+                            <option value="A_F_O_SouCent_02">A_F_O_SouCent_02</option>
+                            <option value="A_F_Y_Beach_01">A_F_Y_Beach_01</option>
+                            <option value="A_F_Y_BevHills_01">A_F_Y_BevHills_01</option>
+                            <option value="A_F_Y_BevHills_02">A_F_Y_BevHills_02</option>
+                            <option value="A_F_Y_BevHills_03">A_F_Y_BevHills_03</option>
+                            <option value="A_F_Y_BevHills_04">A_F_Y_BevHills_04</option>
+                            <option value="A_F_Y_Business_01">A_F_Y_Business_01</option>
+                            <option value="A_F_Y_Business_02">A_F_Y_Business_02</option>
+                            <option value="A_F_Y_Business_03">A_F_Y_Business_03</option>
+                            <option value="A_F_Y_Business_04">A_F_Y_Business_04</option>
+                            <option value="A_F_Y_EastSA_01">A_F_Y_EastSA_01</option>
+                            <option value="A_F_Y_EastSA_02">A_F_Y_EastSA_02</option>
+                            <option value="A_F_Y_EastSA_03">A_F_Y_EastSA_03</option>
+                            <option value="A_F_Y_Epsilon_01">A_F_Y_Epsilon_01</option>
+                            <option value="A_F_Y_Fitness_01">A_F_Y_Fitness_01</option>
+                            <option value="A_F_Y_Fitness_02">A_F_Y_Fitness_02</option>
+                            <option value="A_F_Y_GenHot_01">A_F_Y_GenHot_01</option>
+                            <option value="A_F_Y_Golfer_01">A_F_Y_Golfer_01</option>
+                            <option value="A_F_Y_Hiker_01">A_F_Y_Hiker_01</option>
+                            <option value="A_F_Y_Hippie_01">A_F_Y_Hippie_01</option>
+                            <option value="A_F_Y_Hipster_01">A_F_Y_Hipster_01</option>
+                            <option value="A_F_Y_Hipster_02">A_F_Y_Hipster_02</option>
+                            <option value="A_F_Y_Hipster_03">A_F_Y_Hipster_03</option>
+                            <option value="A_F_Y_Hipster_04">A_F_Y_Hipster_04</option>
+                            <option value="A_F_Y_Indian_01">A_F_Y_Indian_01</option>
+                            <option value="A_F_Y_Juggalo_01">A_F_Y_Juggalo_01</option>
+                            <option value="A_F_Y_Runner_01">A_F_Y_Runner_01</option>
+                            <option value="A_F_Y_RurMeth_01">A_F_Y_RurMeth_01</option>
+                            <option value="A_F_Y_SCDressy_01">A_F_Y_SCDressy_01</option>
+                            <option value="A_F_Y_Skater_01">A_F_Y_Skater_01</option>
+                            <option value="A_F_Y_SouCent_01">A_F_Y_SouCent_01</option>
+                            <option value="A_F_Y_SouCent_02">A_F_Y_SouCent_02</option>
+                            <option value="A_F_Y_SouCent_03">A_F_Y_SouCent_03</option>
+                            <option value="A_F_Y_Tennis_01">A_F_Y_Tennis_01</option>
+                            <option value="A_F_Y_Topless_01">A_F_Y_Topless_01</option>
+                            <option value="A_F_Y_Tourist_01">A_F_Y_Tourist_01</option>
+                            <option value="A_F_Y_Tourist_02">A_F_Y_Tourist_02</option>
+                            <option value="A_F_Y_Vinewood_01">A_F_Y_Vinewood_01</option>
+                            <option value="A_F_Y_Vinewood_02">A_F_Y_Vinewood_02</option>
+                            <option value="A_F_Y_Vinewood_03">A_F_Y_Vinewood_03</option>
+                            <option value="A_F_Y_Vinewood_04">A_F_Y_Vinewood_04</option>
+                            <option value="A_F_Y_Yoga_01">A_F_Y_Yoga_01</option>
+                            <option value="A_M_M_ACult_01">A_M_M_ACult_01</option>
+                            <option value="A_M_M_AfriAmer_01">A_M_M_AfriAmer_01</option>
+                            <option value="A_M_M_Beach_01">A_M_M_Beach_01</option>
+                            <option value="A_M_M_Beach_02">A_M_M_Beach_02</option>
+                            <option value="A_M_M_BevHills_01">A_M_M_BevHills_01</option>
+                            <option value="A_M_M_BevHills_02">A_M_M_BevHills_02</option>
+                            <option value="A_M_M_Business_01">A_M_M_Business_01</option>
+                            <option value="A_M_M_EastSA_01">A_M_M_EastSA_01</option>
+                            <option value="A_M_M_EastSA_02">A_M_M_EastSA_02</option>
+                            <option value="A_M_M_Farmer_01">A_M_M_Farmer_01</option>
+                            <option value="A_M_M_FatLatin_01">A_M_M_FatLatin_01</option>
+                            <option value="A_M_M_GenFat_01">A_M_M_GenFat_01</option>
+                            <option value="A_M_M_GenFat_02">A_M_M_GenFat_02</option>
+                            <option value="A_M_M_Golfer_01">A_M_M_Golfer_01</option>
+                            <option value="A_M_M_HasJew_01">A_M_M_HasJew_01</option>
+                            <option value="A_M_M_Hillbilly_01">A_M_M_Hillbilly_01</option>
+                            <option value="A_M_M_Hillbilly_02">A_M_M_Hillbilly_02</option>
+                            <option value="A_M_M_Indian_01">A_M_M_Indian_01</option>
+                            <option value="A_M_M_KTown_01">A_M_M_KTown_01</option>
+                            <option value="A_M_M_Malibu_01">A_M_M_Malibu_01</option>
+                            <option value="A_M_M_MexCntry_01">A_M_M_MexCntry_01</option>
+                            <option value="A_M_M_MexLabor_01">A_M_M_MexLabor_01</option>
+                            <option value="A_M_M_OG_Boss_01">A_M_M_OG_Boss_01</option>
+                            <option value="A_M_M_Paparazzi_01">A_M_M_Paparazzi_01</option>
+                            <option value="A_M_M_Polynesian_01">A_M_M_Polynesian_01</option>
+                            <option value="A_M_M_ProlHost_01">A_M_M_ProlHost_01</option>
+                            <option value="A_M_M_RurMeth_01">A_M_M_RurMeth_01</option>
+                            <option value="A_M_M_Salton_01">A_M_M_Salton_01</option>
+                            <option value="A_M_M_Salton_02">A_M_M_Salton_02</option>
+                            <option value="A_M_M_Salton_03">A_M_M_Salton_03</option>
+                            <option value="A_M_M_Salton_04">A_M_M_Salton_04</option>
+                            <option value="A_M_M_Skater_01">A_M_M_Skater_01</option>
+                            <option value="A_M_M_Skidrow_01">A_M_M_Skidrow_01</option>
+                            <option value="A_M_M_SoCenLat_01">A_M_M_SoCenLat_01</option>
+                            <option value="A_M_M_SouCent_01">A_M_M_SouCent_01</option>
+                            <option value="A_M_M_SouCent_02">A_M_M_SouCent_02</option>
+                            <option value="A_M_M_SouCent_03">A_M_M_SouCent_03</option>
+                            <option value="A_M_M_SouCent_04">A_M_M_SouCent_04</option>
+                            <option value="A_M_M_StLat_02">A_M_M_StLat_02</option>
+                            <option value="A_M_M_Tennis_01">A_M_M_Tennis_01</option>
+                            <option value="A_M_M_Tourist_01">A_M_M_Tourist_01</option>
+                            <option value="A_M_M_TrampBeac_01">A_M_M_TrampBeac_01</option>
+                            <option value="A_M_M_Tramp_01">A_M_M_Tramp_01</option>
+                            <option value="A_M_M_TranVest_01">A_M_M_TranVest_01</option>
+                            <option value="A_M_M_TranVest_02">A_M_M_TranVest_02</option>
+                            <option value="A_M_O_ACult_01">A_M_O_ACult_01</option>
+                            <option value="A_M_O_ACult_02">A_M_O_ACult_02</option>
+                            <option value="A_M_O_Beach_01">A_M_O_Beach_01</option>
+                            <option value="A_M_O_GenStreet_01">A_M_O_GenStreet_01</option>
+                            <option value="A_M_O_KTown_01">A_M_O_KTown_01</option>
+                            <option value="A_M_O_Salton_01">A_M_O_Salton_01</option>
+                            <option value="A_M_O_SouCent_01">A_M_O_SouCent_01</option>
+                            <option value="A_M_O_SouCent_02">A_M_O_SouCent_02</option>
+                            <option value="A_M_O_SouCent_03">A_M_O_SouCent_03</option>
+                            <option value="A_M_O_Tramp_01">A_M_O_Tramp_01</option>
+                            <option value="A_M_Y_ACult_01">A_M_Y_ACult_01</option>
+                            <option value="A_M_Y_ACult_02">A_M_Y_ACult_02</option>
+                            <option value="A_M_Y_BeachVesp_01">A_M_Y_BeachVesp_01</option>
+                            <option value="A_M_Y_BeachVesp_02">A_M_Y_BeachVesp_02</option>
+                            <option value="A_M_Y_Beach_01">A_M_Y_Beach_01</option>
+                            <option value="A_M_Y_Beach_02">A_M_Y_Beach_02</option>
+                            <option value="A_M_Y_Beach_03">A_M_Y_Beach_03</option>
+                            <option value="A_M_Y_BevHills_01">A_M_Y_BevHills_01</option>
+                            <option value="A_M_Y_BevHills_02">A_M_Y_BevHills_02</option>
+                            <option value="A_M_Y_BreakDance_01">A_M_Y_BreakDance_01</option>
+                            <option value="A_M_Y_BusiCas_01">A_M_Y_BusiCas_01</option>
+                            <option value="A_M_Y_Business_01">A_M_Y_Business_01</option>
+                            <option value="A_M_Y_Business_02">A_M_Y_Business_02</option>
+                            <option value="A_M_Y_Business_03">A_M_Y_Business_03</option>
+                            <option value="A_M_Y_Cyclist_01">A_M_Y_Cyclist_01</option>
+                            <option value="A_M_Y_DHill_01">A_M_Y_DHill_01</option>
+                            <option value="A_M_Y_Downtown_01">A_M_Y_Downtown_01</option>
+                            <option value="A_M_Y_EastSA_01">A_M_Y_EastSA_01</option>
+                            <option value="A_M_Y_EastSA_02">A_M_Y_EastSA_02</option>
+                            <option value="A_M_Y_Epsilon_01">A_M_Y_Epsilon_01</option>
+                            <option value="A_M_Y_Epsilon_02">A_M_Y_Epsilon_02</option>
+                            <option value="A_M_Y_Gay_01">A_M_Y_Gay_01</option>
+                            <option value="A_M_Y_Gay_02">A_M_Y_Gay_02</option>
+                            <option value="A_M_Y_GenStreet_01">A_M_Y_GenStreet_01</option>
+                            <option value="A_M_Y_GenStreet_02">A_M_Y_GenStreet_02</option>
+                            <option value="A_M_Y_Golfer_01">A_M_Y_Golfer_01</option>
+                            <option value="A_M_Y_HasJew_01">A_M_Y_HasJew_01</option>
+                            <option value="A_M_Y_Hiker_01">A_M_Y_Hiker_01</option>
+                            <option value="A_M_Y_Hippy_01">A_M_Y_Hippy_01</option>
+                            <option value="A_M_Y_Hipster_01">A_M_Y_Hipster_01</option>
+                            <option value="A_M_Y_Hipster_02">A_M_Y_Hipster_02</option>
+                            <option value="A_M_Y_Hipster_03">A_M_Y_Hipster_03</option>
+                            <option value="A_M_Y_Indian_01">A_M_Y_Indian_01</option>
+                            <option value="A_M_Y_Jetski_01">A_M_Y_Jetski_01</option>
+                            <option value="A_M_Y_Juggalo_01">A_M_Y_Juggalo_01</option>
+                            <option value="A_M_Y_KTown_01">A_M_Y_KTown_01</option>
+                            <option value="A_M_Y_KTown_02">A_M_Y_KTown_02</option>
+                            <option value="A_M_Y_Latino_01">A_M_Y_Latino_01</option>
+                            <option value="A_M_Y_MethHead_01">A_M_Y_MethHead_01</option>
+                            <option value="A_M_Y_MexThug_01">A_M_Y_MexThug_01</option>
+                            <option value="A_M_Y_MotoX_01">A_M_Y_MotoX_01</option>
+                            <option value="A_M_Y_MotoX_02">A_M_Y_MotoX_02</option>
+                            <option value="A_M_Y_MusclBeac_01">A_M_Y_MusclBeac_01</option>
+                            <option value="A_M_Y_MusclBeac_02">A_M_Y_MusclBeac_02</option>
+                            <option value="A_M_Y_Polynesian_01">A_M_Y_Polynesian_01</option>
+                            <option value="A_M_Y_RoadCyc_01">A_M_Y_RoadCyc_01</option>
+                            <option value="A_M_Y_Runner_01">A_M_Y_Runner_01</option>
+                            <option value="A_M_Y_Runner_02">A_M_Y_Runner_02</option>
+                            <option value="A_M_Y_Salton_01">A_M_Y_Salton_01</option>
+                            <option value="A_M_Y_Skater_01">A_M_Y_Skater_01</option>
+                            <option value="A_M_Y_Skater_02">A_M_Y_Skater_02</option>
+                            <option value="A_M_Y_SouCent_01">A_M_Y_SouCent_01</option>
+                            <option value="A_M_Y_SouCent_02">A_M_Y_SouCent_02</option>
+                            <option value="A_M_Y_SouCent_03">A_M_Y_SouCent_03</option>
+                            <option value="A_M_Y_SouCent_04">A_M_Y_SouCent_04</option>
+                            <option value="A_M_Y_StBla_01">A_M_Y_StBla_01</option>
+                            <option value="A_M_Y_StBla_02">A_M_Y_StBla_02</option>
+                            <option value="A_M_Y_StLat_01">A_M_Y_StLat_01</option>
+                            <option value="A_M_Y_StWhi_01">A_M_Y_StWhi_01</option>
+                            <option value="A_M_Y_StWhi_02">A_M_Y_StWhi_02</option>
+                            <option value="A_M_Y_Sunbathe_01">A_M_Y_Sunbathe_01</option>
+                            <option value="A_M_Y_Surfer_01">A_M_Y_Surfer_01</option>
+                            <option value="A_M_Y_VinDouche_01">A_M_Y_VinDouche_01</option>
+                            <option value="A_M_Y_Vinewood_01">A_M_Y_Vinewood_01</option>
+                            <option value="A_M_Y_Vinewood_02">A_M_Y_Vinewood_02</option>
+                            <option value="A_M_Y_Vinewood_03">A_M_Y_Vinewood_03</option>
+                            <option value="A_M_Y_Vinewood_04">A_M_Y_Vinewood_04</option>
+                            <option value="A_M_Y_Yoga_01">A_M_Y_Yoga_01</option>
+                            <option value="CSB_Abigail">CSB_Abigail</option>
+                            <option value="CSB_Anita">CSB_Anita</option>
+                            <option value="CSB_Anton">CSB_Anton</option>
+                            <option value="CSB_BallasOG">CSB_BallasOG</option>
+                            <option value="CSB_Bride">CSB_Bride</option>
+                            <option value="CSB_BurgerDrug">CSB_BurgerDrug</option>
+                            <option value="CSB_Car3guy1">CSB_Car3guy1</option>
+                            <option value="CSB_Car3guy2">CSB_Car3guy2</option>
+                            <option value="CSB_Chef">CSB_Chef</option>
+                            <option value="CSB_Chin_goon">CSB_Chin_goon</option>
+                            <option value="CSB_Cletus">CSB_Cletus</option>
+                            <option value="CSB_Cop">CSB_Cop</option>
+                            <option value="CSB_Customer">CSB_Customer</option>
+                            <option value="CSB_Denise_friend">CSB_Denise_friend</option>
+                            <option value="CSB_FOS_rep">CSB_FOS_rep</option>
+                            <option value="CSB_G">CSB_G</option>
+                            <option value="CSB_Groom">CSB_Groom</option>
+                            <option value="CSB_Grove_str_dlr">CSB_Grove_str_dlr</option>
+                            <option value="CSB_Hao">CSB_Hao</option>
+                            <option value="CSB_Hugh">CSB_Hugh</option>
+                            <option value="CSB_Imran">CSB_Imran</option>
+                            <option value="CSB_Janitor">CSB_Janitor</option>
+                            <option value="CSB_Maude">CSB_Maude</option>
+                            <option value="CSB_MWeather">CSB_MWeather</option>
+                            <option value="CSB_Ortega">CSB_Ortega</option>
+                            <option value="CSB_Oscar">CSB_Oscar</option>
+                            <option value="CSB_PornDudes">CSB_PornDudes</option>
+                            <option value="CSB_PrologueDriver">CSB_PrologueDriver</option>
+                            <option value="CSB_ProlSec">CSB_ProlSec</option>
+                            <option value="CSB_Ramp_gang">CSB_Ramp_gang</option>
+                            <option value="CSB_Ramp_hic">CSB_Ramp_hic</option>
+                            <option value="CSB_Ramp_hipster">CSB_Ramp_hipster</option>
+                            <option value="CSB_Ramp_marine">CSB_Ramp_marine</option>
+                            <option value="CSB_Ramp_mex">CSB_Ramp_mex</option>
+                            <option value="CSB_Reporter">CSB_Reporter</option>
+                            <option value="CSB_RoccoPelosi">CSB_RoccoPelosi</option>
+                            <option value="CSB_Screen_Writer">CSB_Screen_Writer</option>
+                            <option value="CSB_Stripper_01">CSB_Stripper_01</option>
+                            <option value="CSB_Stripper_02">CSB_Stripper_02</option>
+                            <option value="CSB_Tonya">CSB_Tonya</option>
+                            <option value="CSB_TrafficWarden">CSB_TrafficWarden</option>
+                            <option value="CS_AmandaTownley">CS_AmandaTownley</option>
+                            <option value="CS_Andreas">CS_Andreas</option>
+                            <option value="cs_ashley">cs_ashley</option>
+                            <option value="CS_Bankman">CS_Bankman</option>
+                            <option value="CS_Barry">CS_Barry</option>
+                            <option value="CS_Beverly">CS_Beverly</option>
+                            <option value="CS_Brad">CS_Brad</option>
+                            <option value="CS_BradCadaver">CS_BradCadaver</option>
+                            <option value="CS_Carbuyer">CS_Carbuyer</option>
+                            <option value="CS_Casey">CS_Casey</option>
+                            <option value="CS_ChengSr">CS_ChengSr</option>
+                            <option value="CS_ChrisFormage">CS_ChrisFormage</option>
+                            <option value="CS_Clay">CS_Clay</option>
+                            <option value="CS_Dale">CS_Dale</option>
+                            <option value="CS_DaveNorton">CS_DaveNorton</option>
+                            <option value="cs_debra">cs_debra</option>
+                            <option value="cs_denise">cs_denise</option>
+                            <option value="CS_Devin">CS_Devin</option>
+                            <option value="CS_Dom">CS_Dom</option>
+                            <option value="CS_Dreyfuss">CS_Dreyfuss</option>
+                            <option value="CS_DrFriedlander">CS_DrFriedlander</option>
+                            <option value="CS_Fabien">CS_Fabien</option>
+                            <option value="CS_FBISuit_01">CS_FBISuit_01</option>
+                            <option value="CS_Floyd">CS_Floyd</option>
+                            <option value="CS_Guadalope">CS_Guadalope</option>
+                            <option value="cs_gurk">cs_gurk</option>
+                            <option value="CS_Hunter">CS_Hunter</option>
+                            <option value="CS_Janet">CS_Janet</option>
+                            <option value="CS_JewelAss">CS_JewelAss</option>
+                            <option value="CS_JimmyBoston">CS_JimmyBoston</option>
+                            <option value="CS_JimmyDiSanto">CS_JimmyDiSanto</option>
+                            <option value="CS_JoeMinuteMan">CS_JoeMinuteMan</option>
+                            <option value="CS_JohnnyKlebitz">CS_JohnnyKlebitz</option>
+                            <option value="CS_Josef">CS_Josef</option>
+                            <option value="CS_Josh">CS_Josh</option>
+                            <option value="CS_LamarDavis">CS_LamarDavis</option>
+                            <option value="CS_Lazlow">CS_Lazlow</option>
+                            <option value="CS_LesterCrest">CS_LesterCrest</option>
+                            <option value="CS_LifeInvad_01">CS_LifeInvad_01</option>
+                            <option value="CS_Magenta">CS_Magenta</option>
+                            <option value="CS_Manuel">CS_Manuel</option>
+                            <option value="CS_Marnie">CS_Marnie</option>
+                            <option value="CS_MartinMadrazo">CS_MartinMadrazo</option>
+                            <option value="CS_MaryAnn">CS_MaryAnn</option>
+                            <option value="CS_Michelle">CS_Michelle</option>
+                            <option value="CS_Milton">CS_Milton</option>
+                            <option value="CS_Molly">CS_Molly</option>
+                            <option value="CS_MovPremF_01">CS_MovPremF_01</option>
+                            <option value="CS_MovPremMale">CS_MovPremMale</option>
+                            <option value="CS_MRK">CS_MRK</option>
+                            <option value="CS_MrsPhillips">CS_MrsPhillips</option>
+                            <option value="CS_MRS_Thornhill">CS_MRS_Thornhill</option>
+                            <option value="CS_Natalia">CS_Natalia</option>
+                            <option value="CS_NervousRon">CS_NervousRon</option>
+                            <option value="CS_Nigel">CS_Nigel</option>
+                            <option value="CS_Old_Man1A">CS_Old_Man1A</option>
+                            <option value="CS_Old_Man2">CS_Old_Man2</option>
+                            <option value="CS_Omega">CS_Omega</option>
+                            <option value="CS_Orleans">CS_Orleans</option>
+                            <option value="CS_Paper">CS_Paper</option>
+                            <option value="CS_Patricia">CS_Patricia</option>
+                            <option value="CS_Priest">CS_Priest</option>
+                            <option value="CS_ProlSec_02">CS_ProlSec_02</option>
+                            <option value="CS_RussianDrunk">CS_RussianDrunk</option>
+                            <option value="CS_SiemonYetarian">CS_SiemonYetarian</option>
+                            <option value="CS_Solomon">CS_Solomon</option>
+                            <option value="CS_SteveHains">CS_SteveHains</option>
+                            <option value="CS_Stretch">CS_Stretch</option>
+                            <option value="CS_Tanisha">CS_Tanisha</option>
+                            <option value="CS_TaoCheng">CS_TaoCheng</option>
+                            <option value="CS_TaosTranslator">CS_TaosTranslator</option>
+                            <option value="CS_TennisCoach">CS_TennisCoach</option>
+                            <option value="CS_Terry">CS_Terry</option>
+                            <option value="CS_Tom">CS_Tom</option>
+                            <option value="CS_TomEpsilon">CS_TomEpsilon</option>
+                            <option value="CS_TracyDiSanto">CS_TracyDiSanto</option>
+                            <option value="CS_Wade">CS_Wade</option>
+                            <option value="CS_Zimbor">CS_Zimbor</option>
+                            <option value="G_F_Y_ballas_01">G_F_Y_ballas_01</option>
+                            <option value="G_F_Y_Families_01">G_F_Y_Families_01</option>
+                            <option value="G_F_Y_Lost_01">G_F_Y_Lost_01</option>
+                            <option value="G_F_Y_Vagos_01">G_F_Y_Vagos_01</option>
+                            <option value="G_M_M_ArmBoss_01">G_M_M_ArmBoss_01</option>
+                            <option value="G_M_M_ArmGoon_01">G_M_M_ArmGoon_01</option>
+                            <option value="G_M_M_ArmLieut_01">G_M_M_ArmLieut_01</option>
+                            <option value="G_M_M_ChemWork_01">G_M_M_ChemWork_01</option>
+                            <option value="G_M_M_ChiBoss_01">G_M_M_ChiBoss_01</option>
+                            <option value="G_M_M_ChiCold_01">G_M_M_ChiCold_01</option>
+                            <option value="G_M_M_ChiGoon_01">G_M_M_ChiGoon_01</option>
+                            <option value="G_M_M_ChiGoon_02">G_M_M_ChiGoon_02</option>
+                            <option value="G_M_M_KorBoss_01">G_M_M_KorBoss_01</option>
+                            <option value="G_M_M_MexBoss_01">G_M_M_MexBoss_01</option>
+                            <option value="G_M_M_MexBoss_02">G_M_M_MexBoss_02</option>
+                            <option value="G_M_Y_ArmGoon_02">G_M_Y_ArmGoon_02</option>
+                            <option value="G_M_Y_Azteca_01">G_M_Y_Azteca_01</option>
+                            <option value="G_M_Y_BallaEast_01">G_M_Y_BallaEast_01</option>
+                            <option value="G_M_Y_BallaOrig_01">G_M_Y_BallaOrig_01</option>
+                            <option value="G_M_Y_BallaSout_01">G_M_Y_BallaSout_01</option>
+                            <option value="G_M_Y_FamCA_01">G_M_Y_FamCA_01</option>
+                            <option value="G_M_Y_FamDNF_01">G_M_Y_FamDNF_01</option>
+                            <option value="G_M_Y_FamFor_01">G_M_Y_FamFor_01</option>
+                            <option value="G_M_Y_Korean_01">G_M_Y_Korean_01</option>
+                            <option value="G_M_Y_Korean_02">G_M_Y_Korean_02</option>
+                            <option value="G_M_Y_KorLieut_01">G_M_Y_KorLieut_01</option>
+                            <option value="G_M_Y_Lost_01">G_M_Y_Lost_01</option>
+                            <option value="G_M_Y_Lost_02">G_M_Y_Lost_02</option>
+                            <option value="G_M_Y_Lost_03">G_M_Y_Lost_03</option>
+                            <option value="G_M_Y_MexGang_01">G_M_Y_MexGang_01</option>
+                            <option value="G_M_Y_MexGoon_01">G_M_Y_MexGoon_01</option>
+                            <option value="G_M_Y_MexGoon_02">G_M_Y_MexGoon_02</option>
+                            <option value="G_M_Y_MexGoon_03">G_M_Y_MexGoon_03</option>
+                            <option value="G_M_Y_PoloGoon_01">G_M_Y_PoloGoon_01</option>
+                            <option value="G_M_Y_PoloGoon_02">G_M_Y_PoloGoon_02</option>
+                            <option value="G_M_Y_SalvaBoss_01">G_M_Y_SalvaBoss_01</option>
+                            <option value="G_M_Y_SalvaGoon_01">G_M_Y_SalvaGoon_01</option>
+                            <option value="G_M_Y_SalvaGoon_02">G_M_Y_SalvaGoon_02</option>
+                            <option value="G_M_Y_SalvaGoon_03">G_M_Y_SalvaGoon_03</option>
+                            <option value="G_M_Y_StrPunk_01">G_M_Y_StrPunk_01</option>
+                            <option value="G_M_Y_StrPunk_02">G_M_Y_StrPunk_02</option>
+                            <option value="HC_Driver">HC_Driver</option>
+                            <option value="HC_Gunman">HC_Gunman</option>
+                            <option value="HC_Hacker">HC_Hacker</option>
+                            <option value="IG_Abigail">IG_Abigail</option>
+                            <option value="IG_AmandaTownley">IG_AmandaTownley</option>
+                            <option value="IG_Andreas">IG_Andreas</option>
+                            <option value="IG_Ashley">IG_Ashley</option>
+                            <option value="IG_BallasOG">IG_BallasOG</option>
+                            <option value="IG_Bankman">IG_Bankman</option>
+                            <option value="IG_Barry">IG_Barry</option>
+                            <option value="IG_BestMen">IG_BestMen</option>
+                            <option value="IG_Beverly">IG_Beverly</option>
+                            <option value="IG_Brad">IG_Brad</option>
+                            <option value="IG_Bride">IG_Bride</option>
+                            <option value="IG_Car3guy1">IG_Car3guy1</option>
+                            <option value="IG_Car3guy2">IG_Car3guy2</option>
+                            <option value="IG_Casey">IG_Casey</option>
+                            <option value="IG_Chef">IG_Chef</option>
+                            <option value="IG_ChengSr">IG_ChengSr</option>
+                            <option value="IG_ChrisFormage">IG_ChrisFormage</option>
+                            <option value="IG_Clay">IG_Clay</option>
+                            <option value="IG_ClayPain">IG_ClayPain</option>
+                            <option value="IG_Cletus">IG_Cletus</option>
+                            <option value="IG_Dale">IG_Dale</option>
+                            <option value="IG_DaveNorton">IG_DaveNorton</option>
+                            <option value="IG_Denise">IG_Denise</option>
+                            <option value="IG_Devin">IG_Devin</option>
+                            <option value="IG_Dom">IG_Dom</option>
+                            <option value="IG_Dreyfuss">IG_Dreyfuss</option>
+                            <option value="IG_DrFriedlander">IG_DrFriedlander</option>
+                            <option value="IG_Fabien">IG_Fabien</option>
+                            <option value="IG_FBISuit_01">IG_FBISuit_01</option>
+                            <option value="IG_Floyd">IG_Floyd</option>
+                            <option value="IG_Groom">IG_Groom</option>
+                            <option value="IG_Hao">IG_Hao</option>
+                            <option value="IG_Hunter">IG_Hunter</option>
+                            <option value="IG_Janet">IG_Janet</option>
+                            <option value="ig_JAY_Norris">ig_JAY_Norris</option>
+                            <option value="IG_JewelAss">IG_JewelAss</option>
+                            <option value="IG_JimmyBoston">IG_JimmyBoston</option>
+                            <option value="IG_JimmyDiSanto">IG_JimmyDiSanto</option>
+                            <option value="IG_JoeMinuteMan">IG_JoeMinuteMan</option>
+                            <option value="ig_JohnnyKlebitz">ig_JohnnyKlebitz</option>
+                            <option value="IG_Josef">IG_Josef</option>
+                            <option value="IG_Josh">IG_Josh</option>
+                            <option value="IG_KerryMcIntosh">IG_KerryMcIntosh</option>
+                            <option value="IG_LamarDavis">IG_LamarDavis</option>
+                            <option value="IG_Lazlow">IG_Lazlow</option>
+                            <option value="IG_LesterCrest">IG_LesterCrest</option>
+                            <option value="IG_LifeInvad_01">IG_LifeInvad_01</option>
+                            <option value="IG_LifeInvad_02">IG_LifeInvad_02</option>
+                            <option value="IG_Magenta">IG_Magenta</option>
+                            <option value="IG_Manuel">IG_Manuel</option>
+                            <option value="IG_Marnie">IG_Marnie</option>
+                            <option value="IG_MaryAnn">IG_MaryAnn</option>
+                            <option value="IG_Maude">IG_Maude</option>
+                            <option value="IG_Michelle">IG_Michelle</option>
+                            <option value="IG_Milton">IG_Milton</option>
+                            <option value="IG_Molly">IG_Molly</option>
+                            <option value="IG_MRK">IG_MRK</option>
+                            <option value="IG_MrsPhillips">IG_MrsPhillips</option>
+                            <option value="IG_MRS_Thornhill">IG_MRS_Thornhill</option>
+                            <option value="IG_Natalia">IG_Natalia</option>
+                            <option value="IG_NervousRon">IG_NervousRon</option>
+                            <option value="IG_Nigel">IG_Nigel</option>
+                            <option value="IG_Old_Man1A">IG_Old_Man1A</option>
+                            <option value="IG_Old_Man2">IG_Old_Man2</option>
+                            <option value="IG_Omega">IG_Omega</option>
+                            <option value="IG_ONeil">IG_ONeil</option>
+                            <option value="IG_Orleans">IG_Orleans</option>
+                            <option value="IG_Ortega">IG_Ortega</option>
+                            <option value="IG_Paper">IG_Paper</option>
+                            <option value="IG_Patricia">IG_Patricia</option>
+                            <option value="IG_Priest">IG_Priest</option>
+                            <option value="IG_ProlSec_02">IG_ProlSec_02</option>
+                            <option value="IG_Ramp_Gang">IG_Ramp_Gang</option>
+                            <option value="IG_Ramp_Hic">IG_Ramp_Hic</option>
+                            <option value="IG_Ramp_Hipster">IG_Ramp_Hipster</option>
+                            <option value="IG_Ramp_Mex">IG_Ramp_Mex</option>
+                            <option value="IG_RoccoPelosi">IG_RoccoPelosi</option>
+                            <option value="IG_RussianDrunk">IG_RussianDrunk</option>
+                            <option value="IG_Screen_Writer">IG_Screen_Writer</option>
+                            <option value="IG_SiemonYetarian">IG_SiemonYetarian</option>
+                            <option value="IG_Solomon">IG_Solomon</option>
+                            <option value="IG_SteveHains">IG_SteveHains</option>
+                            <option value="IG_Stretch">IG_Stretch</option>
+                            <option value="IG_Talina">IG_Talina</option>
+                            <option value="IG_Tanisha">IG_Tanisha</option>
+                            <option value="IG_TaoCheng">IG_TaoCheng</option>
+                            <option value="IG_TaosTranslator">IG_TaosTranslator</option>
+                            <option value="ig_TennisCoach">ig_TennisCoach</option>
+                            <option value="IG_Terry">IG_Terry</option>
+                            <option value="IG_TomEpsilon">IG_TomEpsilon</option>
+                            <option value="IG_Tonya">IG_Tonya</option>
+                            <option value="IG_TracyDiSanto">IG_TracyDiSanto</option>
+                            <option value="IG_TrafficWarden">IG_TrafficWarden</option>
+                            <option value="IG_TylerDix">IG_TylerDix</option>
+                            <option value="IG_Wade">IG_Wade</option>
+                            <option value="IG_Zimbor">IG_Zimbor</option>
+                            <option value="MP_F_DeadHooker">MP_F_DeadHooker</option>
+                            <option value="MP_F_Freemode_01">MP_F_Freemode_01</option>
+                            <option value="MP_F_Misty_01">MP_F_Misty_01</option>
+                            <option value="MP_F_StripperLite">MP_F_StripperLite</option>
+                            <option value="MP_G_M_Pros_01">MP_G_M_Pros_01</option>
+                            <option value="MP_HeadTargets">MP_HeadTargets</option>
+                            <option value="MP_M_Claude_01">MP_M_Claude_01</option>
+                            <option value="MP_M_ExArmy_01">MP_M_ExArmy_01</option>
+                            <option value="MP_M_FamDD_01">MP_M_FamDD_01</option>
+                            <option value="MP_M_FIBSec_01">MP_M_FIBSec_01</option>
+                            <option value="MP_M_Freemode_01">MP_M_Freemode_01</option>
+                            <option value="MP_M_Marston_01">MP_M_Marston_01</option>
+                            <option value="MP_M_Niko_01">MP_M_Niko_01</option>
+                            <option value="MP_M_ShopKeep_01">MP_M_ShopKeep_01</option>
+                            <option value="MP_S_M_Armoured_01">MP_S_M_Armoured_01</option>
+                            <option value="Player_One">Player_One</option>
+                            <option value="Player_Two">Player_Two</option>
+                            <option value="Player_Zero">Player_Zero</option>
+                            <option value="slod_human">slod_human</option>
+                            <option value="slod_large_quadped">slod_large_quadped</option>
+                            <option value="slod_small_quadped">slod_small_quadped</option>
+                            <option value="S_F_M_Fembarber">S_F_M_Fembarber</option>
+                            <option value="S_F_M_Maid_01">S_F_M_Maid_01</option>
+                            <option value="S_F_M_Shop_HIGH">S_F_M_Shop_HIGH</option>
+                            <option value="S_F_M_SweatShop_01">S_F_M_SweatShop_01</option>
+                            <option value="S_F_Y_AirHostess_01">S_F_Y_AirHostess_01</option>
+                            <option value="S_F_Y_Bartender_01">S_F_Y_Bartender_01</option>
+                            <option value="S_F_Y_Baywatch_01">S_F_Y_Baywatch_01</option>
+                            <option value="S_F_Y_Cop_01">S_F_Y_Cop_01</option>
+                            <option value="S_F_Y_Factory_01">S_F_Y_Factory_01</option>
+                            <option value="S_F_Y_Hooker_01">S_F_Y_Hooker_01</option>
+                            <option value="S_F_Y_Hooker_02">S_F_Y_Hooker_02</option>
+                            <option value="S_F_Y_Hooker_03">S_F_Y_Hooker_03</option>
+                            <option value="S_F_Y_Migrant_01">S_F_Y_Migrant_01</option>
+                            <option value="S_F_Y_MovPrem_01">S_F_Y_MovPrem_01</option>
+                            <option value="S_F_Y_Ranger_01">S_F_Y_Ranger_01</option>
+                            <option value="S_F_Y_Scrubs_01">S_F_Y_Scrubs_01</option>
+                            <option value="S_F_Y_Sheriff_01">S_F_Y_Sheriff_01</option>
+                            <option value="S_F_Y_Shop_LOW">S_F_Y_Shop_LOW</option>
+                            <option value="S_F_Y_Shop_MID">S_F_Y_Shop_MID</option>
+                            <option value="S_F_Y_StripperLite">S_F_Y_StripperLite</option>
+                            <option value="S_F_Y_Stripper_01">S_F_Y_Stripper_01</option>
+                            <option value="S_F_Y_Stripper_02">S_F_Y_Stripper_02</option>
+                            <option value="S_F_Y_SweatShop_01">S_F_Y_SweatShop_01</option>
+                            <option value="S_M_M_AmmuCountry">S_M_M_AmmuCountry</option>
+                            <option value="S_M_M_Armoured_01">S_M_M_Armoured_01</option>
+                            <option value="S_M_M_Armoured_02">S_M_M_Armoured_02</option>
+                            <option value="S_M_M_AutoShop_01">S_M_M_AutoShop_01</option>
+                            <option value="S_M_M_AutoShop_02">S_M_M_AutoShop_02</option>
+                            <option value="S_M_M_Bouncer_01">S_M_M_Bouncer_01</option>
+                            <option value="S_M_M_ChemSec_01">S_M_M_ChemSec_01</option>
+                            <option value="S_M_M_CIASec_01">S_M_M_CIASec_01</option>
+                            <option value="S_M_M_CntryBar_01">S_M_M_CntryBar_01</option>
+                            <option value="S_M_M_DockWork_01">S_M_M_DockWork_01</option>
+                            <option value="S_M_M_Doctor_01">S_M_M_Doctor_01</option>
+                            <option value="S_M_M_FIBOffice_01">S_M_M_FIBOffice_01</option>
+                            <option value="S_M_M_FIBOffice_02">S_M_M_FIBOffice_02</option>
+                            <option value="S_M_M_Gaffer_01">S_M_M_Gaffer_01</option>
+                            <option value="S_M_M_Gardener_01">S_M_M_Gardener_01</option>
+                            <option value="S_M_M_GenTransport">S_M_M_GenTransport</option>
+                            <option value="S_M_M_HairDress_01">S_M_M_HairDress_01</option>
+                            <option value="S_M_M_HighSec_01">S_M_M_HighSec_01</option>
+                            <option value="S_M_M_HighSec_02">S_M_M_HighSec_02</option>
+                            <option value="S_M_M_Janitor">S_M_M_Janitor</option>
+                            <option value="S_M_M_LatHandy_01">S_M_M_LatHandy_01</option>
+                            <option value="S_M_M_LifeInvad_01">S_M_M_LifeInvad_01</option>
+                            <option value="S_M_M_Linecook">S_M_M_Linecook</option>
+                            <option value="S_M_M_LSMetro_01">S_M_M_LSMetro_01</option>
+                            <option value="S_M_M_Mariachi_01">S_M_M_Mariachi_01</option>
+                            <option value="S_M_M_Marine_01">S_M_M_Marine_01</option>
+                            <option value="S_M_M_Marine_02">S_M_M_Marine_02</option>
+                            <option value="S_M_M_Migrant_01">S_M_M_Migrant_01</option>
+                            <option value="S_M_M_MovAlien_01">S_M_M_MovAlien_01</option>
+                            <option value="S_M_M_MovPrem_01">S_M_M_MovPrem_01</option>
+                            <option value="S_M_M_MovSpace_01">S_M_M_MovSpace_01</option>
+                            <option value="S_M_M_Paramedic_01">S_M_M_Paramedic_01</option>
+                            <option value="S_M_M_Pilot_01">S_M_M_Pilot_01</option>
+                            <option value="S_M_M_Pilot_02">S_M_M_Pilot_02</option>
+                            <option value="S_M_M_Postal_01">S_M_M_Postal_01</option>
+                            <option value="S_M_M_Postal_02">S_M_M_Postal_02</option>
+                            <option value="S_M_M_PrisGuard_01">S_M_M_PrisGuard_01</option>
+                            <option value="S_M_M_Scientist_01">S_M_M_Scientist_01</option>
+                            <option value="S_M_M_Security_01">S_M_M_Security_01</option>
+                            <option value="S_M_M_SnowCop_01">S_M_M_SnowCop_01</option>
+                            <option value="S_M_M_StrPerf_01">S_M_M_StrPerf_01</option>
+                            <option value="S_M_M_StrPreach_01">S_M_M_StrPreach_01</option>
+                            <option value="S_M_M_StrVend_01">S_M_M_StrVend_01</option>
+                            <option value="S_M_M_Trucker_01">S_M_M_Trucker_01</option>
+                            <option value="S_M_M_UPS_01">S_M_M_UPS_01</option>
+                            <option value="S_M_M_UPS_02">S_M_M_UPS_02</option>
+                            <option value="S_M_O_Busker_01">S_M_O_Busker_01</option>
+                            <option value="S_M_Y_AirWorker">S_M_Y_AirWorker</option>
+                            <option value="S_M_Y_AmmuCity_01">S_M_Y_AmmuCity_01</option>
+                            <option value="S_M_Y_ArmyMech_01">S_M_Y_ArmyMech_01</option>
+                            <option value="S_M_Y_Autopsy_01">S_M_Y_Autopsy_01</option>
+                            <option value="S_M_Y_Barman_01">S_M_Y_Barman_01</option>
+                            <option value="S_M_Y_BayWatch_01">S_M_Y_BayWatch_01</option>
+                            <option value="S_M_Y_BlackOps_01">S_M_Y_BlackOps_01</option>
+                            <option value="S_M_Y_BlackOps_02">S_M_Y_BlackOps_02</option>
+                            <option value="S_M_Y_BlackOps_03">S_M_Y_BlackOps_03</option>
+                            <option value="S_M_Y_BusBoy_01">S_M_Y_BusBoy_01</option>
+                            <option value="S_M_Y_Chef_01">S_M_Y_Chef_01</option>
+                            <option value="S_M_Y_Clown_01">S_M_Y_Clown_01</option>
+                            <option value="S_M_Y_Construct_01">S_M_Y_Construct_01</option>
+                            <option value="S_M_Y_Construct_02">S_M_Y_Construct_02</option>
+                            <option value="S_M_Y_Cop_01">S_M_Y_Cop_01</option>
+                            <option value="S_M_Y_Dealer_01">S_M_Y_Dealer_01</option>
+                            <option value="S_M_Y_DevinSec_01">S_M_Y_DevinSec_01</option>
+                            <option value="S_M_Y_DockWork_01">S_M_Y_DockWork_01</option>
+                            <option value="S_M_Y_Doorman_01">S_M_Y_Doorman_01</option>
+                            <option value="S_M_Y_DWService_01">S_M_Y_DWService_01</option>
+                            <option value="S_M_Y_DWService_02">S_M_Y_DWService_02</option>
+                            <option value="S_M_Y_Factory_01">S_M_Y_Factory_01</option>
+                            <option value="S_M_Y_Fireman_01">S_M_Y_Fireman_01</option>
+                            <option value="S_M_Y_Garbage">S_M_Y_Garbage</option>
+                            <option value="S_M_Y_Grip_01">S_M_Y_Grip_01</option>
+                            <option value="S_M_Y_HwayCop_01">S_M_Y_HwayCop_01</option>
+                            <option value="S_M_Y_Marine_01">S_M_Y_Marine_01</option>
+                            <option value="S_M_Y_Marine_02">S_M_Y_Marine_02</option>
+                            <option value="S_M_Y_Marine_03">S_M_Y_Marine_03</option>
+                            <option value="S_M_Y_Mime">S_M_Y_Mime</option>
+                            <option value="S_M_Y_PestCont_01">S_M_Y_PestCont_01</option>
+                            <option value="S_M_Y_Pilot_01">S_M_Y_Pilot_01</option>
+                            <option value="S_M_Y_PrisMuscl_01">S_M_Y_PrisMuscl_01</option>
+                            <option value="S_M_Y_Prisoner_01">S_M_Y_Prisoner_01</option>
+                            <option value="S_M_Y_Ranger_01">S_M_Y_Ranger_01</option>
+                            <option value="S_M_Y_Robber_01">S_M_Y_Robber_01</option>
+                            <option value="S_M_Y_Sheriff_01">S_M_Y_Sheriff_01</option>
+                            <option value="S_M_Y_Shop_MASK">S_M_Y_Shop_MASK</option>
+                            <option value="S_M_Y_StrVend_01">S_M_Y_StrVend_01</option>
+                            <option value="S_M_Y_Swat_01">S_M_Y_Swat_01</option>
+                            <option value="S_M_Y_USCG_01">S_M_Y_USCG_01</option>
+                            <option value="S_M_Y_Valet_01">S_M_Y_Valet_01</option>
+                            <option value="S_M_Y_Waiter_01">S_M_Y_Waiter_01</option>
+                            <option value="S_M_Y_WinClean_01">S_M_Y_WinClean_01</option>
+                            <option value="S_M_Y_XMech_01">S_M_Y_XMech_01</option>
+                            <option value="S_M_Y_XMech_02">S_M_Y_XMech_02</option>
+                            <option value="U_F_M_Corpse_01">U_F_M_Corpse_01</option>
+                            <option value="U_F_M_Miranda">U_F_M_Miranda</option>
+                            <option value="U_F_M_ProMourn_01">U_F_M_ProMourn_01</option>
+                            <option value="U_F_O_MovieStar">U_F_O_MovieStar</option>
+                            <option value="U_F_O_ProlHost_01">U_F_O_ProlHost_01</option>
+                            <option value="U_F_Y_BikerChic">U_F_Y_BikerChic</option>
+                            <option value="U_F_Y_COMJane">U_F_Y_COMJane</option>
+                            <option value="U_F_Y_corpse_01">U_F_Y_corpse_01</option>
+                            <option value="U_F_Y_corpse_02">U_F_Y_corpse_02</option>
+                            <option value="U_F_Y_HotPosh_01">U_F_Y_HotPosh_01</option>
+                            <option value="U_F_Y_JewelAss_01">U_F_Y_JewelAss_01</option>
+                            <option value="U_F_Y_Mistress">U_F_Y_Mistress</option>
+                            <option value="U_F_Y_PoppyMich">U_F_Y_PoppyMich</option>
+                            <option value="U_F_Y_Princess">U_F_Y_Princess</option>
+                            <option value="U_F_Y_SpyActress">U_F_Y_SpyActress</option>
+                            <option value="U_M_M_Aldinapoli">U_M_M_Aldinapoli</option>
+                            <option value="U_M_M_BankMan">U_M_M_BankMan</option>
+                            <option value="U_M_M_BikeHire_01">U_M_M_BikeHire_01</option>
+                            <option value="U_M_M_FIBArchitect">U_M_M_FIBArchitect</option>
+                            <option value="U_M_M_FilmDirector">U_M_M_FilmDirector</option>
+                            <option value="U_M_M_GlenStank_01">U_M_M_GlenStank_01</option>
+                            <option value="U_M_M_Griff_01">U_M_M_Griff_01</option>
+                            <option value="U_M_M_Jesus_01">U_M_M_Jesus_01</option>
+                            <option value="U_M_M_JewelSec_01">U_M_M_JewelSec_01</option>
+                            <option value="U_M_M_JewelThief">U_M_M_JewelThief</option>
+                            <option value="U_M_M_MarkFost">U_M_M_MarkFost</option>
+                            <option value="U_M_M_PartyTarget">U_M_M_PartyTarget</option>
+                            <option value="U_M_M_ProlSec_01">U_M_M_ProlSec_01</option>
+                            <option value="U_M_M_ProMourn_01">U_M_M_ProMourn_01</option>
+                            <option value="U_M_M_RivalPap">U_M_M_RivalPap</option>
+                            <option value="U_M_M_SpyActor">U_M_M_SpyActor</option>
+                            <option value="U_M_M_WillyFist">U_M_M_WillyFist</option>
+                            <option value="U_M_O_FinGuru_01">U_M_O_FinGuru_01</option>
+                            <option value="U_M_O_TapHillBilly">U_M_O_TapHillBilly</option>
+                            <option value="U_M_O_Tramp_01">U_M_O_Tramp_01</option>
+                            <option value="U_M_Y_Abner">U_M_Y_Abner</option>
+                            <option value="U_M_Y_AntonB">U_M_Y_AntonB</option>
+                            <option value="U_M_Y_BabyD">U_M_Y_BabyD</option>
+                            <option value="U_M_Y_Baygor">U_M_Y_Baygor</option>
+                            <option value="U_M_Y_BurgerDrug_01">U_M_Y_BurgerDrug_01</option>
+                            <option value="U_M_Y_Chip">U_M_Y_Chip</option>
+                            <option value="U_M_Y_Cyclist_01">U_M_Y_Cyclist_01</option>
+                            <option value="U_M_Y_FIBMugger_01">U_M_Y_FIBMugger_01</option>
+                            <option value="U_M_Y_Guido_01">U_M_Y_Guido_01</option>
+                            <option value="U_M_Y_GunVend_01">U_M_Y_GunVend_01</option>
+                            <option value="U_M_Y_Hippie_01">U_M_Y_Hippie_01</option>
+                            <option value="U_M_Y_ImpoRage">U_M_Y_ImpoRage</option>
+                            <option value="U_M_Y_Justin">U_M_Y_Justin</option>
+                            <option value="U_M_Y_Mani">U_M_Y_Mani</option>
+                            <option value="U_M_Y_MilitaryBum">U_M_Y_MilitaryBum</option>
+                            <option value="U_M_Y_Paparazzi">U_M_Y_Paparazzi</option>
+                            <option value="U_M_Y_Party_01">U_M_Y_Party_01</option>
+                            <option value="U_M_Y_Pogo_01">U_M_Y_Pogo_01</option>
+                            <option value="U_M_Y_Prisoner_01">U_M_Y_Prisoner_01</option>
+                            <option value="U_M_Y_ProlDriver_01">U_M_Y_ProlDriver_01</option>
+                            <option value="U_M_Y_RSRanger_01">U_M_Y_RSRanger_01</option>
+                            <option value="U_M_Y_SBike">U_M_Y_SBike</option>
+                            <option value="U_M_Y_StagGrm_01">U_M_Y_StagGrm_01</option>
+                            <option value="U_M_Y_Tattoo_01">U_M_Y_Tattoo_01</option>
+                            <option value="U_M_Y_Zombie_01">U_M_Y_Zombie_01</option>
+                        </select>
+
+                        <div id="modelchangeM" class="button">Mudar Skin</div>
+
+                    </div>
+
+                    <div class="gui">
+                        <input id="dinheiro" type="text" value="100">
+                        <div id="adddinheiro" class="button">Add Dinheiro</div>
+                    </div>
+
+                    <div class="gui">
+                        <div id="tunagem" class="button">Tunagem</div>
+                        <div id="sempolicia" class="button">Sem Policia</div>
+                        <div id="dararmas" class="button">Obter Armas</div>
+                        <div id="addZumbiMorto" class="button">+ Zumbis Mortos</div>
+                    </div>
+
+
+                </center>
+            </div>
+
+
+
+
+            <div class="menu-lateral" style="left:386px;max-width: 177px;">
+                <!--left:469px-->
+                <center>
+
+                    <div class="gui">
+                        <p>Traje</p>
+                        <br>
+
+                        <div id="Homem" class="button">Homem</div>
+                        <div id="Mulher" class="button">Mulher</div>
+                        <div id="Resetar" class="button">Resetar</div>
+
+                        <br>
+
+
+                        <table>
+                            <tr>
+                                <td>Cabeca:</td>
+                                <td><input type="number" name="Cabeca" id="Cabeca"></td>
+                                <td><input type="number" name="Cabeca_t" id="Cabeca_t"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Mascara:</td>
+                                <td> <input type="number" name="Mascara" id="Mascara"></td>
+                                <td> <input type="number" name="Mascara_t" id="Mascara_t"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Cabelo</td>
+                                <td><input type="number" name="Cabelo" id="Cabelo"></td>
+                                <td><input type="number" name="Cabelo_t" id="Cabelo_t"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Torso</td>
+                                <td><input type="number" name="Torso" id="Torso"></td>
+                                <td><input type="number" name="Torso_t" id="Torso_t"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Pernas</td>
+                                <td><input type="number" name="Pernas" id="Pernas"></td>
+                                <td><input type="number" name="Pernas_t" id="Pernas_t"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Misc</td>
+                                <td><input type="number" name="Misc" id="Misc"></td>
+                                <td><input type="number" name="Misc_t" id="Misc_t"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Sapatos</td>
+                                <td><input type="number" name="Sapatos" id="Sapatos"></td>
+                                <td><input type="number" name="Sapatos_t" id="Sapatos_t"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Misc 2</td>
+                                <td><input type="number" name="Misc2" id="Misc2"></td>
+                                <td><input type="number" name="Misc2_t" id="Misc2_t"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Casacos</td>
+                                <td><input type="number" name="Casacos" id="Casacos"></td>
+                                <td><input type="number" name="Casacos_t" id="Casacos_t"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Coletes</td>
+                                <td><input type="number" name="Casacos" id="Casacos"></td>
+                                <td><input type="number" name="Casacos_t" id="Casacos_t"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Emblemas</td>
+                                <td><input type="number" name="Emblemas" id="Emblemas"></td>
+                                <td><input type="number" name="Emblemas_t" id="Emblemas_t"></td>
+                            </tr>
+                            <tr>
+                                <td>Chapeus</td>
+                                <td><input type="number" name="Chapeus" id="Chapeus"></td>
+                                <td><input type="number" name="Chapeus_t" id="Chapeus_t"></td>
+                            </tr>
+                            <tr>
+                                <td>Oculos</td>
+                                <td><input type="number" name="Oculos" id="Oculos"></td>
+                                <td><input type="number" name="Oculos_t" id="Oculos_t"></td>
+                            </tr>
+                        </table>
+
+
+
+                    </div>
+
+
+                </center>
+            </div>
+
+
+
+
+            <div class="menu-lateral" style="left:586px;max-width: 177px;">
+                <!--left:469px-->
+                <center>
+
+                    <div class="gui">
+
+
+
+                    </div>
+
+
+                </center>
+            </div>
+
+
+
+
+
+        </form>
+    </div>
+
+
+
+
+    <script src="./script.js" type="text/javascript"></script>
+
+</body>
+<script>
+
+    /*
+    
+    */
+
+    document.getElementById('rodape').addEventListener('input', () => {
+        //container
+        document.getElementById('container').style.opacity = document.getElementById('rodape').value * 0.01
+    })
+
+    document.querySelectorAll('input').forEach(e => {
+        if (e.type === 'number') {
+            if (e.value === '') {
+                e.value = 0
+            }
+
+            e.addEventListener('click', () => {
+
+                var Cabeca = document.getElementById('Cabeca').value
+                var Cabeca_t = document.getElementById('Cabeca_t').value
+                var Mascara = document.getElementById('Mascara').value
+                var Mascara_t = document.getElementById('Mascara_t').value
+                var Cabelo = document.getElementById('Cabelo').value
+                var Cabelo_t = document.getElementById('Cabelo_t').value
+                var Torso = document.getElementById('Torso').value
+                var Torso_t = document.getElementById('Torso_t').value
+                var Pernas = document.getElementById('Pernas').value
+                var Pernas_t = document.getElementById('Pernas_t').value
+                var Misc = document.getElementById('Misc').value
+                var Misc_t = document.getElementById('Misc_t').value
+                var Sapatos = document.getElementById('Sapatos').value
+                var Sapatos_t = document.getElementById('Sapatos_t').value
+                var Misc2 = document.getElementById('Misc2').value
+                var Misc2_t = document.getElementById('Misc2_t').value
+                var Casacos = document.getElementById('Casacos').value
+                var Casacos_t = document.getElementById('Casacos_t').value
+                var Emblemas = document.getElementById('Emblemas').value
+                var Emblemas_t = document.getElementById('Emblemas_t').value
+                var Chapeus = document.getElementById('Chapeus').value
+                var Chapeus_t = document.getElementById('Chapeus_t').value
+                var Oculos = document.getElementById('Oculos').value
+                var Oculos_t = document.getElementById('Oculos_t').value
+
+                $.post("http://dev_menu/trajes", JSON.stringify({
+                    Cabeca: document.getElementById('Cabeca').value,
+                    Cabeca_t: document.getElementById('Cabeca_t').value,
+                    Mascara: document.getElementById('Mascara').value,
+                    Mascara_t: document.getElementById('Mascara_t').value,
+                    Cabelo: document.getElementById('Cabelo').value,
+                    Cabelo_t: document.getElementById('Cabelo_t').value,
+                    Torso: document.getElementById('Torso').value,
+                    Torso_t: document.getElementById('Torso_t').value,
+                    Pernas: document.getElementById('Pernas').value,
+                    Pernas_t: document.getElementById('Pernas_t').value,
+                    Misc: document.getElementById('Misc').value,
+                    Misc_t: document.getElementById('Misc_t').value,
+                    Sapatos: document.getElementById('Sapatos').value,
+                    Sapatos_t: document.getElementById('Sapatos_t').value,
+                    Misc2: document.getElementById('Misc2').value,
+                    Misc2_t: document.getElementById('Misc2_t').value,
+                    Casacos: document.getElementById('Casacos').value,
+                    Casacos_t: document.getElementById('Casacos_t').value,
+                    Emblemas: document.getElementById('Emblemas').value,
+                    Emblemas_t: document.getElementById('Emblemas_t').value,
+                    Chapeus: document.getElementById('Chapeus').value,
+                    Chapeus_t: document.getElementById('Chapeus_t').value,
+                    Oculos: document.getElementById('Oculos').value,
+                    Oculos_t: document.getElementById('Oculos_t').value,
+                }));
+            })
+
+
+        }
+    });
+
+    //-------------------------------------------------------------
+
+
+
+
+
+
+    //------------------------------------------------------
+
+
+
+    document.getElementById('Resetar').addEventListener('click', () => {
+        document.querySelectorAll('input').forEach(e => {
+            if (e.type === 'number') {
+                e.value = 0
+            }
+        });
+    })
+    document.getElementById('Mulher').addEventListener('click', () => {
+        $.post("http://dev_menu/modelchange", JSON.stringify({
+            ped: 'MP_F_Freemode_01'
+        }));
+    })
+    document.getElementById('Homem').addEventListener('click', () => {
+        $.post("http://dev_menu/modelchange", JSON.stringify({
+            ped: 'mp_m_freemode_01'
+        }));
+    })
+    document.getElementById('addZumbiMorto').addEventListener('click', () => {
+        $.post("http://dev_menu/addzumbimorto", JSON.stringify({
+            vazio: 'vazio'
+        }));
+    })
+    document.getElementById('dararmas').addEventListener('click', () => {
+        $.post("http://dev_menu/dararmas", JSON.stringify({
+            vazio: 'vazio'
+        }));
+    })
+    document.getElementById('modelchangeM').addEventListener('click', () => {
+        $.post("http://dev_menu/modelchange", JSON.stringify({
+            ped: document.getElementById('modelchange').value
+        }));
+    })
+    document.getElementById('adddinheiro').addEventListener('click', () => {
+        $.post("http://dev_menu/adddinheiro", JSON.stringify({
+            valor: document.getElementById('dinheiro').value
+        }));
+    })
+
+    document.getElementById('spawnpedinimigo').addEventListener('click', () => {
+        $.post("http://dev_menu/spawninimigo", JSON.stringify({
+            ped: document.getElementById('nomepedinimigo').value
+        }));
+    })
+
+    function hexToRgb(hex) {
+        hex = hex.replace(/^#/, '');
+        let bigint = parseInt(hex, 16);
+        let r = (bigint >> 16) & 255;
+        let g = (bigint >> 8) & 255;
+        let b = bigint & 255;
+        return { r: r, g: g, b: b };
+    }
+
+    document.getElementById('cor').addEventListener('input', () => {
+        let cor = $("#cor").val()
+
+        const rgb = hexToRgb(cor);
+
+
+        $.post("http://dev_menu/corCarro", JSON.stringify({
+
+            r: rgb.r,
+            g: rgb.g,
+            b: rgb.b,
+        }));
+    })
+
+    document.getElementById('cor2').addEventListener('input', () => {
+        let cor = $("#cor2").val()
+
+        const rgb = hexToRgb(cor);
+
+
+        $.post("http://dev_menu/corCarro2", JSON.stringify({
+
+            r: rgb.r,
+            g: rgb.g,
+            b: rgb.b,
+        }));
+    })
+
+    document.getElementById('Clima').addEventListener('input', () => {
+
+        $.post("http://dev_menu/Clima", JSON.stringify({
+
+            Clima: document.getElementById('Clima').value
+        }));
+    })
+    document.getElementById('hora').addEventListener('input', () => {
+
+        $.post("http://dev_menu/horario", JSON.stringify({
+
+            hora: document.getElementById('hora').value
+        }));
+    })
+
+    document.getElementById('Sair').addEventListener('click', () => {
+
+        $.post("http://dev_menu/exit", JSON.stringify({
+            vazio: 'vazio'
+        }));
+    })
+
+
+    document.getElementById('opressor').addEventListener('click', () => {
+
+        $.post("http://dev_menu/carspawn", JSON.stringify({
+            carro: document.getElementById('nomecarro').value
+        }));
+    })
+
+
+
+    document.getElementById('spawnpedamigo').addEventListener('click', () => {
+        $.post("http://dev_menu/spawnamigo", JSON.stringify({
+            ped: document.getElementById('nomepedamigo').value
+        }));
+    })
+
+    document.getElementById('tunagem').addEventListener('click', () => {
+
+        $.post("http://dev_menu/tunagem", JSON.stringify({
+            error: "Input was greater than 100"
+        }));
+    })
+
+    document.getElementById('sempolicia').addEventListener('click', () => {
+
+        $.post("http://dev_menu/sempolicia", JSON.stringify({
+            error: "sempolicia ativado"
+        }));
+    })
+
+    document.getElementById('Teleport').addEventListener('click', () => {
+
+        $.post("http://dev_menu/Teleport", JSON.stringify({
+            x: document.getElementById('X').value,
+            y: document.getElementById('Y').value,
+            z: document.getElementById('Z').value,
+            a: document.getElementById('A').value,
+        }));
+    })
+
+    document.getElementById('Salvar').addEventListener('click', () => {
+
+
+        localStorage.setItem('teleportX', document.getElementById('X').value)
+        localStorage.setItem('teleportY', document.getElementById('Y').value)
+        localStorage.setItem('teleportZ', document.getElementById('Z').value)
+        localStorage.setItem('teleportA', document.getElementById('A').value)
+    })
+
+    document.getElementById('Carregar').addEventListener('click', () => {
+
+        if (localStorage.getItem('teleportX')) {
+            document.getElementById('X').value = localStorage.getItem('teleportX')
+            document.getElementById('Y').value = localStorage.getItem('teleportY')
+            document.getElementById('Z').value = localStorage.getItem('teleportZ')
+            document.getElementById('A').value = localStorage.getItem('teleportA')
+        }
+        else {
+            document.getElementById('X').value = 'vazio'
+            document.getElementById('Y').value = 'vazio'
+            document.getElementById('Z').value = 'vazio'
+            document.getElementById('A').value = 'vazio'
+        }
+    })
+
+
+
+</script>
+
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css" type="text/css">
+    <link rel="stylesheet" href="reset.css" type="text/css">
+    <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+
+    <title>PenisMans</title>
+</head>
+<style>
+    p {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+</style>
+
+<body>
+
+
+    <div class="menu" id="container">
+        <form id="form"> 
+            <p id="X">X:</p>
+            <p id="Y">Y:</p>
+            <p id="Z">Z:</p>
+            <p id="A">Angulo: -0000.0000</p>
+
+        </form>
+    </div>
+
+
+
+</body>
+<script>
+
+
+    function display(bool) {
+
+        $("#container").show();
+
+    }
+
+    var X, Y, Z, A = '0'
+
+    window.addEventListener('message', function (event) {
+        var item = event.data;
+       
+        display(true)
+
+
+        X = item.playerX.toFixed(4)
+        Y = item.playerY.toFixed(4)
+        Z = item.playerZ.toFixed(4)
+        A = item.playerAngle.toFixed(4)
+
+
+    })
+
+
+
+
+    setInterval(() => {
+ 
+        document.getElementById('X').innerHTML = 'X: ' + X
+        document.getElementById('Y').innerHTML = 'Y: ' + Y
+        document.getElementById('Z').innerHTML = 'Z: ' + Z
+        document.getElementById('A').innerHTML = 'Angulo: ' + A
+ 
+    }, 10);
+
+
+
+
+
+
+</script>
+
+</html>
