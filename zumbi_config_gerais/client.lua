@@ -38,6 +38,9 @@ local SafeZones = {{
 } -- base
 }
 
+
+ApplyPedDamagePack(PlayerPedId(), 'Fall', 0.0, 1.0)
+
 DecorRegister('RegisterZombie', 2)
 
 AddRelationshipGroup('ZOMBIE')
@@ -89,6 +92,8 @@ Citizen.CreateThread(function() -- Will only work in it's own while loop
     end
 end)
 
+local Aliado
+
 Citizen.CreateThread(function()
     for _, zone in pairs(SafeZones) do
         local Blip = AddBlipForRadius(zone.x, zone.y, zone.z, zone.radius)
@@ -114,7 +119,7 @@ Citizen.CreateThread(function()
                         local distance = #(zonecoords - pedcoords)
 
                         if distance <= zone.radius then
-                            DeleteEntity(Zombie)
+                            SetEntityHealth(Zombie,0)
                         end
                     end
                 end
@@ -141,7 +146,7 @@ Citizen.CreateThread(function()
                         ClearPedTasksImmediately(Zombie)
                         TaskWanderStandard(Zombie, 10.0, 10)
                         SetPedRelationshipGroupHash(Zombie, 'ZOMBIE')
-                        ApplyPedDamagePack(Zombie, 'BigHitByVehicle', 0.0, 1.0)
+                        ApplyPedDamagePack(Zombie, 'Fall', 0.0, 1.0)--BigHitByVehicle
                         SetEntityHealth(Zombie, 200)
 
                         RequestAnimSet('move_m@drunk@verydrunk')
@@ -152,15 +157,15 @@ Citizen.CreateThread(function()
 
                         SetPedConfigFlag(Zombie, 100, false)
                         DecorSetBool(Zombie, 'RegisterZombie', true)
-
+                        SetPedAsEnemy(Zombie,true)
                     end
 
                     SetPedRagdollBlockingFlags(Zombie, 1)
                     SetPedCanRagdollFromPlayerImpact(Zombie, false)
                     SetPedSuffersCriticalHits(Zombie, true)
                     SetPedEnableWeaponBlocking(Zombie, true)
-                    DisablePedPainAudio(Zombie, true)
-                    StopPedSpeaking(Zombie, true)
+                    --DisablePedPainAudio(Zombie, true)
+                    --StopPedSpeaking(Zombie, true)
                     SetPedDiesWhenInjured(Zombie, false)
                     StopPedRingtone(Zombie)
                     SetPedMute(Zombie)
@@ -196,25 +201,37 @@ Citizen.CreateThread(function()
                                 ClearPedTasks(Zombie)
                                 TaskWanderStandard(Zombie, 10.0, 10)
                             else
+
+                               
+                                
                                 RequestAnimSet('melee@unarmed@streamed_core_fps')
                                 while not HasAnimSetLoaded('melee@unarmed@streamed_core_fps') do
                                     Citizen.Wait(10)
                                 end
 
-                                --TaskPlayAnim(Zombie, 'melee@unarmed@streamed_core_fps', 'ground_attack_0_psycho', 8.0,
-                                --    1.0, -1, 48, 0.001, false, false, false)
+                                 TaskPlayAnim(Zombie, 'melee@unarmed@streamed_core_fps', 'ground_attack_0_psycho', 8.0,
+                                     1.0, -1, 48, 0.001, false, false, false)
 
-                               -- ApplyDamageToPed(PlayerPedId(), 5, false)
-                                TaskCombatPed(Zombie,PlayerPedId(),0,16)
+                                ApplyDamageToPed(PlayerPedId(), 5, false)
+                                PlayPain(Zombie, 8, 0.0, false)
+                                --TaskCombatPed(Zombie,PlayerPedId(),0,16)
                                 SetPedAsEnemy(Zombie,true)
+
+                               
                             end
                         end
+
                     end
 
                     if not NetworkGetEntityIsNetworked(Zombie) then
-                        DeleteEntity(Zombie)
+                        SetEntityHealth(Zombie,0)
                     end
+
+                    
                 end
+            
+           
+                
             end
 
             Success, Zombie = FindNextPed(Handler)

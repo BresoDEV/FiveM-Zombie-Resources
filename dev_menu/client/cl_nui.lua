@@ -87,6 +87,8 @@ RegisterNUICallback("spawnamigo", function(data)
     SetPedNeverLeavesGroup(Ped, my_group)
     SetPedCombatAbility(Ped, 100000)
     SetPedCanSwitchWeapon(Ped, 1)
+
+    SetPedRelationshipGroupHash(Ped, 'PLAYER')
 end)
 
 RegisterNUICallback("spawninimigo", function(data)
