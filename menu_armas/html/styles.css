@@ -1,0 +1,16 @@
+body {
+    background: none !important;
+}
+
+* {
+    color: rgb(200, 198, 198);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.menu {
+    font-family:'Segoe UI';
+  
+}
+

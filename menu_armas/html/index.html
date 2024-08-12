@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css" type="text/css">
+    <link rel="stylesheet" href="reset.css" type="text/css">
+    <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+    <title>PenisMan</title>
+</head>
+
+<style>
+    .container {
+        color: aliceblue;
+        background-color: rgba(0, 0, 0, 0.487);
+        position: fixed;
+        top: 20px;
+        left: 2%;
+        width: 55%;
+        max-height: 500px;
+        display: flex;
+        padding: 10px;
+        overflow-y: auto;
+        border-radius: 20px;
+        user-select: none;
+    }
+
+
+
+    .bloco {
+        background-color: rgb(255, 0, 0);
+        width: 20%;
+        height: 50px;
+        margin: 2%;
+    }
+
+    table {
+        width: 100%;
+        text-align: center;
+        margin-top: 30px;
+
+    }
+
+    img {
+        max-width: 120px;
+        min-width: 120px;
+        transition: all 0.2s ease;
+        padding: 5px;
+        max-height: 50px;
+        min-height: 50px;
+        cursor: pointer;
+    }
+
+    img:hover {
+        scale: 1.05;
+    }
+
+    p {
+        color: aliceblue;
+        margin: 1px;
+    }
+
+    .button {
+        width: 90%;
+        background-color: cornflowerblue;
+        border-radius: 5px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border: none;
+    }
+
+    .button:hover {
+        scale: 1.05;
+    }
+
+    .sair {
+        background-color: rgb(255, 0, 0);
+        border-radius: 5px;
+        padding: 3px;
+        padding-left: 6px;
+        padding-right: 6px;
+        cursor: pointer;
+        right: 10px;
+        position: absolute;
+        color: rgb(255, 255, 255);
+    }
+
+    .container-lateral {
+        color: aliceblue;
+        background-color: rgba(0, 0, 0, 0.487);
+        position: fixed;
+        top: 20px;
+        left: 60%;
+        width: 25%;
+        max-height: 500px;
+
+        padding: 10px;
+        overflow-y: auto;
+        border-radius: 20px;
+        user-select: none;
+    }
+
+    button {
+        color: aliceblue;
+
+    }
+
+    .bg {
+        background-color: rgba(0, 0, 0, 0.506);
+        position: fixed;
+        width: 100%;
+        height: 100%;
+    }
+
+    .container-baixo {
+        color: aliceblue;
+        background-color: rgba(0, 0, 0, 0.487);
+        position: fixed;
+        top: 55%;
+        left: 2%;
+        width: 55%;
+        max-height: 500px;
+
+        padding: 10px;
+        overflow-y: auto;
+        border-radius: 20px;
+        user-select: none;
+    }
+</style>
+
+<body>
+
+
+    <div class="menu" id="container">
+
+        <div class="bg"></div>
+
+        <form id="form">
+
+            <div class="container">
+
+                <p class="sair" id="Sair">X</p>
+
+
+                <table>
+
+
+
+                    <tr>
+
+                        <td>
+                            <img src="328px-Railgun-icon.webp" alt=""><br>
+                            <p>Railgun</p>
+                            <center>
+                                <p class="button" id="precoRailgun">$1000</p>
+                            </center>
+                        </td>
+                        <td>
+                            <img src="328px-Minigun-icon.webp" alt=""><br>
+                            <p>Minigun</p>
+                            <center>
+                                <p class="button" id="precoMinigun">$1000</p>
+                            </center>
+                        </td>
+                        <td>
+                            <img src="Heavy-shotgun-icon.webp" alt=""><br>
+                            <p>Heavy Shotgun</p>
+                            <center>
+                                <p class="button" id="precoHeavyShotgun">$1000</p>
+                            </center>
+                        </td>
+                        <td>
+                            <img src="Pistol-icon.webp" alt=""><br>
+                            <p>Pistola</p>
+                            <center>
+                                <p class="button" id="precoPistola">$1000</p>
+                            </center>
+                        </td>
+
+
+
+                    </tr>
+
+
+
+                    <tr>
+
+                        <td>
+                            <img src="Pump-shotgun-icon.webp" alt=""><br>
+                            <p>Shotgun</p>
+                            <center>
+                                <p class="button" id="precoShotgun">$1000</p>
+                            </center>
+                        </td>
+
+                        <td>
+                            <img src="328px-Assault-rifle-icon.webp" alt=""><br>
+                            <p>AK47</p>
+                            <center>
+                                <p class="button" id="precoAK47">$1000</p>
+                            </center>
+                        </td>
+                        <td>
+                            <img src="328px-Sniper-rifle-icon.webp" alt=""><br>
+                            <p>Sniper</p>
+                            <center>
+                                <p class="button" id="precoSniper">$1000</p>
+                            </center>
+                        </td>
+                        <td>
+                            <img src="Hatchet-icon.webp" alt=""><br>
+                            <p>Machado</p>
+                            <center>
+                                <p class="button" id="precoMachado">$1000</p>
+                            </center>
+                        </td>
+
+
+
+                    </tr>
+
+
+
+
+
+                </table>
+            </div>
+
+
+
+
+            <div class="container-lateral">
+
+
+                <table style="margin-top: 0;">
+                    <tr>
+                        <th colspan="3">Quant. Balas:</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p class="button" id="remBala" style="width: 100%;">-</p>
+                        </td>
+                        <td>
+                            <p id="municaoAtual" class="button" type="text"
+                                style="color: white;text-align: center;width: 100%;">10</p>
+                        </td>
+                        <td>
+                            <p class="button" id="addBala" style="width: 100%;">+</p>
+                        </td>
+                    </tr>
+                </table>
+
+                <hr>
+                <center>
+                    <br>
+                    <p class="button" id="Comprarsomenteasbalas">Comprar somente as balas por $10</p>
+                    <br>
+                    <br>
+                    <p></p>
+                </center>
+
+            </div>
+
+
+
+            <div class="container-baixo">
+                <font style="font-size: 20px;" id="Dinheirotxt">Dinheiro: $5555</font>
+            </div>
+
+
+
+        </form>
+    </div>
+    <script src="./script.js" type="text/javascript"></script>
+
+</body>
+<script>
+
+ var dinheiro = 666 //definir via get
+    document.getElementById('Dinheirotxt').innerHTML = 'Dinheiro: $' + dinheiro
+
+
+     
+
+function display(bool) {
+    if (bool) {
+        document.getElementById('container').style.display = 'block'
+        //$("#container").show();
+    } else {
+       // $("#container").hide();
+       document.getElementById('container').style.display = 'none'
+    }
+}
+
+display(false)
+
+
+
+
+window.addEventListener('message', function (event) {
+    var item = event.data;
+    if (item.type === "ui") {
+        if (item.status == true) {
+            
+
+           
+            dinheiro = parseInt(item.d1)
+            display(true)
+            
+
+        } else {
+            display(false)
+        }
+    }
+})
+
+
+    document.getElementById('Sair').addEventListener('click', () => {
+
+        $.post("http://menu_armas/exit", JSON.stringify({
+            vazio: 'vazio'
+        }));
+    })
+
+
+
+    
+
+
+
+    const Railgun = document.getElementById('precoRailgun')
+    const Minigun = document.getElementById('precoMinigun')
+    const HeavyShotgun = document.getElementById('precoHeavyShotgun')
+    const Pistola = document.getElementById('precoPistola')
+    const Shotgun = document.getElementById('precoShotgun')
+    const AK47 = document.getElementById('precoAK47')
+    const Sniper = document.getElementById('precoSniper')
+    const Machado = document.getElementById('precoMachado')
+
+
+
+
+    var precoRailgun = parseInt(Railgun.innerHTML.replace('$', ''))
+    var precoMinigun = parseInt(Minigun.innerHTML.replace('$', ''))
+    var precoHeavyShotgun = parseInt(HeavyShotgun.innerHTML.replace('$', ''))
+    var precoPistola = parseInt(Pistola.innerHTML.replace('$', ''))
+    var precoShotgun = parseInt(Shotgun.innerHTML.replace('$', ''))
+    var precoAK47 = parseInt(AK47.innerHTML.replace('$', ''))
+    var precoSniper = parseInt(Sniper.innerHTML.replace('$', ''))
+    var precoMachado = parseInt(Machado.innerHTML.replace('$', ''))
+
+
+
+
+    Railgun.addEventListener('click', () => {
+        if (dinheiro >= precoRailgun) {
+
+            console.log(municaoAtual)
+            $.post("http://menu_armas/comprouArma", JSON.stringify({
+                arma: 'Railgun',
+                balas: municaoAtual,
+                valor: precoRailgun,
+            }));
+        }
+        else {
+            document.getElementById('Dinheirotxt').innerHTML = 'Dinheiro: $' + dinheiro + ' <font style="color:red">Sem dinheiro</font>'
+        }
+    })
+
+    Minigun.addEventListener('click', () => {
+        if (dinheiro >= precoMinigun) {
+
+            console.log(municaoAtual)
+            $.post("http://menu_armas/comprouArma", JSON.stringify({
+                arma: 'Minigun',
+                balas: municaoAtual,
+                valor: precoMinigun,
+            }));
+        }
+        else {
+            document.getElementById('Dinheirotxt').innerHTML = 'Dinheiro: $' + dinheiro + ' <font style="color:red">Sem dinheiro</font>'
+        }
+    })
+
+    HeavyShotgun.addEventListener('click', () => {
+        if (dinheiro >= precoHeavyShotgun) {
+
+            console.log(municaoAtual)
+            $.post("http://menu_armas/comprouArma", JSON.stringify({
+                arma: 'HeavyShotgun',
+                balas: municaoAtual,
+                valor: precoHeavyShotgun,
+            }));
+        }
+        else {
+            document.getElementById('Dinheirotxt').innerHTML = 'Dinheiro: $' + dinheiro + ' <font style="color:red">Sem dinheiro</font>'
+        }
+    })
+
+    Pistola.addEventListener('click', () => {
+        if (dinheiro >= precoPistola) {
+
+            console.log(municaoAtual)
+            $.post("http://menu_armas/comprouArma", JSON.stringify({
+                arma: 'Pistola',
+                balas: municaoAtual,
+                valor: precoPistola,
+            }));
+        }
+        else {
+            document.getElementById('Dinheirotxt').innerHTML = 'Dinheiro: $' + dinheiro + ' <font style="color:red">Sem dinheiro</font>'
+        }
+    })
+
+    Shotgun.addEventListener('click', () => {
+        if (dinheiro >= precoShotgun) {
+
+            console.log(municaoAtual)
+            $.post("http://menu_armas/comprouArma", JSON.stringify({
+                arma: 'Shotgun',
+                balas: municaoAtual,
+                valor: precoShotgun,
+            }));
+        }
+        else {
+            document.getElementById('Dinheirotxt').innerHTML = 'Dinheiro: $' + dinheiro + ' <font style="color:red">Sem dinheiro</font>'
+        }
+    })
+
+    AK47.addEventListener('click', () => {
+        if (dinheiro >= precoAK47) {
+
+            console.log(municaoAtual)
+            $.post("http://menu_armas/comprouArma", JSON.stringify({
+                arma: 'AK47',
+                balas: municaoAtual,
+                valor: precoAK47,
+            }));
+        }
+        else {
+            document.getElementById('Dinheirotxt').innerHTML = 'Dinheiro: $' + dinheiro + ' <font style="color:red">Sem dinheiro</font>'
+        }
+    })
+
+    Sniper.addEventListener('click', () => {
+        if (dinheiro >= precoSniper) {
+
+            console.log(municaoAtual)
+            $.post("http://menu_armas/comprouArma", JSON.stringify({
+                arma: 'Sniper',
+                balas: municaoAtual,
+                valor: precoSniper,
+            }));
+        }
+        else {
+            document.getElementById('Dinheirotxt').innerHTML = 'Dinheiro: $' + dinheiro + ' <font style="color:red">Sem dinheiro</font>'
+        }
+    })
+
+    Machado.addEventListener('click', () => {
+        if (dinheiro >= precoMachado) {
+
+            console.log(municaoAtual)
+            $.post("http://menu_armas/comprouArma", JSON.stringify({
+                arma: 'Machado',
+                balas: municaoAtual,
+                valor: precoMachado,
+            }));
+        }
+        else {
+            document.getElementById('Dinheirotxt').innerHTML = 'Dinheiro: $' + dinheiro + ' <font style="color:red">Sem dinheiro</font>'
+        }
+    })
+
+
+    //=============================================================
+    var municaoAtual = 10
+    var precoPorPack = 5
+
+    document.getElementById('addBala').addEventListener('click', () => {
+        municaoAtual += 10
+    })
+    document.getElementById('remBala').addEventListener('click', () => {
+        if (municaoAtual !== 10) {
+            municaoAtual -= 10
+        }
+    })
+
+    setInterval(() => {
+
+
+document.getElementById('Dinheirotxt').innerHTML = 'Dinheiro: $' + dinheiro
+
+
+        document.getElementById('municaoAtual').innerHTML = municaoAtual
+
+        document.getElementById('Comprarsomenteasbalas').innerHTML = 'Comprar balas por $' + municaoAtual * precoPorPack
+
+
+
+        precoRailgun = 2500 + (municaoAtual * precoPorPack)
+        precoMinigun = 2000 + (municaoAtual * precoPorPack)
+        precoHeavyShotgun = 1000 + (municaoAtual * precoPorPack)
+        precoPistola = 400 + (municaoAtual * precoPorPack)
+        precoShotgun = 800 + (municaoAtual * precoPorPack)
+        precoAK47 = 650 + (municaoAtual * precoPorPack)
+        precoSniper = 500 + (municaoAtual * precoPorPack)
+        precoMachado = 150 //parseInt(Machado.innerHTML.replace('$', '')) + (municaoAtual * precoPorPack)
+
+
+        Railgun.innerHTML = '$' + precoRailgun
+        Minigun.innerHTML = '$' + precoMinigun
+        HeavyShotgun.innerHTML = '$' + precoHeavyShotgun
+        Pistola.innerHTML = '$' + precoPistola
+        Shotgun.innerHTML = '$' + precoShotgun
+        AK47.innerHTML = '$' + precoAK47
+        Sniper.innerHTML = '$' + precoSniper
+        Machado.innerHTML = '$' + precoMachado
+
+
+
+    }, 1);
+
+//=============================================================
+</script>
+
+
+</html>
