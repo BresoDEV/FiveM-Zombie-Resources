@@ -69,6 +69,64 @@ $(function () {
                 localStorage.setItem('cabana', 0)
             }
 
+            //veiculos
+            if (!localStorage.getItem('deathbike')) {
+                localStorage.setItem('deathbike', 0)
+            }
+            if (!localStorage.getItem('enduro')) {
+                localStorage.setItem('enduro', 0)
+            }
+            if (!localStorage.getItem('gargoyle')) {
+                localStorage.setItem('gargoyle', 0)
+            }
+            if (!localStorage.getItem('ratbike')) {
+                localStorage.setItem('ratbike', 0)
+            }
+            if (!localStorage.getItem('dukes2')) {
+                localStorage.setItem('dukes2', 0)
+            }
+            if (!localStorage.getItem('caddy3')) {
+                localStorage.setItem('caddy3', 0)
+            }
+            if (!localStorage.getItem('zr3802')) {
+                localStorage.setItem('zr3802', 0)
+            }
+            if (!localStorage.getItem('dune3')) {
+                localStorage.setItem('dune3', 0)
+            }
+            if (!localStorage.getItem('insurgent')) {
+                localStorage.setItem('insurgent', 0)
+            }
+            if (!localStorage.getItem('technical2')) {
+                localStorage.setItem('technical2', 0)
+            }
+            if (!localStorage.getItem('apc')) {
+                localStorage.setItem('apc', 0)
+            }
+            if (!localStorage.getItem('issi4')) {
+                localStorage.setItem('issi4', 0)
+            }
+            if (!localStorage.getItem('barrage')) {
+                localStorage.setItem('barrage', 0)
+            }
+            if (!localStorage.getItem('cerberus')) {
+                localStorage.setItem('cerberus', 0)
+            }
+            if (!localStorage.getItem('phantom2')) {
+                localStorage.setItem('phantom2', 0)
+            }
+            if (!localStorage.getItem('thruster')) {
+                localStorage.setItem('thruster', 0)
+            }
+            if (!localStorage.getItem('havok')) {
+                localStorage.setItem('havok', 0)
+            }
+
+
+
+
+            //----------------------------------------
+
 
             $.post("http://banco_de_dados/attDadosDoJogo", JSON.stringify({
                 dinheiro: localStorage.getItem('dinheiro'),//MP0_WALLET_BALANCE
@@ -82,33 +140,35 @@ $(function () {
                 distancia_caminhando: localStorage.getItem('distancia_caminhando'),//DIST_WALKING
                 tempo_de_jogo: localStorage.getItem('tempo_de_jogo'),//TOTAL_PLAYING_TIME  (milisegundos)
                 quantas_vezes_morreu: localStorage.getItem('quantas_vezes_morreu'),//DEATHS
-                
+
                 //craft menu
                 madeira: localStorage.getItem('madeira'),//MPPLY_CREW_HEIST_CASH_0
                 ferro: localStorage.getItem('ferro'),//MPPLY_CREW_HEIST_CASH_1
                 cabana: localStorage.getItem('cabana'),//MPPLY_CREW_HEIST_CASH_2
-            }))
-      
-            /*
-            Stats livres:
 
-            CHAR_MC_FAILED
-            CHAR_MC_OVER
-            CHAR_MC_STARTED
-            CHAR_MISSION_OVER
-            CHAR_MISSION_PASSED
-            CHAR_MISSION_QUIT
-            CHAR_MISSION_STARTED
-            TOTAL_SHOP_TIME
-            TOTAL_TIMES_ARRESTED
-            LONGEST_PLAYING_TIME
-            MPPLY_CREW_HEIST_CASH_3
-            MPPLY_TOTAL_RACES_WON
-            MPPLY_TOTAL_RACES_LOST
-            MPPLY_TOTAL_SPENT
-            MPPLY_TOTAL_SVC
-            PROSTITUTES_FREQUENTED
-            */
+
+                //veiculos
+                deathbike: localStorage.getItem('deathbike'),
+                enduro: localStorage.getItem('enduro'),
+                gargoyle: localStorage.getItem('gargoyle'),
+                ratbike: localStorage.getItem('ratbike'),
+                dukes2: localStorage.getItem('dukes2'),
+                caddy3: localStorage.getItem('caddy3'),
+                zr3802: localStorage.getItem('zr3802'),
+                dune3: localStorage.getItem('dune3'),
+                insurgent: localStorage.getItem('insurgent'),
+                technical2: localStorage.getItem('technical2'),
+                apc: localStorage.getItem('apc'),
+                issi4: localStorage.getItem('issi4'),
+                barrage: localStorage.getItem('barrage'),
+                cerberus: localStorage.getItem('cerberus'),
+                phantom2: localStorage.getItem('phantom2'),
+                thruster: localStorage.getItem('thruster'),
+                havok: localStorage.getItem('havok'),
+            }))
+
+
+
 
         }
 
@@ -129,15 +189,32 @@ $(function () {
 
 
             //craft menu
-            localStorage.setItem('madeira',item.madeira),//MPPLY_CREW_HEIST_CASH_0
-            localStorage.setItem('ferro',item.ferro),//MPPLY_CREW_HEIST_CASH_1
-            localStorage.setItem('cabana',item.cabana),//MPPLY_CREW_HEIST_CASH_2
+            localStorage.setItem('madeira', item.madeira)//MPPLY_CREW_HEIST_CASH_0
+                localStorage.setItem('ferro', item.ferro)//MPPLY_CREW_HEIST_CASH_1
+                localStorage.setItem('cabana', item.cabana)//MPPLY_CREW_HEIST_CASH_2
 
-            console.log('madeira DB:'+localStorage.getItem('madeira'))
-            console.log('ferro DB:'+localStorage.getItem('ferro'))
-            console.log('cabana DB:'+localStorage.getItem('cabana'))
 
-             
+
+
+                //veiculos
+                localStorage.setItem('deathbike', item.deathbike)
+                localStorage.setItem('enduro', item.enduro)
+                localStorage.setItem('gargoyle', item.gargoyle)
+                localStorage.setItem('ratbike', item.ratbike)
+                localStorage.setItem('dukes2', item.dukes2)
+                localStorage.setItem('caddy3', item.caddy3)
+                localStorage.setItem('zr3802', item.zr3802)
+                localStorage.setItem('dune3', item.dune3)
+                localStorage.setItem('insurgent', item.insurgent)
+                localStorage.setItem('technical2', item.technical)
+                localStorage.setItem('apc', item.apc)
+                localStorage.setItem('issi4', item.issi4)
+                localStorage.setItem('barrage', item.barrage)
+                localStorage.setItem('cerberus', item.cerberus)
+                localStorage.setItem('phantom2', item.phantom2)
+                localStorage.setItem('thruster', item.thruster)
+                localStorage.setItem('havok', item.havok)
+                    
         }
     })
 

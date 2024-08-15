@@ -197,12 +197,19 @@ function iniciar()
 
     if concluiu == true then
         FloatingHelpText(textos.t3) -- "~g~Missao Concluida"
-        StatSetInt('MP0_WALLET_BALANCE', recompensas[indiceCoordEntrega], true)
+
+        local _, pm = StatGetInt("MP0_WALLET_BALANCE", -1)
+        local final = tonumber(pm) + tonumber(recompensas[indiceCoordEntrega])
+        StatSetInt('MP0_WALLET_BALANCE', tonumber(final), true)
+
     else
         FloatingHelpText(textos.t4) -- ~r~Missao Fracassada
     end
 
     -- remove resquicios da missao
+
+    TaskLeaveVehicle(PlayerPedId(),vehicle,0)
+
     RemoveBlip(base)
     SetVehiclePetrolTankHealth(vehicle, 0.0)
     SetEntityAsNoLongerNeeded(vehicle)
@@ -211,7 +218,9 @@ function iniciar()
     iniciar()
 end
 
+Wait 20000
 FloatingHelpText(textos.t0, 1, 3000) -- 'Missoes de ~y~Entrega de suprimentos~s~ estao disponiveis'
+
 
 -- cria o icone pra iniciar a missao
 AddTextEntry('MYBLIP', coordIniciarMissao.textoIcone)

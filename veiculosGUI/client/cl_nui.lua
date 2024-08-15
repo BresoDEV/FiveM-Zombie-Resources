@@ -9,93 +9,111 @@ RegisterNUICallback("exit", function()
 end)
 
 RegisterNUICallback("comprou", function(data)
-    -- seta o dinheiro usando 'data.dinheiro'
-    StatSetInt('MP0_WALLET_BALANCE', tonumber(data.dinheiro), true)
-    print('lua chegou dinheiro')
+    
+
+    local _, pm = StatGetInt("MP0_WALLET_BALANCE", -1)
+    StatSetInt('MP0_WALLET_BALANCE', tonumber(pm) - tonumber(data.dinheiro), true)
 end)
 -------------------------------------------------
 RegisterNUICallback("encomendou_deathbike", function(data)
+    StatSetInt('MPPLY_ACTIVITY_ENDED', 1, true)
     spawn('deathbike')
 end)
 
 ----------------------------------------------------------
 RegisterNUICallback("encomendou_enduro", function(data)
+    StatSetInt('MPPLY_ACTIVITY_QUIT', 1, true)
     spawn('enduro')
 end)
 
 ----------------------------------------------------------
 RegisterNUICallback("encomendou_gargoyle", function(data)
+    StatSetInt('MPPLY_ACTIVITY_STARTED', 1, true)
     spawn('gargoyle')
 end)
 
 ----------------------------------------------------------
 RegisterNUICallback("encomendou_ratbike", function(data)
+    StatSetInt('MPPLY_ARMWRESTLING_TOTAL_MATCH', 1, true)
     spawn('ratbike')
 end)
 
 ----------------------------------------------------------
 RegisterNUICallback("encomendou_dukes2", function(data)
+    StatSetInt('MPPLY_ARMWRESTLING_TOTAL_WINS', 1, true)
     spawn('dukes2')
 end)
 
 ----------------------------------------------------------
 RegisterNUICallback("encomendou_caddy3", function(data)
+    StatSetInt('MPPLY_BAD_CREW_EMBLEM', 1, true)
     spawn('caddy3')
 end)
 
 ----------------------------------------------------------
 RegisterNUICallback("encomendou_zr3802", function(data)
+    StatSetInt('MPPLY_BAD_CREW_MOTTO', 1, true)
     spawn('zr3802')
 end)
 
 ----------------------------------------------------------
 RegisterNUICallback("encomendou_dune3", function(data)
+    StatSetInt('MPPLY_BAD_CREW_NAME', 1, true)
     spawn('dune3')
 end)
 
 ----------------------------------------------------------
 RegisterNUICallback("encomendou_insurgent", function(data)
+    StatSetInt('MPPLY_BAD_CREW_STATUS', 1, true)
     spawn('insurgent')
 end)
 
 ----------------------------------------------------------
 RegisterNUICallback("encomendou_technical2", function(data)
+    StatSetInt('MPPLY_BADSPORT_END', 1, true)
     spawn('technical2')
 end)
 
 ----------------------------------------------------------
 RegisterNUICallback("encomendou_apc", function(data)
+    StatSetInt('MPPLY_BADSPORT_START', 1, true)
     spawn('apc')
 end)
 
 ----------------------------------------------------------
 RegisterNUICallback("encomendou_issi4", function(data)
+    StatSetInt('MPPLY_CREW_0_ID', 1, true)
     spawn('issi4')
 end)
 
 ----------------------------------------------------------
 RegisterNUICallback("encomendou_barrage", function(data)
+    StatSetInt('MPPLY_CREW_4_ID', 1, true)
     spawn('barrage')
 end)
 
 ----------------------------------------------------------
 RegisterNUICallback("encomendou_cerberus", function(data)
+    StatSetInt('MPPLY_CREW_3_ID', 1, true)
     print(data.valor)
     spawn('cerberus')
 end)
 
 ----------------------------------------------------------
 RegisterNUICallback("encomendou_phantom2", function(data)
+    StatSetInt('MPPLY_CREW_2_ID', 1, true)
     spawn('phantom2')
 end)
 
 ----------------------------------------------------------
 RegisterNUICallback("encomendou_thruster", function(data)
+    StatSetInt('MPPLY_CREW_1_ID', 1, true)
     spawn('thruster')
 end)
 
 ----------------------------------------------------------
 RegisterNUICallback("encomendou_havok", function(data)
+    StatSetInt('MPPLY_CREW_CHALENGE_ATTEMPTS', 1, true)
     spawn('havok')
 end)
 
