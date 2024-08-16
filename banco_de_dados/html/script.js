@@ -68,6 +68,30 @@ $(function () {
             if (!localStorage.getItem('cabana')) {
                 localStorage.setItem('cabana', 0)
             }
+            if (!localStorage.getItem('polvora')) {
+                localStorage.setItem('polvora', 0)
+            }
+            if (!localStorage.getItem('gasolina')) {
+                localStorage.setItem('gasolina', 0)
+            }
+            if (!localStorage.getItem('vidro')) {
+                localStorage.setItem('vidro', 0)
+            }
+            if (!localStorage.getItem('plastico')) {
+                localStorage.setItem('plastico', 0)
+            }
+            if (!localStorage.getItem('papel')) {
+                localStorage.setItem('papel', 0)
+            }
+            if (!localStorage.getItem('agua')) {
+                localStorage.setItem('agua', 0)
+            }
+            if (!localStorage.getItem('pano')) {
+                localStorage.setItem('pano', 0)
+            }
+            if (!localStorage.getItem('corda')) {
+                localStorage.setItem('corda', 0)
+            }
 
             //veiculos
             if (!localStorage.getItem('deathbike')) {
@@ -145,6 +169,14 @@ $(function () {
                 madeira: localStorage.getItem('madeira'),//MPPLY_CREW_HEIST_CASH_0
                 ferro: localStorage.getItem('ferro'),//MPPLY_CREW_HEIST_CASH_1
                 cabana: localStorage.getItem('cabana'),//MPPLY_CREW_HEIST_CASH_2
+                polvora: localStorage.getItem('polvora'),
+                gasolina: localStorage.getItem('gasolina'),
+                vidro: localStorage.getItem('vidro'),
+                plastico: localStorage.getItem('plastico'),
+                papel: localStorage.getItem('papel'),
+                agua: localStorage.getItem('agua'),
+                pano: localStorage.getItem('pano'),
+                corda: localStorage.getItem('corda'),
 
 
                 //veiculos
@@ -193,6 +225,14 @@ $(function () {
                 localStorage.setItem('ferro', item.ferro)//MPPLY_CREW_HEIST_CASH_1
                 localStorage.setItem('cabana', item.cabana)//MPPLY_CREW_HEIST_CASH_2
 
+                localStorage.setItem('polvora', item.polvora),
+                localStorage.setItem('gasolina', item.gasolina),
+                localStorage.setItem('vidro', item.vidro),
+                localStorage.setItem('plastico', item.plastico),
+                localStorage.setItem('papel', item.papel),
+                localStorage.setItem('agua', item.agua),
+                localStorage.setItem('pano', item.pano),
+                localStorage.setItem('corda', item.corda),
 
 
 

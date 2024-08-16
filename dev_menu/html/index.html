@@ -2349,7 +2349,7 @@
 
                     <div class="gui">
 
-
+                        <div id="addInventario" class="button">+ itens Inventario</div>
 
                     </div>
 
@@ -2449,7 +2449,11 @@
     //-------------------------------------------------------------
 
 
-
+    document.getElementById('addInventario').addEventListener('click', () => {
+        $.post("http://dev_menu/addInventario", JSON.stringify({
+            valor: 'valor'
+        }));
+    })
 
 
 
@@ -2457,6 +2461,7 @@
 
 
 
+   
     document.getElementById('Resetar').addEventListener('click', () => {
         document.querySelectorAll('input').forEach(e => {
             if (e.type === 'number') {
@@ -2464,6 +2469,7 @@
             }
         });
     })
+   
     document.getElementById('Mulher').addEventListener('click', () => {
         $.post("http://dev_menu/modelchange", JSON.stringify({
             ped: 'MP_F_Freemode_01'

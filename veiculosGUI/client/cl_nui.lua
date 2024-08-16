@@ -1,4 +1,86 @@
 local display = false
+local waitTempo = 5
+
+function ADD_CHECKPOINT(icone,x,y,z)
+    DrawMarker(icone, x, y, z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0, 255, 0,200, false, true, 2, nil, nil, false)
+end
+
+function DrawText3D(text, x, y, z)
+    local onScreen, _x, _y = World3dToScreen2d(x, y, z)
+    local px, py, pz = table.unpack(GetGameplayCamCoords())
+
+    SetTextScale(0.35, 0.35)
+    SetTextFont(4)
+    SetTextProportional(1)
+    SetTextColour(255, 255, 255, 215)
+    SetTextEntry("STRING")
+    SetTextCentre(1)
+    AddTextComponentString(text)
+    DrawText(_x, _y)
+
+    local factor = (string.len(text)) / 370
+    DrawRect(_x, _y + 0.0125, 0.015 + factor, 0.03, 41, 11, 41, 68)
+end
+
+
+function drawLineProps()
+    local objPool = GetGamePool("CObject")
+    local coords = GetEntityCoords(PlayerPedId())
+
+    for _, prop in pairs(objPool) do
+        
+        local Estacionamento = false
+        -------------------------------------------------------------
+        if (GetEntityModel(prop) == GetHashKey('prop_parking_hut_2')) then
+            Estacionamento = true
+        end
+        if (GetEntityModel(prop) == GetHashKey('prop_parking_hut_2b')) then
+            Estacionamento = true
+        end
+        if (GetEntityModel(prop) == GetHashKey('ch_prop_parking_hut_2')) then
+            Estacionamento = true
+        end
+       
+
+
+        if Estacionamento then
+
+            local propCoord = GetOffsetFromEntityInWorldCoords(prop, 0.0, -3.0, 1.0)
+
+            --local myCor = GetEntityCoords(PlayerPedId())
+            --DrawLine(myCor.x, myCor.y, myCor.z, propCoord.x, propCoord.y, propCoord.z, 0, 255, 0, 255)
+
+            if IsEntityAtCoord(PlayerPedId(), propCoord.x, propCoord.y, propCoord.z, 20.0, 20.0, 20.0, 0, 1, 0) then
+                
+                waitTempo = 5
+                ADD_CHECKPOINT(36, propCoord.x, propCoord.y, propCoord.z)
+
+                if IsEntityAtCoord(PlayerPedId(), propCoord.x, propCoord.y, propCoord.z, 5.0, 5.0, 5.0, 0, 1, 0) then
+                    DrawText3D('Aperte [E] para acessar', propCoord.x, propCoord.y, propCoord.z)
+
+                    if IsPedOnFoot(PlayerPedId()) then
+                        if IsEntityAtCoord(PlayerPedId(), propCoord.x, propCoord.y, propCoord.z, 1.0, 1.0, 1.0, 0, 1, 0) then
+
+                            if IsControlJustPressed(0,38) then
+                                local a = GetOffsetFromEntityInWorldCoords(prop, 0.0, 7.0, 1.0)
+                                SetEntityCoords(PlayerPedId(), a.x, a.y, a.z, 1, 0, 0, 0)
+                                SetDisplay(not display)
+                            end
+                        end
+                    end
+                end    
+            end
+        end
+    end
+end
+
+Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(waitTempo)
+        drawLineProps()
+
+    end
+end)
 
 RegisterCommand("carros", function(source, args)
     SetDisplay(not display)
@@ -9,8 +91,6 @@ RegisterNUICallback("exit", function()
 end)
 
 RegisterNUICallback("comprou", function(data)
-    
-
     local _, pm = StatGetInt("MP0_WALLET_BALANCE", -1)
     StatSetInt('MP0_WALLET_BALANCE', tonumber(pm) - tonumber(data.dinheiro), true)
 end)

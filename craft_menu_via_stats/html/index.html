@@ -87,7 +87,7 @@ var inventario = [
     {
         nome_bruto: 'Ferro',
         foto: 'ferro.png',
-        quantidade: 0,
+        quantidade: 1,
         quantidade_bau: 0,
         stat_usado: 'MPPLY_CREW_HEIST_CASH_1',
         quantidade_na_mesa: 0
@@ -98,6 +98,70 @@ var inventario = [
         quantidade: 0,
         quantidade_bau: 0,
         stat_usado: 'MPPLY_CREW_HEIST_CASH_2',
+        quantidade_na_mesa: 0
+    },
+    {
+        nome_bruto: 'Corda',
+        foto: 'corda.png',
+        quantidade: 1,
+        quantidade_bau: 0,
+        stat_usado: 'MPPLY_CREW_LOCAL_XP_3',
+        quantidade_na_mesa: 0
+    },
+    {
+        nome_bruto: 'Agua',
+        foto: 'agua.png',
+        quantidade: 1,
+        quantidade_bau: 0,
+        stat_usado: 'MPPLY_CREW_LOCAL_TIME_0',
+        quantidade_na_mesa: 0
+    },
+    {
+        nome_bruto: 'Gasolina',
+        foto: 'gasolina.png',
+        quantidade: 1,
+        quantidade_bau: 0,
+        stat_usado: 'MPPLY_CREW_LOCAL_TIME_4',
+        quantidade_na_mesa: 0
+    },
+    {
+        nome_bruto: 'Pano',
+        foto: 'pano.png',
+        quantidade: 1,
+        quantidade_bau: 0,
+        stat_usado: 'MPPLY_CREW_LOCAL_XP_4',
+        quantidade_na_mesa: 0
+    },
+    {
+        nome_bruto: 'Vidro',
+        foto: 'vidro.png',
+        quantidade: 1,
+        quantidade_bau: 0,
+        stat_usado: 'MPPLY_CREW_LOCAL_TIME_3',
+        quantidade_na_mesa: 0
+    },
+    {
+        nome_bruto: 'Plastico',
+        foto: 'plastico.png',
+        quantidade: 1,
+        quantidade_bau: 0,
+        stat_usado: 'MPPLY_CREW_LOCAL_TIME_2',
+        quantidade_na_mesa: 0
+    },
+    {
+        nome_bruto: 'Papel',
+        foto: 'papel.png',
+        quantidade: 1,
+        quantidade_bau: 0,
+        stat_usado: 'MPPLY_CREW_LOCAL_TIME_1',
+        quantidade_na_mesa: 0
+    },
+    {
+        nome_bruto: 'Polvora',
+        foto: 'polvora.png',
+        quantidade: 1,
+        quantidade_bau: 0,
+        stat_usado: 'MPPLY_CREW_CHALENGE_WIN',
         quantidade_na_mesa: 0
     },
 ]
@@ -111,7 +175,7 @@ var receitas = [
     }
 ]
 
-
+display(false)//MUDAR PRA FALSEEEEEEEE
 
 
 
@@ -125,7 +189,7 @@ function display(bool) {
     }
 }
 
-display(false)
+
 
 
 
@@ -140,11 +204,16 @@ window.addEventListener('message', function (event) {
             inventario[0].quantidade = parseInt(item.madeira)
             inventario[1].quantidade = parseInt(item.ferro)
             inventario[2].quantidade = parseInt(item.cabana)
+            inventario[3].quantidade = parseInt(item.corda)
+            inventario[4].quantidade = parseInt(item.agua)
+            inventario[5].quantidade = parseInt(item.gasolina)
+            inventario[6].quantidade = parseInt(item.pano)
+            inventario[7].quantidade = parseInt(item.vidro)
+            inventario[8].quantidade = parseInt(item.plastico)
+            inventario[9].quantidade = parseInt(item.papel)
+            inventario[10].quantidade = parseInt(item.polvora)
 
-            console.log("salvo no array madeira: " + inventario[0].quantidade)
-            console.log("salvo no array ferro: " + inventario[1].quantidade)
-            console.log("salvo no array cabana: " + inventario[2].quantidade)
-
+      
             display(true)
             recarregarInventario()
 
@@ -249,7 +318,16 @@ window.addEventListener('message', function (event) {
             madeira: inventario[0].quantidade,
             ferro:inventario[1].quantidade,
             cabana:inventario[2].quantidade,
-                }));
+            corda: inventario[3].quantidade,
+            agua: inventario[4].quantidade,
+            gasolina: inventario[5].quantidade,
+            pano: inventario[6].quantidade,
+            vidro: inventario[7].quantidade,
+            plastico: inventario[8].quantidade,
+            papel: inventario[9].quantidade, 
+            polvora: inventario[10].quantidade,
+                
+        }));
           
 
 

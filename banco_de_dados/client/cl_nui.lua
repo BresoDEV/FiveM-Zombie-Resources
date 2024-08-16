@@ -17,37 +17,37 @@ RegisterNUICallback("attDadosDoJogo", function(data)
     StatSetInt('MPPLY_CREW_HEIST_CASH_0', tonumber(data.madeira), true)
     StatSetInt('MPPLY_CREW_HEIST_CASH_1', tonumber(data.ferro), true)
     StatSetInt('MPPLY_CREW_HEIST_CASH_2', tonumber(data.cabana), true)
-
+    StatSetInt('MPPLY_CREW_CHALENGE_WIN',tonumber(data.polvora),true)
+    StatSetInt('MPPLY_CREW_LOCAL_TIME_4',tonumber(data.gasolina),true)
+    StatSetInt('MPPLY_CREW_LOCAL_TIME_3',tonumber(data.vidro),true)
+    StatSetInt('MPPLY_CREW_LOCAL_TIME_2',tonumber(data.plastico),true)
+    StatSetInt('MPPLY_CREW_LOCAL_TIME_1',tonumber(data.papel),true)
+    StatSetInt('MPPLY_CREW_LOCAL_TIME_0',tonumber(data.agua),true)
+    StatSetInt('MPPLY_CREW_LOCAL_XP_4',tonumber(data.pano),true)
+    StatSetInt('MPPLY_CREW_LOCAL_XP_3',tonumber(data.corda),true)
 
 
     --veiculos comprados
     StatSetInt('MPPLY_ACTIVITY_ENDED',tonumber(data.deathbike),true)
-StatSetInt('MPPLY_ACTIVITY_QUIT',tonumber(data.enduro),true)
-StatSetInt('MPPLY_ACTIVITY_STARTED',tonumber(data.gargoyle),true)
-StatSetInt('MPPLY_ARMWRESTLING_TOTAL_MATCH',tonumber(data.ratbike),true)
-StatSetInt('MPPLY_ARMWRESTLING_TOTAL_WINS',tonumber(data.dukes2),true)
-StatSetInt('MPPLY_BAD_CREW_EMBLEM',tonumber(data.caddy3),true)
-StatSetInt('MPPLY_BAD_CREW_MOTTO',tonumber(data.zr3802),true)
-StatSetInt('MPPLY_BAD_CREW_NAME',tonumber(data.dune3),true)
-StatSetInt('MPPLY_BAD_CREW_STATUS',tonumber(data.insurgent),true)
-StatSetInt('MPPLY_BADSPORT_END',tonumber(data.technical2),true)
-StatSetInt('MPPLY_BADSPORT_START',tonumber(data.apc),true)
-StatSetInt('MPPLY_CREW_0_ID',tonumber(data.issi4),true)
-StatSetInt('MPPLY_CREW_4_ID',tonumber(data.barrage),true)
-StatSetInt('MPPLY_CREW_3_ID',tonumber(data.cerberus),true)
-StatSetInt('MPPLY_CREW_2_ID',tonumber(data.phantom2),true)
-StatSetInt('MPPLY_CREW_1_ID',tonumber(data.thruster),true)
-StatSetInt('MPPLY_CREW_CHALENGE_ATTEMPTS',tonumber(data.havok),true)
+    StatSetInt('MPPLY_ACTIVITY_QUIT',tonumber(data.enduro),true)
+    StatSetInt('MPPLY_ACTIVITY_STARTED',tonumber(data.gargoyle),true)
+    StatSetInt('MPPLY_ARMWRESTLING_TOTAL_MATCH',tonumber(data.ratbike),true)
+    StatSetInt('MPPLY_ARMWRESTLING_TOTAL_WINS',tonumber(data.dukes2),true)
+    StatSetInt('MPPLY_BAD_CREW_EMBLEM',tonumber(data.caddy3),true)
+    StatSetInt('MPPLY_BAD_CREW_MOTTO',tonumber(data.zr3802),true)
+    StatSetInt('MPPLY_BAD_CREW_NAME',tonumber(data.dune3),true)
+    StatSetInt('MPPLY_BAD_CREW_STATUS',tonumber(data.insurgent),true)
+    StatSetInt('MPPLY_BADSPORT_END',tonumber(data.technical2),true)
+    StatSetInt('MPPLY_BADSPORT_START',tonumber(data.apc),true)
+    StatSetInt('MPPLY_CREW_0_ID',tonumber(data.issi4),true)
+    StatSetInt('MPPLY_CREW_4_ID',tonumber(data.barrage),true)
+    StatSetInt('MPPLY_CREW_3_ID',tonumber(data.cerberus),true)
+    StatSetInt('MPPLY_CREW_2_ID',tonumber(data.phantom2),true)
+    StatSetInt('MPPLY_CREW_1_ID',tonumber(data.thruster),true)
+    StatSetInt('MPPLY_CREW_CHALENGE_ATTEMPTS',tonumber(data.havok),true)
     
 
---MPPLY_CREW_CHALENGE_WIN
---MPPLY_CREW_LOCAL_TIME_4
---MPPLY_CREW_LOCAL_TIME_3
---MPPLY_CREW_LOCAL_TIME_2
---MPPLY_CREW_LOCAL_TIME_1
---MPPLY_CREW_LOCAL_TIME_0
---MPPLY_CREW_LOCAL_XP_4
---MPPLY_CREW_LOCAL_XP_3
+
 --MPPLY_CREW_LOCAL_XP_2
 --MPPLY_CREW_LOCAL_XP_1
 --MPPLY_CREW_LOCAL_XP_0
@@ -127,7 +127,15 @@ function update()
         local _,madeira = StatGetInt('MPPLY_CREW_HEIST_CASH_0', -1)
         local _,ferro = StatGetInt('MPPLY_CREW_HEIST_CASH_1', -1)
         local _,cabana = StatGetInt('MPPLY_CREW_HEIST_CASH_2', -1)
-
+        local _,polvora =  StatGetInt('MPPLY_CREW_CHALENGE_WIN', -1)
+        local _,gasolina =  StatGetInt('MPPLY_CREW_LOCAL_TIME_4', -1)
+        local _,vidro =  StatGetInt('MPPLY_CREW_LOCAL_TIME_3', -1)
+        local _,plastico =  StatGetInt('MPPLY_CREW_LOCAL_TIME_2', -1)
+        local _,papel =  StatGetInt('MPPLY_CREW_LOCAL_TIME_1', -1)
+        local _,agua =  StatGetInt('MPPLY_CREW_LOCAL_TIME_0', -1)
+        local _,pano =  StatGetInt('MPPLY_CREW_LOCAL_XP_4', -1)
+        local _,corda =  StatGetInt('MPPLY_CREW_LOCAL_XP_3', -1)
+        
 
         --veiculos
         local _,deathbike = StatGetInt('MPPLY_ACTIVITY_ENDED',-1)
@@ -169,6 +177,14 @@ function update()
             madeira = madeira,
             ferro = ferro,
             cabana = cabana,
+            polvora=polvora,
+            gasolina=gasolina,
+            vidro=vidro,
+            plastico=plastico,
+            papel=papel,
+            agua=agua,
+            pano=pano,
+            corda=corda,
 
             --veiculos
             deathbike=deathbike,

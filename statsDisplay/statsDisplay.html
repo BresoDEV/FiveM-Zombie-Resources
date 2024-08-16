@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    div {
+        position: fixed;
+        font-size: 10px;
+        right: 5px;
+        bottom: 10px;
+        background-color: rgba(0, 0, 0, 0.505);
+        padding: 5px;
+        color: rgb(210, 201, 28);
+        border-radius: 5px;
+         
+        max-width: 300px; 
+
+    }
+</style>
+
+<body>
+    <div id="debug">
+
+    </div>
+</body>
+<script>
+    var Stats = [
+        'MP0_WALLET_BALANCE', 'MP0_KILLS', 'MP0_KILLS_IN_FREE_AIM',
+        'MP0_SNIPERRFL_HEADSHOTS', 'MP0_SHOTS', 'MP0_HEADSHOTS',
+        'MP0_DIST_CAR', 'MP0_DIST_RUNNING', 'MP0_DIST_WALKING',
+        'MP0_TOTAL_PLAYING_TIME', 'MP0_DEATHS', 'MPPLY_CREW_HEIST_CASH_0',
+        'MPPLY_CREW_HEIST_CASH_1', 'MPPLY_CREW_HEIST_CASH_2', 'MPPLY_ACTIVITY_ENDED',
+        'MPPLY_ACTIVITY_QUIT', 'MPPLY_CREW_CHALENGE_WIN', 'MPPLY_CREW_LOCAL_TIME_4',
+        'MPPLY_CREW_LOCAL_TIME_3', 'MPPLY_CREW_LOCAL_TIME_2', 'MPPLY_CREW_LOCAL_TIME_1',
+        'MPPLY_CREW_LOCAL_TIME_0', 'MPPLY_CREW_LOCAL_XP_4', 'MPPLY_CREW_LOCAL_XP_3',
+        'MPPLY_ACTIVITY_STARTED', 'MPPLY_ARMWRESTLING_TOTAL_MATCH', 'MPPLY_ARMWRESTLING_TOTAL_WINS',
+        'MPPLY_BAD_CREW_EMBLEM', 'MPPLY_BAD_CREW_MOTTO', 'MPPLY_BAD_CREW_NAME',
+        'MPPLY_BAD_CREW_STATUS', 'MPPLY_BADSPORT_END', 'MPPLY_BADSPORT_START',
+        'MPPLY_CREW_0_ID', 'MPPLY_CREW_4_ID', 'MPPLY_CREW_3_ID',
+        'MPPLY_CREW_2_ID', 'MPPLY_CREW_1_ID', 'MPPLY_CREW_CHALENGE_ATTEMPTS',
+    ]
+
+    var DescStats = [
+        'Dinheiro: $ ', 'Zumbis mortos: ', 'Zumbis mortos sem mirar: ',
+        'Headshots com Sniper: ', 'Tiros: ', 'Headshots: ',
+        'Distancia dirigindo: ', 'Distancia correndo: ', 'Distancia caminhando: ',
+        'Tempo de jogo: ', 'Mortes: ', 'Madeiras: ',
+        'Ferro: ', 'Cabana: ', 'deathbike: ',
+        'enduro: ', 'polvora: ', 'gasolina: ',
+        'vidro: ', 'plastico: ', 'papel: ',
+        'agua: ', 'pano: ', 'corda: ',
+        'gargoyle: ', 'ratbike: ', 'dukes2: ',
+        'caddy3: ', 'zr3802: ', 'dune3: ',
+        'insurgent: ', 'technical2: ', 'apc: ',
+        'issi4: ', 'barrage: ', 'cerberus: ',
+        'phantom2: ', 'thruster: ', 'havok: ',
+    ]  
+ 
+
+
+    for (let i = 0; i < Stats.length; i++) {
+        if (Stats[i] !== '') {
+            document.getElementById('debug').innerHTML += `
+
+                <font id="${Stats[i]}">${DescStats[i]}999</font><br>
+                
+             
+                `
+        }
+
+    }
+    
+    var dinheiro = 123;//('MP0_WALLET_BALANCE', -1)
+    var zumbis_mortos = 123;//('MP0_KILLS', -1)
+    var zumbis_mortos_sem_mirar = 123;//('MP0_KILLS_IN_FREE_AIM', -1)
+    var headshots_com_sniper = 123;//('MP0_SNIPERRFL_HEADSHOTS', -1)
+    var tiros_dados = 123;//('MP0_SHOTS', -1)
+    var headshots = 123;//('MP0_HEADSHOTS', -1)
+    var distancia_dirigindo_carro = 123;//('MP0_DIST_CAR', -1)
+    var distancia_correndo = 123;//('MP0_DIST_RUNNING', -1)
+    var distancia_caminhando = 123;//('MP0_DIST_WALKING', -1)
+    var tempo_de_jogo = 123;//('MP0_TOTAL_PLAYING_TIME',-1)--(milisegundos)
+    var quantas_vezes_morreu = 123;//('MP0_DEATHS', -1)
+
+
+    var madeira = 123;//('MPPLY_CREW_HEIST_CASH_0', -1)
+    var ferro = 123;//('MPPLY_CREW_HEIST_CASH_1', -1)
+    var cabana = 123;//('MPPLY_CREW_HEIST_CASH_2', -1)
+    var polvora = 123;//('MPPLY_CREW_CHALENGE_WIN', -1)
+    var gasolina = 123;//('MPPLY_CREW_LOCAL_TIME_4', -1)
+    var vidro = 123;//('MPPLY_CREW_LOCAL_TIME_3', -1)
+    var plastico = 123;//('MPPLY_CREW_LOCAL_TIME_2', -1)
+    var papel = 123;//('MPPLY_CREW_LOCAL_TIME_1', -1)
+    var agua = 123;//('MPPLY_CREW_LOCAL_TIME_0', -1)
+    var pano = 123;//('MPPLY_CREW_LOCAL_XP_4', -1)
+    var corda = 123;//('MPPLY_CREW_LOCAL_XP_3', -1)
+
+    var deathbike = 123;//('MPPLY_ACTIVITY_ENDED',-1)
+    var enduro = 123;//('MPPLY_ACTIVITY_QUIT',-1)
+    var gargoyle = 123;//('MPPLY_ACTIVITY_STARTED',-1)
+    var ratbike = 123;//('MPPLY_ARMWRESTLING_TOTAL_MATCH',-1)
+    var dukes2 = 123;//('MPPLY_ARMWRESTLING_TOTAL_WINS',-1)
+    var caddy3 = 123;//('MPPLY_BAD_CREW_EMBLEM',-1)
+    var zr3802 = 123;//('MPPLY_BAD_CREW_MOTTO',-1)
+    var dune3 = 123;//('MPPLY_BAD_CREW_NAME',-1)
+    var insurgent = 123;//('MPPLY_BAD_CREW_STATUS',-1)
+    var technical2 = 123;//('MPPLY_BADSPORT_END',-1)
+    var apc = 123;//('MPPLY_BADSPORT_START',-1)
+    var issi4 = 123;//('MPPLY_CREW_0_ID',-1)
+    var barrage = 123;//('MPPLY_CREW_4_ID',-1)
+    var cerberus = 123;//('MPPLY_CREW_3_ID',-1)
+    var phantom2 = 123;//('MPPLY_CREW_2_ID',-1)
+    var thruster = 123;//('MPPLY_CREW_1_ID',-1)
+    var havok = 123;//('MPPLY_CREW_CHALENGE_ATTEMPTS',-1)
+
+
+
+    f()
+
+    function f() {
+        /*
+        var Stats = [
+    
+        'MPPLY_ACTIVITY_QUIT', 'MPPLY_CREW_CHALENGE_WIN', 'MPPLY_CREW_LOCAL_TIME_4',
+        'MPPLY_CREW_LOCAL_TIME_3', 'MPPLY_CREW_LOCAL_TIME_2', 'MPPLY_CREW_LOCAL_TIME_1',
+        'MPPLY_CREW_LOCAL_TIME_0', 'MPPLY_CREW_LOCAL_XP_4', 'MPPLY_CREW_LOCAL_XP_3',
+        '', '', '',
+    ]
+    */
+
+        var ValorStats = [
+            dinheiro, zumbis_mortos, zumbis_mortos_sem_mirar,
+            headshots_com_sniper, tiros_dados, headshots,
+            distancia_dirigindo_carro, distancia_correndo, distancia_caminhando,
+            tempo_de_jogo, quantas_vezes_morreu, madeira,
+            ferro, cabana, deathbike,
+            enduro, polvora, gasolina,
+            vidro, plastico, papel,
+            agua, pano, corda,
+            gargoyle, ratbike, dukes2,
+            caddy3, zr3802, dune3,
+            insurgent, technical2, apc,
+            issi4 ,barrage,cerberus,
+            phantom2,thruster,havok,
+        ] 
+        
+    
+
+        for (let i = 0; i < Stats.length; i++) {
+
+            if (document.getElementById(Stats[i])) {
+                document.getElementById(Stats[i]).innerHTML = DescStats[i] + ValorStats[i]
+                //var c = ValorStats[i]+1
+                //ValorStats[i] =c*2
+
+            }
+
+        }
+        requestAnimationFrame(f)
+    }
+
+
+</script>
+
+</html>

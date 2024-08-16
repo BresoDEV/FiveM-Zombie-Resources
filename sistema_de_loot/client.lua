@@ -1,15 +1,40 @@
 
+local tempoWait = {
+    valor= 5
+}
+
+
 function addLootAleatorio()
 
-    --madeira
-    local _, pm = StatGetInt("MPPLY_CREW_HEIST_CASH_0", -1)
-    local final = tonumber(pm) + tonumber(GetRandomIntInRange(0,3))
-    StatSetInt('MPPLY_CREW_HEIST_CASH_0', tonumber(final), true)
+    local stats = {
+        'MPPLY_CREW_HEIST_CASH_0', --madeira
+        'MPPLY_CREW_HEIST_CASH_1', --ferro
+        'MPPLY_CREW_LOCAL_TIME_3', --vidro
+        'MPPLY_CREW_LOCAL_TIME_2', --plastico
+        'MPPLY_CREW_LOCAL_XP_4', --pano
+        'MPPLY_CREW_LOCAL_XP_3', --corda
+        'MPPLY_CREW_CHALENGE_WIN', --polvora
+    }
 
-    --ferro
-    local _, pm = StatGetInt("MPPLY_CREW_HEIST_CASH_1", -1)
+    local indice = math.random(1, #stats)
+
+    local _, pm = StatGetInt(stats[indice], -1)
     local final = tonumber(pm) + tonumber(GetRandomIntInRange(0,3))
-    StatSetInt('MPPLY_CREW_HEIST_CASH_1', tonumber(final), true)
+    StatSetInt(stats[indice], tonumber(final), true)
+
+    
+    indice = math.random(1, #stats)
+
+    local _, pm = StatGetInt(stats[indice], -1)
+    local final = tonumber(pm) + tonumber(GetRandomIntInRange(0,3))
+    StatSetInt(stats[indice], tonumber(final), true)
+
+    indice = math.random(1, #stats)
+
+    local _, pm = StatGetInt(stats[indice], -1)
+    local final = tonumber(pm) + tonumber(GetRandomIntInRange(0,3))
+    StatSetInt(stats[indice], tonumber(final), true)
+  
 end
 
 
@@ -38,96 +63,118 @@ function alerta(txt)
     DrawNotification(false, true)
 end
 
+function ADD_CHECKPOINT(icone,x,y,z,rotacao)
+    if icone == 29 then
+        DrawMarker(icone, x, y, z, 0.0, 0.0, 0.0, 0.0, rotacao, 0.0, 1.0, 1.0, 1.0, 0, 255, 0,200, false, true, 2, nil, nil, false)
+    end 
+    if icone == 2 then
+        DrawMarker(icone, x, y, z, 0.0, 0.0, 0.0, 0.0, rotacao, 0.0, 1.0, 1.0, 1.0, 255, 0, 0,200, false, true, 2, nil, nil, false)
+    end
+    
+end
 
 function drawLineProps()
-    local pedPool = GetGamePool("CObject")
+    local objPool = GetGamePool("CObject")
     local coords = GetEntityCoords(PlayerPedId())
-    local closestPed = -1
-    local closestDist = -1
-    for _, ped in pairs(pedPool) do
+    for _, prop in pairs(objPool) do
         
 
         local Lixeira = false
         local ATM = false
 
-        if (GetEntityModel(ped) == GetHashKey('prop_dumpster_02a')) then
+        -------------------------------------------------------------
+        if (GetEntityModel(prop) == GetHashKey('prop_dumpster_02a')) then
             Lixeira = true
         end
-        if (GetEntityModel(ped) == GetHashKey('prop_dumpster_3a')) then
+        if (GetEntityModel(prop) == GetHashKey('prop_dumpster_3a')) then
             Lixeira = true
         end
-        if (GetEntityModel(ped) == GetHashKey('prop_dumpster_4a')) then
+        if (GetEntityModel(prop) == GetHashKey('prop_dumpster_4a')) then
             Lixeira = true
         end
-        if (GetEntityModel(ped) == GetHashKey('prop_dumpster_4b')) then
+        if (GetEntityModel(prop) == GetHashKey('prop_dumpster_4b')) then
             Lixeira = true
         end
-        if (GetEntityModel(ped) == GetHashKey('prop_dumpster_01a')) then
+        if (GetEntityModel(prop) == GetHashKey('prop_dumpster_01a')) then
             Lixeira = true
         end
-        if (GetEntityModel(ped) == GetHashKey('prop_atm_01')) then
+        -------------------------------------------------------------
+        if (GetEntityModel(prop) == GetHashKey('prop_atm_01')) then
             ATM = true
         end
 
-        if Lixeira == true then
-            if GetEntityAlpha(ped) == 255 then
-                local myCor = GetEntityCoords(PlayerPedId())
-                local pedCor = GetOffsetFromEntityInWorldCoords(ped, 0.0, -1.0, 1.0)
-               
-               -- DrawLine(myCor.x, myCor.y, myCor.z, pedCor.x, pedCor.y, pedCor.z, 0, 255, 0, 255)
+        -------------------------------------------------------------
 
-                DrawMarker(2, pedCor.x, pedCor.y, pedCor.z, 0.0, 0.0, 0.0, 0.0, 180.0, 0.0, 1.0, 1.0, 1.0, 255, 0, 0,
-                    200, false, true, 2, nil, nil, false)
 
-                if IsEntityAtCoord(PlayerPedId(), pedCor.x, pedCor.y, pedCor.z, 10.0, 10.0, 10.0, 0, 1, 0) then
 
-                    DrawText3D('Se aproxime para coletar', pedCor.x, pedCor.y, pedCor.z)
+        if Lixeira or ATM then
 
-                    if IsPedOnFoot(PlayerPedId()) and
-                        IsEntityAtCoord(PlayerPedId(), pedCor.x, pedCor.y, pedCor.z, 1.0, 1.0, 1.0, 0, 1, 0) then
+            if GetEntityAlpha(prop) == 255 then
+-------------------------------------------------------------------------------------------
+                if Lixeira then
+                    local propCoord = GetOffsetFromEntityInWorldCoords(prop, 0.0, -1.0, 1.0)
+
+                    --local myCor = GetEntityCoords(PlayerPedId())
+                    --DrawLine(myCor.x, myCor.y, myCor.z, propCoord.x, propCoord.y, propCoord.z, 0, 255, 0, 255)
+
+                    if IsEntityAtCoord(PlayerPedId(), propCoord.x, propCoord.y, propCoord.z, 20.0, 20.0, 20.0, 0, 1, 0) then
                         
-                        SetEntityAlpha(ped, 254, false)
-                        alerta('Recursos Coletados')
-                        addLootAleatorio()
+                        tempoWait.valor = 5
+                        ADD_CHECKPOINT(2, propCoord.x, propCoord.y, propCoord.z, 180.0)
+
+                        if IsEntityAtCoord(PlayerPedId(), propCoord.x, propCoord.y, propCoord.z, 5.0, 5.0, 5.0, 0, 1, 0) then
+                            DrawText3D('Aperte [E] para coletar', propCoord.x, propCoord.y, propCoord.z)
+
+                            if IsPedOnFoot(PlayerPedId()) then
+                                if IsEntityAtCoord(PlayerPedId(), propCoord.x, propCoord.y, propCoord.z, 1.0, 1.0, 1.0, 0, 1, 0) then
+
+                                    if IsControlJustPressed(0,38) then
+                                        SetEntityAlpha(prop, 254, false)
+                                        alerta('Recursos Coletados')
+                                        addLootAleatorio()
+                                    end
+                                end
+                            end
+                        end    
                     end
                 end
-
-            end
-
-        end
-
-
-        
-        if ATM == true then
-            if GetEntityAlpha(ped) == 255 then
-                local myCor = GetEntityCoords(PlayerPedId())
-                local pedCor = GetOffsetFromEntityInWorldCoords(ped, 0.0, -0.5, 1.5)
+-------------------------------------------------------------------------------------------
+                if ATM then
+                    local propCoord = GetOffsetFromEntityInWorldCoords(prop, 0.0, -0.5, 1.5)
                 
-                --DrawLine(myCor.x, myCor.y, myCor.z, pedCor.x, pedCor.y, pedCor.z, 0, 255, 0, 255)
-
-                DrawMarker(2, pedCor.x, pedCor.y, pedCor.z, 0.0, 0.0, 0.0, 0.0, 180.0, 0.0, 0.5, 0.5, 0.5, 0, 255, 0,
-                    180, false, true, 2, nil, nil, false)
-
-                if IsEntityAtCoord(PlayerPedId(), pedCor.x, pedCor.y, pedCor.z, 10.0, 10.0, 10.0, 0, 1, 0) then
-
-                    DrawText3D('Se aproxime para roubar', pedCor.x, pedCor.y, pedCor.z)
-
-                    if IsPedOnFoot(PlayerPedId()) and
-                        IsEntityAtCoord(PlayerPedId(), pedCor.x, pedCor.y, pedCor.z, 1.0, 1.0, 1.0, 0, 1, 0) then
+                    --local myCor = GetEntityCoords(PlayerPedId())
+                    --DrawLine(myCor.x, myCor.y, myCor.z, propCoord.x, propCoord.y, propCoord.z, 0, 255, 0, 255)
+                
+                    if IsEntityAtCoord(PlayerPedId(), propCoord.x, propCoord.y, propCoord.z, 20.0, 20.0, 20.0, 0, 1, 0) then
                         
+                        tempoWait.valor = 5
+                        ADD_CHECKPOINT(29, propCoord.x, propCoord.y, propCoord.z, 0.0)
+                    
+                        if IsEntityAtCoord(PlayerPedId(), propCoord.x, propCoord.y, propCoord.z, 5.0, 5.0, 5.0, 0, 1, 0) then
+                            DrawText3D('Aperte [E] para coletar', propCoord.x, propCoord.y, propCoord.z)
                         
-                        SetEntityAlpha(ped, 254, false)
-                        
-                        alerta('Dinheiro Coletados')
-
-                        local _, pm = StatGetInt("MP0_WALLET_BALANCE", -1)
-                        local final = tonumber(pm) + tonumber(GetRandomIntInRange(1,50))
-                        StatSetInt('MP0_WALLET_BALANCE', tonumber(final), true)
+                            if IsPedOnFoot(PlayerPedId()) then
+                                if IsEntityAtCoord(PlayerPedId(), propCoord.x, propCoord.y, propCoord.z, 1.0, 1.0, 1.0, 0, 1, 0) then
+                                
+                                    if IsControlJustPressed(0,38) then
+                                        SetEntityAlpha(prop, 254, false)
+                                        alerta('~g~Dinheiro~s~ Coletado')
+                                        
+                                        local _, pm = StatGetInt("MP0_WALLET_BALANCE", -1)
+                                        local final = tonumber(pm) + tonumber(GetRandomIntInRange(1,50))
+                                        StatSetInt('MP0_WALLET_BALANCE', tonumber(final), true)
+                                    end
+                                end
+                            end
+                        end
                     end
                 end
+-------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
 
             end
-
         end
     end
 end
@@ -135,7 +182,7 @@ end
 
 CreateThread(function()
     while true do
-        Wait(5)
+        Wait(tempoWait.valor)
         drawLineProps()
     end
 end)

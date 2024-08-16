@@ -106,6 +106,11 @@ local FonteOpcoesY = {
     valor = 0.080
 }
 
+--------------
+local tempoWait = {
+    valor = 250
+}
+
 -- nao modificar esses valores
 local optionIndex = 1;
 local menuIndex = 0;
@@ -316,7 +321,7 @@ function addBoolOption(txt, variavel)
     return false
 end
 
-function Topo(titulo, menuatual, menuVoltar)
+function addTitle(titulo, menuatual, menuVoltar)
 
     DrawRect(MenuX.valor, MenuY.valor, MenuLargura.valor, FundoTopoAltura.valor, corFundoTopoR.valor,
         corFundoTopoG.valor, corFundoTopoB.valor, corFundoTopoA.valor)
@@ -377,145 +382,48 @@ function drawOption(texto, x, y)
     EndTextCommandDisplayText(x, y);
 end
 
-function DrawText3D(text, x, y, z)
-    local onScreen, _x, _y = World3dToScreen2d(x, y, z)
-    local px, py, pz = table.unpack(GetGameplayCamCoords())
 
-    SetTextScale(0.35, 0.35)
-    SetTextFont(4)
-    SetTextProportional(1)
-    SetTextColour(255, 255, 255, 215)
-    SetTextEntry("STRING")
-    SetTextCentre(1)
-    AddTextComponentString(text)
-    DrawText(_x, _y)
 
-    local factor = (string.len(text)) / 370
-    DrawRect(_x, _y + 0.0125, 0.015 + factor, 0.03, 41, 11, 41, 68)
-end
-
-local propR = {
-    valor = 1.0
-}
-local propG = {
-    valor = 1.0
-}
-local propB = {
-    valor = 1.0
-}
-
-function drawLineProps()
-    local pedPool = GetGamePool("CObject")
-    local coords = GetEntityCoords(PlayerPedId())
-    local closestPed = -1
-    local closestDist = -1
-    for _, ped in pairs(pedPool) do
-        -- if not IsPedAPlayer(ped) and not IsPedDeadOrDying(ped) then
-
-        local Lixeira = false
-        local ATM = false
-
-        if (GetEntityModel(ped) == GetHashKey('prop_dumpster_02a')) then
-            Lixeira = true
-        end
-        if (GetEntityModel(ped) == GetHashKey('prop_dumpster_3a')) then
-            Lixeira = true
-        end
-        if (GetEntityModel(ped) == GetHashKey('prop_dumpster_4a')) then
-            Lixeira = true
-        end
-        if (GetEntityModel(ped) == GetHashKey('prop_dumpster_4b')) then
-            Lixeira = true
-        end
-        if (GetEntityModel(ped) == GetHashKey('prop_dumpster_01a')) then
-            Lixeira = true
-        end
-        if (GetEntityModel(ped) == GetHashKey('prop_atm_01')) then
-            ATM = true
-        end
-
-        if Lixeira == true then
-            if GetEntityAlpha(ped) == 255 then
-                local myCor = GetEntityCoords(PlayerPedId())
-                local pedCor = GetOffsetFromEntityInWorldCoords(ped, 0.0, -1.0, 1.0)
-                DrawLine(myCor.x, myCor.y, myCor.z, pedCor.x, pedCor.y, pedCor.z, 0, 255, 0, 255)
-
-                DrawMarker(2, pedCor.x, pedCor.y, pedCor.z, 0.0, 0.0, 0.0, 0.0, 180.0, 0.0, 1.0, 1.0, 1.0, 255, 0, 0,
-                    200, false, true, 2, nil, nil, false)
-
-                if IsEntityAtCoord(PlayerPedId(), pedCor.x, pedCor.y, pedCor.z, 10.0, 10.0, 10.0, 0, 1, 0) then
-
-                    DrawText3D('Se aproxime para coletar', pedCor.x, pedCor.y, pedCor.z)
-
-                    if IsPedOnFoot(PlayerPedId()) and
-                        IsEntityAtCoord(PlayerPedId(), pedCor.x, pedCor.y, pedCor.z, 1.0, 1.0, 1.0, 0, 1, 0) then
-                        SetEntityAlpha(ped, 254, false)
-                        SetTextFont(0)
-                        SetNotificationTextEntry("STRING")
-                        AddTextComponentString('Recursos Coletados')
-                        DrawNotification(false, true)
-                    end
-                end
-
-            end
-
-        end
-        if ATM == true then
-            if GetEntityAlpha(ped) == 255 then
-                local myCor = GetEntityCoords(PlayerPedId())
-                local pedCor = GetOffsetFromEntityInWorldCoords(ped, 0.0, -0.5, 1.5)
-                DrawLine(myCor.x, myCor.y, myCor.z, pedCor.x, pedCor.y, pedCor.z, 0, 255, 0, 255)
-
-                DrawMarker(2, pedCor.x, pedCor.y, pedCor.z, 0.0, 0.0, 0.0, 0.0, 180.0, 0.0, 0.5, 0.5, 0.5, 0, 255, 0,
-                    180, false, true, 2, nil, nil, false)
-
-                if IsEntityAtCoord(PlayerPedId(), pedCor.x, pedCor.y, pedCor.z, 10.0, 10.0, 10.0, 0, 1, 0) then
-
-                    DrawText3D('Se aproxime para roubar', pedCor.x, pedCor.y, pedCor.z)
-
-                    if IsPedOnFoot(PlayerPedId()) and
-                        IsEntityAtCoord(PlayerPedId(), pedCor.x, pedCor.y, pedCor.z, 1.0, 1.0, 1.0, 0, 1, 0) then
-                        SetEntityAlpha(ped, 254, false)
-                        SetTextFont(0)
-                        SetNotificationTextEntry("STRING")
-                        AddTextComponentString('Dinheiro Coletados')
-                        DrawNotification(false, true)
-
-                        local _, pm = StatGetInt("MP0_WALLET_BALANCE", -1)
-                        local final = tonumber(pm) + tonumber(GetRandomIntInRange(1,50))
-                        StatSetInt('MP0_WALLET_BALANCE', tonumber(final), true)
-                    end
-                end
-
-            end
-
-        end
-    end
-end
 
 function DevMenu()
-    Topo('Dev Menu', 1, 0)
 
-    addFloatOption('X', propR, 0.05, -10.0, 10.0)
-    addFloatOption('Y', propG, 0.05, -10.0, 10.0)
-    addFloatOption('Z', propB, 0.05, -10.0, 10.0)
+    addTitle('Dev Menu', 1, 0)
+
+    --addFloatOption('x', teste, 0.1, -10.1, 10.0)
+    --addFloatOption('y', teste2, 0.1, -10.1, 10.0)
+    --addFloatOption('z', teste3, 0.1, -10.1, 10.0)
+    --addIntOption('marker', marker, 1, 0, 43)
 
      
-    -- local myCor2 = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 0.0, 1.0)
+    if addOption('Config Menu') then
+        Citizen.Wait(tempoWait.valor)
+        optionIndex = 1
+        menuIndex = 1020
+    end
+     
+    if addOption('Workstation') then
 
-    drawLineProps()
-
-    --DrawLightWithRange(myCor.x, myCor.y, myCor.z, propR.valor, propG.valor, propB.valor, propX.valor, propY.valor)
-
-    if addOption('mesa') then
-
-        local cord2 = GetEntityCoords(PlayerPedId())
-        local Objeto_spawn = CreateObject(GetHashKey("prop_tool_bench02"), cord2.x, cord2.y, cord2.z - 1,
-            GetEntityHeading(PlayerPedId()), true, 1);
-        SetEntityCoords(Objeto_spawn, cord2.x, cord2.y, cord2.z - 1, 0, 0, 0, 1);
+        local cord2 = GetOffsetFromEntityInWorldCoords(PlayerPedId(),0.0,0.6,-1.0)
+        local Objeto_spawn = CreateObject(GetHashKey("prop_tool_bench02"), cord2.x, cord2.y, cord2.z,
+            GetEntityHeading(PlayerPedId()), true, true);
+        
+            SetEntityHeading(Objeto_spawn,GetEntityHeading(PlayerPedId())+90.0)
         FreezeEntityPosition(Objeto_spawn, true);
 
     end
+
+    if addOption('grade') then
+
+        local cord2 = GetOffsetFromEntityInWorldCoords(PlayerPedId(),-2.0,0.6,0.0)
+        local Objeto_spawn = CreateObject(GetHashKey("prop_fnclink_02gate5"), cord2.x, cord2.y, cord2.z - 1,
+            GetEntityHeading(PlayerPedId()), true, true);
+       
+        SetEntityHeading(Objeto_spawn,GetEntityHeading(PlayerPedId()))
+
+        FreezeEntityPosition(Objeto_spawn, true);
+
+    end
+    
 
     if addOption('Teleport para Base') then
         local i = PlayerPedId()
@@ -525,340 +433,35 @@ function DevMenu()
         SetEntityCoords(i, -118.53456115723, -964.60687255859, 114.136655771484, 1, 0, 0, 0)
 
     end
-    if addOption('Mascara de Gas') then
-        -- 6, 3, 0, 2
-        SetPedComponentVariation(PlayerPedId(), 6, 3, 0, 2)
-    end
-    if addOption('Armas') then
-        GiveWeaponToPed(PlayerPedId(), 1432025498, 9999, 0, 1)
-        GiveWeaponToPed(PlayerPedId(), 984333226, 9999, 0, 1)
-        GiveWeaponToPed(PlayerPedId(), 961495388, 9999, 0, 1)
-        GiveWeaponToPed(PlayerPedId(), 100416529, 9999, 0, 1) -- sniperrifle
-        GiveWeaponToPed(PlayerPedId(), 1834241177, 9999, 0, 1) -- rail
-        GiveWeaponToPed(PlayerPedId(), 1119849093, 9999, 0, 1) -- minigun
-        GiveWeaponToPed(PlayerPedId(), 615608432, 9999, 0, 1) -- molotov
-        GiveWeaponToPed(PlayerPedId(), 1233104067, 1, 0, 1) -- flare
-        GiveWeaponToPed(PlayerPedId(), 883325847, 1, 0, 1) -- galao
-        GiveWeaponToPed(PlayerPedId(), 2067956739, 1, 0, 1) -- pe de cabra
-        GiveWeaponToPed(PlayerPedId(), -1951375401, 1, 0, 1) -- lanterna
-        GiveWeaponToPed(PlayerPedId(), -102973651, 1, 0, 1) -- machado
-        GiveWeaponToPed(PlayerPedId(), 453432689, 9999, 0, 1) -- pistola
-
-    end
+    
 
     buttonMonitor();
 end
 
-----------------------------------------
-
-function CarMenu()
-    Topo('Vehicles', 2, 0)
-    if addOption('Motos') then
-        Citizen.Wait(500)
-        optionIndex = 1
-        menuIndex = 3
-    end
-    if addOption('Militares') then
-        Citizen.Wait(500)
-        optionIndex = 1
-        menuIndex = 4
-    end
-    if addOption('Basicos') then
-        Citizen.Wait(500)
-        optionIndex = 1
-        menuIndex = 5
-    end
-    if addOption('Voadores') then
-        Citizen.Wait(500)
-        optionIndex = 1
-        menuIndex = 6
-    end
-
-    buttonMonitor();
-end
-
-local vehicleName = ''
-
-function CarMenu_Motos()
-    Topo('Motos', 3, 2)
-    if addOption('Deathbike') then
-
-        vehicleName = 'deathbike'
-    end
-    if addOption('Enduro') then
-        vehicleName = 'enduro'
-    end
-    if addOption('Gargoyle') then
-        vehicleName = 'gargoyle'
-    end
-    if addOption('Rat Bike') then
-        vehicleName = 'ratbike'
-    end
-
-    if vehicleName ~= '' then
-        RequestModel(vehicleName)
-        while not HasModelLoaded(vehicleName) do
-            Wait(500)
-        end
-        local vehicle = CreateVehicle(vehicleName, GetEntityCoords(PlayerPedId()).x, GetEntityCoords(PlayerPedId()).y,
-            GetEntityCoords(PlayerPedId()).z, GetEntityHeading(PlayerPedId()), true, false)
-        SetPedIntoVehicle(PlayerPedId(), vehicle, -1)
-        SetEntityAsNoLongerNeeded(vehicle)
-        SetModelAsNoLongerNeeded(vehicleName)
-
-        SetVehicleModKit(GetVehiclePedIsIn(PlayerPedId(), 0), 0)
-        for i = 0, 50 do
-            SetVehicleMod(GetVehiclePedIsIn(PlayerPedId(), 0), i,
-                GetNumVehicleMods(GetVehiclePedIsIn(PlayerPedId(), 0), i) - 1, false)
-        end
-        SetVehicleNumberPlateText(GetVehiclePedIsIn(PlayerPedId(), 0), GetPlayerName(GetPlayerIndex()))
-
-        vehicleName = ''
-    end
-
-    buttonMonitor();
-end
-
-function CarMenu_Militar()
-    Topo('Militar', 4, 2)
-    if addOption('APC') then
-        vehicleName = 'apc'
-    end
-    if addOption('Barrage') then
-        vehicleName = 'barrage'
-    end
-    if addOption('Dune') then
-        vehicleName = 'dune3'
-    end
-    if addOption('Insurgent') then
-        vehicleName = 'insurgent'
-    end
-    if addOption('Technical') then
-        vehicleName = 'technical2'
-    end
-
-    if vehicleName ~= '' then
-        RequestModel(vehicleName)
-        while not HasModelLoaded(vehicleName) do
-            Wait(500)
-        end
-        local vehicle = CreateVehicle(vehicleName, GetEntityCoords(PlayerPedId()).x, GetEntityCoords(PlayerPedId()).y,
-            GetEntityCoords(PlayerPedId()).z, GetEntityHeading(PlayerPedId()), true, false)
-        SetPedIntoVehicle(PlayerPedId(), vehicle, -1)
-        SetEntityAsNoLongerNeeded(vehicle)
-        SetModelAsNoLongerNeeded(vehicleName)
-
-        SetVehicleModKit(GetVehiclePedIsIn(PlayerPedId(), 0), 0)
-        for i = 0, 50 do
-            SetVehicleMod(GetVehiclePedIsIn(PlayerPedId(), 0), i,
-                GetNumVehicleMods(GetVehiclePedIsIn(PlayerPedId(), 0), i) - 1, false)
-        end
-        SetVehicleNumberPlateText(GetVehiclePedIsIn(PlayerPedId(), 0), GetPlayerName(GetPlayerIndex()))
-
-        vehicleName = ''
-    end
-
-    buttonMonitor();
-end
-
-function CarMenu_Basicos()
-    Topo('Basicos', 5, 2)
-
-    if addOption('Caminhao da Morte') then
-        vehicleName = 'cerberus'
-    end
-    if addOption('Caminhao Rampa') then
-        vehicleName = 'phantom2'
-    end
-    if addOption('Issi') then
-        vehicleName = 'issi4'
-    end
-
-    if addOption('Dukes') then
-        vehicleName = 'dukes2'
-    end
-
-    if addOption('ZR 380') then
-        vehicleName = 'zr3802'
-    end
-
-    if addOption('Carrinho de Golf') then
-        vehicleName = 'caddy3'
-    end
-
-    if vehicleName ~= '' then
-        RequestModel(vehicleName)
-        while not HasModelLoaded(vehicleName) do
-            Wait(500)
-        end
-        local vehicle = CreateVehicle(vehicleName, GetEntityCoords(PlayerPedId()).x, GetEntityCoords(PlayerPedId()).y,
-            GetEntityCoords(PlayerPedId()).z, GetEntityHeading(PlayerPedId()), true, false)
-        SetPedIntoVehicle(PlayerPedId(), vehicle, -1)
-        SetEntityAsNoLongerNeeded(vehicle)
-        SetModelAsNoLongerNeeded(vehicleName)
-
-        SetVehicleModKit(GetVehiclePedIsIn(PlayerPedId(), 0), 0)
-        for i = 0, 50 do
-            SetVehicleMod(GetVehiclePedIsIn(PlayerPedId(), 0), i,
-                GetNumVehicleMods(GetVehiclePedIsIn(PlayerPedId(), 0), i) - 1, false)
-        end
-        SetVehicleNumberPlateText(GetVehiclePedIsIn(PlayerPedId(), 0), GetPlayerName(GetPlayerIndex()))
-
-        vehicleName = ''
-    end
-
-    buttonMonitor();
-end
-
-function CarMenu_Voadores()
-    Topo('Voadores', 6, 2)
-
-    if addOption('Helicoptero') then
-        vehicleName = 'havok'
-    end
-
-    if addOption('Jetpack') then
-        vehicleName = 'thruster'
-    end
-
-    if vehicleName ~= '' then
-        RequestModel(vehicleName)
-        while not HasModelLoaded(vehicleName) do
-            Wait(500)
-        end
-        local vehicle = CreateVehicle(vehicleName, GetEntityCoords(PlayerPedId()).x, GetEntityCoords(PlayerPedId()).y,
-            GetEntityCoords(PlayerPedId()).z, GetEntityHeading(PlayerPedId()), true, false)
-        SetPedIntoVehicle(PlayerPedId(), vehicle, -1)
-        SetEntityAsNoLongerNeeded(vehicle)
-        SetModelAsNoLongerNeeded(vehicleName)
-
-        SetVehicleModKit(GetVehiclePedIsIn(PlayerPedId(), 0), 0)
-        for i = 0, 50 do
-            SetVehicleMod(GetVehiclePedIsIn(PlayerPedId(), 0), i,
-                GetNumVehicleMods(GetVehiclePedIsIn(PlayerPedId(), 0), i) - 1, false)
-        end
-        SetVehicleNumberPlateText(GetVehiclePedIsIn(PlayerPedId(), 0), GetPlayerName(GetPlayerIndex()))
-
-        vehicleName = ''
-    end
-
-    buttonMonitor();
-end
-
------------------------------------------------
-
-function Armas()
-    Topo('Armas', 7, 0)
-
-    if addOption('Armas Pesadas') then
-        Citizen.Wait(500)
-        optionIndex = 1
-        menuIndex = 8
-    end
-
-    if addOption('Armas Leves') then
-        Citizen.Wait(500)
-        optionIndex = 1
-        menuIndex = 9
-    end
-    if addOption('Armas Simples') then
-        Citizen.Wait(500)
-        optionIndex = 1
-        menuIndex = 11
-    end
-    if addOption('Explosivos') then
-        Citizen.Wait(500)
-        optionIndex = 1
-        menuIndex = 10
-    end
-    -----------------
-    buttonMonitor();
-end
-
-function Armas_pesadas()
-    Topo('Pesadas', 8, 7)
-    if addOption('Railgun') then
-        GiveWeaponToPed(PlayerPedId(), 1834241177, 9999, 0, 1)
-    end
-    if addOption('Minigun') then
-        GiveWeaponToPed(PlayerPedId(), 1119849093, 9999, 0, 1)
-    end
-    if addOption('Heavy Shotgun') then
-        GiveWeaponToPed(PlayerPedId(), 984333226, 9999, 0, 1)
-    end
-
-    buttonMonitor();
-end
-
-function Armas_Leves()
-    Topo('Leves', 9, 7)
-    if addOption('Machado') then
-        GiveWeaponToPed(PlayerPedId(), -102973651, 1, 0, 1)
-    end
-    if addOption('Pe de Cabra') then
-        GiveWeaponToPed(PlayerPedId(), 2067956739, 1, 0, 1)
-    end
-    if addOption('Flare') then
-        GiveWeaponToPed(PlayerPedId(), 1233104067, 1, 0, 1)
-    end
-    if addOption('Galao') then
-        GiveWeaponToPed(PlayerPedId(), 883325847, 1, 0, 1)
-    end
-    if addOption('Lanterna') then
-        GiveWeaponToPed(PlayerPedId(), -1951375401, 1, 0, 1)
-    end
-    buttonMonitor();
-end
-
-function Armas_Explosivas()
-    Topo('Explosivas', 10, 7)
-    if addOption('Molotov') then
-        GiveWeaponToPed(PlayerPedId(), 615608432, 9999, 0, 1)
-    end
-
-    buttonMonitor();
-end
-
-function Armas_Simples()
-    Topo('Simples', 11, 7)
-    if addOption('Pistola') then
-        GiveWeaponToPed(PlayerPedId(), 453432689, 9999, 0, 1)
-    end
-    if addOption('Shotgun') then
-        GiveWeaponToPed(PlayerPedId(), 1432025498, 9999, 0, 1)
-    end
-    if addOption('AK47') then
-        GiveWeaponToPed(PlayerPedId(), 961495388, 9999, 0, 1)
-    end
-    if addOption('Sniper Rifle') then
-        GiveWeaponToPed(PlayerPedId(), 100416529, 9999, 0, 1)
-    end
-    buttonMonitor();
-end
-
+ 
 ------------------------------------
 
 function Config()
-    Topo('Configs', 1020, 0)
+    addTitle('Configs', 1020, 1)
 
     if addOption('Topo') then
-        Citizen.Wait(500)
+        Citizen.Wait(tempoWait.valor)
         optionIndex = 1
         menuIndex = 1021
     end
     if addOption('Scrool') then
-        Citizen.Wait(500)
+        Citizen.Wait(tempoWait.valor)
         optionIndex = 1
         menuIndex = 1022
     end
     if addOption('Menu') then
-        Citizen.Wait(500)
+        Citizen.Wait(tempoWait.valor)
         optionIndex = 1
         menuIndex = 1023
     end
 
     if addOption('Opcoes') then
-        Citizen.Wait(500)
+        Citizen.Wait(tempoWait.valor)
         optionIndex = 1
         menuIndex = 1024
     end
@@ -867,7 +470,7 @@ function Config()
 end
 
 function Configs_Fonte()
-    Topo('Fonte', 1024, 1020)
+    addTitle('Fonte', 1024, 1020)
 
     addIntOption('Fonte R', FonteOpcoesR, 1, 0, 255)
     addIntOption('Fonte G', FonteOpcoesG, 1, 0, 255)
@@ -885,7 +488,7 @@ function Configs_Fonte()
 end
 
 function Configs_Menu()
-    Topo('Menu', 1023, 1020)
+    addTitle('Menu', 1023, 1020)
 
     addIntOption('Menu R', MenuR, 1, 0, 255)
     addIntOption('Menu G', MenuG, 1, 0, 255)
@@ -900,7 +503,7 @@ function Configs_Menu()
 end
 
 function Configs_Scrool()
-    Topo('Scrool', 1022, 1020)
+    addTitle('Scrool', 1022, 1020)
 
     addIntOption('Scrool R', corFundoSelecaoR, 1, 0, 255)
     addIntOption('Scrool G', corFundoSelecaoG, 1, 0, 255)
@@ -913,18 +516,13 @@ function Configs_Scrool()
 end
 
 function Configs_Topo()
-    Topo('Topo', 1021, 1020)
+    addTitle('Topo', 1021, 1020)
 
     addIntOption('Fundo R', corFundoTopoR, 1, 0, 255)
     addIntOption('Fundo G', corFundoTopoG, 1, 0, 255)
     addIntOption('Fundo B', corFundoTopoB, 1, 0, 255)
     addIntOption('Fundo A', corFundoTopoA, 1, 0, 255)
-
-    -- addIntOption('Fonte R',corFonteTopoR,1,0,255)
-    -- addIntOption('Fonte G',corFonteTopoG,1,0,255)
-    -- addIntOption('Fonte B',corFonteTopoB,1,0,255)
-    -- addIntOption('Fonte A',corFonteTopoA,1,0,255)
-
+ 
     addIntOption('Fonte Id', FonteTopo, 1, 0, 10)
 
     addFloatOption('Fonte Escala', FonteTopoEscala, 0.0025, 0, 10)
@@ -936,95 +534,53 @@ function Configs_Topo()
 end
 
 function menuEmBranco()
-    Topo('bla bla bla', 12, 0)
+    addTitle('bla bla bla', 12, 0)
 
     buttonMonitor();
 end
 
+function Hook()
+    --looop functions
+end
+
+
 -- Hook
-while true do
-
-    -- enter
-
-    if keyPressed(TECLAS.F1) then
-        menuIndex = 1020 -- configs
-    end
-
-    -----------------------------
-    if keyPressed(TECLAS.F9) then
-        menuIndex = 1 -- menu dev
-    end
-    if keyPressed(TECLAS.F10) then
-        menuIndex = 2 -- menu carros
-    end
-
-    if keyPressed(TECLAS.F11) then
-        menuIndex = 7 -- menu armas
-    end
-    if keyPressed(TECLAS.F7) then
-        menuIndex = 12 -- player menu
-    end
+Citizen.CreateThread(function()
+    while true do
+        Hook()
+        -----------------------------
+        if keyPressed(TECLAS.F9) then
+            menuIndex = 1 -- abre o menu
+        end
+    
 
     ------------------------------------
-    if menuIndex == 1 then
-        DevMenu()
-    end
+        if menuIndex == 1 then
+            DevMenu()
+        end
 
-    ------------------------------------
-
-    if menuIndex == 2 then
-        CarMenu()
-    end
-    if menuIndex == 3 then
-        CarMenu_Motos()
-    end
-    if menuIndex == 4 then
-        CarMenu_Militar()
-    end
-    if menuIndex == 5 then
-        CarMenu_Basicos()
-    end
-    if menuIndex == 6 then
-        CarMenu_Voadores()
-    end
-
-    ----------------------------------
-
-    if menuIndex == 7 then
-        Armas()
-    end
-
-    if menuIndex == 8 then
-        Armas_pesadas()
-    end
-    if menuIndex == 9 then
-        Armas_Leves()
-    end
-    if menuIndex == 10 then
-        Armas_Explosivas()
-    end
-    if menuIndex == 11 then
-        Armas_Simples()
-    end
-
+    
     -------------------------------
 
-    if menuIndex == 1020 then
-        Config()
-    end
-    if menuIndex == 1024 then
-        Configs_Fonte()
-    end
-    if menuIndex == 1023 then
-        Configs_Menu()
-    end
-    if menuIndex == 1022 then
-        Configs_Scrool()
-    end
-    if menuIndex == 1021 then
-        Configs_Topo()
-    end
+        if menuIndex == 1020 then
+            Config()
+        end
+        if menuIndex == 1024 then
+            Configs_Fonte()
+        end
+        if menuIndex == 1023 then
+            Configs_Menu()
+        end
+        if menuIndex == 1022 then
+            Configs_Scrool()
+        end
+        if menuIndex == 1021 then
+            Configs_Topo()
+        end
 
-    Citizen.Wait(1)
-end
+        Citizen.Wait(1)
+    end
+end)
+
+
 

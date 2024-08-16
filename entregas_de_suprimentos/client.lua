@@ -3,7 +3,7 @@ local entrar_automaticamente_no_veiculo_ao_iniciar_a_missao = false
 local veiculos = {'boxville2', 'burrito3', 'pony', 'speedo4'}
 
 local marcadores = {{
-    tipoMarcador = 2,
+    tipoMarcador = 39,
     tamanho = 1.0,
     R = 255,
     G = 255,
@@ -121,17 +121,25 @@ function iniciar()
     -- icone da missao
     while passo1 do
 
+        if IsEntityAtCoord(PlayerPedId(), coordIniciarMissao.x, coordIniciarMissao.y, coordIniciarMissao.z, 20.0, 20.0,20.0, 0, 1, 0) then
+            
+            DrawMarker(marcadores[1].tipoMarcador, coordIniciarMissao.x, coordIniciarMissao.y, coordIniciarMissao.z, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0, marcadores[1].tamanho, marcadores[1].tamanho, marcadores[1].tamanho,
+            marcadores[1].R, marcadores[1].G, marcadores[1].B, marcadores[1].A, false, true, 2, nil, nil, false)
+        
+            DrawText3D('Aperte [E] para iniciar entrega',coordIniciarMissao.x,coordIniciarMissao.y,coordIniciarMissao.z)
+            if IsEntityAtCoord(PlayerPedId(), coordIniciarMissao.x, coordIniciarMissao.y, coordIniciarMissao.z, 1.0, 1.0,1.0, 0, 1, 0) then
+            
+                if IsControlJustPressed(0,38) then
+                    passo1 = false
+                end
+            end
+        end
+
          
 
-        DrawMarker(marcadores[1].tipoMarcador, coordIniciarMissao.x, coordIniciarMissao.y, coordIniciarMissao.z, 0.0,
-            0.0, 0.0, 0.0, 180.0, 0.0, marcadores[1].tamanho, marcadores[1].tamanho, marcadores[1].tamanho,
-            marcadores[1].R, marcadores[1].G, marcadores[1].B, marcadores[1].A, false, true, 2, nil, nil, false)
-        -- DrawText3D('Iniciar entrega',coordIniciarMissao.x,coordIniciarMissao.y,coordIniciarMissao.z)
-        if IsEntityAtCoord(PlayerPedId(), coordIniciarMissao.x, coordIniciarMissao.y, coordIniciarMissao.z, 1.0, 1.0,
-            1.0, 0, 1, 0) then
-            passo1 = false
-        end
-        Wait(1)
+        
+        Wait(5)
     end
 
     -- Carrega o carro
@@ -218,7 +226,7 @@ function iniciar()
     iniciar()
 end
 
-Wait 20000
+Wait(20000)
 FloatingHelpText(textos.t0, 1, 3000) -- 'Missoes de ~y~Entrega de suprimentos~s~ estao disponiveis'
 
 
