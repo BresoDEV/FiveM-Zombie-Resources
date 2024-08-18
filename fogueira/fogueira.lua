@@ -33,8 +33,8 @@ Citizen.CreateThread(function()
                                 end
 
                                 if bateu then
-                                    --SetEntityHealth(ped,0)
-                                    StartEntityFire(ped)
+                                    SetEntityHealth(ped,0)
+                                    --StartEntityFire(ped)
                                 end
 
 

@@ -7,8 +7,14 @@ this_is_a_map 'yes'
 --- Simply uncomment the lines below and replace the quoted ytyp. ---
 
 
-
+data_file "DLC_ITYP_REQUEST" "stream/*.ytyp"
+data_file "DLC_ITYP_REQUEST" "stream/*.ydr"
+data_file "DLC_ITYP_REQUEST" "stream/*.ytd"
  
+ data_file "DLC_ITYP_REQUEST" "stream/downtown_01_metadata_007_strm.ytyp"
+data_file "DLC_ITYP_REQUEST" "stream/bkr_biker_dlc_int_02.ytyp"
+data_file "DLC_ITYP_REQUEST" "stream/v_int_61.ytyp"
+data_file "DLC_ITYP_REQUEST" "stream/v_int_68.ytyp"
 data_file "DLC_ITYP_REQUEST" "stream/ch_chint03_dlc_plan.ytd"
 data_file "DLC_ITYP_REQUEST" "stream/ch_chint03_tool_box_01a.ydr"
 data_file "DLC_ITYP_REQUEST" "stream/cs1_11_build1.ytd"
