@@ -1,5 +1,6 @@
-local tudoCerto = false
+
 local index_funcao = 0
+local distancia_do_veiculo = 5.0
 
 function FloatingHelpText(txt)
     BeginTextCommandDisplayHelp("STRING")
@@ -9,8 +10,7 @@ end
 
 function DrawText3D(text, x, y, z)
     local onScreen, _x, _y = World3dToScreen2d(x, y, z)
-    local px, py, pz = table.unpack(GetGameplayCamCoords())
-
+     
     SetTextScale(0.35, 0.35)
     SetTextFont(4)
     SetTextProportional(1)
@@ -19,93 +19,88 @@ function DrawText3D(text, x, y, z)
     SetTextCentre(1)
     AddTextComponentString(text)
     DrawText(_x, _y)
-
-    local factor = (string.len(text)) / 370
-    DrawRect(_x, _y + 0.0125, 0.015 + factor, 0.03, 41, 11, 41, 68)
+ 
 end
 
+function trim(placa)
+    return (string.gsub(placa,"^%s*(.-)%s*$","%1"))
+end
+
+RegisterCommand("placa", function(source, args)
+     
+	 SetVehicleNumberPlateText(GetVehiclePedIsIn(PlayerPedId(), 0),GetPlayerName(GetPlayerIndex()))
+end)
+
 function opcoesCarro()
-    local VehiclePool = GetGamePool("CVehicle")  
-    for _, carro in pairs(VehiclePool) do
-        
-        local minha_pos = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 0.0, 0.0)
-        local carro_pos = GetOffsetFromEntityInWorldCoords(carro, 0.0, 0.0, 0.0)
-        
-        if IsEntityAtCoord(PlayerPedId(), carro_pos.x, carro_pos.y, carro_pos.z, 10.0, 10.0, 10.0, 0, 1, 0) then
-            if IsPedOnFoot(PlayerPedId()) then
-                
-                DrawText3D('1-Tranca\n2-Destranca\n3-Abre porta malas\n4-Fecha porta malas\n5-Liga o motor\n6-Desliga o motor\n7-Waypoint\n8-Tunning Max\n9 ao 13 - Sons\n15- RP',carro_pos.x, carro_pos.y, carro_pos.z)
+    if IsPedOnFoot(PlayerPedId()) then
 
-                if index_funcao == 1 then--trancar
-                    SetVehicleDoorsLocked(carro,10)
-                    FloatingHelpText('Veiculo trancado')
-                end
-                if index_funcao == 2 then--destrancar
-                    SetVehicleDoorsLocked(carro,1)
-                    FloatingHelpText('Veiculo destrancado')
-                end
-                if index_funcao == 3 then--abrir porrtamalas
-                    SetVehicleDoorOpen(carro,5,false,false)
-                    FloatingHelpText('Porta malas aberto')
-                end
-                
-                if index_funcao == 4 then--fechar porrtamalas
-                    SetVehicleDoorShut(carro,5,false)
-                    FloatingHelpText('Porta malas fechado')
-                end
-                if index_funcao == 5 then--ligar motor
-                    SetVehicleEngineOn(carro,true,false,false)
-                    FloatingHelpText('Motor ligado')
-                end
-                if index_funcao == 6 then--desligar motor
-                    SetVehicleEngineOn(carro,false,false,false)
-                    FloatingHelpText('Motor desligado')
-                end
-                if index_funcao == 7 then--WAYPOINT
-                    local WaypointHandle = GetFirstBlipInfoId(8)
+        local VehiclePool = GetGamePool("CVehicle")  
+        for _, carro in pairs(VehiclePool) do
 
-				    if DoesBlipExist(WaypointHandle) then
-				        local WaypointPos = GetBlipCoords(WaypointHandle)
-					    TaskVehicleDriveToCoord(PlayerPedId(), carro, WaypointPos.x, WaypointPos.y, WaypointPos.z, 18.0, 0, carro, 6, 1.0, true);
-				    else
-				        FloatingHelpText("~r~PLEASE SET A WAYPOINT!");
-                    end
-                end
-                if index_funcao == 8 then--max
-                     SetVehicleModKit(carro, 0)
-                    for i = 0, 50 do
-                        SetVehicleMod(carro, i,
-                            GetNumVehicleMods(carro, i) - 1, false)
-                    end
-                    SetVehicleNumberPlateText(carro, "bresodev")
-                    FloatingHelpText("Tunado ao maximo");
-                end
-                
-                if index_funcao == 9 then
-                    PlaySoundFrontend(-1, "NAV_LEFT_RIGHT", "HUD_FREEMODE_SOUNDSET", 1)
-                end
-                if index_funcao == 10 then
-                    PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FREEMODE_SOUNDSET", 1)
-                end
-                if index_funcao == 11 then
-                    PlaySoundFrontend(-1, "SELECT", "HUD_FREEMODE_SOUNDSET", 1)
-                end
-                if index_funcao == 12 then
-                    PlaySoundFrontend(-1, "CANCEL", "HUD_FREEMODE_SOUNDSET", 1)
-                end
-                if index_funcao == 13 then
-                    SetEntityRenderScorched(carro, true);
-                end
-                if index_funcao == 15 then
-                    StatSetInt('MP0_CHAR_XP_FM',123456 ,true);
-                end
-                
+            if GetPlayerName(GetPlayerIndex()) == trim(string.lower(GetVehicleNumberPlateText(carro))) then
+
+                local minha_pos = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 0.0, 0.0)
+                local carro_pos = GetOffsetFromEntityInWorldCoords(carro, 0.0, 0.0, 0.0)
+            
+                if IsEntityAtCoord(PlayerPedId(), carro_pos.x, carro_pos.y, carro_pos.z, distancia_do_veiculo, distancia_do_veiculo, distancia_do_veiculo, 0, 1, 0) then
+
+
+                        DrawText3D('1-Trancar e Destrancar\n2-Abre e Fecha o porta malas\n3-Consertar por $25\n4-particula\n5-alerta',carro_pos.x, carro_pos.y, carro_pos.z)
+
+                        if index_funcao == 1 then--trancar
+                            if GetVehicleDoorLockStatus(carro) == 2 then
+                                SetVehicleDoorsLocked(carro,1)
+                                FloatingHelpText('Veiculo destrancado')
+                            else
+                                SetVehicleDoorsLocked(carro,2)
+                                FloatingHelpText('Veiculo trancado')
+                            end
+                        end
+                        if index_funcao == 2 then--abrir porrtamalas
+
+                            if GetVehicleDoorAngleRatio(carro,5) > 0.0 then
+                                SetVehicleDoorShut(carro,5,false)
+                                FloatingHelpText('Porta malas fechado')
+                            else
+                                SetVehicleDoorOpen(carro,5,false,false)
+                                FloatingHelpText('Porta malas aberto')
+                            end
+
+                        end
+                        if index_funcao == 3 then--consertar
+
+                            local _,dinheiro = StatGetInt('MP0_WALLET_BALANCE', -1)
+                            if 25 <= tonumber(dinheiro) then
+                                SetVehicleFixed(carro)
+                                StatSetInt('MP0_WALLET_BALANCE', tonumber(dinheiro)-25, true)
+                                FloatingHelpText('Veiculo consertado')
+                            else
+                                FloatingHelpText('Kit de Reparo custa ~g~$25~s~')
+                            end
+
+                        end
+
+                        if index_funcao == 4 then--max
+                            RequestNamedPtfxAsset("scr_rcbarry1")
+	                        UseParticleFxAsset("scr_rcbarry1")
+	                        StartParticleFxNonLoopedAtCoord("scr_alien_teleport", carro_pos.x, carro_pos.y, carro_pos.z, 0.0, 0.0, 0.0, 1.0, 0, 0, 0)
+	
+                        end
+                        if index_funcao == 5 then--max
+                            BeginTextCommandThefeedPost("STRING")--ok
+	                        AddTextComponentSubstringPlayerName("Eduardo")
+	                        EndTextCommandThefeedPostMessagetextWithCrewTagAndAdditionalIcon("CHAR_SOCIAL_CLUB", "CHAR_SOCIAL_CLUB", 1, 7, "~g~ToxicModZz ", "~b~ToxicModZzDevelopment", 5.0, "___GTA*", 0, 8)
+	                        EndTextCommandThefeedPostTicker(blink, false)
+                        end
+                    
+                    
 
 
 
 
-                index_funcao = 0
-          
+                        index_funcao = 0
+                    
+                end
             end
         end
     end

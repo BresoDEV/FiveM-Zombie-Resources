@@ -1,4 +1,69 @@
  
+ 
+function enviarDados(prop,x,y,z,a)
+        SendNUIMessage({
+
+            type = "salvar_prop",
+    
+            
+            prophash=prop,
+            propx=x,
+            propy=y,
+            propz=z,
+            propa=a,
+        })
+    end
+   
+    
+function spawnMesa()
+    local cord2 = GetOffsetFromEntityInWorldCoords(PlayerPedId(),0.0,0.6,-1.0)
+    local Objeto_spawn = CreateObject(GetHashKey("prop_tool_bench02"), cord2.x, cord2.y, cord2.z,
+        GetEntityHeading(PlayerPedId()), true, true);
+    
+        SetEntityHeading(Objeto_spawn,GetEntityHeading(PlayerPedId())+90.0)
+    FreezeEntityPosition(Objeto_spawn, true);
+    enviarDados("prop_tool_bench02",cord2.x, cord2.y, cord2.z,GetEntityHeading(Objeto_spawn))
+end 
+
+function spawnGrade()
+    local cord2 = GetOffsetFromEntityInWorldCoords(PlayerPedId(),-2.0,0.6,-1.0)
+    local Objeto_spawn = CreateObject(GetHashKey("prop_fnclink_02gate5"), cord2.x, cord2.y, cord2.z,
+        GetEntityHeading(PlayerPedId()), true, true);
+   
+    SetEntityHeading(Objeto_spawn,GetEntityHeading(PlayerPedId()))
+
+    FreezeEntityPosition(Objeto_spawn, true);
+
+    enviarDados("prop_fnclink_02gate5",cord2.x, cord2.y, cord2.z,GetEntityHeading(Objeto_spawn))
+end
+
+RegisterNUICallback("carregarProps", function(data)
+  
+	print('Chamou a void')
+    RequestModel(GetHashKey(data.prop))
+    while not HasModelLoaded(GetHashKey(data.prop)) do
+        Wait(500)
+    end
+    local Objeto_spawn = CreateObject(GetHashKey(data.prop), 
+    tonumber(data.coord_x), 
+    tonumber(data.coord_y), 
+    tonumber(data.coord_z),
+    tonumber(data.coord_a), 
+    true, true);
+
+    SetEntityHeading(Objeto_spawn,tonumber(data.coord_a))
+
+    FreezeEntityPosition(Objeto_spawn, true);
+ 
+    print('objeto '..data.prop..' spawnado')
+end)
+
+RegisterCommand("mesa", function(source, args)
+    spawnMesa()
+end)
+RegisterCommand("grade", function(source, args)
+   spawnGrade()
+end)
 
 RegisterNUICallback("attDadosDoJogo", function(data)
     StatSetInt('MP0_WALLET_BALANCE', tonumber(data.dinheiro), true)
@@ -100,6 +165,9 @@ RegisterNUICallback("attDadosDoJogo", function(data)
     
 
 end)
+
+
+
 
 
  
@@ -229,3 +297,6 @@ while attDados do
     end
 
 end
+
+
+

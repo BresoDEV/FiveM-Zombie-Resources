@@ -110,7 +110,11 @@ RegisterNUICallback("spawnamigo", function(data)
     local my_group = GetPlayerGroup(PlayerPedId())
     SetPedAsGroupLeader(PlayerPedId(), my_group)
     SetPedAsGroupMember(Ped, my_group)
-    GiveWeaponToPed(Ped, 453432689, 9999, 0, 1)
+
+    if IsPedHuman(ped) then
+        GiveWeaponToPed(ped, 453432689, 9999, 0, 1)
+    end
+    
     SetPedNeverLeavesGroup(Ped, my_group)
     SetPedCombatAbility(Ped, 100000)
     SetPedCanSwitchWeapon(Ped, 1)

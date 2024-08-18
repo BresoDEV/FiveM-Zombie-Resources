@@ -144,11 +144,4 @@ Citizen.CreateThread(function()
         marcadorGasolina()
     end
 end)
-Citizen.CreateThread(function()
-    while true do
-        Citizen.Wait(5000)
-        local Gasosa1 = GetVehicleDirtLevel(GetVehiclePedIsIn(PlayerPedId(), false))
-        local Gasosa = string.format("%.1f", Gasosa1)
-        print(Gasosa)
-    end
-end)
+ 

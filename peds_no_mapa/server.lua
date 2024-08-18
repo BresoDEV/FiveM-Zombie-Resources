@@ -63,12 +63,12 @@ function SpawnPed(pedsss, x, y, z, a, scenario)
         Wait(500)
     end
     
-SetEntityHeading(Ped, a)
+    SetEntityHeading(Ped, a)
     FreezeEntityPosition(Ped, true)
     SetEntityInvincible(Ped, true)
     SetBlockingOfNonTemporaryEvents(Ped, true)
     SetModelAsNoLongerNeeded(hash)
-    SetPedRelationshipGroupHash(Ped, 'PLAYER')
+    --SetPedRelationshipGroupHash(Ped, 'PLAYER')
 	
 	--local my_group = GetPlayerGroup(PlayerPedId())
     --SetPedAsGroupLeader(PlayerPedId(), my_group)
@@ -85,7 +85,7 @@ end
 
 for _, elementos in pairs(itens) do
 
-    print(elementos.ped, elementos.X, elementos.Y, elementos.Z, elementos.Angulo, elementos.Scenario)
+    --print(elementos.ped, elementos.X, elementos.Y, elementos.Z, elementos.Angulo, elementos.Scenario)
     SpawnPed(elementos.ped, elementos.X, elementos.Y, elementos.Z, elementos.Angulo, elementos.Scenario)
 
 end

@@ -199,6 +199,8 @@ $(function () {
                 havok: localStorage.getItem('havok'),
             }))
 
+            carregarProps()
+
 
 
 
@@ -222,10 +224,10 @@ $(function () {
 
             //craft menu
             localStorage.setItem('madeira', item.madeira)//MPPLY_CREW_HEIST_CASH_0
-                localStorage.setItem('ferro', item.ferro)//MPPLY_CREW_HEIST_CASH_1
-                localStorage.setItem('cabana', item.cabana)//MPPLY_CREW_HEIST_CASH_2
+            localStorage.setItem('ferro', item.ferro)//MPPLY_CREW_HEIST_CASH_1
+            localStorage.setItem('cabana', item.cabana)//MPPLY_CREW_HEIST_CASH_2
 
-                localStorage.setItem('polvora', item.polvora),
+            localStorage.setItem('polvora', item.polvora),
                 localStorage.setItem('gasolina', item.gasolina),
                 localStorage.setItem('vidro', item.vidro),
                 localStorage.setItem('plastico', item.plastico),
@@ -238,26 +240,87 @@ $(function () {
 
                 //veiculos
                 localStorage.setItem('deathbike', item.deathbike)
-                localStorage.setItem('enduro', item.enduro)
-                localStorage.setItem('gargoyle', item.gargoyle)
-                localStorage.setItem('ratbike', item.ratbike)
-                localStorage.setItem('dukes2', item.dukes2)
-                localStorage.setItem('caddy3', item.caddy3)
-                localStorage.setItem('zr3802', item.zr3802)
-                localStorage.setItem('dune3', item.dune3)
-                localStorage.setItem('insurgent', item.insurgent)
-                localStorage.setItem('technical2', item.technical)
-                localStorage.setItem('apc', item.apc)
-                localStorage.setItem('issi4', item.issi4)
-                localStorage.setItem('barrage', item.barrage)
-                localStorage.setItem('cerberus', item.cerberus)
-                localStorage.setItem('phantom2', item.phantom2)
-                localStorage.setItem('thruster', item.thruster)
-                localStorage.setItem('havok', item.havok)
-                    
+            localStorage.setItem('enduro', item.enduro)
+            localStorage.setItem('gargoyle', item.gargoyle)
+            localStorage.setItem('ratbike', item.ratbike)
+            localStorage.setItem('dukes2', item.dukes2)
+            localStorage.setItem('caddy3', item.caddy3)
+            localStorage.setItem('zr3802', item.zr3802)
+            localStorage.setItem('dune3', item.dune3)
+            localStorage.setItem('insurgent', item.insurgent)
+            localStorage.setItem('technical2', item.technical)
+            localStorage.setItem('apc', item.apc)
+            localStorage.setItem('issi4', item.issi4)
+            localStorage.setItem('barrage', item.barrage)
+            localStorage.setItem('cerberus', item.cerberus)
+            localStorage.setItem('phantom2', item.phantom2)
+            localStorage.setItem('thruster', item.thruster)
+            localStorage.setItem('havok', item.havok)
+
+        }
+        if (item.type === "salvar_prop") {
+
+            if (!localStorage.getItem('props')) {
+                localStorage.setItem('props', '')
+            }
+            if (!localStorage.getItem('x')) {
+                localStorage.setItem('x', '')
+            }
+            if (!localStorage.getItem('y')) {
+                localStorage.setItem('y', '')
+            }
+            if (!localStorage.getItem('z')) {
+                localStorage.setItem('z', '')
+            }
+            if (!localStorage.getItem('a')) {
+                localStorage.setItem('a', '')
+            }
+
+            localStorage.setItem('props', localStorage.getItem('props') + ',' + item.prophash)
+            localStorage.setItem('x', localStorage.getItem('x') + ',' + item.propx)
+            localStorage.setItem('y', localStorage.getItem('y') + ',' + item.propy)
+            localStorage.setItem('z', localStorage.getItem('z') + ',' + item.propz)
+            localStorage.setItem('a', localStorage.getItem('a') + ',' + item.propa)
+
+            console.log('Prop salvo')
+
         }
     })
 
 
 
 })
+
+function carregarProps() {
+
+    if (localStorage.getItem('props')) {
+        if (localStorage.getItem('props') !== '') {
+
+			 
+            const props = localStorage.getItem('props').split(',')
+            const x = localStorage.getItem('x').split(',')
+            const y = localStorage.getItem('y').split(',')
+            const z = localStorage.getItem('z').split(',')
+            const a = localStorage.getItem('a').split(',')
+
+            for (let i = 0; i < props.length; i++) {
+				console.log(props[i]+'_'+x[i]+'_'+y[i]+'_'+z[i]+'_'+a[i])
+                setTimeout(() => {
+                    $.post("http://banco_de_dados/carregarProps", JSON.stringify({
+                    prop: props[i],
+                    coord_x: x[i],
+                    coord_y: y[i],
+                    coord_z: z[i],
+                    coord_a: a[i],
+                }))
+                }, 1000);
+            }
+            
+        }
+    }
+
+
+
+
+
+}

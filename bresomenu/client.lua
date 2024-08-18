@@ -207,7 +207,8 @@ function addFloatOption(txt, variavel, incremento, min, max)
     end
 
     -- 6
-    if IsDisabledControlJustPressed(2, 109) or IsDisabledControlJustPressed(2, 175) then -- 6 addint
+    --if IsDisabledControlJustPressed(2, 109) or IsDisabledControlJustPressed(2, 175) then -- 6 addint
+    if IsDisabledControlPressed(2, 109) or IsDisabledControlPressed(2, 175) then -- 6 addint
         if numOpcoes == optionIndex then
             if (variavel.valor + incremento) <= max then
                 variavel.valor = variavel.valor + incremento
@@ -219,7 +220,8 @@ function addFloatOption(txt, variavel, incremento, min, max)
         end
     end
     -- 4
-    if IsDisabledControlJustPressed(2, 108) or IsDisabledControlJustPressed(2, 174) then -- 4 removeint
+    --if IsDisabledControlJustPressed(2, 108) or IsDisabledControlJustPressed(2, 174) then -- 4 removeint
+    if IsDisabledControlPressed(2, 108) or IsDisabledControlPressed(2, 174) then -- 4 removeint
         if numOpcoes == optionIndex then
             if (variavel.valor - incremento) >= min then
                 variavel.valor = variavel.valor - incremento
@@ -257,7 +259,8 @@ function addIntOption(txt, variavel, incremento, min, max)
     end
 
     -- 6
-    if IsDisabledControlJustPressed(2, 109) or IsDisabledControlJustPressed(2, 175) then -- 6 addint
+    --if IsDisabledControlJustPressed(2, 109) or IsDisabledControlJustPressed(2, 175) then -- 6 addint
+    if IsDisabledControlPressed(2, 109) or IsDisabledControlPressed(2, 175) then -- 6 addint
         if numOpcoes == optionIndex then
             if (variavel.valor + incremento) <= max then
                 variavel.valor = variavel.valor + incremento
@@ -269,7 +272,8 @@ function addIntOption(txt, variavel, incremento, min, max)
         end
     end
     -- 4
-    if IsDisabledControlJustPressed(2, 108) or IsDisabledControlJustPressed(2, 174) then -- 4 removeint
+    --if IsDisabledControlJustPressed(2, 108) or IsDisabledControlJustPressed(2, 174) then -- 4 removeint
+    if IsDisabledControlPressed(2, 108) or IsDisabledControlPressed(2, 174) then -- 4 removeint
         if numOpcoes == optionIndex then
             if (variavel.valor - incremento) >= min then
                 variavel.valor = variavel.valor - incremento

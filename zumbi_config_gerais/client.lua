@@ -1,5 +1,21 @@
 local spawnPos = vector3(273.4642, -1116.2220, 88.8147)
 
+function pode_Transformar(ped)
+    local bateu = true
+
+    if (GetEntityModel(ped) == GetHashKey('csb_ramp_marine')) then
+        bateu = false
+    end
+    if (GetEntityModel(ped) == GetHashKey('mp_m_exarmy_01')) then
+        bateu = false
+    end
+    if (GetEntityModel(ped) == GetHashKey('g_m_m_chemwork_01')) then
+        bateu = false
+    end
+
+    return bateu
+end
+
 AddEventHandler('onClientGameTypeStart', function()
     exports.spawnmanager:setAutoSpawnCallback(function()
         exports.spawnmanager:spawnPlayer({
@@ -37,7 +53,6 @@ local SafeZones = {{
     radius = 80.0
 } -- base
 }
-
 
 ApplyPedDamagePack(PlayerPedId(), 'Fall', 0.0, 1.0)
 
@@ -92,8 +107,6 @@ Citizen.CreateThread(function() -- Will only work in it's own while loop
     end
 end)
 
-local Aliado
-
 Citizen.CreateThread(function()
     for _, zone in pairs(SafeZones) do
         local Blip = AddBlipForRadius(zone.x, zone.y, zone.z, zone.radius)
@@ -113,13 +126,15 @@ Citizen.CreateThread(function()
 
             repeat
                 if GetPedGroupIndex(Zombie) ~= GetPlayerGroup(PlayerPedId()) then
-                    if IsPedHuman(Zombie) and not IsPedAPlayer(Zombie) and not IsPedDeadOrDying(Zombie, true) then
-                        local pedcoords = GetEntityCoords(Zombie)
-                        local zonecoords = vector3(zone.x, zone.y, zone.z)
-                        local distance = #(zonecoords - pedcoords)
+                    if pode_Transformar(Zombie) then
+                        if IsPedHuman(Zombie) and not IsPedAPlayer(Zombie) and not IsPedDeadOrDying(Zombie, true) then
+                            local pedcoords = GetEntityCoords(Zombie)
+                            local zonecoords = vector3(zone.x, zone.y, zone.z)
+                            local distance = #(zonecoords - pedcoords)
 
-                        if distance <= zone.radius then
-                            SetEntityHealth(Zombie,0)
+                            if distance <= zone.radius then
+                                SetEntityHealth(Zombie, 0)
+                            end
                         end
                     end
                 end
@@ -139,109 +154,95 @@ Citizen.CreateThread(function()
 
             if GetPedGroupIndex(Zombie) ~= GetPlayerGroup(PlayerPedId()) then
                 if IsPedHuman(Zombie) and not IsPedAPlayer(Zombie) and not IsPedDeadOrDying(Zombie, true) then
-                    
-                    if (GetEntityModel(ped) ~= GetHashKey('csb_ramp_marine')) then--ignora os peds da base
-                        if (GetEntityModel(ped) ~= GetHashKey('mp_m_exarmy_01')) then--ignora os peds da base
-                            if (GetEntityModel(ped) ~= GetHashKey('g_m_m_chemwork_01')) then--ignora os peds da base
 
-                                if not DecorExistOn(Zombie, 'RegisterZombie') then
+                    if pode_Transformar(Zombie) then
+                        if not DecorExistOn(Zombie, 'RegisterZombie') then
 
+                            ClearPedTasks(Zombie)
+                            ClearPedSecondaryTask(Zombie)
+                            ClearPedTasksImmediately(Zombie)
+                            TaskWanderStandard(Zombie, 10.0, 10)
+                            SetPedRelationshipGroupHash(Zombie, 'ZOMBIE')
+                            ApplyPedDamagePack(Zombie, 'Fall', 0.0, 1.0) -- BigHitByVehicle
+                            SetEntityHealth(Zombie, 200)
+
+                            RequestAnimSet('move_m@drunk@verydrunk')
+                            while not HasAnimSetLoaded('move_m@drunk@verydrunk') do
+                                Citizen.Wait(0)
+                            end
+                            SetPedMovementClipset(Zombie, 'move_m@drunk@verydrunk', 1.0)
+
+                            SetPedConfigFlag(Zombie, 100, false)
+                            DecorSetBool(Zombie, 'RegisterZombie', true)
+                            SetPedAsEnemy(Zombie, true)
+                        end
+
+                        SetPedRagdollBlockingFlags(Zombie, 1)
+                        SetPedCanRagdollFromPlayerImpact(Zombie, false)
+                        SetPedSuffersCriticalHits(Zombie, true)
+                        SetPedEnableWeaponBlocking(Zombie, true)
+                        -- DisablePedPainAudio(Zombie, true)
+                        -- StopPedSpeaking(Zombie, true)
+                        SetPedDiesWhenInjured(Zombie, false)
+                        StopPedRingtone(Zombie)
+                        SetPedMute(Zombie)
+                        SetPedIsDrunk(Zombie, true)
+                        SetPedConfigFlag(Zombie, 166, false)
+                        SetPedConfigFlag(Zombie, 170, false)
+                        SetBlockingOfNonTemporaryEvents(Zombie, true)
+                        SetPedCanEvasiveDive(Zombie, false)
+                        RemoveAllPedWeapons(Zombie, true)
+                        SetPedMoney(Zombie, 150)
+
+                        local PlayerCoords = GetEntityCoords(PlayerPedId())
+                        local PedCoords = GetEntityCoords(Zombie)
+                        local Distance = #(PedCoords - PlayerCoords)
+                        local DistanceTarget
+
+                        if IsPlayerShooting() then
+                            DistanceTarget = 120.0
+                        elseif IsPlayerRunning() then
+                            DistanceTarget = 50.0
+                        else
+                            DistanceTarget = 20.0
+                        end
+
+                        if Distance <= DistanceTarget and not IsPedInAnyVehicle(PlayerPedId(), false) then
+                            TaskGoToEntity(Zombie, PlayerPedId(), -1, 0.0, 2.0, 1073741824, 0)
+                        end
+
+                        if Distance <= 1.3 then
+                            if not IsPedRagdoll(Zombie) and not IsPedGettingUp(Zombie) then
+                                local health = GetEntityHealth(PlayerPedId())
+                                if health == 0 then
                                     ClearPedTasks(Zombie)
-                                    ClearPedSecondaryTask(Zombie)
-                                    ClearPedTasksImmediately(Zombie)
                                     TaskWanderStandard(Zombie, 10.0, 10)
-                                    SetPedRelationshipGroupHash(Zombie, 'ZOMBIE')
-                                    ApplyPedDamagePack(Zombie, 'Fall', 0.0, 1.0)--BigHitByVehicle
-                                    SetEntityHealth(Zombie, 200)
-            
-                                    RequestAnimSet('move_m@drunk@verydrunk')
-                                    while not HasAnimSetLoaded('move_m@drunk@verydrunk') do
-                                        Citizen.Wait(0)
-                                    end
-                                    SetPedMovementClipset(Zombie, 'move_m@drunk@verydrunk', 1.0)
-            
-                                    SetPedConfigFlag(Zombie, 100, false)
-                                    DecorSetBool(Zombie, 'RegisterZombie', true)
-                                    SetPedAsEnemy(Zombie,true)
-                                end
-            
-                                SetPedRagdollBlockingFlags(Zombie, 1)
-                                SetPedCanRagdollFromPlayerImpact(Zombie, false)
-                                SetPedSuffersCriticalHits(Zombie, true)
-                                SetPedEnableWeaponBlocking(Zombie, true)
-                                --DisablePedPainAudio(Zombie, true)
-                                --StopPedSpeaking(Zombie, true)
-                                SetPedDiesWhenInjured(Zombie, false)
-                                StopPedRingtone(Zombie)
-                                SetPedMute(Zombie)
-                                SetPedIsDrunk(Zombie, true)
-                                SetPedConfigFlag(Zombie, 166, false)
-                                SetPedConfigFlag(Zombie, 170, false)
-                                SetBlockingOfNonTemporaryEvents(Zombie, true)
-                                SetPedCanEvasiveDive(Zombie, false)
-                                RemoveAllPedWeapons(Zombie, true)
-                                SetPedMoney(Zombie, 150)
-            
-                                local PlayerCoords = GetEntityCoords(PlayerPedId())
-                                local PedCoords = GetEntityCoords(Zombie)
-                                local Distance = #(PedCoords - PlayerCoords)
-                                local DistanceTarget
-            
-                                if IsPlayerShooting() then
-                                    DistanceTarget = 120.0
-                                elseif IsPlayerRunning() then
-                                    DistanceTarget = 50.0
                                 else
-                                    DistanceTarget = 20.0
-                                end
-            
-                                if Distance <= DistanceTarget and not IsPedInAnyVehicle(PlayerPedId(), false) then
-                                    TaskGoToEntity(Zombie, PlayerPedId(), -1, 0.0, 2.0, 1073741824, 0)
-                                end
-            
-                                if Distance <= 1.3 then
-                                    if not IsPedRagdoll(Zombie) and not IsPedGettingUp(Zombie) then
-                                        local health = GetEntityHealth(PlayerPedId())
-                                        if health == 0 then
-                                            ClearPedTasks(Zombie)
-                                            TaskWanderStandard(Zombie, 10.0, 10)
-                                        else
-            
-                                           
-                                            
-                                            RequestAnimSet('melee@unarmed@streamed_core_fps')
-                                            while not HasAnimSetLoaded('melee@unarmed@streamed_core_fps') do
-                                                Citizen.Wait(10)
-                                            end
-            
-                                             TaskPlayAnim(Zombie, 'melee@unarmed@streamed_core_fps', 'ground_attack_0_psycho', 8.0,
-                                                 1.0, -1, 48, 0.001, false, false, false)
-            
-                                            ApplyDamageToPed(PlayerPedId(), 5, false)
-                                            PlayPain(Zombie, 8, 0.0, false)
-                                            --TaskCombatPed(Zombie,PlayerPedId(),0,16)
-                                            SetPedAsEnemy(Zombie,true)
-            
-                                           
-                                        end
+
+                                    RequestAnimSet('melee@unarmed@streamed_core_fps')
+                                    while not HasAnimSetLoaded('melee@unarmed@streamed_core_fps') do
+                                        Citizen.Wait(10)
                                     end
-            
-                                end
-            
-                                if not NetworkGetEntityIsNetworked(Zombie) then
-                                    SetEntityHealth(Zombie,0)
+
+                                    TaskPlayAnim(Zombie, 'melee@unarmed@streamed_core_fps', 'ground_attack_0_psycho',
+                                        8.0, 1.0, -1, 48, 0.001, false, false, false)
+
+                                    ApplyDamageToPed(PlayerPedId(), 5, false)
+                                    PlayPain(Zombie, 8, 0.0, false)
+                                    -- TaskCombatPed(Zombie,PlayerPedId(),0,16)
+                                    SetPedAsEnemy(Zombie, true)
+
                                 end
                             end
+
+                        end
+
+                        if not NetworkGetEntityIsNetworked(Zombie) then
+                            SetEntityHealth(Zombie, 0)
                         end
                     end
-
-                    
                 end
-            
-           
-                
             end
-
             Success, Zombie = FindNextPed(Handler)
         until not (Success)
 
