@@ -1,12 +1,23 @@
 local display = false
+ 
 
-RegisterCommand("dev", function(source, args)
-    SetDisplay(not display)
-end)
+
 
 RegisterNUICallback("exit", function()
     SetDisplay(false)
 end)
+
+
+
+RegisterNUICallback("abastecer", function(data)
+    SetVehicleDirtLevel(GetVehiclePedIsIn(PlayerPedId(), false),0.0)
+end)
+
+RegisterNUICallback("desabastecer", function(data)
+    SetVehicleDirtLevel(GetVehiclePedIsIn(PlayerPedId(), false),15.0)
+end)
+
+
 
 RegisterNUICallback("addInventario", function(data)
 
@@ -110,11 +121,7 @@ RegisterNUICallback("spawnamigo", function(data)
     local my_group = GetPlayerGroup(PlayerPedId())
     SetPedAsGroupLeader(PlayerPedId(), my_group)
     SetPedAsGroupMember(Ped, my_group)
-
-    if IsPedHuman(ped) then
-        GiveWeaponToPed(ped, 453432689, 9999, 0, 1)
-    end
-    
+    GiveWeaponToPed(Ped, 453432689, 9999, 0, 1)
     SetPedNeverLeavesGroup(Ped, my_group)
     SetPedCombatAbility(Ped, 100000)
     SetPedCanSwitchWeapon(Ped, 1)
@@ -237,14 +244,22 @@ function SetDisplay(bool)
 end
 
 Citizen.CreateThread(function()
-    while display do
-        Citizen.Wait(0)
-        DisableControlAction(0, 1, display)
-        DisableControlAction(0, 2, display)
-        DisableControlAction(0, 142, display)
-        DisableControlAction(0, 18, display)
-        DisableControlAction(0, 322, display)
-        DisableControlAction(0, 106, display)
+    while true do
+        Citizen.Wait(10)
+
+        if IsDisabledControlJustPressed(2, 57) then
+            SetDisplay(not display)
+        end
+
+        if display then
+            DisableControlAction(0, 1, display)
+            DisableControlAction(0, 2, display)
+            DisableControlAction(0, 142, display)
+            DisableControlAction(0, 18, display)
+            DisableControlAction(0, 322, display)
+            DisableControlAction(0, 106, display)
+        end
+        
     end
 end)
 

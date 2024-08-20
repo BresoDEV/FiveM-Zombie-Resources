@@ -7,13 +7,13 @@ body {
     color: rgb(255, 255, 255);
     background-color: transparent;
     border: 1px solid rgb(255, 255, 255);
-    
+    font-size: 12px;
 }
 
 .menu {
      
     font-family: monospace;
-    font-size: 16px;
+     
     padding: 10px;
     position: fixed;
     top: 10px;
@@ -28,7 +28,7 @@ body {
     cursor: pointer;
     background-color: transparent;
     padding: 2px;
-    font-size: 16px;
+     
     border-radius: 5px;
     color: rgb(255, 255, 255);
     user-select: none;
@@ -47,7 +47,7 @@ body {
     position: absolute;
     top: 5px;
     right: 5px;
-    font-size: 10px;
+    font-size: 15px;
     border: none;
 }
 
@@ -87,7 +87,7 @@ input[type="range"]::-webkit-slider-runnable-track {
     width: 100%;
     height: 15px;
     /* Define a altura do trilho */
-    background: #333;
+    background: rgb(111, 52, 52);
     /* Define a cor do fundo do trilho */
     border-radius: 5px;
     /* Define o raio das bordas do trilho */
@@ -100,7 +100,7 @@ input[type="range"]::-webkit-slider-thumb {
     /* Define a largura do controle deslizante */
     height: 15px;
     /* Define a altura do controle deslizante */
-    background: rgb(193, 91, 91);
+    background: rgb(255, 255, 255);
     /* Define a cor do controle deslizante */
     cursor: pointer;
     /* Define o cursor quando passa sobre o controle deslizante */
@@ -111,7 +111,7 @@ input[type="range"]::-webkit-slider-thumb {
 
 .menu-lateral {
     font-family: monospace;
-    font-size: 16px;
+     
     padding: 10px;
     position: fixed;
     top: 10px;

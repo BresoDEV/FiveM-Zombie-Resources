@@ -85,6 +85,27 @@ Citizen.CreateThread(function() -- Will only work in it's own while loop
     end
 end)
 
+function tem_objeto_proximo(nome_prop,radius)
+
+    local boleta = false
+    local propPool = GetGamePool("CObject")
+    for _, prop in pairs(propPool) do
+
+        if (GetEntityModel(prop) == GetHashKey(nome_prop)) then
+
+            local cord = GetOffsetFromEntityInWorldCoords(prop,0.0,0.0,0.0)
+
+            if IsEntityAtCoord(PlayerPedId(), cord.x, cord.y,cord.z, radius, radius, radius, 0, 1, 0) then
+                boleta = true;
+            end
+
+        end
+        
+    end
+    return boleta
+    
+end
+
 Citizen.CreateThread(function() -- Will only work in it's own while loop
     while true do
         Citizen.Wait(0)
@@ -207,8 +228,13 @@ Citizen.CreateThread(function()
                             DistanceTarget = 20.0
                         end
 
-                        if Distance <= DistanceTarget and not IsPedInAnyVehicle(PlayerPedId(), false) then
-                            TaskGoToEntity(Zombie, PlayerPedId(), -1, 0.0, 2.0, 1073741824, 0)
+
+
+
+                        if not tem_objeto_proximo('prop_beach_fire',20.0) then
+                            if Distance <= DistanceTarget and not IsPedInAnyVehicle(PlayerPedId(), false) then
+                                TaskGoToEntity(Zombie, PlayerPedId(), -1, 0.0, 2.0, 1073741824, 0)
+                            end
                         end
 
                         if Distance <= 1.3 then

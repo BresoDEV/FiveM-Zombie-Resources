@@ -54,6 +54,17 @@ RegisterNUICallback("carregarProps", function(data)
     SetEntityHeading(Objeto_spawn,tonumber(data.coord_a))
 
     FreezeEntityPosition(Objeto_spawn, true);
+	
+	if data.prop == 'prop_beach_fire' then
+		AddTextEntry('MYBLIP', 'Fogueira')
+		local base = AddBlipForCoord(tonumber(data.coord_x), tonumber(data.coord_y), tonumber(data.coord_z))
+		BeginTextCommandSetBlipName('MYBLIP')
+		SetBlipSprite(base, 436)
+		AddTextComponentSubstringPlayerName('me')
+		EndTextCommandSetBlipName(base)
+	end
+	
+	
  
     print('objeto '..data.prop..' spawnado')
 end)
@@ -61,8 +72,26 @@ end)
 RegisterCommand("mesa", function(source, args)
     spawnMesa()
 end)
+
 RegisterCommand("grade", function(source, args)
    spawnGrade()
+end)
+
+RegisterCommand("fogueira", function(source, args)
+    local cord2 = GetOffsetFromEntityInWorldCoords(PlayerPedId(),0.0,2.6,-1.0)
+    local Objeto_spawn = CreateObject(GetHashKey("prop_beach_fire"), cord2.x, cord2.y, cord2.z,
+        GetEntityHeading(PlayerPedId()), true, true);
+    
+        SetEntityHeading(Objeto_spawn,GetEntityHeading(PlayerPedId())+90.0)
+    FreezeEntityPosition(Objeto_spawn, true);
+    enviarDados("prop_beach_fire",cord2.x, cord2.y, cord2.z,GetEntityHeading(Objeto_spawn))
+	
+	AddTextEntry('MYBLIP', 'Fogueira')
+		local base = AddBlipForCoord(cord2.x, cord2.y, cord2.z)
+		BeginTextCommandSetBlipName('MYBLIP')
+		SetBlipSprite(base, 436)
+		AddTextComponentSubstringPlayerName('me')
+		EndTextCommandSetBlipName(base)
 end)
 
 RegisterNUICallback("attDadosDoJogo", function(data)
