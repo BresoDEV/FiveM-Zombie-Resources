@@ -285,6 +285,18 @@ $(function () {
             console.log('Prop salvo')
 
         }
+        if (item.type === "limpar_props") {
+ 
+            localStorage.removeItem('props')
+            localStorage.removeItem('x')
+            localStorage.removeItem('y')
+            localStorage.removeItem('z')
+            localStorage.removeItem('a')
+
+            console.log('Props apagados')
+
+        }
+
     })
 
 

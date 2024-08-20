@@ -87,10 +87,21 @@ function opcoesCarro()
 	
                         end
                         if index_funcao == 5 then--max
+                            --DIA_ZOMBIE1
+                            --CHAR_DEFAULT vazio
+                            --CHAR_BRYONY assistente
+                            --CHAR_HUNTER vizinhno do trevor
+                            --CHAR_JIMMY_BOSTON
+                            --CHAR_JOE
+                            --CHAR_JOSEF
+                            --CHAR_MALC
+                            --CHAR_MP_ARMY_CONTACT
+                            local foto = "CHAR_MP_ARMY_CONTACT"
                             BeginTextCommandThefeedPost("STRING")--ok
-	                        AddTextComponentSubstringPlayerName("Eduardo")
-	                        EndTextCommandThefeedPostMessagetextWithCrewTagAndAdditionalIcon("CHAR_SOCIAL_CLUB", "CHAR_SOCIAL_CLUB", 1, 7, "~g~ToxicModZz ", "~b~ToxicModZzDevelopment", 5.0, "___GTA*", 0, 8)
-	                        EndTextCommandThefeedPostTicker(blink, false)
+	                        AddTextComponentSubstringPlayerName("Ola, tudo bem?")
+	                        EndTextCommandThefeedPostMessagetextWithCrewTagAndAdditionalIcon(foto, foto, true, 4, 'Chris - Base', ' ', 1.0, "", 4,0)
+	                        
+                            EndTextCommandThefeedPostTicker(true, true)
                         end
                     
                     
