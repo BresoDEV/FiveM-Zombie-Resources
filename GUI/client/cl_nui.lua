@@ -1,5 +1,59 @@
 local display = false
+local propSpawnado
+
+RequestNamedPtfxAsset("scr_rcbarry2")
+
+
  
+--objspawn
+RegisterNUICallback("spawn_prop", function(data)
+    --prop: _propNome,
+    --x: _x,
+    --y: _y,
+    --z: _z,
+    --a: _a,
+    local cord2 = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 
+    tonumber(data.x), 
+    tonumber(data.y), 
+    tonumber(data.z))
+
+    RequestModel(GetHashKey(data.prop))
+    Wait(2000)
+    if HasModelLoaded(GetHashKey(data.prop)) then
+        propSpawnado = CreateObject(GetHashKey(data.prop), cord2.x, cord2.y, cord2.z,true, true, true)
+        SetEntityHeading(propSpawnado, GetEntityHeading(PlayerPedId()) + tonumber(data.a))
+        FreezeEntityPosition(propSpawnado, true)
+    else
+        print('Modelo '..data.prop..' nao foi carregado')
+    end
+    
+end)
+
+RegisterNUICallback("posicionar_ja_spawnado", function(data)
+    if DoesEntityExist(propSpawnado) then
+
+        local cord2 = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 
+        tonumber(data.x), 
+        tonumber(data.y), 
+        tonumber(data.z))
+
+        SetEntityCoords(propSpawnado, cord2.x, cord2.y, cord2.z, 1, 0, 0, 0)
+        
+        SetEntityHeading(propSpawnado, GetEntityHeading(PlayerPedId()) + tonumber(data.a))
+        FreezeEntityPosition(propSpawnado, true)
+    end
+    
+end)
+
+RegisterNUICallback("deletarProp", function(data)
+    if DoesEntityExist(propSpawnado) then
+        DeleteEntity(propSpawnado)
+    end
+    
+end)
+
+
+--------------------------------
 
 
 
@@ -8,6 +62,23 @@ RegisterNUICallback("exit", function()
 end)
 
 
+
+
+
+---------------------------------
+RegisterNUICallback("godmode", function(data)
+    if tonumber(data.godmode) == 1 then
+        SetEntityInvincible(PlayerPedId(), true)
+    else
+        SetEntityInvincible(PlayerPedId(), false)
+    end
+end)
+---------------------------------
+
+
+RegisterNUICallback("carromeu", function(data)
+    SetVehicleNumberPlateText(GetVehiclePedIsIn(PlayerPedId(), 0),GetPlayerName(GetPlayerIndex()))
+end)
 
 RegisterNUICallback("abastecer", function(data)
     SetVehicleDirtLevel(GetVehiclePedIsIn(PlayerPedId(), false),0.0)
@@ -96,6 +167,14 @@ RegisterNUICallback("carspawn", function(data)
     end
     local vehicle = CreateVehicle(vehicleName, GetEntityCoords(PlayerPedId()).x, GetEntityCoords(PlayerPedId()).y,
         GetEntityCoords(PlayerPedId()).z, GetEntityHeading(PlayerPedId()), true, true)
+    
+        UseParticleFxAsset("scr_rcbarry2")
+        StartParticleFxNonLoopedAtCoord("scr_clown_appears", 
+        GetEntityCoords(PlayerPedId()).x, 
+        GetEntityCoords(PlayerPedId()).y,
+        GetEntityCoords(PlayerPedId()).z, 
+        0.0, 0.0, 0.0, 1.0, 0, 0, 0)
+    
     SetPedIntoVehicle(PlayerPedId(), vehicle, -1)
     SetEntityAsNoLongerNeeded(vehicle)
     SetModelAsNoLongerNeeded(vehicleName)
@@ -127,6 +206,13 @@ RegisterNUICallback("spawnamigo", function(data)
     SetPedCanSwitchWeapon(Ped, 1)
 
     SetPedRelationshipGroupHash(Ped, 'PLAYER')
+
+    UseParticleFxAsset("scr_rcbarry2")
+        StartPartcleFxNonLoopedAtCoord("scr_clown_appears", 
+        c.x, 
+        c.y,
+        c.z, 
+        0.0, 0.0, 0.0, 3.0, 0, 0, 0)
 end)
 
 RegisterNUICallback("spawninimigo", function(data)
@@ -149,6 +235,14 @@ RegisterNUICallback("spawninimigo", function(data)
     -- GiveWeaponPed(Ped, 0x6D544C99)
     TaskCombatPed(Ped, PlayerPedId(), 0, 16)
     SetPedCanSwitchWeapon(Ped, 1)
+
+    UseParticleFxAsset("scr_rcbarry2")
+    StartPartcleFxNonLoopedAtCoord("scr_clown_appears", 
+    c.x, 
+    c.y,
+    c.z, 
+    0.0, 0.0, 0.0, 3.0, 0, 0, 0)
+    
 end)
 
 RegisterNUICallback("Clima", function(data)

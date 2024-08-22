@@ -230,11 +230,30 @@ RegisterCommand("adm", function(source, args)
     
 end)
 
+
+function FindZForCoords(x, y)
+    local found = true
+    local START_Z = 1500
+    local z = START_Z
+    while found and z > 0 do
+        local _found, _z = GetGroundZAndNormalFor_3dCoord(x + 0.0, y + 0.0, z - 1.0)
+        if _found then
+            z = _z + 0.0
+        end
+        found = _found
+        Wait(0)
+    end
+    if z == START_Z then return nil end
+    return z + 0.0
+end
+
 RegisterCommand("tp", function(source, args)
     local WaypointHandle = GetFirstBlipInfoId(8)
     if DoesBlipExist(WaypointHandle) then
         local WaypointPos = GetBlipCoords(WaypointHandle)
-        SetEntityCoords(PlayerPedId(), WaypointPos.x, WaypointPos.y, WaypointPos.z, 1, 0, 0, 0)
+
+        local chao = FindZForCoords(WaypointPos.x, WaypointPos.y)
+        SetEntityCoords(PlayerPedId(), WaypointPos.x, WaypointPos.y, chao+1.0, 1, 0, 0, 0)
                 SetEntityHeading(PlayerPedId(), 0.0)
     else
         FloatingHelpText("~r~PLEASE SET A WAYPOINT!");

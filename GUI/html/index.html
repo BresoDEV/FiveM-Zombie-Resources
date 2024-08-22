@@ -24,14 +24,16 @@
         font-size: 12px;
         cursor: pointer;
         border-radius: 5px;
-
+        width: 250px;
         padding-left: 5px;
         padding-right: 5px;
     }
 
     details,
     summary {
-        padding: 3px;
+        padding: 2px;
+        transition: all 0.2s ease;
+        font-size: 17px;
     }
 
     summary:hover {
@@ -41,6 +43,7 @@
     table {
         width: 100%;
         margin-top: 10px;
+        font-size: 12px;
     }
 
     input[type='color'] {
@@ -51,11 +54,24 @@
         background: none;
     }
 
+    input,
+    label {
+        cursor: pointer;
+    }
+
+    label:hover {
+        color: aqua;
+    }
+
     tr,
     td,
     th {
         text-align: center;
         align-items: center;
+    }
+
+    font {
+        border: none
     }
 </style>
 
@@ -901,21 +917,31 @@
 
                     <table>
                         <tr>
-                            <td>
+                            <td colspan="2">
                                 <div id="sempolicia" class="button">Sem Policia</div>
                             </td>
                         </tr>
                         <tr>
-                            <td>
+                            <td colspan="2">
                                 <div id="dararmas" class="button">Obter Armas</div>
                             </td>
                         </tr>
+                        <tr>
+                            <td colspan="2">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div id="godmode" class="button">GodMode</div>
+                            </td>
+                        </tr>
+
                     </table>
 
                     <br>
-                    <br>
                 </details>
+
                 <!------------------------------>
+
                 <details>
                     <summary>Veiculos</summary>
                     <br>
@@ -1874,6 +1900,14 @@
                             </td>
                         </tr>
                         <tr>
+                            <td><br></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div id="carromeu" class="button">Definir Carro Atual como Proprio</div>
+                            </td>
+                        </tr>
+                        <tr>
                             <td>
                                 <div id="abastecer" class="button">Abastecer</div>
                             </td>
@@ -1883,13 +1917,18 @@
                                 <div id="desabastecer" class="button">Esvaziar Tanque</div>
                             </td>
                         </tr>
+
                     </table>
+                    <br>
+
 
 
                     <br>
                     <br>
                 </details>
+
                 <!------------------------------>
+
                 <details>
                     <summary>Mundo</summary>
                     <br>
@@ -1935,6 +1974,114 @@
                     <br>
                 </details>
                 <!--------------------------------->
+
+                <details>
+                    <summary>Objetos</summary>
+                    <br>
+
+                    <table>
+                        <tr>
+                            <th colspan="2">Object Spawn</th>
+                        </tr>
+                        <tr>
+                            <td colspan="2">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>Prop:</td>
+                            <td><input list="listaProps" type="text" id="propSpawnNome"></td>
+                        </tr>
+
+                        <datalist id="listaProps" class="button">
+                            <option value="bkr_prop_weed_01_small_01a">Maconha pequena</option>
+                            <option value="bkr_prop_weed_01_small_01b">Maconha pequena 2</option>
+                            <option value="bkr_prop_weed_med_01a">Maconha media</option>
+                            <option value="bkr_prop_weed_med_01b">Maconha media</option>
+                            <option value="bkr_prop_weed_lrg_01a">Maconha larga</option>
+                            <option value="bkr_prop_weed_lrg_01b">Maconha larga</option>
+                            <option value="sf_prop_sf_weed_01_small_01a">Maconha pequena</option>
+                            <option value="sf_prop_sf_weed_med_01a">Maconha med</option>
+                            <option value="sf_prop_sf_weed_01_lrg_01a">Maconha lrg</option>
+                            
+                            <option value="prop_gas_pump_1c">Bomba de gasolina</option>
+                            <option value="prop_dumpster_4b">Lixeira</option>
+                            <option value="ch_prop_tree_02a">Arvore natal</option>
+                            <option value="prop_doghouse_01">Dog house</option>
+                            <option value="prop_atm_01">Atm</option>
+                            <option value="prop_const_fenc01b">Parede de madeira</option>
+                            <option value="prop_arcade_01">Fliperama</option>
+                            <option value="v_ret_247shelves03">Comidas</option>
+                            <option value="v_res_msonbed_s">Cama</option>
+                            <option value="v_res_tre_sofa">Sofa</option>
+                            <option value="prop_ld_toilet_01">Vaso</option>
+                            <option value="prop_gazebo_01">Barraca</option>
+                            <option value="prop_gazebo_02">Barraca 2</option>
+                            <option value="prop_gazebo_03">Barraca 3</option>
+
+                        </datalist>
+
+                        <tr>
+                            <td>X:</td>
+                            <td><input type="text" name="" id="propSpawnX" value="0.0"></td>
+                        </tr>
+                        <tr>
+                            <td>Y:</td>
+                            <td><input type="text" name="" id="propSpawnY" value="2.0"></td>
+                        </tr>
+                        <tr>
+                            <td>Z:</td>
+                            <td><input type="text" name="" id="propSpawnZ" value="0.0"></td>
+                        </tr>
+                        <tr>
+                            <td>Angulo:</td>
+                            <td><input type="text" name="" id="propSpawnA" value="0.0"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div id="propSpawnBt" class="button">Spawn</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div id="deletarProp" class="button">Deletar Ultimo Spawn</div>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <br>
+
+                    <table>
+                        <tr>
+                            <th colspan="2">Ja Spawnado</th>
+                        </tr>
+                        <tr>
+                            <td>X: </td>
+                            <td id="jaSpawnadoXlabel">0.0000</td>
+                            <td><input type="range" min="-50" max="50" name="" id="jaSpawnadoX"></td>
+                        </tr>
+                        <tr>
+                            <td>Y: </td>
+                            <td id="jaSpawnadoYlabel">0.0000</td>
+                            <td><input type="range" min="-50" max="50" name="" id="jaSpawnadoY"></td>
+                        </tr>
+                        <tr>
+                            <td>Z: </td>
+                            <td id="jaSpawnadoZlabel">0.0000</td>
+                            <td><input type="range" min="-50" max="50" name="" id="jaSpawnadoZ"></td>
+                        </tr>
+                        <tr>
+                            <td>Angulo: </td>
+                            <td id="jaSpawnadoAlabel">0.0</td>
+                            <td><input type="range" min="0" max="360" value="0" name="" id="jaSpawnadoA"></td>
+                        </tr>
+                    </table>
+
+
+                    <br>
+                    <br>
+                </details>
+
+                <!--------------------------------->
+
                 <details>
                     <summary>Misc</summary>
                     <table>
@@ -3367,6 +3514,7 @@
                 </details>
 
                 <!--------------------------------->
+
                 <details>
                     <summary>Teleport</summary>
                     <table>
@@ -3429,21 +3577,118 @@
 
                 <br>
             </div>
-
-
-
         </form>
     </div>
-
-
-
-
     <script src="./script.js" type="text/javascript"></script>
-
 </body>
 <script>
 
 
+
+
+    //------------godmode---------------------
+    var godmode_ = 0
+    document.getElementById('godmode').style.border='none'
+    document.getElementById('godmode').innerHTML = 'God Mode: <font style="color:red">OFF</font>'
+
+    document.getElementById('godmode').addEventListener('click', () => {
+
+        godmode_ = !godmode_
+
+        if (godmode_ == 1) {
+            document.getElementById('godmode').innerHTML = 'God Mode: <font style="color:lime">ON</font>'
+        }
+        else {
+            document.getElementById('godmode').innerHTML = 'God Mode: <font style="color:red">OFF</font>'
+        }
+        $.post("http://GUI/godmode", JSON.stringify({
+            godmode: godmode_
+        }));
+    })
+
+
+
+
+    //--------Prop Spawn------------------------------------------------
+
+
+    document.getElementById('jaSpawnadoX').addEventListener('input', () => {
+        const label = document.getElementById('jaSpawnadoXlabel');
+        const range = document.getElementById('jaSpawnadoX').value;
+        label.textContent = (range * 0.1).toFixed(4)
+        $.post("http://GUI/posicionar_ja_spawnado", JSON.stringify({
+            x: document.getElementById('jaSpawnadoXlabel').textContent,
+            y: document.getElementById('jaSpawnadoYlabel').textContent,
+            z: document.getElementById('jaSpawnadoZlabel').textContent,
+            a: document.getElementById('jaSpawnadoAlabel').textContent,
+        }));
+    })
+    document.getElementById('jaSpawnadoY').addEventListener('input', () => {
+        const label = document.getElementById('jaSpawnadoYlabel');
+        const range = document.getElementById('jaSpawnadoY').value;
+        label.textContent = (range * 0.1).toFixed(4)
+        $.post("http://GUI/posicionar_ja_spawnado", JSON.stringify({
+            x: document.getElementById('jaSpawnadoXlabel').textContent,
+            y: document.getElementById('jaSpawnadoYlabel').textContent,
+            z: document.getElementById('jaSpawnadoZlabel').textContent,
+            a: document.getElementById('jaSpawnadoAlabel').textContent,
+        }));
+    })
+    document.getElementById('jaSpawnadoZ').addEventListener('input', () => {
+        const label = document.getElementById('jaSpawnadoZlabel');
+        const range = document.getElementById('jaSpawnadoZ').value;
+        label.textContent = (range * 0.1).toFixed(4)
+        $.post("http://GUI/posicionar_ja_spawnado", JSON.stringify({
+            x: document.getElementById('jaSpawnadoXlabel').textContent,
+            y: document.getElementById('jaSpawnadoYlabel').textContent,
+            z: document.getElementById('jaSpawnadoZlabel').textContent,
+            a: document.getElementById('jaSpawnadoAlabel').textContent,
+        }));
+    })
+    document.getElementById('jaSpawnadoA').addEventListener('input', () => {
+        const label = document.getElementById('jaSpawnadoAlabel');
+        const range = document.getElementById('jaSpawnadoA').value;
+        label.textContent = (range * 1).toFixed(4)
+
+        $.post("http://GUI/posicionar_ja_spawnado", JSON.stringify({
+            x: document.getElementById('jaSpawnadoXlabel').textContent,
+            y: document.getElementById('jaSpawnadoYlabel').textContent,
+            z: document.getElementById('jaSpawnadoZlabel').textContent,
+            a: document.getElementById('jaSpawnadoAlabel').textContent,
+        }));
+    })
+    document.getElementById('propSpawnBt').addEventListener('click', () => {
+
+        const _propNome = document.getElementById('propSpawnNome').value
+        const _x = document.getElementById('propSpawnX').value
+        const _y = document.getElementById('propSpawnY').value
+        const _z = document.getElementById('propSpawnZ').value
+        const _a = document.getElementById('propSpawnA').value
+
+        $.post("http://GUI/spawn_prop", JSON.stringify({
+            prop: _propNome,
+            x: _x,
+            y: _y,
+            z: _z,
+            a: _a,
+        }));
+    })
+
+    document.getElementById('deletarProp').addEventListener('click', () => {
+        $.post("http://GUI/deletarProp", JSON.stringify({
+            v:'vazio'
+        }));
+    })
+
+
+    //--------------------------------------------------------
+
+
+    document.getElementById('carromeu').addEventListener('click', () => {
+        $.post("http://GUI/carromeu", JSON.stringify({
+            vazio: "vazio"
+        }));
+    })
     document.getElementById('desabastecer').addEventListener('click', () => {
         $.post("http://GUI/desabastecer", JSON.stringify({
             vazio: "vazio"

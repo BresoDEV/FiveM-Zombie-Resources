@@ -26,7 +26,7 @@ local textos = {
     t2 = 'Leve o ~b~veiculo de entrega~s~ ate o ~y~local de coleta',
     t3 = '~g~Missao Concluida',
     t4 = '~r~Missao Fracassada',
-    t5 = ''
+    t5 = 'Ei, se precisar de grana, vem ate aqui. Sempre tenho encomendas de suprimentos pelo mapa'
 }
 local coordIniciarMissao = {
     x = -91.2506,
@@ -86,6 +86,15 @@ function FloatingHelpText(txt)
     BeginTextCommandDisplayHelp("STRING")
     AddTextComponentSubstringPlayerName(txt)
     EndTextCommandDisplayHelp(0, 0, 1, -1)
+end
+
+function Celular(txt)
+    local foto = "CHAR_MP_ARMY_CONTACT"
+    BeginTextCommandThefeedPost("STRING")--ok
+    AddTextComponentSubstringPlayerName(txt)
+    EndTextCommandThefeedPostMessagetextWithCrewTagAndAdditionalIcon(foto, foto, true, 4, 'Chris - Base', ' ', 1.0, "", 4,0)
+    
+    EndTextCommandThefeedPostTicker(true, true)
 end
 
 function DrawText3D(text, x, y, z)
@@ -226,9 +235,10 @@ function iniciar()
     iniciar()
 end
 
-Wait(20000)
+Wait(40000)
+Celular(textos.t5)--Ei, se precisar de grana, vem ate aqui. Sempre tenho encomendas de suprimentos pelo mapa para entregar
+Wait(5000)
 FloatingHelpText(textos.t0, 1, 3000) -- 'Missoes de ~y~Entrega de suprimentos~s~ estao disponiveis'
-
 
 -- cria o icone pra iniciar a missao
 AddTextEntry('MYBLIP', coordIniciarMissao.textoIcone)

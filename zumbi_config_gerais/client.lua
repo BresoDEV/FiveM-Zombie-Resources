@@ -57,7 +57,6 @@ local SafeZones = {{
 ApplyPedDamagePack(PlayerPedId(), 'Fall', 0.0, 1.0)
 
 DecorRegister('RegisterZombie', 2)
-
 AddRelationshipGroup('ZOMBIE')
 SetRelationshipBetweenGroups(0, GetHashKey('ZOMBIE'), GetHashKey('PLAYER'))
 SetRelationshipBetweenGroups(5, GetHashKey('PLAYER'), GetHashKey('ZOMBIE'))
@@ -70,7 +69,7 @@ function IsPlayerRunning()
     return Running
 end
 
-Citizen.CreateThread(function() -- Will only work in it's own while loop
+Citizen.CreateThread(function() 
     while true do
         Citizen.Wait(0)
 
@@ -82,6 +81,15 @@ Citizen.CreateThread(function() -- Will only work in it's own while loop
         SetRandomVehicleDensityMultiplierThisFrame(0.0)
         SetParkedVehicleDensityMultiplierThisFrame(0.0)
         SetVehicleDensityMultiplierThisFrame(0.0)
+
+        SetMaxWantedLevel(0)
+
+        SetMobileRadioEnabledDuringGameplay(false)
+		SetMobilePhoneRadioState(false)
+
+		DisplayAmmoThisFrame(true)
+		DisplayCash(true)
+
     end
 end)
 
@@ -139,7 +147,7 @@ Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
 
-        SetMaxWantedLevel(0)
+        
         for _, zone in pairs(SafeZones) do
             local Zombie = -1
             local Success = false
