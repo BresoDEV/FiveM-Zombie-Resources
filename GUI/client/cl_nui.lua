@@ -3,6 +3,7 @@ local propSpawnado
 
 RequestNamedPtfxAsset("scr_rcbarry2")
 
+DisableIdleCamera(true)
 
  
 --objspawn
@@ -16,6 +17,7 @@ RegisterNUICallback("spawn_prop", function(data)
     tonumber(data.x), 
     tonumber(data.y), 
     tonumber(data.z))
+	
 
     RequestModel(GetHashKey(data.prop))
     Wait(2000)
