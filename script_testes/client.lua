@@ -1,12 +1,65 @@
+ 
+RegisterCommand('ensure', function(source, args, rawCommand) 
+    TriggerServerEvent('meuComando:ensure', args[1])
+end, false)
+RegisterCommand('stop', function(source, args, rawCommand) 
+    TriggerServerEvent('meuComando:stop', args[1])
+end, false)
+RegisterCommand('start', function(source, args, rawCommand) 
+    TriggerServerEvent('meuComando:start', args[1])
+end, false)
+ 
+RegisterNetEvent('meuComando:ensure')
+AddEventHandler('meuComando:ensure', function(nome) 
+    print('Recurso '..nome..' reiniciado') 
+end)
+RegisterNetEvent('meuComando:stop')
+AddEventHandler('meuComando:stop', function(nome) 
+    print('Recurso '..nome..' parado') 
+end)
+
+RegisterNetEvent('meuComando:start')
+AddEventHandler('meuComando:start', function(nome) 
+    print('Recurso '..nome..' iniciado') 
+end)
+
+
+
+
+
+
+
+
+
+-- Registrar o comando 'oi' no lado do cliente
+RegisterCommand('oi', function(source, args, rawCommand)
+    -- Obtendo nome e sobrenome do usuário dos argumentos do comando
+    local nome = args[1] or GetPlayerName(GetPlayerIndex())
+    local sobrenome = args[2] or 'De Tal'
+
+    -- Enviar um evento para o servidor com nome e sobrenome
+    TriggerServerEvent('meuComando:executar', nome, sobrenome)
+end, false)
+
+-- Registrar o evento 'meuComando:confirmacao' no lado do cliente
+RegisterNetEvent('meuComando:confirmacao')
+AddEventHandler('meuComando:confirmacao', function(nome, sobrenome)
+    -- Código que você quer executar quando o servidor confirmar
+    print('O servidor confirmou a execução do comando "oi"!')
+    print('Nome:', nome)
+    print('Sobrenome:', sobrenome)
+    -- Aqui você pode adicionar qualquer outra ação desejada
+end)
+
+
+
 RegisterCommand("tp", function(source, args)
     local WaypointHandle = GetFirstBlipInfoId(8)
     if DoesBlipExist(WaypointHandle) then
         local WaypointPos = GetBlipCoords(WaypointHandle)
 
         SetEntityCoords(PlayerPedId(), WaypointPos.x, WaypointPos.y, WaypointPos.z, 1, 0, 0, 0)
-                SetEntityHeading(PlayerPedId(), 0.0)
-    else
-        FloatingHelpText("~r~PLEASE SET A WAYPOINT!");
+                SetEntityHeading(PlayerPedId(), 0.0) 
     end
 end)
 
