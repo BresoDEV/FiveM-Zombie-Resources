@@ -35,6 +35,8 @@ AddEventHandler('onClientGameTypeStart', function()
 
 end)
 
+
+
 -- icone da base
 AddTextEntry('MYBLIP', 'Base')
 local base = AddBlipForCoord(273.4642, -1116.2220, 88.8147)
@@ -144,6 +146,7 @@ Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
 
+ 
         
         for _, zone in pairs(SafeZones) do
             local Zombie = -1

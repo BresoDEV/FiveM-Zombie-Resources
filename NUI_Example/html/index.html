@@ -1811,17 +1811,17 @@
                     <tr>
                         <td>X: </td>
                         <td id="jaSpawnadoXlabel">0.0000</td>
-                        <td><input type="range" min="-50" max="50" name="" id="jaSpawnadoX"></td>
+                        <td><input type="range" min="-500" max="500" name="" id="jaSpawnadoX"></td>
                     </tr>
                     <tr>
                         <td>Y: </td>
                         <td id="jaSpawnadoYlabel">0.0000</td>
-                        <td><input type="range" min="-50" max="50" name="" id="jaSpawnadoY"></td>
+                        <td><input type="range" min="-500" max="500" name="" id="jaSpawnadoY"></td>
                     </tr>
                     <tr>
                         <td>Z: </td>
                         <td id="jaSpawnadoZlabel">0.0000</td>
-                        <td><input type="range" min="-50" max="50" name="" id="jaSpawnadoZ"></td>
+                        <td><input type="range" min="-500" max="500" name="" id="jaSpawnadoZ"></td>
                     </tr>
                     <tr>
                         <td>Angulo: </td>
@@ -3457,7 +3457,7 @@ document.getElementById('fixcar').addEventListener('click', () => {
     document.getElementById('jaSpawnadoX').addEventListener('input', () => {
         const label = document.getElementById('jaSpawnadoXlabel');
         const range = document.getElementById('jaSpawnadoX').value;
-        label.textContent = (range * 0.1).toFixed(4)
+        label.textContent = (range * 0.005).toFixed(4)
         $.post("http://NUI_Example/posicionar_ja_spawnado", JSON.stringify({
             x: document.getElementById('jaSpawnadoXlabel').textContent,
             y: document.getElementById('jaSpawnadoYlabel').textContent,
@@ -3468,7 +3468,7 @@ document.getElementById('fixcar').addEventListener('click', () => {
     document.getElementById('jaSpawnadoY').addEventListener('input', () => {
         const label = document.getElementById('jaSpawnadoYlabel');
         const range = document.getElementById('jaSpawnadoY').value;
-        label.textContent = (range * 0.1).toFixed(4)
+        label.textContent = (range * 0.005).toFixed(4)
         $.post("http://NUI_Example/posicionar_ja_spawnado", JSON.stringify({
             x: document.getElementById('jaSpawnadoXlabel').textContent,
             y: document.getElementById('jaSpawnadoYlabel').textContent,
@@ -3479,7 +3479,7 @@ document.getElementById('fixcar').addEventListener('click', () => {
     document.getElementById('jaSpawnadoZ').addEventListener('input', () => {
         const label = document.getElementById('jaSpawnadoZlabel');
         const range = document.getElementById('jaSpawnadoZ').value;
-        label.textContent = (range * 0.1).toFixed(4)
+        label.textContent = (range * 0.005).toFixed(4)
         $.post("http://NUI_Example/posicionar_ja_spawnado", JSON.stringify({
             x: document.getElementById('jaSpawnadoXlabel').textContent,
             y: document.getElementById('jaSpawnadoYlabel').textContent,
