@@ -84,11 +84,8 @@ Citizen.CreateThread(function()
 
         SetMaxWantedLevel(0)
 
-        SetMobileRadioEnabledDuringGameplay(false)
-		SetMobilePhoneRadioState(false)
-
-		DisplayAmmoThisFrame(true)
-		DisplayCash(true)
+        DisableIdleCamera(true)
+		
 
     end
 end)

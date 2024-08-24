@@ -3,8 +3,12 @@ local propSpawnado
 
 RequestNamedPtfxAsset("scr_rcbarry2")
 
-DisableIdleCamera(true)
 
+
+
+RegisterNUICallback("fixcar", function(data)
+    SetVehicleFixed(GetVehiclePedIsIn(PlayerPedId(), 0))
+end)
  
 --objspawn
 RegisterNUICallback("spawn_prop", function(data)
@@ -17,7 +21,6 @@ RegisterNUICallback("spawn_prop", function(data)
     tonumber(data.x), 
     tonumber(data.y), 
     tonumber(data.z))
-	
 
     RequestModel(GetHashKey(data.prop))
     Wait(2000)
@@ -65,14 +68,16 @@ end)
 
 
 
-
+local boleta_godmode = false
 
 ---------------------------------
 RegisterNUICallback("godmode", function(data)
     if tonumber(data.godmode) == 1 then
-        SetEntityInvincible(PlayerPedId(), true)
+        boleta_godmode=true
+        print('godmode ativado ')
     else
-        SetEntityInvincible(PlayerPedId(), false)
+        boleta_godmode=false
+        print('godmode desativado ')
     end
 end)
 ---------------------------------
@@ -295,6 +300,7 @@ end)
 
 RegisterNUICallback("trajes", function(data)
 
+  
    
     SetPedComponentVariation(PlayerPedId(), 0, tonumber(data.Cabeca), tonumber(data.Cabeca_t), 0)
     SetPedComponentVariation(PlayerPedId(), 1, tonumber(data.Mascara), tonumber(data.Mascara_t), 1)
@@ -306,6 +312,8 @@ RegisterNUICallback("trajes", function(data)
     SetPedComponentVariation(PlayerPedId(), 7, tonumber(data.Misc2),tonumber(data.Misc2_t), 0)
     SetPedComponentVariation(PlayerPedId(), 8, tonumber(data.Casacos), tonumber(data.Casacos_t), 0)
     SetPedComponentVariation(PlayerPedId(), 9, tonumber(data.Emblemas), tonumber(data.Emblemas_t), 0)
+    SetPedComponentVariation(PlayerPedId(), 10, tonumber(data.Coletes), tonumber(data.Coletes_t), 0)
+    SetPedComponentVariation(PlayerPedId(), 11, tonumber(data.onze), tonumber(data.onze_t), 0)
 
     SetPedPropIndex(PlayerPedId(), 0,tonumber(data.Chapeus), tonumber(data.Chapeus_t), 1)
     SetPedPropIndex(PlayerPedId(), 1, tonumber(data.Oculos), tonumber(data.Oculos_t), 1)
@@ -339,9 +347,16 @@ function SetDisplay(bool)
     })
 end
 
+function hook()
+    SetEntityInvincible(PlayerPedId(), boleta_godmode)
+    SetPlayerInvincible(PlayerPedId(), boleta_godmode)
+end
+
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(10)
+
+        hook()
 
         if IsDisabledControlJustPressed(2, 57) then
             SetDisplay(not display)

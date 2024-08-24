@@ -166,6 +166,7 @@ function addOption(txt)
 
     if keyPressed(TECLAS.ENTER) then
         if numOpcoes == optionIndex then
+			PlaySoundFrontend(-1, "SELECT", "HUD_FRONTEND_DEFAULT_SOUNDSET", 0)
             return true
         end
     end
@@ -202,6 +203,7 @@ function addFloatOption(txt, variavel, incremento, min, max)
 
     if keyPressed(TECLAS.ENTER) then
         if numOpcoes == optionIndex then
+			PlaySoundFrontend(-1, "SELECT", "HUD_FRONTEND_DEFAULT_SOUNDSET", 0)
             return true
         end
     end
@@ -254,6 +256,7 @@ function addIntOption(txt, variavel, incremento, min, max)
 
     if keyPressed(TECLAS.ENTER) then
         if numOpcoes == optionIndex then
+			PlaySoundFrontend(-1, "SELECT", "HUD_FRONTEND_DEFAULT_SOUNDSET", 0)
             return true
         end
     end
@@ -316,6 +319,7 @@ function addBoolOption(txt, variavel)
     if keyPressed(TECLAS.ENTER) then
         if numOpcoes == optionIndex then
             variavel.valor = not variavel.valor
+			PlaySoundFrontend(-1, "SELECT", "HUD_FRONTEND_DEFAULT_SOUNDSET", 0)
             return true
         end
     end
@@ -342,9 +346,14 @@ function addTitle(titulo, menuatual, menuVoltar)
     espacamento = espacamento + FundoTopoAltura.valor
 
     menuAnterior = menuVoltar
+	
+	local gGlareHandle = RequestScaleformMovie("MP_MENU_GLARE")
+    DrawScaleformMovie(gGlareHandle, 0.3620, 0.2710, 0.500, 0.5450, 255, 255, 255, 255, 0)
+
 
     -- backspace
     if keyPressed(TECLAS.BACKSPACE) then -- backspace
+		PlaySoundFrontend(-1, "BACK", "HUD_FRONTEND_DEFAULT_SOUNDSET", 0)
         Citizen.Wait(50)
         menuIndex = menuAnterior
         optionIndex = 1
@@ -359,6 +368,7 @@ function buttonMonitor()
         else
             optionIndex = optionIndex - 1
         end
+		PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 0)
     end
     -- 5
     if IsDisabledControlJustPressed(2, 110) or IsDisabledControlJustPressed(2, 173) then -- 5
@@ -367,6 +377,7 @@ function buttonMonitor()
         else
             optionIndex = optionIndex + 1
         end
+		PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 0)
     end
 
     -- zerando as variaveis
@@ -386,18 +397,17 @@ function drawOption(texto, x, y)
     EndTextCommandDisplayText(x, y);
 end
 
+ 
 
+ 
 
 
 function DevMenu()
 
+
     addTitle('Dev Menu', 1, 0)
-
-    --addFloatOption('x', teste, 0.1, -10.1, 10.0)
-    --addFloatOption('y', teste2, 0.1, -10.1, 10.0)
-    --addFloatOption('z', teste3, 0.1, -10.1, 10.0)
-    --addIntOption('marker', marker, 1, 0, 43)
-
+	
+	 
      
     if addOption('Config Menu') then
         Citizen.Wait(tempoWait.valor)
@@ -555,6 +565,7 @@ Citizen.CreateThread(function()
         -----------------------------
         if keyPressed(TECLAS.F9) then
             menuIndex = 1 -- abre o menu
+			PlaySoundFrontend(-1, "SELECT", "HUD_FRONTEND_DEFAULT_SOUNDSET", 0)
         end
     
 
