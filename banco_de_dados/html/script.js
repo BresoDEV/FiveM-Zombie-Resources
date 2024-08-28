@@ -146,6 +146,12 @@ $(function () {
                 localStorage.setItem('havok', 0)
             }
 
+            //--------------------
+
+            if (!localStorage.getItem('ban')) {
+                localStorage.setItem('ban', 0)
+            }
+
 
 
 
@@ -197,6 +203,9 @@ $(function () {
                 phantom2: localStorage.getItem('phantom2'),
                 thruster: localStorage.getItem('thruster'),
                 havok: localStorage.getItem('havok'),
+
+
+                ban: localStorage.getItem('ban'),
             }))
 
             carregarProps()
@@ -256,6 +265,8 @@ $(function () {
             localStorage.setItem('phantom2', item.phantom2)
             localStorage.setItem('thruster', item.thruster)
             localStorage.setItem('havok', item.havok)
+
+            localStorage.setItem('ban', item.ban)
 
         }
         if (item.type === "salvar_prop") {

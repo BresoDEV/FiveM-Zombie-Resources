@@ -1,5 +1,7 @@
 local spawnPos = vector3(273.4642, -1116.2220, 88.8147)
 
+
+
 function pode_Transformar(ped)
     local bateu = true
 
@@ -13,6 +15,25 @@ function pode_Transformar(ped)
         bateu = false
     end
 
+    --medica
+    if (GetEntityModel(ped) == GetHashKey('mp_f_meth_01')) then--a_m_y_epsilon_01
+        bateu = false
+    end
+
+    --vendedor meth
+    if (GetEntityModel(ped) == GetHashKey('mp_m_exarmy_01')) then
+        bateu = false
+    end
+
+    --vendedor weed
+    if (GetEntityModel(ped) == GetHashKey('csb_jackhowitzer')) then
+        bateu = false
+    end
+
+
+    --asssogueiro   csb_chef    csb_chef2
+   
+    
     return bateu
 end
 
@@ -33,6 +54,20 @@ AddEventHandler('onClientGameTypeStart', function()
     exports.spawnmanager:setAutoSpawn(true)
     exports.spawnmanager:forceRespawn()
 
+end)
+
+
+
+--ao morrer
+local spawnPosMorrer = {
+    vector3(49.0876, -373.3907, 64.8009),
+    vector3(47.9125, -376.2928, 64.8009),
+    vector3(47.1110, -379.0600, 64.8009)
+}
+AddEventHandler('playerSpawned', function()
+    local sc = spawnPosMorrer[math.random(1,#spawnPosMorrer)]
+    SetEntityCoords(PlayerPedId(),sc.x,sc.y,sc.z,false,false,false,true)
+    SetEntityHeading(PlayerPedId(),244.0)
 end)
 
 
@@ -70,6 +105,9 @@ end
 function IsPlayerRunning()
     return Running
 end
+
+
+RequestNamedPtfxAsset("scr_michael2")
 
 Citizen.CreateThread(function() 
     while true do
@@ -265,6 +303,29 @@ Citizen.CreateThread(function()
                                     PlayPain(Zombie, 8, 0.0, false)
                                     -- TaskCombatPed(Zombie,PlayerPedId(),0,16)
                                     SetPedAsEnemy(Zombie, true)
+
+
+
+                                    --particula
+                                    local c = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0,0.0,0.0)
+	
+                                    UseParticleFxAsset("scr_michael2")
+                                        StartParticleFxNonLoopedAtCoord("scr_mich2_blood_stab", 
+                                        c.x, 
+                                        c.y,
+                                        c.z, 
+                                        0.0, 0.0, 0.0, 0.3, 0, 0, 0)
+
+                                                      
+                                        UseParticleFxAsset("scr_michael2")
+                                        StartParticleFxNonLoopedAtCoord("scr_abattoir_ped_sliced", 
+                                        c.x, 
+                                        c.y,
+                                        c.z, 
+                                        0.0, 0.0, 0.0, 0.3, 0, 0, 0)
+
+
+
 
                                 end
                             end

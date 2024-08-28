@@ -22,30 +22,30 @@ local marcadores = {{
 
 local textos = {
     t0 = 'Missoes de ~y~Entrega de encomendas~s~ estao disponiveis',
-    t1 = 'Desca do predio e entre no ~b~veiculo de entrega',
-    t2 = 'Leve o ~b~veiculo de entrega~s~ ate o ~y~local de coleta',
+    t1 = 'Entre no ~b~veiculo de entrega',
+    t2 = 'Leve a ~b~metanfetamina~s~ ate o ~y~local de coleta',
     t3 = '~g~Missao Concluida',
     t4 = '~r~Missao Fracassada',
-    t5 = 'Ei, se precisar de grana, vem ate aqui. Sempre tenho encomendas de suprimentos pelo mapa'
+    t5 = 'Ei, o Chris me passou seu numero. Tambem tenho encomendas, se quiser uma grana'
 }
 local coordIniciarMissao = {
-    x = 331.6146,
-    y = -1106.2266,
-    z = 39.3512,
+    x = -1107.5590,
+    y = -1640.1300,
+    z = 4.6405,
     blipID = 318,
-    textoIcone = 'Entrega de Suprimentos'
+    textoIcone = 'Entrega de Produtos'
 }
 local coordSpawnCaminhao = {
-    x = 348.1913,
-    y = -1126.8690,
-    z = 29.0201,
-    angulo = 90.0
+    x = -1099.0984,
+    y = -1635.0278,
+    z = 4.2166,
+    angulo = 28.0
 }
 
  
 local iconeEntrega = {
     id = 289,
-    texto = 'Local de Coleta'
+    texto = 'Local de Entrega'
 }
 
 local coordsEntregas = {{
@@ -83,10 +83,10 @@ function FloatingHelpText(txt)
 end
 
 function Celular(txt)
-    local foto = "CHAR_MP_ARMY_CONTACT"
+    local foto = "CHAR_DEFAULT"
     BeginTextCommandThefeedPost("STRING")--ok
     AddTextComponentSubstringPlayerName(txt)
-    EndTextCommandThefeedPostMessagetextWithCrewTagAndAdditionalIcon(foto, foto, true, 4, 'Chris - Base', ' ', 1.0, "", 4,0)
+    EndTextCommandThefeedPostMessagetextWithCrewTagAndAdditionalIcon(foto, foto, true, 4, 'Anonimo - Base', ' ', 1.0, "", 4,0)
     
     EndTextCommandThefeedPostTicker(true, true)
 end
@@ -229,7 +229,7 @@ function iniciar()
     iniciar()
 end
 
-Wait(70000)
+Wait(120000)
 Celular(textos.t5)--Ei, se precisar de grana, vem ate aqui. Sempre tenho encomendas de suprimentos pelo mapa para entregar
 Wait(5000)
 FloatingHelpText(textos.t0, 1, 3000) -- 'Missoes de ~y~Entrega de suprimentos~s~ estao disponiveis'

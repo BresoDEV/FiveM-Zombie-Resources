@@ -1,5 +1,8 @@
 local display = false
-local waitTempo = 5
+
+local tempoWait = {
+    valor= 5
+}
 
 function ADD_CHECKPOINT(icone,x,y,z)
     DrawMarker(icone, x, y, z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0, 255, 0,200, false, true, 2, nil, nil, false)
@@ -25,7 +28,7 @@ end
 
 function drawLineProps()
     local objPool = GetGamePool("CObject")
-    local coords = GetEntityCoords(PlayerPedId())
+    --local coords = GetEntityCoords(PlayerPedId())
 
     for _, prop in pairs(objPool) do
         
@@ -52,7 +55,7 @@ function drawLineProps()
 
             if IsEntityAtCoord(PlayerPedId(), propCoord.x, propCoord.y, propCoord.z, 20.0, 20.0, 20.0, 0, 1, 0) then
                 
-                waitTempo = 5
+               
                 ADD_CHECKPOINT(36, propCoord.x, propCoord.y, propCoord.z)
 
                 if IsEntityAtCoord(PlayerPedId(), propCoord.x, propCoord.y, propCoord.z, 5.0, 5.0, 5.0, 0, 1, 0) then
@@ -62,8 +65,8 @@ function drawLineProps()
                         if IsEntityAtCoord(PlayerPedId(), propCoord.x, propCoord.y, propCoord.z, 1.0, 1.0, 1.0, 0, 1, 0) then
 
                             if IsControlJustPressed(0,38) then
-                                local a = GetOffsetFromEntityInWorldCoords(prop, 0.0, 7.0, 1.0)
-                                SetEntityCoords(PlayerPedId(), a.x, a.y, a.z, 1, 0, 0, 0)
+                                --local a = GetOffsetFromEntityInWorldCoords(prop, 0.0, 7.0, 1.0)
+                                --SetEntityCoords(PlayerPedId(), a.x, a.y, a.z, 1, 0, 0, 0)
                                 SetDisplay(not display)
                             end
                         end
@@ -76,8 +79,13 @@ end
 
 Citizen.CreateThread(function()
     while true do
-        Citizen.Wait(waitTempo)
-        drawLineProps()
+        Citizen.Wait(5)
+        
+        if IsPedOnFoot(PlayerPedId()) then
+            drawLineProps()
+        end
+
+        
 
     end
 end)
@@ -214,6 +222,7 @@ function spawn(carro)
     SetEntityAsNoLongerNeeded(vehicle)
     SetModelAsNoLongerNeeded(vehicleName)
 
+    SetDisplay(false)
 end
 
 RegisterNUICallback("error", function(data)

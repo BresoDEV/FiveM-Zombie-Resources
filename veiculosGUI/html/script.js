@@ -16,23 +16,12 @@ $(function () {
 
 
 
-                ///this.document.getElementById('X').value = item.playerX.toFixed(4)
-                ///this.document.getElementById('Y').value = item.playerY.toFixed(4)
-                ///this.document.getElementById('Z').value = item.playerZ.toFixed(4)
-                ///this.document.getElementById('A').value = item.playerAngle.toFixed(4)
-                ///
-                ///this.document.getElementById('hora').value = item.horarioAtual
-
-                // this.print(item.d1)
-                //this.print(item.d2)
-                //this.print(item.PlayerPedId)
-
                 if (!localStorage.getItem('dinheiro')) {
                     localStorage.setItem('dinheiro', 0)
                 }
                 localStorage.setItem('dinheiro', item.d1)
 
-                localStorage.setItem('nomeJogador', item.PlayerPedId)
+                //localStorage.setItem('nomeJogador', item.PlayerPedId)
 
 
                 display(true)

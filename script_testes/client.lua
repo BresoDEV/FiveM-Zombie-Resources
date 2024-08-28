@@ -1,27 +1,3 @@
- 
-RegisterCommand('ensure', function(source, args, rawCommand) 
-    TriggerServerEvent('meuComando:ensure', args[1])
-end, false)
-RegisterCommand('stop', function(source, args, rawCommand) 
-    TriggerServerEvent('meuComando:stop', args[1])
-end, false)
-RegisterCommand('start', function(source, args, rawCommand) 
-    TriggerServerEvent('meuComando:start', args[1])
-end, false)
- 
-RegisterNetEvent('meuComando:ensure')
-AddEventHandler('meuComando:ensure', function(nome) 
-    print('Recurso '..nome..' reiniciado') 
-end)
-RegisterNetEvent('meuComando:stop')
-AddEventHandler('meuComando:stop', function(nome) 
-    print('Recurso '..nome..' parado') 
-end)
-
-RegisterNetEvent('meuComando:start')
-AddEventHandler('meuComando:start', function(nome) 
-    print('Recurso '..nome..' iniciado') 
-end)
 
 
 
@@ -29,27 +5,6 @@ end)
 
 
 
-
-
--- Registrar o comando 'oi' no lado do cliente
-RegisterCommand('oi', function(source, args, rawCommand)
-    -- Obtendo nome e sobrenome do usuário dos argumentos do comando
-    local nome = args[1] or GetPlayerName(GetPlayerIndex())
-    local sobrenome = args[2] or 'De Tal'
-
-    -- Enviar um evento para o servidor com nome e sobrenome
-    TriggerServerEvent('meuComando:executar', nome, sobrenome)
-end, false)
-
--- Registrar o evento 'meuComando:confirmacao' no lado do cliente
-RegisterNetEvent('meuComando:confirmacao')
-AddEventHandler('meuComando:confirmacao', function(nome, sobrenome)
-    -- Código que você quer executar quando o servidor confirmar
-    print('O servidor confirmou a execução do comando "oi"!')
-    print('Nome:', nome)
-    print('Sobrenome:', sobrenome)
-    -- Aqui você pode adicionar qualquer outra ação desejada
-end)
 
 
 
@@ -130,64 +85,10 @@ RegisterCommand("camera", function(source, args)
 end)
 
 
+ 
 
-RegisterCommand("drop", function(source, args)
-
-    local ModelHash = GetHashKey("prop_money_bag_01")
-    RequestModel(ModelHash)
-    Wait(1000)
-    if  HasModelLoaded(ModelHash) then
-        local Pos12 = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0,2.0,1.0)
-        CreateAmbientPickup(0xCE6FDD6B, Pos12.x, Pos12.y, Pos12.z, 0, 40000, ModelHash, 0, 2)
-        
-        Pos12 = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 2.0,2.0,1.0)
-        CreateAmbientPickup(0xCE6FDD6B, Pos12.x, Pos12.y, Pos12.z, 0, 1000, ModelHash, 0, 2)
-        
-        Pos12 = GetOffsetFromEntityInWorldCoords(PlayerPedId(), -2.0,2.0,1.0)
-        CreateAmbientPickup(0xCE6FDD6B, Pos12.x, Pos12.y, Pos12.z, 0, 10000, ModelHash, 0, 2)
-        
-        
-        
-        SetModelAsNoLongerNeeded(ModelHash)
-     end 
-
-
-    
-end)
-
-
-local glare = false
-Citizen.CreateThread(function()
-    while true do
-        Citizen.Wait(5)
-        if glare then
-            local gGlareHandle = RequestScaleformMovie("MP_MENU_GLARE")
-            DrawScaleformMovie(gGlareHandle, 1.1530, 0.3900, 0.9760, 0.6500, 255, 255, 255, 255, 0)
-        end
-    end
-end)
-
-
-RegisterCommand("glare1", function(source, args)
-    glare = true
-end)
-
-RegisterCommand("glare0", function(source, args)
-    glare = false
-end)
-
-
-
-
-RegisterCommand("som", function(source, args)
-    Wait(2000)
-    PlaySoundFrontend(-1, "SELECT", "HUD_FRONTEND_DEFAULT_SOUNDSET", 0)
-    Wait(2000)
-    PlaySoundFrontend(-1, "BACK", "HUD_FRONTEND_DEFAULT_SOUNDSET", 0)
-    Wait(2000)
-    PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 0)
-    
-end)
+ 
+ 
 
 
 local cam
@@ -229,53 +130,7 @@ RegisterCommand("escala", function(source, args)
     escalaSangue = tonumber(args[1])
 end)
 
-RegisterCommand("sangue", function(source, args)
-    local c = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0,2.0,0.0)
-	
-    UseParticleFxAsset("scr_michael2")
-        StartParticleFxNonLoopedAtCoord("scr_mich2_blood_stab", 
-        c.x, 
-        c.y,
-        c.z, 
-        0.0, 0.0, 0.0, escalaSangue, 0, 0, 0)
-
-        Wait(5000)
-        
-        UseParticleFxAsset("scr_michael2")
-        StartParticleFxNonLoopedAtCoord("scr_abattoir_ped_sliced", 
-        c.x, 
-        c.y,
-        c.z, 
-        0.0, 0.0, 0.0, escalaSangue, 0, 0, 0)
-
-        Wait(5000)
-        
-        UseParticleFxAsset("scr_solomon3")
-        StartParticleFxNonLoopedAtCoord("scr_trev4_747_engine_debris", 
-        c.x, 
-        c.y,
-        c.z, 
-        0.0, 0.0, 0.0, escalaSangue, 0, 0, 0)
-
-        Wait(5000)
-        
-        UseParticleFxAsset("scr_solomon3")
-        StartParticleFxNonLoopedAtCoord("scr_trev4_747_blood_impact", 
-        c.x, 
-        c.y,
-        c.z, 
-        0.0, 0.0, 0.0, escalaSangue, 0, 0, 0)
-
-        Wait(5000)
-        
-        UseParticleFxAsset("ent_liquid_cont1")
-        StartParticleFxNonLoopedAtCoord("ent_sht_gloopy_liquid", 
-        c.x, 
-        c.y,
-        c.z, 
-        0.0, 0.0, 0.0, escalaSangue, 0, 0, 0)
-end)
-
+ 
 
 RegisterCommand("fumaca", function(source, args)
     local c = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0,2.0,0.0)
@@ -335,3 +190,41 @@ RegisterCommand("fumaca", function(source, args)
         Wait(5000)
 end)
  
+
+
+function ADD_MARKER(icone,x,y,z,radiusProMarkerAparecer,radiusProTextoAparecer)
+    local boleta = false
+    if IsEntityAtCoord(PlayerPedId(), x, y, z, radiusProMarkerAparecer, radiusProMarkerAparecer,radiusProMarkerAparecer, 0, 1, 0) then
+            
+        DrawMarker(icone, x,y,z, 
+        0.0,0.0, 0.0, 0.0, 0.0, 0.0, 
+        1.0, 1.0, 1.0,
+        255, 0, 0, 200, 
+        false, true, 2, nil, nil, false)
+    
+        if IsEntityAtCoord(PlayerPedId(), x, y, z, radiusProTextoAparecer, radiusProTextoAparecer,radiusProTextoAparecer, 0, 1, 0) then
+        
+            local onScreen, _x, _y = World3dToScreen2d(x, y, z)
+            local px, py, pz = table.unpack(GetGameplayCamCoords())
+            
+            SetTextScale(0.35, 0.35)
+            SetTextFont(4)
+            SetTextProportional(1)
+            SetTextColour(255, 255, 255, 215)
+            SetTextEntry("STRING")
+            SetTextCentre(1)
+            AddTextComponentString('Aperte [E] para iniciar a entrega')
+            DrawText(_x, _y)
+    
+            if IsEntityAtCoord(PlayerPedId(), x, y, z, 1.0, 1.0,1.0, 0, 1, 0) then
+                if IsControlJustPressed(0,38) then
+                    boleta = true
+                end
+            end
+        end
+    end
+    return boleta
+end
+
+
+--

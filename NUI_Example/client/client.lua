@@ -4,7 +4,18 @@ local propSpawnado
 RequestNamedPtfxAsset("scr_rcbarry2")
 
 
+----------IPL-------------
 
+RegisterNUICallback("iplLoad", function(data)
+    --data.ipl
+    RequestIpl(data.ipl)
+end)
+RegisterNUICallback("iplUnLoad", function(data)
+    --data.ipl
+    RemoveIpl(data.ipl)
+end)
+---------------------------------------
+ 
 
 RegisterNUICallback("fixcar", function(data)
     SetVehicleFixed(GetVehiclePedIsIn(PlayerPedId(), 0))

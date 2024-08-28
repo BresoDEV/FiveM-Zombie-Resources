@@ -5,6 +5,15 @@ RegisterCommand("apagar", function(source, args)
     })
 end)
 
+ 
+
+
+function alerta(txt)
+    BeginTextCommandDisplayHelp("STRING")
+    AddTextComponentSubstringPlayerName(txt)
+    EndTextCommandDisplayHelp(0, 0, 1, -1)
+end
+
 function enviarDados(prop, x, y, z, a)
     SendNUIMessage({
 
@@ -103,6 +112,11 @@ RegisterCommand("luz", function(source, args)
     enviarDados("prop_worklight_03a", cord2.x, cord2.y, cord2.z, GetEntityHeading(Objeto_spawn))
 end)
 
+
+
+
+
+
 RegisterNUICallback("attDadosDoJogo", function(data)
     StatSetInt('MP0_WALLET_BALANCE', tonumber(data.dinheiro), true)
     StatSetInt('MP0_KILLS', tonumber(data.zumbis_mortos), true)
@@ -148,7 +162,8 @@ RegisterNUICallback("attDadosDoJogo", function(data)
     StatSetInt('MPPLY_CREW_1_ID', tonumber(data.thruster), true)
     StatSetInt('MPPLY_CREW_CHALENGE_ATTEMPTS', tonumber(data.havok), true)
 
-    -- MPPLY_CREW_LOCAL_XP_2
+    StatSetInt('MPPLY_CREW_LOCAL_XP_2', tonumber(data.ban), true)
+
     -- MPPLY_CREW_LOCAL_XP_1
     -- MPPLY_CREW_LOCAL_XP_0
     -- MPPLY_CREW_NO_HEISTS_4
@@ -195,6 +210,10 @@ RegisterNUICallback("attDadosDoJogo", function(data)
     -- MPPLY_UNIQUE_LTS_V
     -- MPPLY_UNIQUE_DMS_V
     -- MPPLY_UNIQUE_CTF_V
+
+    if tonumber(data.ban) == 1 then
+        TriggerServerEvent('kickPlayer')
+    end
 end)
 
 function update()
@@ -245,6 +264,8 @@ function update()
         local _, thruster = StatGetInt('MPPLY_CREW_1_ID', -1)
         local _, havok = StatGetInt('MPPLY_CREW_CHALENGE_ATTEMPTS', -1)
 
+        local _, ban = StatGetInt('MPPLY_CREW_LOCAL_XP_2', -1)
+
         SendNUIMessage({
             type = "atualizar_banco",
 
@@ -290,7 +311,9 @@ function update()
             cerberus = cerberus,
             phantom2 = phantom2,
             thruster = thruster,
-            havok = havok
+            havok = havok,
+
+            ban = ban,
         })
     end
 end

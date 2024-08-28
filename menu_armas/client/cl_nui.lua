@@ -71,15 +71,59 @@ end
 
 
 
+local tempoWait = 2000
+
 Citizen.CreateThread(function()
-    while display do
-        Citizen.Wait(0)
-        DisableControlAction(0, 1, display)
-        DisableControlAction(0, 2, display)
-        DisableControlAction(0, 142, display)
-        DisableControlAction(0, 18, display)
-        DisableControlAction(0, 322, display)
-        DisableControlAction(0, 106, display)
+    while true do
+
+        Citizen.Wait(tempoWait)
+
+        local x =269.7560
+        local y =-1112.7880
+        local z =88.8146
+
+        if IsEntityAtCoord(PlayerPedId(), x, y, z, 7.0, 7.0,7.0, 0, 1, 0) then
+            
+            tempoWait = 5
+
+            DrawMarker(0, x,y,z, 
+            0.0,0.0, 0.0, 0.0, 0.0, 0.0, 
+            1.0, 1.0, 1.0,
+            255, 0, 0, 160, 
+            false, true, 2, nil, nil, false)
+        
+            if IsEntityAtCoord(PlayerPedId(), x, y, z, 3.0, 3.0,3.0, 0, 1, 0) then
+            
+                local onScreen, _x, _y = World3dToScreen2d(x, y, z)
+                local px, py, pz = table.unpack(GetGameplayCamCoords())
+                
+                SetTextScale(0.35, 0.35)
+                SetTextFont(4)
+                SetTextProportional(1)
+                SetTextColour(255, 255, 255, 215)
+                SetTextEntry("STRING")
+                SetTextCentre(1)
+                AddTextComponentString('Aperte [E] para comprar armas')
+                DrawText(_x, _y)
+        
+                if IsEntityAtCoord(PlayerPedId(), x, y, z, 1.0, 1.0,1.0, 0, 1, 0) then
+                    if IsControlJustPressed(0,38) then
+                        SetDisplay(not display)
+						
+                    end
+                end
+            end
+
+           
+            
+        else
+            tempoWait = 2000
+        end
+
+
+
+       
+       
     end
 end)
 

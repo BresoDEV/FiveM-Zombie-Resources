@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reset.css" type="text/css">
+    <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+
+    <title>Bau</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        margin: 0;
+        user-select: none;
+    }
+
+    .esq::-webkit-scrollbar,
+    .dir::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    .esq::-webkit-scrollbar-thumb,
+    .dir::-webkit-scrollbar-thumb {
+        background: red;
+        border-radius: 20px;
+    }
+
+    .esq::-webkit-scrollbar-track,
+    .dir::-webkit-scrollbar-track {
+        background: transparent;
+
+    }
+
+    .esq {
+        position: fixed;
+        background-color: rgba(0, 0, 0, 0.5);
+        left: 5%;
+        width: 35%;
+        height: 400px;
+        border-radius: 10px;
+        padding: 1%;
+        top: 40px;
+        cursor: pointer;
+        display: flex;
+        flex-wrap: wrap;
+        overflow-y: auto;
+    }
+
+    .dir {
+        position: fixed;
+        background-color: rgba(0, 0, 0, 0.5);
+        right: 5%;
+        width: 35%;
+        height: 400px;
+        border-radius: 10px;
+        padding: 1%;
+        top: 40px;
+        cursor: pointer;
+        display: flex;
+        flex-wrap: wrap;
+        overflow-y: auto;
+    }
+
+    .centro {
+        width: 12%;
+        position: fixed;
+        left: 43%;
+        top: 40px;
+        border-radius: 10px;
+        cursor: pointer;
+        background-color: rgba(0, 0, 0, 0.5);
+
+        border-radius: 10px;
+        padding: 1%;
+    }
+
+
+
+    .bloco {
+
+        min-width: 18%;
+        max-width: 18%;
+        min-height: 50px;
+        max-height: 50px;
+        left: 43%;
+        top: 40px;
+        border-radius: 10px;
+        cursor: pointer;
+        background-color: rgba(0, 0, 0, 0.5);
+
+        margin: 1%;
+        border-radius: 10px;
+    }
+
+
+    .button {
+        border-radius: 10px;
+        background-color: rgba(0, 0, 0, 0.5);
+        width: 100%;
+        color: aliceblue;
+        text-align: center;
+        padding-top: 7px;
+        padding-bottom: 7px;
+        margin-bottom: 10px;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+    }
+</style>
+
+<body>
+
+    <div class="menu" id="container">
+        <form id="form">
+            <div class="esq" id="esq">
+                <!---<div class="bloco"></div>-->
+            </div>
+
+            <div class="dir" id="dir">
+                <!---<div class="bloco"></div>-->
+            </div>
+
+            <div class="centro">
+                <div class="button" id="Salvar">Salvar</div>
+                <div class="button" id="Cancelar">Sair</div>
+            </div>
+        </form>
+    </div>
+
+
+
+
+</body>
+<script>
+
+
+
+    var Bau_Recebido = {
+        agua: 0, cabana: 0,
+        corda: 0, ferro: 0, gasolina: 0, madeira: 0,
+        pano: 0, papel: 0, plastico: 0, polvora: 0, vidro: 0,
+    }
+
+    var Inventario_Recebido = {
+        agua: 0, cabana: 0,
+        corda: 0, ferro: 0, gasolina: 0, madeira: 0,
+        pano: 0, papel: 0, plastico: 0, polvora: 0, vidro: 0,
+    }
+
+
+    display(false)//MUDAR PRA FALSEEEEEEEE
+
+
+
+    function display(bool) {
+        if (bool) {
+            document.getElementById('container').style.display = 'block'
+            //$("#container").show();
+        } else {
+            // $("#container").hide();
+            document.getElementById('container').style.display = 'none'
+        }
+    }
+
+    window.addEventListener('message', function (event) {
+        var item = event.data;
+        if (item.type === "bau") {
+            if (item.status == true) {
+
+                //FALTA TEERMINAR
+               // Bau_Recebido.agua = item.bau_agua
+               // Bau_Recebido.cabana = item.bau_cabana
+               // Bau_Recebido.corda = item.bau_corda
+               // Bau_Recebido.ferro = item.bau_ferro
+               // Bau_Recebido.gasolina = item.bau_gasolina
+               // Bau_Recebido.madeira = item.bau_madeira
+               // Bau_Recebido.pano = item.bau_pano
+               // Bau_Recebido.papel = item.bau_papel
+               // Bau_Recebido.plastico = item.bau_plastico
+               // Bau_Recebido.polvora = item.bau_polvora
+               // Bau_Recebido.vidro = item.bau_vidro
+
+                Inventario_Recebido.agua = parseInt(item.inventario_agua)
+                Inventario_Recebido.cabana = parseInt(item.inventario_cabana)
+                Inventario_Recebido.corda = parseInt(item.inventario_corda)
+                Inventario_Recebido.ferro = parseInt(item.inventario_ferro)
+                Inventario_Recebido.gasolina = parseInt(item.inventario_gasolina)
+                Inventario_Recebido.madeira = parseInt(item.inventario_madeira)
+                Inventario_Recebido.pano = parseInt(item.inventario_pano)
+                Inventario_Recebido.papel = parseInt(item.inventario_papel)
+                Inventario_Recebido.plastico = parseInt(item.inventario_plastico)
+                Inventario_Recebido.polvora = parseInt(item.inventario_polvora)
+                Inventario_Recebido.vidro = parseInt(item.inventario_vidro)
+
+ 
+				Alimentar()
+				eventoPegarDoBau()
+                display(true)
+
+            } else {
+                display(false)
+            }
+        }
+    })
+
+
+
+
+
+
+
+    //cria os blocos do inventario
+    for (let i = 0; i < 25; i++) {
+        document.getElementById('esq').innerHTML += `
+        <div class="bloco" id="b${i}">
+            
+        </div>
+        `
+    }
+
+    //cria os blocos do bau
+    for (let i = 0; i < 25; i++) {
+        document.getElementById('dir').innerHTML += `
+        <div class="bloco" id="bau_b${i}">
+            
+        </div>
+        `
+    }
+
+    //aqui vai a parte de alimentar as imagens com os itens do inventario
+
+
+function Alimentar(){
+ var index = 0
+
+    if (Inventario_Recebido.vidro > 0) {
+        document.getElementById('b' + index).innerHTML = '<img src="img/vidro.png" id="ib' + index + '">'
+        document.getElementById('ib' + index).title = Inventario_Recebido.vidro
+        index++
+    }
+    if (Inventario_Recebido.polvora > 0) {
+        document.getElementById('b' + index).innerHTML = '<img src="img/polvora.png" id="ib' + index + '">'
+        document.getElementById('ib' + index).title = Inventario_Recebido.polvora
+        index++
+    }
+
+    if (Inventario_Recebido.plastico > 0) {
+        document.getElementById('b' + index).innerHTML = '<img src="img/plastico.png" id="ib' + index + '">'
+        document.getElementById('ib' + index).title = Inventario_Recebido.plastico
+        index++
+    }
+
+    if (Inventario_Recebido.papel > 0) {
+        document.getElementById('b' + index).innerHTML = '<img src="img/papel.png" id="ib' + index + '">'
+        document.getElementById('ib' + index).title = Inventario_Recebido.papel
+        index++
+    }
+
+    if (Inventario_Recebido.pano > 0) {
+        document.getElementById('b' + index).innerHTML = '<img src="img/pano.png" id="ib' + index + '">'
+        document.getElementById('ib' + index).title = Inventario_Recebido.pano
+        index++
+    }
+
+    if (Inventario_Recebido.madeira > 0) {
+        document.getElementById('b' + index).innerHTML = '<img src="img/madeira.png" id="ib' + index + '">'
+        document.getElementById('ib' + index).title = Inventario_Recebido.madeira
+        index++
+    }
+
+    if (Inventario_Recebido.gasolina > 0) {
+        document.getElementById('b' + index).innerHTML = '<img src="img/gasolina.png" id="ib' + index + '">'
+        document.getElementById('ib' + index).title = Inventario_Recebido.gasolina
+        index++
+    }
+
+    if (Inventario_Recebido.ferro > 0) {
+        document.getElementById('b' + index).innerHTML = '<img src="img/ferro.png" id="ib' + index + '">'
+        document.getElementById('ib' + index).title = Inventario_Recebido.ferro
+        index++
+    }
+
+    if (Inventario_Recebido.agua > 0) {
+        document.getElementById('b' + index).innerHTML = '<img src="img/agua.png" id="ib' + index + '">'
+        document.getElementById('ib' + index).title = Inventario_Recebido.agua
+		console.log('recebeu agua')
+        index++
+    }
+
+    if (Inventario_Recebido.cabana > 0) {
+        document.getElementById('b' + index).innerHTML = '<img src="img/cabana.png" id="ib' + index + '">'
+        document.getElementById('ib' + index).title = Inventario_Recebido.cabana
+        index++
+    }
+
+    if (Inventario_Recebido.corda > 0) {
+        document.getElementById('b' + index).innerHTML = '<img src="img/corda.png" id="ib' + index + '">'
+        document.getElementById('ib' + index).title = Inventario_Recebido.corda
+        index++
+    }
+
+    index = 0
+
+    if (Bau_Recebido.vidro > 0) {
+        document.getElementById('bau_b' + index).innerHTML = '<img src="img/vidro.png" id="bau_ib' + index + '">'
+        document.getElementById('bau_ib' + index).title = Bau_Recebido.vidro
+        index++
+    }
+    if (Bau_Recebido.polvora > 0) {
+        document.getElementById('bau_b' + index).innerHTML = '<img src="img/polvora.png" id="bau_ib' + index + '">'
+        document.getElementById('bau_ib' + index).title = Bau_Recebido.polvora
+        index++
+    }
+
+    if (Bau_Recebido.plastico > 0) {
+        document.getElementById('bau_b' + index).innerHTML = '<img src="img/plastico.png" id="bau_ib' + index + '">'
+        document.getElementById('bau_ib' + index).title = Bau_Recebido.plastico
+        index++
+    }
+
+    if (Bau_Recebido.papel > 0) {
+        document.getElementById('bau_b' + index).innerHTML = '<img src="img/papel.png" id="bau_ib' + index + '">'
+        document.getElementById('bau_ib' + index).title = Bau_Recebido.papel
+        index++
+    }
+
+    if (Bau_Recebido.pano > 0) {
+        document.getElementById('bau_b' + index).innerHTML = '<img src="img/pano.png" id="bau_ib' + index + '">'
+        document.getElementById('bau_ib' + index).title = Bau_Recebido.pano
+        index++
+    }
+
+    if (Bau_Recebido.madeira > 0) {
+        document.getElementById('bau_b' + index).innerHTML = '<img src="img/madeira.png" id="bau_ib' + index + '">'
+        document.getElementById('bau_ib' + index).title = Bau_Recebido.madeira
+        index++
+    }
+
+    if (Bau_Recebido.gasolina > 0) {
+        document.getElementById('bau_b' + index).innerHTML = '<img src="img/gasolina.png" id="bau_ib' + index + '">'
+        document.getElementById('bau_ib' + index).title = Bau_Recebido.gasolina
+        index++
+    }
+
+    if (Bau_Recebido.ferro > 0) {
+        document.getElementById('bau_b' + index).innerHTML = '<img src="img/ferro.png" id="bau_ib' + index + '">'
+        document.getElementById('bau_ib' + index).title = Bau_Recebido.ferro
+        index++
+    }
+
+    if (Bau_Recebido.agua > 0) {
+        document.getElementById('bau_b' + index).innerHTML = '<img src="img/agua.png" id="bau_ib' + index + '">'
+        document.getElementById('bau_ib' + index).title = Bau_Recebido.agua
+        index++
+    }
+
+    if (Bau_Recebido.cabana > 0) {
+        document.getElementById('bau_b' + index).innerHTML = '<img src="img/cabana.png" id="bau_ib' + index + '">'
+        document.getElementById('bau_ib' + index).title = Bau_Recebido.cabana
+        index++
+    }
+
+    if (Bau_Recebido.corda > 0) {
+        document.getElementById('bau_b' + index).innerHTML = '<img src="img/corda.png" id="bau_ib' + index + '">'
+        document.getElementById('bau_ib' + index).title = Bau_Recebido.corda
+        index++
+    }
+
+}
+   
+     
+
+
+
+    //add os eventos de movimento se o bloco possuir uma foto
+    eventoPegarDoBau()
+
+    //----------------------------------------
+
+    document.getElementById('Salvar').addEventListener('click', () => {
+
+        console.clear()
+
+        var bau = {
+            agua: 0,
+            cabana: 0,
+            corda: 0,
+            ferro: 0,
+            gasolina: 0,
+            madeira: 0,
+            pano: 0,
+            papel: 0,
+            plastico: 0,
+            polvora: 0,
+            vidro: 0,
+        }
+        for (let i = 0; i < 100; i++) {
+            if (document.getElementById('bau_ib' + i)) {
+
+                const src = document.getElementById('bau_ib' + i).src
+                if (src.includes('agua')) {
+                    bau.agua = bau.agua + parseInt(document.getElementById('bau_ib' + i).title)
+                }
+                if (src.includes('cabana')) {
+                    bau.cabana = bau.cabana + parseInt(document.getElementById('bau_ib' + i).title)
+                }
+
+                if (src.includes('corda')) {
+                    bau.corda = bau.corda + parseInt(document.getElementById('bau_ib' + i).title)
+                }
+
+                if (src.includes('ferro')) {
+                    bau.ferro = bau.ferro + parseInt(document.getElementById('bau_ib' + i).title)
+                }
+
+                if (src.includes('gasolina')) {
+                    bau.gasolina = bau.gasolina + parseInt(document.getElementById('bau_ib' + i).title)
+                }
+
+                if (src.includes('madeira')) {
+                    bau.madeira = bau.madeira + parseInt(document.getElementById('bau_ib' + i).title)
+                }
+
+                if (src.includes('pano')) {
+                    bau.pano = bau.pano + parseInt(document.getElementById('bau_ib' + i).title)
+                }
+
+                if (src.includes('papel')) {
+                    bau.papel = bau.papel + parseInt(document.getElementById('bau_ib' + i).title)
+                }
+
+                if (src.includes('plastico')) {
+                    bau.plastico = bau.plastico + parseInt(document.getElementById('bau_ib' + i).title)
+                }
+
+                if (src.includes('polvora')) {
+                    bau.polvora = bau.polvora + parseInt(document.getElementById('bau_ib' + i).title)
+                }
+
+                if (src.includes('vidro')) {
+                    bau.vidro = bau.vidro + parseInt(document.getElementById('bau_ib' + i).title)
+                }
+
+            }
+        }
+
+        //---------------------------
+
+
+        var inventario = {
+            agua: 0,
+            cabana: 0,
+            corda: 0,
+            ferro: 0,
+            gasolina: 0,
+            madeira: 0,
+            pano: 0,
+            papel: 0,
+            plastico: 0,
+            polvora: 0,
+            vidro: 0,
+        }
+
+        for (let i = 0; i < 100; i++) {
+            if (document.getElementById('ib' + i)) {
+
+                const src = document.getElementById('ib' + i).src
+                if (src.includes('agua')) {
+                    inventario.agua = inventario.agua + parseInt(document.getElementById('ib' + i).title)
+                }
+                if (src.includes('cabana')) {
+                    inventario.cabana = inventario.cabana + parseInt(document.getElementById('ib' + i).title)
+                }
+
+                if (src.includes('corda')) {
+                    inventario.corda = inventario.corda + parseInt(document.getElementById('ib' + i).title)
+                }
+
+                if (src.includes('ferro')) {
+                    inventario.ferro = inventario.ferro + parseInt(document.getElementById('ib' + i).title)
+                }
+
+                if (src.includes('gasolina')) {
+                    inventario.gasolina = inventario.gasolina + parseInt(document.getElementById('ib' + i).title)
+                }
+
+                if (src.includes('madeira')) {
+                    inventario.madeira = inventario.madeira + parseInt(document.getElementById('ib' + i).title)
+                }
+
+                if (src.includes('pano')) {
+                    inventario.pano = inventario.pano + parseInt(document.getElementById('ib' + i).title)
+                }
+
+                if (src.includes('papel')) {
+                    inventario.papel = inventario.papel + parseInt(document.getElementById('ib' + i).title)
+                }
+
+                if (src.includes('plastico')) {
+                    inventario.plastico = inventario.plastico + parseInt(document.getElementById('ib' + i).title)
+                }
+
+                if (src.includes('polvora')) {
+                    inventario.polvora = inventario.polvora + parseInt(document.getElementById('ib' + i).title)
+                }
+
+                if (src.includes('vidro')) {
+                    inventario.vidro = inventario.vidro + parseInt(document.getElementById('ib' + i).title)
+                }
+
+            }
+
+        }
+
+
+        //aqui envia pro lua
+        console.log(inventario)
+        console.log(bau)
+
+        $.post("http://menu_bau/salvar", JSON.stringify({
+
+            inventario_agua: inventario.agua,
+            inventario_cabana: inventario.cabana,
+            inventario_corda: inventario.corda,
+            inventario_ferro: inventario.ferro,
+            inventario_gasolina: inventario.gasolina,
+            inventario_madeira: inventario.madeira,
+            inventario_pano: inventario.pano,
+            inventario_papel: inventario.papel,
+            inventario_plastico: inventario.plastico,
+            inventario_polvora: inventario.polvora,
+            inventario_vidro: inventario.vidro,
+
+            bau_agua: bau.agua,
+            bau_cabana: bau.cabana,
+            bau_corda: bau.corda,
+            bau_ferro: bau.ferro,
+            bau_gasolina: bau.gasolina,
+            bau_madeira: bau.madeira,
+            bau_pano: bau.pano,
+            bau_papel: bau.papel,
+            bau_plastico: bau.plastico,
+            bau_polvora: bau.polvora,
+            bau_vidro: bau.vidro,
+
+        }));
+
+
+
+    })
+
+
+
+    document.getElementById('Cancelar').addEventListener('click', () => {
+        $.post("http://menu_bau/exit", JSON.stringify({
+            vazio: 'vazio'
+        }));
+    })
+
+
+
+
+
+    var bool = false
+    var bool2 = false
+    var elementoSelecionado;
+    var quantidadeelementoSelecionado;
+    var elementoImagem;
+    const elementoSelecionadoWidth = document.getElementById('b0').offsetWidth;
+    const elementoSelecionadoHeigth = document.getElementById('b0').offsetHeight
+
+
+
+
+
+
+    window.addEventListener('mousemove', (e) => {
+        if (bool) {
+            elementoSelecionado.style.position = 'fixed'
+            elementoSelecionado.style.left = (e.clientX - (elementoSelecionadoWidth / 2)) + 'px'
+            elementoSelecionado.style.top = (e.clientY - (elementoSelecionadoHeigth / 2)) + 'px'
+
+            elementoSelecionado.style.minWidth = elementoSelecionadoWidth + 'px'
+            elementoSelecionado.style.minHeight = elementoSelecionadoHeigth + 'px'
+            elementoSelecionado.style.maxWidth = elementoSelecionadoWidth + 'px'
+            elementoSelecionado.style.maxHeight = elementoSelecionadoHeigth + 'px'
+            elementoSelecionado.style.zIndex = '100'
+
+            if ((window.innerWidth / 4) * 2.7 < e.clientX) {
+                bool = false
+
+
+                for (let i = 0; i < 25; i++) {
+
+                    if (!document.getElementById('bau_ib' + i)) {
+                        document.getElementById('bau_b' + i).innerHTML += '<img src="' + elementoImagem + '" id="bau_ib' + i + '" >'
+
+                        document.getElementById('bau_ib' + i).title = quantidadeelementoSelecionado
+
+                        elementoSelecionado.remove()
+
+                        console.log('movido ' + quantidadeelementoSelecionado + ' para o bau')
+
+                        eventoPegarDoBau()
+
+                        break
+                    }
+
+                }
+
+            }
+        }
+
+
+        if (bool2) {
+            elementoSelecionado.style.position = 'fixed'
+            elementoSelecionado.style.left = (e.clientX - (elementoSelecionadoWidth / 2)) + 'px'
+            elementoSelecionado.style.top = (e.clientY - (elementoSelecionadoHeigth / 2)) + 'px'
+
+            elementoSelecionado.style.minWidth = elementoSelecionadoWidth + 'px'
+            elementoSelecionado.style.minHeight = elementoSelecionadoHeigth + 'px'
+            elementoSelecionado.style.maxWidth = elementoSelecionadoWidth + 'px'
+            elementoSelecionado.style.maxHeight = elementoSelecionadoHeigth + 'px'
+            elementoSelecionado.style.zIndex = '100'
+
+            if ((window.innerWidth / 3) > e.clientX) {
+                bool2 = false
+
+
+                for (let i = 0; i < 25; i++) {
+
+                    if (!document.getElementById('ib' + i)) {
+                        document.getElementById('b' + i).innerHTML += '<img src="' + elementoImagem + '" id="ib' + i + '" >'
+
+                        document.getElementById('ib' + i).title = quantidadeelementoSelecionado
+
+                        console.log('movido ' + quantidadeelementoSelecionado + ' para o inventario')
+
+                        elementoSelecionado.remove()
+
+
+                        eventoPegarDoBau()
+
+                        break
+                    }
+
+                }
+
+            }
+        }
+
+    })
+
+
+    function eventoPegarDoBau() {
+
+        for (let i = 0; i < 25; i++) {
+            if (document.getElementById('ib' + i)) {
+                document.getElementById('b' + i).addEventListener('mousedown', () => {
+                    elementoSelecionado = document.getElementById('ib' + i)
+                    elementoImagem = document.getElementById('ib' + i).src
+                    quantidadeelementoSelecionado = document.getElementById('ib' + i).title
+                    bool = true
+                })
+            }
+        }
+        for (let i = 0; i < 25; i++) {
+            if (document.getElementById('bau_ib' + i)) {
+                document.getElementById('bau_b' + i).addEventListener('mousedown', () => {
+                    elementoSelecionado = document.getElementById('bau_ib' + i)
+                    elementoImagem = document.getElementById('bau_ib' + i).src
+                    quantidadeelementoSelecionado = document.getElementById('bau_ib' + i).title
+                    bool2 = true
+                })
+            }
+        }
+
+    }
+
+</script>
+
+</html>

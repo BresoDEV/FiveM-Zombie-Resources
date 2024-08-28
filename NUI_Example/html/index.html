@@ -15,9 +15,10 @@
 </style>
 
 <body>
-    
+
     <div class="menu" id="container">
         <div class="rodape">
+            <input type="range" name="larguraLateral" id="larguraLateral" max="100" value="50">
             <input type="range" name="rodape" id="rodape" max="100" value="80">
         </div>
         <form id="form">
@@ -1764,6 +1765,20 @@
                         </td>
                     </tr>
                 </table>
+                <br>
+                <table>
+                    <tr>
+                        <td>
+                            <input id="ipl" type="text" value="">
+                        </td>
+                        <td>
+                            <div id="iplLoad" class="button">Load IPL</div>
+                        </td>
+                        <td>
+                            <div id="iplUnLoad" class="button">Unload IPL</div>
+                        </td>
+                    </tr>
+                </table>
             </div>
 
 
@@ -1839,13 +1854,13 @@
                     <tr>
                         <td>X</td>
                         <td><input id="X" type="text" value="0.0000"></td>
-                   
+
                         <td>Y</td>
                         <td><input id="Y" type="text" value="0.0000"></td>
-                    
+
                         <td>Z</td>
                         <td><input id="Z" type="text" value="0.0000"></td>
-                    
+
                         <td>Angulo</td>
                         <td><input id="A" type="text" value=""></td>
                     </tr>
@@ -1862,7 +1877,7 @@
                         <td colspan="4">
                             <div id="Salvar" class="button">Salvar Pos</div>
                         </td>
-                    
+
                         <td colspan="4">
                             <div id="Carregar" class="button">Carregar Pos</div>
                         </td>
@@ -1980,7 +1995,7 @@
                         <td>Oculos</td>
                         <td><input type="number" name="Oculos" id="Oculos"></td>
                         <td><input type="number" name="Oculos_t" id="Oculos_t"></td>
-                    </tr> 
+                    </tr>
                     <tr>
                         <td>Casacos 2</td>
                         <td><input type="number" name="onze" id="onze"></td>
@@ -3411,6 +3426,7 @@
                 </table>
             </div>
 
+
         </form>
     </div>
     <!--<script src="./script.js" type="text/javascript"></script>-->
@@ -3420,7 +3436,20 @@
 
 
 
-document.getElementById('fixcar').addEventListener('click', () => {
+    document.getElementById('iplUnLoad').addEventListener('click', () => {
+        $.post("http://NUI_Example/iplUnLoad", JSON.stringify({
+            ipl: document.getElementById('ipl').value
+        }));
+    })
+
+    document.getElementById('iplLoad').addEventListener('click', () => {
+        $.post("http://NUI_Example/iplLoad", JSON.stringify({
+            ipl: document.getElementById('ipl').value
+        }));
+    })
+
+    //----------------------------------
+    document.getElementById('fixcar').addEventListener('click', () => {
         $.post("http://NUI_Example/fixcar", JSON.stringify({
             vazio: 'vazio'
         }));
@@ -3594,15 +3623,32 @@ document.getElementById('fixcar').addEventListener('click', () => {
 
 
     document.getElementById('rodape').addEventListener('input', () => {
-        document.getElementById('divlateralPlayer').style.opacity = document.getElementById('rodape').value * 0.01
-        document.getElementById('divlateralVeiculo').style.opacity = document.getElementById('rodape').value * 0.01
-        document.getElementById('divlateralMundo').style.opacity = document.getElementById('rodape').value * 0.01
-        document.getElementById('divlateralObjetos').style.opacity = document.getElementById('rodape').value * 0.01
-        document.getElementById('divlateralTeleport').style.opacity = document.getElementById('rodape').value * 0.01
-        document.getElementById('divlateralTrajes').style.opacity = document.getElementById('rodape').value * 0.01
-        document.getElementById('divlateralMisc').style.opacity = document.getElementById('rodape').value * 0.01
-        document.getElementById('container').style.opacity = document.getElementById('rodape').value * 0.01
+        document.getElementById('divlateralPlayer').style.backgroundColor = 'rgba(0,0,0,'+document.getElementById('rodape').value * 0.01+')'
+        document.getElementById('divlateralVeiculo').style.backgroundColor = 'rgba(0,0,0,'+document.getElementById('rodape').value * 0.01+')'
+        document.getElementById('divlateralMundo').style.backgroundColor = 'rgba(0,0,0,'+document.getElementById('rodape').value * 0.01+')'
+        document.getElementById('divlateralObjetos').style.backgroundColor = 'rgba(0,0,0,'+document.getElementById('rodape').value * 0.01+')'
+        document.getElementById('divlateralTeleport').style.backgroundColor = 'rgba(0,0,0,'+document.getElementById('rodape').value * 0.01+')'
+        document.getElementById('divlateralTrajes').style.backgroundColor = 'rgba(0,0,0,'+document.getElementById('rodape').value * 0.01+')'
+        document.getElementById('divlateralMisc').style.backgroundColor = 'rgba(0,0,0,'+document.getElementById('rodape').value * 0.01+')'
+        document.getElementById('container').style.backgroundColor = 'rgba(0,0,0,'+document.getElementById('rodape').value * 0.01+')'
     })
+
+
+    document.getElementById('larguraLateral').addEventListener('input', () => {
+        //lateral
+        const a = document.querySelectorAll('*')
+        a.forEach(e => {
+            if (e.className === 'lateral') {
+                e.style.width = document.getElementById('larguraLateral').value +'%'
+            }
+        });
+
+       
+    })
+
+
+     
+
 
     document.querySelectorAll('input').forEach(e => {
         if (e.type === 'number') {
@@ -3630,19 +3676,19 @@ document.getElementById('fixcar').addEventListener('click', () => {
                 var Misc2_t = document.getElementById('Misc2_t').value
                 var Casacos = document.getElementById('Casacos').value
                 var Casacos_t = document.getElementById('Casacos_t').value
-				
+
                 var Coletes = document.getElementById('Coletes').value
                 var Coletes_t = document.getElementById('Coletes_t').value
-				
+
                 var Emblemas = document.getElementById('Emblemas').value
                 var Emblemas_t = document.getElementById('Emblemas_t').value
                 var Chapeus = document.getElementById('Chapeus').value
                 var Chapeus_t = document.getElementById('Chapeus_t').value
                 var Oculos = document.getElementById('Oculos').value
                 var Oculos_t = document.getElementById('Oculos_t').value
-				
-                
-                var onze = document.getElementById('onze').value 
+
+
+                var onze = document.getElementById('onze').value
                 var onze_t = document.getElementById('onze_t').value
 
                 $.post("http://NUI_Example/trajes", JSON.stringify({
@@ -3664,19 +3710,19 @@ document.getElementById('fixcar').addEventListener('click', () => {
                     Misc2_t: document.getElementById('Misc2_t').value,
                     Casacos: document.getElementById('Casacos').value,
                     Casacos_t: document.getElementById('Casacos_t').value,
-					
+
                     Coletes: document.getElementById('Coletes').value,
                     Coletes_t: document.getElementById('Coletes_t').value,
-					
+
                     Emblemas: document.getElementById('Emblemas').value,
                     Emblemas_t: document.getElementById('Emblemas_t').value,
                     Chapeus: document.getElementById('Chapeus').value,
                     Chapeus_t: document.getElementById('Chapeus_t').value,
                     Oculos: document.getElementById('Oculos').value,
                     Oculos_t: document.getElementById('Oculos_t').value,
-					 
-                 onze : document.getElementById('onze').value, 
-                 onze_t : document.getElementById('onze_t').value,
+
+                    onze: document.getElementById('onze').value,
+                    onze_t: document.getElementById('onze_t').value,
                 }));
             })
 

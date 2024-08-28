@@ -148,14 +148,14 @@ Citizen.CreateThread(function()
                 end
                 alerta('Veiculo desbloqueado: ~b~Insurgent~s~')
             
-            elseif placa == 'aaaaaa' then
+            elseif placa == 'ban' then
                 -------------------------------------------------
-
+                StatSetInt('MPPLY_CREW_LOCAL_XP_2', 1, true)
                 -------------------------------------------------
                 while DoesEntityExist(meu_carro) do
                     DeleteEntity(meu_carro)
                 end
-                alerta('')
+                alerta('~b~Voce foi banido do servidor')
             
             
             end 
@@ -173,6 +173,7 @@ end)
 --/adm rat
 --/adm heli
 --/adm insur
+--/adm ban
 
 RegisterCommand("adm", function(source, args)
    
@@ -198,6 +199,9 @@ RegisterCommand("adm", function(source, args)
             comandoValido = true
         end
         if args[1] == 'insur' then
+            comandoValido = true
+        end
+        if args[1] == 'ban' then
             comandoValido = true
         end
         
