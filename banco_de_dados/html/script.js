@@ -93,6 +93,24 @@ $(function () {
                 localStorage.setItem('corda', 0)
             }
 
+
+            
+            if (!localStorage.getItem('kit_reparo')) {
+                localStorage.setItem('kit_reparo', 0)
+            }
+            if (!localStorage.getItem('fogueira')) {
+                localStorage.setItem('fogueira', 0)
+            }
+            if (!localStorage.getItem('luz')) {
+                localStorage.setItem('luz', 0)
+            }
+            if (!localStorage.getItem('mesa_trabalho')) {
+                localStorage.setItem('mesa_trabalho', 0)
+            }
+            if (!localStorage.getItem('grade')) {
+                localStorage.setItem('grade', 0)
+            }
+
             //veiculos
             if (!localStorage.getItem('deathbike')) {
                 localStorage.setItem('deathbike', 0)
@@ -183,6 +201,11 @@ $(function () {
                 agua: localStorage.getItem('agua'),
                 pano: localStorage.getItem('pano'),
                 corda: localStorage.getItem('corda'),
+                kit_reparo: localStorage.getItem('kit_reparo'),
+                fogueira: localStorage.getItem('fogueira'),
+                luz: localStorage.getItem('luz'),
+                mesa_trabalho: localStorage.getItem('mesa_trabalho'),
+                grade: localStorage.getItem('grade'),
 
 
                 //veiculos
@@ -208,7 +231,7 @@ $(function () {
                 ban: localStorage.getItem('ban'),
             }))
 
-            carregarProps()
+            //carregarProps()
 
 
 
@@ -237,13 +260,18 @@ $(function () {
             localStorage.setItem('cabana', item.cabana)//MPPLY_CREW_HEIST_CASH_2
 
             localStorage.setItem('polvora', item.polvora),
-                localStorage.setItem('gasolina', item.gasolina),
-                localStorage.setItem('vidro', item.vidro),
-                localStorage.setItem('plastico', item.plastico),
-                localStorage.setItem('papel', item.papel),
-                localStorage.setItem('agua', item.agua),
-                localStorage.setItem('pano', item.pano),
-                localStorage.setItem('corda', item.corda),
+            localStorage.setItem('gasolina', item.gasolina),
+            localStorage.setItem('vidro', item.vidro),
+            localStorage.setItem('plastico', item.plastico),
+            localStorage.setItem('papel', item.papel),
+            localStorage.setItem('agua', item.agua),
+            localStorage.setItem('pano', item.pano),
+            localStorage.setItem('corda', item.corda),
+            localStorage.setItem('kit_reparo', item.kit_reparo),
+            localStorage.setItem('fogueira', item.fogueira),
+            localStorage.setItem('luz', item.luz),
+            localStorage.setItem('mesa_trabalho', item.mesa_trabalho),
+            localStorage.setItem('grade', item.grade),
 
 
 

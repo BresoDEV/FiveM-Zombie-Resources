@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css" type="text/css">
+    <link rel="stylesheet" href="reset.css" type="text/css">
+    <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+
+    <title>PenisMan</title>
+</head>
+<style>
+    .kkkkkk {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        backdrop-filter: blur(0px);
+    }
+</style>
+
+<body>
+
+
+
+    <div class="menu" id="container">
+
+
+        <form id="form">
+
+
+
+
+            <div class="fundo-centro" id="centro">
+
+                <!--aqui vai os bloquinhos-->
+
+
+            </div>
+
+            <div class="menu-direita" id="direita">
+
+
+            </div>
+
+
+
+
+            <div class="resultado" id="resultado">
+                <center>
+                    <div id="resultado_bloquinho" style="width: 50%;">
+                        <img src="ferro.png" style="width: 50%;" title="" id="resultado_foto">
+                        <p id="resultado_nome_item">Fogueira</p>
+                    </div>
+                    <div class="button" style="margin-top:10px" id="craftar">Criar</div>
+                </center>
+            </div>
+
+            <center>
+                <div class="limpar-mesa" id="limpar-mesa">Reiniciar</div>
+                <div class="sair" id="sair">Sair</div>
+            </center>
+
+
+
+        </form>
+    </div>
+
+</body>
+<script>
+
+
+
+
+
+    var inventario = [
+        {
+            nome_bruto: 'Madeira',
+            foto: 'madeira.png',
+            quantidade: 10,
+            quantidade_bau: 0,
+            stat_usado: 'MPPLY_CREW_HEIST_CASH_0',
+            quantidade_na_mesa: 0
+        },
+        {
+            nome_bruto: 'Ferro',
+            foto: 'ferro.png',
+            quantidade: 10,
+            quantidade_bau: 0,
+            stat_usado: 'MPPLY_CREW_HEIST_CASH_1',
+            quantidade_na_mesa: 0
+        },
+        {
+            nome_bruto: 'Cabana',
+            foto: 'cabana.png',
+            quantidade: 0,
+            quantidade_bau: 0,
+            stat_usado: 'MPPLY_CREW_HEIST_CASH_2',
+            quantidade_na_mesa: 0
+        },
+        {
+            nome_bruto: 'Corda',
+            foto: 'corda.png',
+            quantidade: 10,
+            quantidade_bau: 0,
+            stat_usado: 'MPPLY_CREW_LOCAL_XP_3',
+            quantidade_na_mesa: 0
+        },
+        {
+            nome_bruto: 'Agua',
+            foto: 'agua.png',
+            quantidade: 10,
+            quantidade_bau: 0,
+            stat_usado: 'MPPLY_CREW_LOCAL_TIME_0',
+            quantidade_na_mesa: 0
+        },
+        {
+            nome_bruto: 'Gasolina',
+            foto: 'gasolina.png',
+            quantidade: 10,
+            quantidade_bau: 0,
+            stat_usado: 'MPPLY_CREW_LOCAL_TIME_4',
+            quantidade_na_mesa: 0
+        },
+        {
+            nome_bruto: 'Pano',
+            foto: 'pano.png',
+            quantidade: 10,
+            quantidade_bau: 0,
+            stat_usado: 'MPPLY_CREW_LOCAL_XP_4',
+            quantidade_na_mesa: 0
+        },
+        {
+            nome_bruto: 'Vidro',
+            foto: 'vidro.png',
+            quantidade: 10,
+            quantidade_bau: 0,
+            stat_usado: 'MPPLY_CREW_LOCAL_TIME_3',
+            quantidade_na_mesa: 0
+        },
+        {
+            nome_bruto: 'Plastico',
+            foto: 'plastico.png',
+            quantidade: 10,
+            quantidade_bau: 0,
+            stat_usado: 'MPPLY_CREW_LOCAL_TIME_2',
+            quantidade_na_mesa: 0
+        },
+        {
+            nome_bruto: 'Papel',
+            foto: 'papel.png',
+            quantidade: 10,
+            quantidade_bau: 0,
+            stat_usado: 'MPPLY_CREW_LOCAL_TIME_1',
+            quantidade_na_mesa: 0
+        },
+        {
+            nome_bruto: 'Polvora',
+            foto: 'polvora.png',
+            quantidade: 10,
+            quantidade_bau: 0,
+            stat_usado: 'MPPLY_CREW_CHALENGE_WIN',
+            quantidade_na_mesa: 0
+        },
+        {
+            nome_bruto: 'Kit Reparo',
+            foto: 'kit_reparo.png',
+            quantidade: 10,
+            quantidade_bau: 0,
+            stat_usado: 'MPPLY_CREW_LOCAL_XP_1',
+            quantidade_na_mesa: 0
+        },
+        {
+            nome_bruto: 'Fogueira',
+            foto: 'fogueira.png',
+            quantidade: 0,
+            quantidade_bau: 0,
+            stat_usado: 'MPPLY_CREW_LOCAL_XP_0',
+            quantidade_na_mesa: 0
+        },
+        {
+            nome_bruto: 'Luz',
+            foto: 'luz.png',
+            quantidade: 0,
+            quantidade_bau: 0,
+            stat_usado: 'MPPLY_CREW_NO_HEISTS_4',
+            quantidade_na_mesa: 0
+        },
+        {
+            nome_bruto: 'Mesa',
+            foto: 'mesa.png',
+            quantidade: 0,
+            quantidade_bau: 0,
+            stat_usado: 'MPPLY_CREW_NO_HEISTS_3',
+            quantidade_na_mesa: 0
+        },
+        {
+            nome_bruto: 'Grade',
+            foto: 'grade.png',
+            quantidade: 0,
+            quantidade_bau: 0,
+            stat_usado: 'MPPLY_CREW_NO_HEISTS_2',
+            quantidade_na_mesa: 0
+        },
+    ]
+
+
+
+    var receitas = [
+        {
+            nome: 'Cabana',
+            foto: 'cabana.png',
+            itens: 'Madeira Ferro Pano'
+        },
+        {
+            nome: 'Fogueira',
+            foto: 'fogueira.png',
+            itens: 'Madeira Polvora Papel'
+        },
+        {
+            nome: 'Kit Reparo',
+            foto: 'kit_reparo.png',
+            itens: 'Ferro Corda Plastico'
+        },
+        {
+            nome: 'Luz',
+            foto: 'luz.png',
+            itens: 'Ferro Vidro Plastico'
+        },
+        {
+            nome: 'Mesa',
+            foto: 'mesa.png',
+            itens: 'Ferro Plastico Madeira Kit Reparo Papel'
+        },
+        {
+            nome: 'Grade',
+            foto: 'grade.png',
+            itens: 'Ferro Corda'
+        }
+    ]
+
+   display(false)//MUDAR PRA FALSEEEEEEEE
+
+
+
+    function display(bool) {
+        if (bool) {
+            document.getElementById('container').style.display = 'block'
+            //$("#container").show();
+        } else {
+            // $("#container").hide();
+            document.getElementById('container').style.display = 'none'
+        }
+    }
+
+
+
+
+
+
+    window.addEventListener('message', function (event) {
+        var item = event.data;
+        if (item.type === "ui") {
+            if (item.status == true) {
+
+
+
+                inventario[0].quantidade = parseInt(item.madeira)
+                inventario[1].quantidade = parseInt(item.ferro)
+                inventario[2].quantidade = parseInt(item.cabana)
+                inventario[3].quantidade = parseInt(item.corda)
+                inventario[4].quantidade = parseInt(item.agua)
+                inventario[5].quantidade = parseInt(item.gasolina)
+                inventario[6].quantidade = parseInt(item.pano)
+                inventario[7].quantidade = parseInt(item.vidro)
+                inventario[8].quantidade = parseInt(item.plastico)
+                inventario[9].quantidade = parseInt(item.papel)
+                inventario[10].quantidade = parseInt(item.polvora)
+
+                inventario[11].quantidade = parseInt(item.kit_reparo)
+                inventario[12].quantidade = parseInt(item.fogueira)
+                inventario[13].quantidade = parseInt(item.luz)
+                inventario[14].quantidade = parseInt(item.mesa_trabalho)
+                inventario[15].quantidade = parseInt(item.grade)
+
+
+                display(true)
+                recarregarInventario()
+
+            } else {
+                display(false)
+            }
+        }
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    var itemSelecionadoAtualmente;
+    var blur = 0;
+
+
+
+
+
+    setInterval(() => {
+
+        var resultou_Algum_Craft_Valido = false
+        var receitaAtual = ''
+
+        //Cabana
+        if (!resultou_Algum_Craft_Valido) {
+            receitaAtual = 'Cabana'
+            if (tem_na_mesa('Madeira', 4)) {
+                if (tem_na_mesa('Ferro', 4)) {
+                    if (tem_na_mesa('Pano', 1)) {
+
+                        resultou_Algum_Craft_Valido = true
+                    }
+                }
+            }
+        }
+
+        //Fogueira
+        if (!resultou_Algum_Craft_Valido) {
+            receitaAtual = 'Fogueira'
+            if (tem_na_mesa('Madeira', 4)) {
+                if (tem_na_mesa('Polvora', 2)) {
+                    if (tem_na_mesa('Papel', 1)) {
+                        resultou_Algum_Craft_Valido = true
+                    }
+                }
+            }
+        }
+
+        //Kit Reparo
+        if (!resultou_Algum_Craft_Valido) {
+            receitaAtual = 'Kit Reparo'
+            if (tem_na_mesa('Ferro', 5)) {
+                if (tem_na_mesa('Corda', 2)) {
+                    if (tem_na_mesa('Plastico', 2)) {
+                        resultou_Algum_Craft_Valido = true
+                    }
+                }
+            }
+        }
+
+
+        //Luz
+        if (!resultou_Algum_Craft_Valido) {
+            receitaAtual = 'Luz'
+            if (tem_na_mesa('Ferro', 5)) {
+                if (tem_na_mesa('Vidro', 5)) {
+                    if (tem_na_mesa('Plastico', 5)) {
+                        resultou_Algum_Craft_Valido = true
+                    }
+                }
+            }
+        }
+
+        //Mesa
+        if (!resultou_Algum_Craft_Valido) {
+            receitaAtual = 'Mesa'
+            if (tem_na_mesa('Ferro', 10)) {
+                if (tem_na_mesa('Madeira', 10)) {
+                    if (tem_na_mesa('Plastico', 4)) {
+                        if (tem_na_mesa('Kit Reparo', 5)) {
+                            if (tem_na_mesa('Papel', 5)) {
+                                resultou_Algum_Craft_Valido = true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        //Grade
+        if (!resultou_Algum_Craft_Valido) {
+            receitaAtual = 'Mesa'
+            if (tem_na_mesa('Ferro', 10)) {
+                if (tem_na_mesa('Corda', 5)) {
+                    resultou_Algum_Craft_Valido = true
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+        if (resultou_Algum_Craft_Valido) {
+            receitas.forEach(craft => {
+                if (craft.nome === receitaAtual) {
+                    document.getElementById('resultado_foto').src = craft.foto
+                    document.getElementById('resultado_nome_item').innerHTML = craft.nome
+                    document.getElementById('resultado').style.display = 'block'
+                }
+            });
+        }
+        else {
+            document.getElementById('resultado').style.display = 'none'
+        }
+
+
+
+
+
+
+
+    }, 1);
+
+
+
+
+
+    document.getElementById('limpar-mesa').addEventListener('click', () => {
+        //var item = document.getElementById('resultado_nome_item').innerHTML
+        inventario.forEach(e => {
+            if (e.quantidade_na_mesa >= 1) {
+                e.quantidade = e.quantidade + e.quantidade_na_mesa
+                e.quantidade_na_mesa = 0
+                while (e.quantidade_na_mesa !== 0) {
+                    e.quantidade_na_mesa = 0
+                }
+            }
+        });
+
+
+
+        document.getElementById('direita').innerHTML = ''
+        document.getElementById('resultado').style.display = 'none'
+        document.getElementById('limpar-mesa').style.display = 'none'
+
+        recarregarInventario()
+
+    })
+
+
+    document.getElementById('craftar').addEventListener('click', () => {
+
+        var item = document.getElementById('resultado_nome_item').innerHTML
+
+        console.log('Sendo criado: ' + item)
+        console.log('-------')
+
+
+        //remove itens adicionais da mesa, que nao faz parte da receita
+        //nao mexe nessa budega, pq ta funcionando milimetricamente!!
+        inventario.forEach(mochila => {
+            if (mochila.quantidade_na_mesa >= 1) {
+
+                console.log(mochila.nome_bruto + ' esta na mesa com ' + mochila.quantidade_na_mesa + ' unidades')
+
+                receitas.forEach(e => {
+                    if (e.nome == item) {//receita valida
+
+                        console.log('Receita atual existe')
+
+                        receitas.forEach(receita => {
+                            if (receita.nome == item) {//achou a receita na lista
+
+                                console.log('Receita atual existe na lista')
+
+                                if (receita.itens.includes(mochila.nome_bruto)) {
+                                    mochila.quantidade_na_mesa = 0
+                                    console.log(mochila.nome_bruto + ' existe na receita')
+                                }
+                                else {
+                                    console.log(mochila.nome_bruto + ' nao existe na receita lista. Retornado ao inventario ' + mochila.quantidade_na_mesa + ' unidades')
+                                    mochila.quantidade = mochila.quantidade + mochila.quantidade_na_mesa
+                                    mochila.quantidade_na_mesa = 0
+                                }
+
+                            }
+                        });
+
+                    }
+                });
+            }
+        });
+        //--------------------------------------------
+
+
+
+
+        inventario.forEach(e => {
+            if (e.nome_bruto === item) {
+                e.quantidade = e.quantidade + 1
+            }
+        });
+
+
+
+        alertaOK('Sucesso', '<i>1x ' + item + ' adicionado</i>')
+
+
+
+
+        $.post("http://craft_menu/attStats", JSON.stringify({
+            madeira: inventario[0].quantidade,
+            ferro: inventario[1].quantidade,
+            cabana: inventario[2].quantidade,
+            corda: inventario[3].quantidade,
+            agua: inventario[4].quantidade,
+            gasolina: inventario[5].quantidade,
+            pano: inventario[6].quantidade,
+            vidro: inventario[7].quantidade,
+            plastico: inventario[8].quantidade,
+            papel: inventario[9].quantidade,
+            polvora: inventario[10].quantidade,
+        
+            kit_reparo: inventario[11].quantidade,
+            fogueira: inventario[12].quantidade,
+            luz: inventario[13].quantidade,
+            mesa_trabalho: inventario[14].quantidade,
+            grade: inventario[15].quantidade,
+        }));
+
+
+
+        document.getElementById('direita').innerHTML = ''
+        document.getElementById('resultado').style.display = 'none'
+        document.getElementById('limpar-mesa').style.display = 'none'
+
+
+
+        recarregarInventario()
+    })
+
+
+
+
+
+
+    function tem_na_mesa(nome, quant) {
+        var bool = false
+        inventario.forEach(mesa => {
+            if (mesa.nome_bruto === nome) {
+                if (mesa.quantidade_na_mesa === quant) {
+                    bool = true
+                }
+            }
+
+        });
+        return bool
+    }
+
+
+
+
+
+
+
+
+
+
+    recarregarInventario()
+
+    function recarregarInventario() {
+        document.getElementById('centro').innerHTML = ''
+        var itens_na_tela = 0
+        inventario.forEach(i => {
+
+            if (i.quantidade > 0) {
+
+                document.getElementById('centro').innerHTML += `
+                <div class="bloquinho"  id="centro_${i.nome_bruto}">
+                    <img src="${i.foto}" alt="" title="" id="foto_${i.nome_bruto}">
+                    <p>${i.quantidade}</p>
+                </div>
+            `
+                itens_na_tela++
+            }
+        });
+        for (let index = itens_na_tela; index < 20; index++) {
+            document.getElementById('centro').innerHTML += `
+            <div class="bloquinho"  id=""></div>
+            `
+        }
+        redimencionaBloquinhos()
+        moverParaMesa()
+        todosBloquinhosPreto()
+
+        //redimenciona os containers
+        document.getElementById('centro').style.height = (window.innerHeight / 1.5) + 'px'
+        document.getElementById('direita').style.height = (window.innerHeight / 2.5) + 'px'
+        document.getElementById('resultado').style.top = (window.innerHeight / 1.9) + 'px'
+
+
+    }
+
+
+
+
+
+    function moverParaMesa() {
+        var lista = document.getElementById('centro').querySelectorAll('*')
+        lista.forEach(e => {
+            if (e.id.includes('centro_')) {
+                var id_sem_id = e.id.replace('centro_', '')
+
+                e.addEventListener('click', () => {
+
+                    if (e !== itemSelecionadoAtualmente) {
+                        todosBloquinhosPreto()
+                        itemSelecionadoAtualmente = e
+                    }
+
+                    //if(e.style.backgroundColor  === 'rgba(53, 115, 248, 0.77)'){
+                    if (e.style.backgroundColor === 'rgba(17, 17, 17, 0.77)') {
+                        e.style.backgroundColor = 'rgba(53, 115, 248, 0.77)'
+                    }
+                    else {
+                        inventario.forEach(inv => {
+
+                            if (inv.nome_bruto === id_sem_id) {
+                                inv.quantidade = inv.quantidade - 1
+                                inv.quantidade_na_mesa = inv.quantidade_na_mesa + 1
+
+
+                                document.getElementById('direita').innerHTML += `
+                                    <div class="bloquinho"  id="direita_${inv.nome_bruto}">
+                                        <img src="${inv.foto}" alt="" title="" id="foto_${inv.nome_bruto}">
+                                        <p>${inv.nome_bruto}</p>
+                                    </div>`
+
+                                document.getElementById('limpar-mesa').style.display = 'block'
+                            }
+                        });
+
+                        recarregarInventario()
+                    }
+
+
+
+
+                })
+
+
+            }
+        });
+    }
+
+
+
+
+
+
+
+    function redimencionaBloquinhos() {
+        const bloquinhos = document.querySelectorAll('div')
+        bloquinhos.forEach(b => {
+            if (b.classList.contains('bloquinho')) {
+                b.style.height = b.offsetWidth + 'px'
+                b.style.minHeight = b.offsetWidth + 'px'
+                b.style.maxHeight = b.offsetWidth + 'px'
+            }
+        });
+    }
+
+    function todosBloquinhosPreto() {
+        const bloquinhos = document.querySelectorAll('div')
+        bloquinhos.forEach(b => {
+            if (b.classList.contains('bloquinho')) {
+                b.style.backgroundColor = 'rgba(17, 17, 17, 0.767)'
+            }
+        });
+    }
+
+
+
+
+    function alertaOK(tit, txt) {
+
+        var i_left = -260
+        var opacidade = 1.0
+
+        const f = document.createElement('div')
+        f.style.backgroundColor = 'green'
+        f.style.position = 'fixed'
+        f.style.left = i_left + 'px'
+        f.style.top = '25%'
+        f.style.width = '250px'
+        f.style.height = '50px'
+        f.style.borderRadius = '50px'
+        f.style.display = 'flex'
+        f.style.opacity = opacidade
+
+
+        const bola = document.createElement('div')
+        bola.style.width = '25%'
+        bola.style.backgroundColor = 'lime'
+        bola.style.height = '50px'
+        bola.style.borderRadius = '50px'
+        bola.style.opacity = '0.7'
+
+        const titulo = document.createElement('p')
+        titulo.style.width = '100%'
+        titulo.style.marginLeft = '0%'
+        titulo.style.marginTop = '2%'
+        titulo.style.color = 'white'
+        titulo.innerHTML = '<center><b>' + tit + '</b><br><i>' + txt + '</i></center>'
+
+
+
+
+        f.appendChild(bola)
+        f.appendChild(titulo)
+        document.body.appendChild(f)
+
+        var i_top = f.offsetTop
+
+        var p1 = true
+        var p2 = false
+
+        var loop = setInterval(() => {
+
+
+            if (p1) {
+                f.style.left = i_left + 'px'
+                i_left++
+                i_left++
+                if (i_left === 10) {
+                    p1 = false
+
+                    setTimeout(() => {
+                        p2 = true
+                    }, 2000);
+                }
+            }
+            if (p2) {
+
+                f.style.opacity = opacidade
+                opacidade = opacidade - 0.004
+
+                f.style.top = i_top + 'px'
+                i_top++
+                if (i_top === 10000) {
+                    clearInterval(loop)
+                }
+            }
+        }, 1);
+    }
+
+    function alertaERRO(tit, txt) {
+
+        var i_left = -260
+        var opacidade = 1.0
+
+        const f = document.createElement('div')
+        f.style.backgroundColor = 'red'
+        f.style.position = 'fixed'
+        f.style.left = i_left + 'px'
+        f.style.top = '25%'
+        f.style.width = '250px'
+        f.style.height = '50px'
+        f.style.borderRadius = '50px'
+        f.style.display = 'flex'
+        f.style.opacity = opacidade
+
+
+        const bola = document.createElement('div')
+        bola.style.width = '25%'
+        bola.style.backgroundColor = 'rgb(200,100,100)'
+        bola.style.height = '50px'
+        bola.style.borderRadius = '50px'
+        bola.style.opacity = '0.7'
+
+        const titulo = document.createElement('p')
+        titulo.style.width = '100%'
+        titulo.style.marginLeft = '0%'
+        titulo.style.marginTop = '2%'
+        titulo.style.color = 'white'
+        titulo.innerHTML = '<center><b>' + tit + '</b><br><i>' + txt + '</i></center>'
+
+
+
+
+        f.appendChild(bola)
+        f.appendChild(titulo)
+        document.body.appendChild(f)
+
+        var i_top = f.offsetTop
+
+        var p1 = true
+        var p2 = false
+
+        var loop = setInterval(() => {
+
+
+            if (p1) {
+                f.style.left = i_left + 'px'
+                i_left++
+                i_left++
+                if (i_left === 10) {
+                    p1 = false
+
+                    setTimeout(() => {
+                        p2 = true
+                    }, 2000);
+                }
+            }
+            if (p2) {
+
+                f.style.opacity = opacidade
+                opacidade = opacidade - 0.004
+
+                f.style.top = i_top + 'px'
+                i_top++
+                if (i_top === 10000) {
+                    clearInterval(loop)
+                }
+            }
+        }, 1);
+    }
+
+
+    document.getElementById('sair').addEventListener('click', () => {
+        $.post("http://craft_menu/exit", JSON.stringify({
+            vazio: 'vazio'
+        }));
+    })
+
+</script>
+
+</html>

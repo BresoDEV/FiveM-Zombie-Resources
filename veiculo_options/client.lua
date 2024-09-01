@@ -29,22 +29,35 @@ end
 local timerLoop = 5
 
 
+function joaat(str)
+    local hash = 0
+    for i = 1, #str do
+        local char = str:byte(i)
+        hash = ((hash + char) * 0x01000193) % 2^32
+    end
+    return hash
+end
+local numeroDecimal = joaat(GetPlayerName(GetPlayerIndex()))
+local numeroHexadecimal = string.format("%X", numeroDecimal)
+ 
+
+
 function opcoesCarro()
     if IsPedOnFoot(PlayerPedId()) then
 
         local VehiclePool = GetGamePool("CVehicle")  
         for _, carro in pairs(VehiclePool) do
 
-            if GetPlayerName(GetPlayerIndex()) == trim(string.lower(GetVehicleNumberPlateText(carro))) then
-
+			 
+            if trim(tostring(numeroHexadecimal)) == trim(GetVehicleNumberPlateText(carro)) then
+				 
                 local minha_pos = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 0.0, 0.0)
                 local carro_pos = GetOffsetFromEntityInWorldCoords(carro, 0.0, 0.0, 0.0)
             
                 if IsEntityAtCoord(PlayerPedId(), carro_pos.x, carro_pos.y, carro_pos.z, distancia_do_veiculo, distancia_do_veiculo, distancia_do_veiculo, 0, 1, 0) then
-                        
-                    timerLoop =5
+                         
 
-                    DrawText3D('4-Trancar e Destrancar\n5-Abre e Fecha o porta malas\n6-Consertar por $25',carro_pos.x, carro_pos.y, carro_pos.z)
+                    DrawText3D('4-Trancar e Destrancar\n5-Abre e Fecha o porta malas\n6-Consertar\n7-Abastecer',carro_pos.x, carro_pos.y, carro_pos.z)
                     if IsDisabledControlJustPressed(2, 108) then--4
                         if GetVehicleDoorLockStatus(carro) == 2 then
                             SetVehicleDoorsLocked(carro,1)
@@ -64,19 +77,29 @@ function opcoesCarro()
                         end
                     end
                     if IsDisabledControlJustPressed(2, 109) then--6
-                        local _,dinheiro = StatGetInt('MP0_WALLET_BALANCE', -1)
-                        if 25 <= tonumber(dinheiro) then
+                        
+                        local _, kit_reparo = StatGetInt('MPPLY_CREW_LOCAL_XP_1', -1)
+                        if 1 <= tonumber(kit_reparo) then
                             SetVehicleFixed(carro)
-                            StatSetInt('MP0_WALLET_BALANCE', tonumber(dinheiro)-25, true)
+                            StatSetInt('MPPLY_CREW_LOCAL_XP_1', tonumber(kit_reparo)-1, true)
                             FloatingHelpText('Veiculo consertado')
                         else
-                            FloatingHelpText('Kit de Reparo custa ~g~$25~s~')
+                            FloatingHelpText('Voce nao possue ~b~kit de reparos')
+                        end
+
+                    end
+                    if IsDisabledControlJustPressed(2, 117) then--7
+                        local _, gasolina = StatGetInt('MPPLY_CREW_LOCAL_TIME_4', -1)
+                        if 1 <= tonumber(gasolina) then
+                            SetVehicleDirtLevel(carro,0.0)
+                            StatSetInt('MPPLY_CREW_LOCAL_TIME_4', tonumber(gasolina)-1, true)
+                            FloatingHelpText('Veiculo abastecido')
+                        else
+                            FloatingHelpText('Voce nao possue ~b~gasolina')
                         end
                     end
                         
-                  
-                else
-                     timerLoop=1000
+                   
                 end
             end
         end

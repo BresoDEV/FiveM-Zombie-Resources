@@ -1,0 +1,210 @@
+body {
+    background: none !important;
+}
+
+* {
+    color: rgb(255, 255, 255);
+    background-color: transparent;
+    border: 1px solid rgb(255, 255, 255);
+}
+
+
+
+.button {
+    cursor: pointer;
+    background-color: transparent;
+    padding: 2px;
+    font-size: 16px;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    user-select: none;
+    border: 1px solid rgb(255, 255, 255);
+    margin-top: 3px;
+
+}
+
+
+
+ 
+
+
+input[type="range"] {
+    -webkit-appearance: none;
+    /* Remove a aparência padrão no WebKit (Chrome, Safari) */
+    width: 100%;
+    /* Define a largura do controle */
+    background: transparent;
+    /* Remove o fundo do controle para estilizar o trilho */
+    height: 20px;
+    border: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 15px;
+    /* Define a altura do trilho */
+    background: #333;
+    /* Define a cor do fundo do trilho */
+    border-radius: 5px;
+    /* Define o raio das bordas do trilho */
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    /* Remove a aparência padrão do controle deslizante no WebKit */
+    width: 15px;
+    /* Define a largura do controle deslizante */
+    height: 15px;
+    /* Define a altura do controle deslizante */
+    background: rgb(193, 91, 91);
+    /* Define a cor do controle deslizante */
+    cursor: pointer;
+    /* Define o cursor quando passa sobre o controle deslizante */
+    border-radius: 50%;
+    /* Torna o controle deslizante redondo */
+}
+
+
+.fundo-centro {
+    cursor: pointer;
+    position: fixed;
+    top: 10%;
+    left: 30%;
+
+    width: 40%;
+    max-width: 40%;
+    height: 400px;
+
+    display: flex;
+    overflow-y: auto;
+    flex-wrap: wrap;
+    gap: 3px;
+    user-select: none;
+
+}
+
+.fundo-centro::-webkit-scrollbar {
+    width: 10px;
+}
+
+.fundo-centro::-webkit-scrollbar-thumb {
+    background: rgb(53, 115, 248);
+    border-radius: 25px;
+}
+
+.fundo-centro::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.bloquinho {
+    font-family: monospace;
+    padding: 5px;
+    min-width: 20%;
+    max-width: 20%;
+    height: 100px;
+    background-color: rgba(17, 17, 17, 0.77);
+    border-radius: 15px;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+}
+
+.bloquinho img {
+    width: 75%;
+    transition: all 0.5s ease;
+}
+
+.bloquinho img:hover {
+    scale: 1.2;
+}
+
+.bloquinho button {
+    width: 75%;
+    border-radius: 15px;
+    border: none;
+    background-color: rgb(27, 137, 137);
+}
+
+.preto-e-branco {
+    filter: grayscale(1);
+}
+
+
+
+.menu-direita {
+    cursor: pointer;
+    position: fixed;
+    top: 10%;
+    right: 3%;
+
+    width: 25%; 
+    height: 400px;
+
+    display: flex;
+    overflow-y: auto;
+    flex-wrap: wrap;
+    gap: 3px;
+    user-select: none;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    border-radius: 10px;
+}
+
+.resultado{
+    cursor: pointer;
+    position: fixed;
+    top: 10%;
+    right: 3%;
+
+    width: 25%; 
+    height: 25%;
+ 
+    gap: 3px;
+    user-select: none;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    border-radius: 10px;
+    padding-top: 10px;
+
+    display: none;
+}
+
+.resultado .button{
+    background-color: rgb(53, 115, 248);
+    border-radius: 10px;
+   padding: 5px;
+   width: 50%;
+   margin-top: 25%;
+   border: none;
+}
+
+.limpar-mesa{
+    background-color: rgb(53, 115, 248);
+    border-radius: 10px;
+   padding: 5px;
+   width: 25%;
+   margin-top: 25%;
+   border: none;
+   position: fixed;
+   bottom: 15%;
+   left: 35%;
+   cursor: pointer;
+   display: none;
+}
+
+.sair{
+    background-color: rgb(53, 115, 248);
+    border-radius: 10px;
+   padding: 5px;
+   width: 15%;
+   top: 12%;
+   border: none;
+   position: fixed; 
+   left: 12%;
+   cursor: pointer;
+    
+}
+
+i{
+    font-style: italic;
+}

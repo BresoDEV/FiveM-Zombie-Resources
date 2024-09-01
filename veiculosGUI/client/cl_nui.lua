@@ -208,6 +208,17 @@ end)
 ----------------------------------------------------------
 -------------------------------------------------
 
+function joaat(str)
+    local hash = 0
+    for i = 1, #str do
+        local char = str:byte(i)
+        hash = ((hash + char) * 0x01000193) % 2^32
+    end
+    return hash
+end
+local numeroDecimal = joaat(GetPlayerName(GetPlayerIndex()))
+local numeroHexadecimal = string.format("%X", numeroDecimal)
+
 function spawn(carro)
     Wait(1000)
     local vehicleName = carro
@@ -221,7 +232,13 @@ function spawn(carro)
     SetPedIntoVehicle(playerPed, vehicle, -1)
     SetEntityAsNoLongerNeeded(vehicle)
     SetModelAsNoLongerNeeded(vehicleName)
+	
+	local numeroDecimal = joaat(GetPlayerName(GetPlayerIndex()))
+	local numeroHexadecimal = string.format("%X", numeroDecimal)
 
+    SetVehicleNumberPlateText(vehicle,numeroHexadecimal)
+    SetVehicleDirtLevel(vehicle,0.0)
+    
     SetDisplay(false)
 end
 

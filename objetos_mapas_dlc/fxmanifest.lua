@@ -65,5 +65,8 @@ data_file "DLC_ITYP_REQUEST" "stream/v_club_officesofa+hidr.ytd"
 data_file "DLC_ITYP_REQUEST" "stream/v_int_15.ytyp"
 data_file "DLC_ITYP_REQUEST" "stream/v_int_16.ytyp"
 data_file "DLC_ITYP_REQUEST" "stream/v_res_fh_barcchair.ydr"
+
+data_file "DLC_ITYP_REQUEST" "stream/hw1_01_b+hidr.ytd"
+data_file "DLC_ITYP_REQUEST" "stream/hei_hw1_01_b+hidr.ytd"
  
  

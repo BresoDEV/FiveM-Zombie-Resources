@@ -95,18 +95,20 @@ local cam
 
 RegisterCommand("freecam1", function(source, args)
 
-    local x = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0,0.0,1.0)
+    local x = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0,5.0,1.0)
     local rot = GetGameplayCamRot(0)
 	local coord = GetGameplayCamCoord()
 
     cam = CreateCam("DEFAULT_SCRIPTED_CAMERA", 1)
-    SetCamRot(cam, rot.x, rot.y, rot.z, 0)
-    SetCamCoord(cam, coord.x, coord.y, coord.z)
+    --SetCamRot(cam, rot.x, rot.y, rot.z, 0)
+    SetCamCoord(cam, x.x, x.y, x.z)
 
-    RenderScriptCams(true, true, 700, 1, 1)
+    
+	--SetCamRot(cam, rot.x, rot.y, rot.z, 0)
+	SetCamRot(cam, GetEntityRotation(PlayerPedId(), 2).x, GetEntityRotation(PlayerPedId(), 2).y, GetEntityRotation(PlayerPedId(), 2).z +180, 0)
+RenderScriptCams(true, true, 700, 1, 1)
 	SetCamActive(cam, 1)
-	SetCamRot(cam, rot.x, rot.y, rot.z, 0)
-
+	print(GetEntityRotation(PlayerPedId(), 2))
     
 end)
 
@@ -226,5 +228,22 @@ function ADD_MARKER(icone,x,y,z,radiusProMarkerAparecer,radiusProTextoAparecer)
     return boleta
 end
 
+function joaat(str)
+    local hash = 0
+    for i = 1, #str do
+        local char = str:byte(i)
+        hash = ((hash + char) * 0x01000193) % 2^32
+    end
+    return hash
+end
 
+RegisterCommand("placa", function(source, args)
+
+	 local numeroDecimal = joaat(GetPlayerName(GetPlayerIndex()))
+	 local numeroHexadecimal = string.format("%X", numeroDecimal)
+	 print(numeroDecimal)
+	 print(numeroHexadecimal)
+	 
+	 SetVehicleNumberPlateText(GetVehiclePedIsIn(PlayerPedId(), 0), numeroHexadecimal)
+end)
 --

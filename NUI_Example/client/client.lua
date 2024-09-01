@@ -1,7 +1,90 @@
 local display = false
 local propSpawnado
+local pedSpawnado
+
+local drawEsp = false
+
+
+function GetGroundZCoord(coords)
+    if not coords then return end
+    local retval, groundZ = GetGroundZFor_3dCoord(coords.x, coords.y, 1000.0, 0)
+	 Wait(1)
+    if retval then
+        return vector3(coords.x, coords.y, groundZ)
+    else
+        --print('Couldn\'t find Ground Z Coordinates given 3D Coordinates')
+        --print(coords)
+        return coords
+    end
+end
+
+RegisterNUICallback("Waypoint", function(data)
+    local WaypointHandle = GetFirstBlipInfoId(8)
+    if DoesBlipExist(WaypointHandle) then
+	
+        local WaypointPos = GetBlipCoords(WaypointHandle)
+		SetFocusPosAndVel(WaypointPos.x, WaypointPos.y, 0.0,100.0,100.0,100.0)
+		SetEntityCoords(PlayerPedId(), WaypointPos.x, WaypointPos.y, 7500.0, 1, 0, 0, 0)
+		
+		local i = 0
+		while i < 100 do
+			local final = GetGroundZCoord(WaypointPos)
+			SetEntityCoords(PlayerPedId(), final.x, final.y, final.z + 2.0, 1, 0, 0, 0)
+			SetEntityHeading(PlayerPedId(), 0.0)
+			i = i+1
+		end
+		ClearFocus()
+         
+    end
+end)
+
+
+
+
+RegisterNUICallback("togleEsp", function(data)
+    if drawEsp then
+        drawEsp = false
+    else
+        drawEsp = true
+    end
+end)
 
 RequestNamedPtfxAsset("scr_rcbarry2")
+
+function DrawBoxAroundEntity(entity,r,gr,blu)
+    local model = GetEntityModel(entity)
+    local minDim, maxDim = GetModelDimensions(model)
+    local a = GetOffsetFromEntityInWorldCoords(entity, minDim.x, maxDim.y, minDim.z)
+    local b = GetOffsetFromEntityInWorldCoords(entity, minDim.x, minDim.y, minDim.z)
+    local c = GetOffsetFromEntityInWorldCoords(entity, maxDim.x, minDim.y, minDim.z)
+    local d = GetOffsetFromEntityInWorldCoords(entity, maxDim.x, maxDim.y, minDim.z)
+    local e = GetOffsetFromEntityInWorldCoords(entity, minDim.x, maxDim.y, maxDim.z)
+    local f = GetOffsetFromEntityInWorldCoords(entity, minDim.x, minDim.y, maxDim.z)
+    local g = GetOffsetFromEntityInWorldCoords(entity, maxDim.x, minDim.y, maxDim.z)
+    local h = GetOffsetFromEntityInWorldCoords(entity, maxDim.x, maxDim.y, maxDim.z)
+    local lines = {
+        {a, b}, {b, c}, {c, d}, {d, a}, {e, f}, {f, g}, {g, h}, {h, e},
+        {a, e}, {b, f}, {c, g}, {d, h}
+    }
+    for _, line in ipairs(lines) do
+        DrawLine(line[1].x, line[1].y, line[1].z, line[2].x, line[2].y, line[2].z, r, gr, blu, 255)
+    end
+	
+	
+end
+
+
+
+
+RegisterNUICallback("playScenario", function(data)
+    --data.scenarios 
+    TaskStartScenarioInPlace(PlayerPedId(),data.scenarios,0,0)
+end)
+
+RegisterNUICallback("stopScenario", function(data)
+    ClearPedTasks(PlayerPedId())
+end)
+
 
 
 ----------IPL-------------
@@ -42,6 +125,7 @@ RegisterNUICallback("spawn_prop", function(data)
     else
         print('Modelo '..data.prop..' nao foi carregado')
     end
+	 
     
 end)
 
@@ -92,10 +176,20 @@ RegisterNUICallback("godmode", function(data)
     end
 end)
 ---------------------------------
-
+function joaat(str)
+    local hash = 0
+    for i = 1, #str do
+        local char = str:byte(i)
+        hash = ((hash + char) * 0x01000193) % 2^32
+    end
+    return hash
+end
 
 RegisterNUICallback("carromeu", function(data)
-    SetVehicleNumberPlateText(GetVehiclePedIsIn(PlayerPedId(), 0),GetPlayerName(GetPlayerIndex()))
+    local numeroDecimal = joaat(GetPlayerName(GetPlayerIndex()))
+    local numeroHexadecimal = string.format("%X", numeroDecimal)
+
+    SetVehicleNumberPlateText(GetVehiclePedIsIn(PlayerPedId(), 0),numeroHexadecimal)
 end)
 
 RegisterNUICallback("abastecer", function(data)
@@ -193,6 +287,7 @@ RegisterNUICallback("carspawn", function(data)
         GetEntityCoords(PlayerPedId()).z, 
         0.0, 0.0, 0.0, 1.0, 0, 0, 0)
     
+        SetVehicleDirtLevel(vehicle,0.0)
     SetPedIntoVehicle(PlayerPedId(), vehicle, -1)
     SetEntityAsNoLongerNeeded(vehicle)
     SetModelAsNoLongerNeeded(vehicleName)
@@ -206,24 +301,24 @@ RegisterNUICallback("spawnamigo", function(data)
     while not HasModelLoaded(hash) do
         Wait(500)
     end
-    local Ped = CreatePed(26, hash, c.x, c.y , c.z, 0, 1, 0)
-    while not DoesEntityExist(Ped) do
+    pedSpawnado = CreatePed(26, hash, c.x, c.y , c.z, 0, 1, 0)
+    while not DoesEntityExist(pedSpawnado) do
         Wait(500)
     end
     SetModelAsNoLongerNeeded(hash)
 
-    while not NetworkRequestControlOfEntity(Ped) do
+    while not NetworkRequestControlOfEntity(pedSpawnado) do
         Wait(500)
     end
     local my_group = GetPlayerGroup(PlayerPedId())
     SetPedAsGroupLeader(PlayerPedId(), my_group)
-    SetPedAsGroupMember(Ped, my_group)
-    GiveWeaponToPed(Ped, 453432689, 9999, 0, 1)
-    SetPedNeverLeavesGroup(Ped, my_group)
-    SetPedCombatAbility(Ped, 100000)
-    SetPedCanSwitchWeapon(Ped, 1)
+    SetPedAsGroupMember(pedSpawnado, my_group)
+    GiveWeaponToPed(pedSpawnado, 984333226, 9999, 0, 1)
+    SetPedNeverLeavesGroup(pedSpawnado, my_group)
+    SetPedCombatAbility(pedSpawnado, 100000)
+    SetPedCanSwitchWeapon(pedSpawnado, 1)
 
-    SetPedRelationshipGroupHash(Ped, 'PLAYER')
+    SetPedRelationshipGroupHash(pedSpawnado, 'PLAYER')
 
     UseParticleFxAsset("scr_rcbarry2")
         StartPartcleFxNonLoopedAtCoord("scr_clown_appears", 
@@ -358,14 +453,66 @@ function SetDisplay(bool)
     })
 end
 
+function DrawText3D(text, x, y, z)
+    local onScreen, _x, _y = World3dToScreen2d(x, y, z)
+    local px, py, pz = table.unpack(GetGameplayCamCoords())
+
+    SetTextScale(0.35, 0.35)
+    SetTextFont(4)
+    SetTextProportional(1)
+    SetTextColour(255, 255, 255, 215)
+    SetTextEntry("STRING")
+    SetTextCentre(1)
+    AddTextComponentString(text)
+    DrawText(_x, _y)
+
+     
+end
+
+
+
 function hook()
     SetEntityInvincible(PlayerPedId(), boleta_godmode)
     SetPlayerInvincible(PlayerPedId(), boleta_godmode)
+
+    if drawEsp then
+        local boleta = false
+    local propPool = GetGamePool("CObject")
+    for _, prop in pairs(propPool) do
+		local cord = GetOffsetFromEntityInWorldCoords(prop,0.0,0.0,0.0)
+		if IsEntityAtCoord(PlayerPedId(), cord.x, cord.y, cord.z, 20.0, 20.0,20.0, 0, 1, 0) then
+			DrawBoxAroundEntity(prop,0,0,255)
+			DrawText3D(GetEntityArchetypeName(prop),cord.x,cord.y,cord.z)
+        end
+    end
+	
+	propPool = GetGamePool("CPed")
+    for _, prop in pairs(propPool) do
+		local cord = GetOffsetFromEntityInWorldCoords(prop,0.0,0.0,0.0)
+		if IsEntityAtCoord(PlayerPedId(), cord.x, cord.y, cord.z, 20.0, 20.0,20.0, 0, 1, 0) then
+			DrawBoxAroundEntity(prop,255,0,0)
+			DrawText3D(GetEntityArchetypeName(prop),cord.x,cord.y,cord.z)
+        end
+    end
+	
+	propPool = GetGamePool("CVehicle")
+    for _, prop in pairs(propPool) do
+		local cord = GetOffsetFromEntityInWorldCoords(prop,0.0,0.0,0.0)
+		if IsEntityAtCoord(PlayerPedId(), cord.x, cord.y, cord.z, 20.0, 20.0,20.0, 0, 1, 0) then
+			DrawBoxAroundEntity(prop,0,255,0)
+			DrawText3D(GetEntityArchetypeName(prop),cord.x,cord.y,cord.z)
+        end
+    end
+    end
+	
+	
+	
 end
 
+ 
 Citizen.CreateThread(function()
     while true do
-        Citizen.Wait(10)
+        Citizen.Wait(5)
 
         hook()
 

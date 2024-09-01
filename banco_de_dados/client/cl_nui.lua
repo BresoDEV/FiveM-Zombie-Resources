@@ -1,9 +1,4 @@
-RegisterCommand("apagar", function(source, args)
-    SendNUIMessage({
 
-        type = "limpar_props"
-    })
-end)
 
  
 
@@ -13,104 +8,6 @@ function alerta(txt)
     AddTextComponentSubstringPlayerName(txt)
     EndTextCommandDisplayHelp(0, 0, 1, -1)
 end
-
-function enviarDados(prop, x, y, z, a)
-    SendNUIMessage({
-
-        type = "salvar_prop",
-
-        prophash = prop,
-        propx = x,
-        propy = y,
-        propz = z,
-        propa = a
-    })
-end
-
-function spawnMesa()
-    local cord2 = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 0.6, -1.0)
-    local Objeto_spawn = CreateObject(GetHashKey("prop_tool_bench02"), cord2.x, cord2.y, cord2.z,
-        GetEntityHeading(PlayerPedId()), true, true);
-
-    SetEntityHeading(Objeto_spawn, GetEntityHeading(PlayerPedId()) + 90.0)
-    FreezeEntityPosition(Objeto_spawn, true);
-    enviarDados("prop_tool_bench02", cord2.x, cord2.y, cord2.z, GetEntityHeading(Objeto_spawn))
-end
-
-function spawnGrade()
-    local cord2 = GetOffsetFromEntityInWorldCoords(PlayerPedId(), -2.0, 0.6, -1.0)
-    local Objeto_spawn = CreateObject(GetHashKey("prop_fnclink_02gate5"), cord2.x, cord2.y, cord2.z,
-        GetEntityHeading(PlayerPedId()), true, true);
-
-    SetEntityHeading(Objeto_spawn, GetEntityHeading(PlayerPedId()))
-
-    FreezeEntityPosition(Objeto_spawn, true);
-
-    enviarDados("prop_fnclink_02gate5", cord2.x, cord2.y, cord2.z, GetEntityHeading(Objeto_spawn))
-end
-
-RegisterNUICallback("carregarProps", function(data)
-    print('Chamou a void')
-    RequestModel(GetHashKey(data.prop))
-    while not HasModelLoaded(GetHashKey(data.prop)) do
-        Wait(500)
-    end
-    local Objeto_spawn = CreateObject(GetHashKey(data.prop), tonumber(data.coord_x), tonumber(data.coord_y),
-        tonumber(data.coord_z), true, true, true);
-
-    SetEntityHeading(Objeto_spawn, tonumber(data.coord_a))
-
-    FreezeEntityPosition(Objeto_spawn, true);
-
-    if data.prop == 'prop_beach_fire' then
-        AddTextEntry('MYBLIP', 'Fogueira')
-        local base = AddBlipForCoord(tonumber(data.coord_x), tonumber(data.coord_y), tonumber(data.coord_z))
-        BeginTextCommandSetBlipName('MYBLIP')
-        SetBlipSprite(base, 436)
-        AddTextComponentSubstringPlayerName('me')
-        EndTextCommandSetBlipName(base)
-    end
-
-    print('objeto ' .. data.prop .. ' spawnado')
-end)
-
-RegisterCommand("mesa", function(source, args)
-    spawnMesa()
-end)
-
-RegisterCommand("grade", function(source, args)
-    spawnGrade()
-end)
-
-RegisterCommand("fogueira", function(source, args)
-    local cord2 = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 2.6, -1.6)
-    local Objeto_spawn = CreateObject(GetHashKey("prop_beach_fire"), cord2.x, cord2.y, cord2.z,
-        GetEntityHeading(PlayerPedId()), true, true);
-
-    SetEntityHeading(Objeto_spawn, GetEntityHeading(PlayerPedId()) + 90.0)
-    FreezeEntityPosition(Objeto_spawn, true);
-
-    enviarDados("prop_beach_fire", cord2.x, cord2.y, cord2.z, GetEntityHeading(Objeto_spawn))
-
-    AddTextEntry('MYBLIP', 'Fogueira')
-    local base = AddBlipForCoord(cord2.x, cord2.y, cord2.z)
-    BeginTextCommandSetBlipName('MYBLIP')
-    SetBlipSprite(base, 436)
-    AddTextComponentSubstringPlayerName('me')
-    EndTextCommandSetBlipName(base)
-end)
-
-RegisterCommand("luz", function(source, args)
-    local cord2 = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 1.0, -1.6)
-    local Objeto_spawn = CreateObject(GetHashKey("prop_worklight_03a"), cord2.x, cord2.y, cord2.z,
-        true, true, true);
-
-    SetEntityHeading(Objeto_spawn, GetEntityHeading(PlayerPedId()) + 180.0)
-    FreezeEntityPosition(Objeto_spawn, true);
-
-    
-    enviarDados("prop_worklight_03a", cord2.x, cord2.y, cord2.z, GetEntityHeading(Objeto_spawn))
-end)
 
 
 
@@ -142,6 +39,12 @@ RegisterNUICallback("attDadosDoJogo", function(data)
     StatSetInt('MPPLY_CREW_LOCAL_TIME_0', tonumber(data.agua), true)
     StatSetInt('MPPLY_CREW_LOCAL_XP_4', tonumber(data.pano), true)
     StatSetInt('MPPLY_CREW_LOCAL_XP_3', tonumber(data.corda), true)
+    StatSetInt('MPPLY_CREW_LOCAL_XP_1', tonumber(data.kit_reparo), true)
+    StatSetInt('MPPLY_CREW_LOCAL_XP_0', tonumber(data.fogueira), true)
+    StatSetInt('MPPLY_CREW_NO_HEISTS_4', tonumber(data.luz), true)
+    StatSetInt('MPPLY_CREW_NO_HEISTS_3', tonumber(data.mesa_trabalho), true)
+    StatSetInt('MPPLY_CREW_NO_HEISTS_2', tonumber(data.grade), true)
+
 
     -- veiculos comprados
     StatSetInt('MPPLY_ACTIVITY_ENDED', tonumber(data.deathbike), true)
@@ -164,11 +67,7 @@ RegisterNUICallback("attDadosDoJogo", function(data)
 
     StatSetInt('MPPLY_CREW_LOCAL_XP_2', tonumber(data.ban), true)
 
-    -- MPPLY_CREW_LOCAL_XP_1
-    -- MPPLY_CREW_LOCAL_XP_0
-    -- MPPLY_CREW_NO_HEISTS_4
-    -- MPPLY_CREW_NO_HEISTS_3
-    -- MPPLY_CREW_NO_HEISTS_2
+ 
     -- MPPLY_CREW_NO_HEISTS_1
     -- MPPLY_CREW_NO_HEISTS_0
     -- MPPLY_CURRENT_CREW_RANK
@@ -244,6 +143,12 @@ function update()
         local _, agua = StatGetInt('MPPLY_CREW_LOCAL_TIME_0', -1)
         local _, pano = StatGetInt('MPPLY_CREW_LOCAL_XP_4', -1)
         local _, corda = StatGetInt('MPPLY_CREW_LOCAL_XP_3', -1)
+        local _,kit_reparo  = StatGetInt('MPPLY_CREW_LOCAL_XP_1', -1)
+        local _,fogueira  = StatGetInt('MPPLY_CREW_LOCAL_XP_0', -1)
+        local _,luz  = StatGetInt('MPPLY_CREW_NO_HEISTS_4', -1)
+        local _,mesa_trabalho  = StatGetInt('MPPLY_CREW_NO_HEISTS_3', -1)
+        local _,grade  = StatGetInt('MPPLY_CREW_NO_HEISTS_2', -1)
+
 
         -- veiculos
         local _, deathbike = StatGetInt('MPPLY_ACTIVITY_ENDED', -1)
@@ -293,6 +198,11 @@ function update()
             agua = agua,
             pano = pano,
             corda = corda,
+            kit_reparo  = kit_reparo,
+            fogueira  = fogueira,
+            luz  = luz,
+            mesa_trabalho  = mesa_trabalho,
+            grade  = grade,
 
             -- veiculos
             deathbike = deathbike,

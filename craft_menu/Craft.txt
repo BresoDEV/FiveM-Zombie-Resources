@@ -1,0 +1,30 @@
+Cabana
+-Madeira = 4
+-Ferro = 4
+-Pano = 1
+
+Fogueira
+-Madeira = 4
+-Polvora = 2
+-Papel = 1
+
+Kit Reparo
+-Ferro = 5
+-Corda = 2
+-Plastico = 2
+
+Luz
+-Ferro  = 5
+-Vidro  = 5
+-Plastico = 5
+
+Mesa
+-Ferro = 10 
+-Plastico = 4
+-Madeira = 10
+-Kit Reparo = 5
+-Papel = 5
+
+Grade
+-Ferro = 10
+-Corda = 5

@@ -3,6 +3,7 @@ local tempoWait = {
     valor= 5
 }
 
+local zumbisMortos = {}
 
 function addLootAleatorio()
 
@@ -179,10 +180,60 @@ function drawLineProps()
     end
 end
 
+function lootZumbis()
+    local zumbis = GetGamePool("CPed")
+    for _, z in pairs(zumbis) do
+	
+		if IsEntityDead(z) and GetPedSourceOfDeath(z) == PlayerPedId() then
+			if GetEntityAlpha(z) == 255 then
+				table.insert(zumbisMortos, z)
+				SetEntityAlpha(z, 254,0)
+			end
+		end
+		
+		
+		
+		local cord = GetOffsetFromEntityInWorldCoords(prop,0.0,0.0,0.0)
+		if IsEntityAtCoord(PlayerPedId(), cord.x, cord.y, cord.z, 20.0, 20.0,20.0, 0, 1, 0) then
+			 
+			DrawText3D(GetEntityArchetypeName(prop),cord.x,cord.y,cord.z)
+        end
+    end
+
+
+	for _, mortos in pairs(zumbisMortos) do
+		if DoesEntityExist(mortos) then
+			local cord = GetOffsetFromEntityInWorldCoords(mortos,0.0,0.0,0.0)
+			if IsEntityAtCoord(PlayerPedId(), cord.x, cord.y, cord.z, 20.0, 20.0,20.0, 0, 1, 0) then
+				 
+				DrawText3D('Aproxime-se para coletar',cord.x,cord.y,cord.z)
+				if IsEntityAtCoord(PlayerPedId(), cord.x, cord.y, cord.z, 1.0, 1.0,1.0, 0, 1, 0) then
+					DeleteEntity(mortos)
+					addLootAleatorio()
+				end
+			end
+		end
+    end
+
+    --limpa o array se nenhum existir
+    local encontrouVivo = false
+	for _, mortos in pairs(zumbisMortos) do
+		if DoesEntityExist(mortos) then
+			encontrouVivo = true
+		end
+    end
+    if encontrouVivo == false then
+        zumbisMortos = {}
+    end
+
+end
+
+ 
 
 CreateThread(function()
     while true do
         Wait(tempoWait.valor)
         drawLineProps()
+        lootZumbis()
     end
 end)

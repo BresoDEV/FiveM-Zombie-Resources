@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reset.css" type="text/css">
+    <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+    <title>NUI Example</title>
+</head>
+<style>
+    .ct {
+
+        position: fixed;
+        left: 20px;
+        top: 70px;
+        width: 200px;
+        background-color: rgba(0, 0, 0, 0.7);
+
+        color: aliceblue;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        border: 1px solid red;
+    }
+
+    .opt {
+        transition: all 0.3s ease;
+        cursor: pointer;
+        padding: 5px;
+        font-weight: bolder;
+    }
+
+    .opt:hover {
+        background-color: rgba(255, 0, 0, 0.3);
+        border-left: 10px solid rgb(255, 0, 0);
+    }
+
+    .banner {
+        position: fixed;
+        left: 20px;
+        top: 10px;
+        width: 200px;
+        height: 50px;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: aliceblue;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        border: 1px solid red;
+    }
+
+    .ct-lateral {
+        display: none;
+        position: fixed;
+        left: 230px;
+        top: 70px;
+        width: 200px;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: aliceblue;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        border: 1px solid red;
+    }
+
+    .ct-lateral-do-lateral {
+        display: none;
+        position: fixed;
+        left: 440px;
+        top: 70px;
+        width: 200px;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: aliceblue;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        border: 1px solid red;
+    }
+
+    img {
+        width: 80%;
+        margin-bottom: 10px;
+    }
+</style>
+
+<body>
+    <div class="menu" id="container">
+        <form id="form">
+            <div class="ct" id="ct">
+                <div class="opt" id="Criacao">
+                    <p>Criacao</p>
+                </div>
+                <div class="opt" id="Alimentos">
+                    <p>Alimentos</p>
+                </div>
+                <div class="opt" id="Veiculos">
+                    <p>Veiculos</p>
+                </div>
+                <div class="opt" id="Armas">
+                    <p>Armas</p>
+                </div>
+                <div class="opt" id="Ajudantes">
+                    <p>Ajudantes</p>
+                </div>
+                <div class="opt" id="Trajes">
+                    <p>Trajes</p>
+                </div>
+
+
+                <div>
+                    <p><br></p>
+                </div>
+
+                <div class="opt" id="Sair">
+                    <p>Sair</p>
+                </div>
+
+            </div>
+
+            <div class="ct-lateral" id="lateral Armas">
+                <p class="opt" id="Facao">Facao</p>
+                <p class="opt" id="Taco">Pe de Cabra</p>
+            </div>
+
+            <div class="ct-lateral" id="lateral Criacao">
+                <p class="opt" id="Fogueira">Fogueira</p>
+                <p class="opt" id="Cabana">Cabana</p>
+                <p class="opt" id="MesadeTrabalho">Mesa de Trabalho</p>
+                <p class="opt" id="Cerca">Cerca de Proteção</p>
+                <p class="opt" id="Iluminacao">Iluminação</p>
+                <p>
+                    <hr>
+                </p>
+                <p class="opt" id="SalvarUltimoProp">Salvar Ultima Criacao</p>
+                <p class="opt" id="ApagarUltimoProp">Apagar Ultima Criacao</p>
+                <p class="opt" id="ApagarProps">Zerar Memoria</p>
+            </div>
+
+
+
+            <div class="ct-lateral" id="lateral Alimentos">
+                <p class="opt" id="Comida">Comida</p>
+                <p class="opt" id="Agua">Agua</p>
+                <p class="opt" id="Fumar">Fumar</p>
+            </div>
+
+            <!----------------------------------------------->
+            <div class="ct-lateral" id="lateral Veiculos">
+                <p class="opt" id="Transporte Basico">Transporte Basico</p>
+                <p class="opt" id="Moto">Moto</p>
+                <p class="opt" id="Carro">Carro</p>
+                <p class="opt" id="Veiculo Militar">Veiculo Militar</p>
+                <p class="opt" id="Helicoptero">Helicoptero</p>
+            </div>
+
+            <div class="ct-lateral-do-lateral" id="lateral Transporte Basico">
+                <p class="opt" id="Transporte Basico Alugar">Alugar $500</p>
+                <center>
+                    <img src="imgs/caddy3.jpg" alt="">
+                </center>
+            </div>
+            <div class="ct-lateral-do-lateral" id="lateral Moto">
+                <p class="opt" id="Moto Alugar">Alugar</p>
+                <center>
+                    <img src="imgs/ratbike.jpg" alt="">
+                </center>
+            </div>
+            <div class="ct-lateral-do-lateral" id="lateral Carro">
+                <p class="opt" id="Carro Alugar">Alugar</p>
+                <center>
+                    <img src="imgs/dukes2.jpg" alt="">
+                </center>
+            </div>
+            <div class="ct-lateral-do-lateral" id="lateral Veiculo Militar">
+                <p class="opt" id="Veiculo Militar Alugar">Alugar</p>
+                <center>
+                    <img src="imgs/dune3.jpg" alt="">
+                </center>
+            </div>
+
+            <div class="ct-lateral-do-lateral" id="lateral Helicoptero">
+                <p class="opt" id="Helicoptero Alugar">Alugar</p>
+                <center>
+                    <img src="imgs/havok.jpg" alt="">
+                </center>
+            </div>
+
+            <!----------------------------------------------->
+            <div class="ct-lateral" id="lateral Ajudantes">
+                <p class="opt" id="Chop">Chop</p>
+                <p class="opt" id="Pantera">Pantera</p>
+                <p class="opt" id="Civil">Civil</p>
+                <p class="opt" id="Policial">Policial</p>
+                <p class="opt" id="Soldado">Soldado</p>
+                <p class="opt" id="Assasino">Assasino</p>
+            </div>
+            <!----------------------------------------------->
+            <div class="ct-lateral" id="lateral Trajes">
+                <p class="opt" id="Sobrevivente" onclick="esconderLateralDoLateral()">Sobrevivente</p>
+                <p class="opt" id="Iniciante" onclick="esconderLateralDoLateral()">Iniciante</p>
+                <p class="opt" id="Experiente" onclick="esconderLateralDoLateral()">Experiente</p>
+                <p class="opt" id="Guerrilheiro" onclick="esconderLateralDoLateral()">Guerrilheiro</p>
+                <p class="opt" id="Veterano" onclick="esconderLateralDoLateral()">Veterano</p>
+            </div>
+
+            <div class="ct-lateral-do-lateral" id="lateral Sobrevivente">
+                <p class="opt">Sobrevivente</p>
+                <p>
+                    <hr>
+                </p>
+                <p class="opt" id="Sobrevivente Homem">Homem</p>
+                <p class="opt" id="Sobrevivente Mulher">Mulher</p>
+            </div>
+            <div class="ct-lateral-do-lateral" id="lateral Iniciante">
+                <p class="opt">Iniciante</p>
+                <p>
+                    <hr>
+                </p>
+                <p class="opt" id="Iniciante Homem">Homem</p>
+                <p class="opt" id="Iniciante Mulher">Mulher</p>
+            </div>
+            <div class="ct-lateral-do-lateral" id="lateral Experiente">
+                <p class="opt">Experiente</p>
+                <p>
+                    <hr>
+                </p>
+                <p class="opt" id="Experiente Homem">Homem</p>
+                <p class="opt" id="Experiente Mulher">Mulher</p>
+            </div>
+            <div class="ct-lateral-do-lateral" id="lateral Guerrilheiro">
+                <p class="opt">Guerrilheiro</p>
+                <p>
+                    <hr>
+                </p>
+                <p class="opt" id="Guerrilheiro Homem">Homem</p>
+                <p class="opt" id="Guerrilheiro Mulher">Mulher</p>
+            </div>
+            <div class="ct-lateral-do-lateral" id="lateral Veterano">
+                <p class="opt">Veterano</p>
+                <p>
+                    <hr>
+                </p>
+                <p class="opt" id="Veterano Homem">Homem</p>
+                <p class="opt" id="Veterano Mulher">Mulher</p>
+            </div>
+            <!----------------------------------------------->
+
+        </form>
+    </div>
+
+</body>
+<script>
+
+    display(false)
+
+    function display(bool) {
+        if (bool) {
+            document.getElementById('container').style.display = 'block'
+        } else {
+            document.getElementById('container').style.display = 'none'
+        }
+    }
+
+
+    window.addEventListener('message', function (event) {
+        var item = event.data;
+        if (item.type === "ui") {
+            if (item.status == true) {
+                display(true)
+
+            } else {
+                display(false)
+            }
+        }
+        if (item.type === "alerta") {
+            alerta(item.texto, parseInt(item.tempo), item.cor)
+        }
+        if (item.type === "salvar_prop") {
+            if (!localStorage.getItem('props')) {
+                localStorage.setItem('props', '')
+            }
+            if (!localStorage.getItem('x')) {
+                localStorage.setItem('x', '')
+            }
+            if (!localStorage.getItem('y')) {
+                localStorage.setItem('y', '')
+            }
+            if (!localStorage.getItem('z')) {
+                localStorage.setItem('z', '')
+            }
+            if (!localStorage.getItem('a')) {
+                localStorage.setItem('a', '')
+            }
+
+            localStorage.setItem('props', localStorage.getItem('props') + ',' + item.prophash)
+            localStorage.setItem('x', localStorage.getItem('x') + ',' + item.propx)
+            localStorage.setItem('y', localStorage.getItem('y') + ',' + item.propy)
+            localStorage.setItem('z', localStorage.getItem('z') + ',' + item.propz)
+            localStorage.setItem('a', localStorage.getItem('a') + ',' + item.propa)
+
+            console.log('Prop salvo')
+            alerta('Prop salvo')
+        }
+
+        if (item.type === "propload") {
+            carregarProps()
+        }
+
+    })
+
+
+function carregarProps() {
+
+                if (localStorage.getItem('props')) {
+                    if (localStorage.getItem('props') !== '') {
+
+
+                        const props = localStorage.getItem('props').split(',')
+                        const x = localStorage.getItem('x').split(',')
+                        const y = localStorage.getItem('y').split(',')
+                        const z = localStorage.getItem('z').split(',')
+                        const a = localStorage.getItem('a').split(',')
+
+                        for (let i = 0; i < props.length; i++) {
+                            console.log(props[i] + '_' + x[i] + '_' + y[i] + '_' + z[i] + '_' + a[i])
+                            setTimeout(() => {
+                                $.post("http://menu_player/carregarProps", JSON.stringify({
+                                    prop: props[i],
+                                    coord_x: x[i],
+                                    coord_y: y[i],
+                                    coord_z: z[i],
+                                    coord_a: a[i],
+                                }))
+                            }, 1000);
+                        }
+
+                    }
+                }
+
+
+
+
+
+            }
+
+
+
+    function esconderLateralDoLateral() {
+        var d = document.querySelectorAll('*')
+        d.forEach(element => {
+            if (element.className == 'ct-lateral-do-lateral') {
+                element.style.display = 'none'
+            }
+        });
+    }
+
+
+    //-------------------------------------------------------------
+    document.getElementById('SalvarUltimoProp').addEventListener('click', () => {
+        $.post("http://menu_player/SalvarUltimoProp", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+
+    document.getElementById('Sair').addEventListener('click', () => {
+        $.post("http://menu_player/Sair", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+    //-------------------------------------------------------------
+
+    document.getElementById('ApagarUltimoProp').addEventListener('click', () => {
+        $.post("http://menu_player/ApagarUltimoProp", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+    document.getElementById('ApagarProps').addEventListener('click', () => {
+        localStorage.removeItem('props')
+        localStorage.removeItem('x')
+        localStorage.removeItem('y')
+        localStorage.removeItem('z')
+        localStorage.removeItem('a')
+
+        console.log('Props apagados')
+        alerta('Props apagados')
+    })
+    //-------------------------------------------------------------
+    document.getElementById('Sobrevivente Homem').addEventListener('click', () => {
+        $.post("http://menu_player/Sobrevivente Homem", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+    document.getElementById('Sobrevivente Mulher').addEventListener('click', () => {
+        $.post("http://menu_player/Sobrevivente Mulher", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+    document.getElementById('Iniciante Homem').addEventListener('click', () => {
+        $.post("http://menu_player/Iniciante Homem", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+    document.getElementById('Iniciante Mulher').addEventListener('click', () => {
+        $.post("http://menu_player/Iniciante Mulher", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+    document.getElementById('Experiente Homem').addEventListener('click', () => {
+        $.post("http://menu_player/Experiente Homem", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+    document.getElementById('Experiente Mulher').addEventListener('click', () => {
+        $.post("http://menu_player/Experiente Mulher", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+    document.getElementById('Guerrilheiro Homem').addEventListener('click', () => {
+        $.post("http://menu_player/Guerrilheiro Homem", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+    document.getElementById('Guerrilheiro Mulher').addEventListener('click', () => {
+        $.post("http://menu_player/Guerrilheiro Mulher", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+    document.getElementById('Veterano Homem').addEventListener('click', () => {
+        $.post("http://menu_player/Veterano Homem", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+    document.getElementById('Veterano Mulher').addEventListener('click', () => {
+        $.post("http://menu_player/Veterano Mulher", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+
+    //-------------------------------------------------------------
+    document.getElementById('Chop').addEventListener('click', () => {
+        $.post("http://menu_player/Chop", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+    document.getElementById('Pantera').addEventListener('click', () => {
+        $.post("http://menu_player/Pantera", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+    document.getElementById('Civil').addEventListener('click', () => {
+        $.post("http://menu_player/Civil", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+    document.getElementById('Policial').addEventListener('click', () => {
+        $.post("http://menu_player/Policial", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+    document.getElementById('Soldado').addEventListener('click', () => {
+        $.post("http://menu_player/Soldado", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+    document.getElementById('Assasino').addEventListener('click', () => {
+        $.post("http://menu_player/Assasino", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+    //-------------------------------------------------------------
+
+    document.getElementById('Helicoptero Alugar').addEventListener('click', () => {
+        $.post("http://menu_player/Helicoptero Alugar", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+    document.getElementById('Veiculo Militar Alugar').addEventListener('click', () => {
+        $.post("http://menu_player/Veiculo Militar Alugar", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+    document.getElementById('Carro Alugar').addEventListener('click', () => {
+        $.post("http://menu_player/Carro Alugar", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+    document.getElementById('Moto Alugar').addEventListener('click', () => {
+        $.post("http://menu_player/Moto Alugar", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+    document.getElementById('Transporte Basico Alugar').addEventListener('click', () => {
+        $.post("http://menu_player/TransporteBasicoAlugar", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+    //-------------------------------------------------------------
+    document.getElementById('Fumar').addEventListener('click', () => {
+        $.post("http://menu_player/Fumar", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+    document.getElementById('Agua').addEventListener('click', () => {
+        $.post("http://menu_player/Agua", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+    document.getElementById('Comida').addEventListener('click', () => {
+        $.post("http://menu_player/Comida", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+
+
+    //-------------------------------------------------------------
+
+    document.getElementById('Iluminacao').addEventListener('click', () => {
+        $.post("http://menu_player/Iluminacao", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+    document.getElementById('Cerca').addEventListener('click', () => {
+        $.post("http://menu_player/Cerca", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+    document.getElementById('MesadeTrabalho').addEventListener('click', () => {
+        $.post("http://menu_player/MesadeTrabalho", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+    document.getElementById('Cabana').addEventListener('click', () => {
+        $.post("http://menu_player/Cabana", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+    document.getElementById('Fogueira').addEventListener('click', () => {
+        $.post("http://menu_player/Fogueira", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+    document.getElementById('Taco').addEventListener('click', () => {
+        $.post("http://menu_player/Taco", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+    document.getElementById('Facao').addEventListener('click', () => {
+        $.post("http://menu_player/Facao", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+
+
+
+
+    function oculltarTodosLateral() {
+        var d = document.querySelectorAll('div')
+        d.forEach(e => {
+            if (e.id.includes('lateral')) {
+                e.style.display = 'none'
+            }
+        });
+    }
+
+    document.getElementById('Trajes').addEventListener('click', () => {
+        oculltarTodosLateral()
+        document.getElementById('lateral Trajes').style.display = 'block'
+
+    })
+
+    document.getElementById('Armas').addEventListener('click', () => {
+        oculltarTodosLateral()
+        document.getElementById('lateral Armas').style.display = 'block'
+    })
+
+    document.getElementById('Sobrevivente').addEventListener('click', () => {
+
+        document.getElementById('lateral Sobrevivente').style.display = 'block'
+    })
+
+    document.getElementById('Iniciante').addEventListener('click', () => {
+        document.getElementById('lateral Iniciante').style.display = 'block'
+    })
+    document.getElementById('Experiente').addEventListener('click', () => {
+        document.getElementById('lateral Experiente').style.display = 'block'
+    })
+    document.getElementById('Guerrilheiro').addEventListener('click', () => {
+        document.getElementById('lateral Guerrilheiro').style.display = 'block'
+    })
+    document.getElementById('Veterano').addEventListener('click', () => {
+        document.getElementById('lateral Veterano').style.display = 'block'
+    })
+
+
+
+
+
+
+
+    document.getElementById('Ajudantes').addEventListener('click', () => {
+        oculltarTodosLateral()
+        document.getElementById('lateral Ajudantes').style.display = 'block'
+
+    })
+    document.getElementById('Criacao').addEventListener('click', () => {
+        oculltarTodosLateral()
+        document.getElementById('lateral Criacao').style.display = 'block'
+
+    })
+
+    document.getElementById('Alimentos').addEventListener('click', () => {
+        oculltarTodosLateral()
+        document.getElementById('lateral Alimentos').style.display = 'block'
+    })
+
+
+    document.getElementById('Veiculos').addEventListener('click', () => {
+        oculltarTodosLateral()
+        document.getElementById('lateral Veiculos').style.display = 'block'
+    })
+
+
+    document.getElementById('Transporte Basico').addEventListener('click', () => {
+        document.getElementById('lateral Transporte Basico').style.display = 'block'
+        document.getElementById('lateral Moto').style.display = 'none'
+        document.getElementById('lateral Carro').style.display = 'none'
+        document.getElementById('lateral Veiculo Militar').style.display = 'none'
+        document.getElementById('lateral Helicoptero').style.display = 'none'
+    })
+
+    document.getElementById('Moto').addEventListener('click', () => {
+        document.getElementById('lateral Moto').style.display = 'block'
+        document.getElementById('lateral Transporte Basico').style.display = 'none'
+        document.getElementById('lateral Carro').style.display = 'none'
+        document.getElementById('lateral Veiculo Militar').style.display = 'none'
+        document.getElementById('lateral Helicoptero').style.display = 'none'
+    })
+    document.getElementById('Carro').addEventListener('click', () => {
+        document.getElementById('lateral Carro').style.display = 'block'
+        document.getElementById('lateral Transporte Basico').style.display = 'none'
+        document.getElementById('lateral Moto').style.display = 'none'
+        document.getElementById('lateral Veiculo Militar').style.display = 'none'
+        document.getElementById('lateral Helicoptero').style.display = 'none'
+    })
+    document.getElementById('Veiculo Militar').addEventListener('click', () => {
+        document.getElementById('lateral Veiculo Militar').style.display = 'block'
+        document.getElementById('lateral Transporte Basico').style.display = 'none'
+        document.getElementById('lateral Moto').style.display = 'none'
+        document.getElementById('lateral Carro').style.display = 'none'
+        document.getElementById('lateral Helicoptero').style.display = 'none'
+    })
+
+    document.getElementById('Helicoptero').addEventListener('click', () => {
+        document.getElementById('lateral Helicoptero').style.display = 'block'
+        document.getElementById('lateral Transporte Basico').style.display = 'none'
+        document.getElementById('lateral Moto').style.display = 'none'
+        document.getElementById('lateral Carro').style.display = 'none'
+        document.getElementById('lateral Veiculo Militar').style.display = 'none'
+    })
+
+
+
+    var indexAlerta = 20
+
+    function alerta(txt, tempo = 3, cor = 'lime') {
+        var top = 50
+        if (document.getElementById(indexAlerta - 1)) {
+            top = document.getElementById(indexAlerta - 1).offsetHeight + document.getElementById(indexAlerta - 1).offsetTop + 4
+        }
+        b(top, cor, txt, tempo)
+    }
+
+
+    function b(top, cor, txt, tempo) {
+
+        const corpo = document.createElement('div')
+        corpo.style.position = 'fixed'
+        corpo.style.width = '200px'
+        corpo.style.right = '-250px'
+        corpo.style.top = top + 'px'
+        corpo.style.backgroundColor = 'rgba(0,0,0,0.7)'
+        corpo.style.color = 'white'
+        corpo.style.padding = '15px'
+        corpo.style.borderRight = '6px solid ' + cor
+        corpo.style.fontSize = '90%'
+        corpo.innerHTML = txt
+        corpo.id = indexAlerta
+
+        indexAlerta++
+        document.body.append(corpo)
+
+        var irigth = -250
+
+        var biil1 = setInterval(() => {
+            if (irigth !== 20) {
+                irigth += 2
+                corpo.style.right = irigth + 'px'
+            }
+            else {
+                clearInterval(biil1)
+                setTimeout(() => {
+
+                    var biil = setInterval(() => {
+                        if (irigth > -240) {
+                            irigth -= 3
+                            corpo.style.right = irigth + 'px'
+                        }
+                        else {
+                            clearInterval(biil)
+                            corpo.remove()
+                            indexAlerta--
+
+
+                        }
+                    }, 1);
+                }, (1000 * tempo));
+            }
+        }, 1);
+    }
+
+
+</script>
+
+</html>

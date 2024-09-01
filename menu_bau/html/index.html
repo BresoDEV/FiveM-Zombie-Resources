@@ -146,12 +146,23 @@
         agua: 0, cabana: 0,
         corda: 0, ferro: 0, gasolina: 0, madeira: 0,
         pano: 0, papel: 0, plastico: 0, polvora: 0, vidro: 0,
+        kit_reparo: 0,
+        fogueira: 0,
+        luz: 0,
+        mesa_trabalho: 0,
+        grade: 0,
     }
 
     var Inventario_Recebido = {
         agua: 0, cabana: 0,
         corda: 0, ferro: 0, gasolina: 0, madeira: 0,
         pano: 0, papel: 0, plastico: 0, polvora: 0, vidro: 0,
+        kit_reparo: 0,
+        fogueira: 0,
+        luz: 0,
+        mesa_trabalho: 0,
+        grade: 0,
+
     }
 
 
@@ -175,17 +186,22 @@
             if (item.status == true) {
 
                 //FALTA TEERMINAR
-               // Bau_Recebido.agua = item.bau_agua
-               // Bau_Recebido.cabana = item.bau_cabana
-               // Bau_Recebido.corda = item.bau_corda
-               // Bau_Recebido.ferro = item.bau_ferro
-               // Bau_Recebido.gasolina = item.bau_gasolina
-               // Bau_Recebido.madeira = item.bau_madeira
-               // Bau_Recebido.pano = item.bau_pano
-               // Bau_Recebido.papel = item.bau_papel
-               // Bau_Recebido.plastico = item.bau_plastico
-               // Bau_Recebido.polvora = item.bau_polvora
-               // Bau_Recebido.vidro = item.bau_vidro
+                // Bau_Recebido.agua = item.bau_agua
+                // Bau_Recebido.cabana = item.bau_cabana
+                // Bau_Recebido.corda = item.bau_corda
+                // Bau_Recebido.ferro = item.bau_ferro
+                // Bau_Recebido.gasolina = item.bau_gasolina
+                // Bau_Recebido.madeira = item.bau_madeira
+                // Bau_Recebido.pano = item.bau_pano
+                // Bau_Recebido.papel = item.bau_papel
+                // Bau_Recebido.plastico = item.bau_plastico
+                // Bau_Recebido.polvora = item.bau_polvora
+                // Bau_Recebido.vidro = item.bau_vidro
+                // Bau_Recebido.kit_reparo = parseInt(item.bau_kit_reparo)
+                // Bau_Recebido.fogueira = parseInt(item.bau_fogueira)
+                // Bau_Recebido.luz = parseInt(item.bau_luz)
+                // Bau_Recebido.mesa_trabalho = parseInt(item.bau_mesa_trabalho)
+                // Bau_Recebido.grade = parseInt(item.bau_grade)
 
                 Inventario_Recebido.agua = parseInt(item.inventario_agua)
                 Inventario_Recebido.cabana = parseInt(item.inventario_cabana)
@@ -199,9 +215,15 @@
                 Inventario_Recebido.polvora = parseInt(item.inventario_polvora)
                 Inventario_Recebido.vidro = parseInt(item.inventario_vidro)
 
- 
-				Alimentar()
-				eventoPegarDoBau()
+
+                Inventario_Recebido.kit_reparo = parseInt(item.inventario_kit_reparo)
+                Inventario_Recebido.fogueira = parseInt(item.inventario_fogueira)
+                Inventario_Recebido.luz = parseInt(item.inventario_luz)
+                Inventario_Recebido.mesa_trabalho = parseInt(item.inventario_mesa_trabalho)
+                Inventario_Recebido.grade = parseInt(item.inventario_grade)
+
+                Alimentar()
+                eventoPegarDoBau()
                 display(true)
 
             } else {
@@ -237,145 +259,218 @@
     //aqui vai a parte de alimentar as imagens com os itens do inventario
 
 
-function Alimentar(){
- var index = 0
+    function Alimentar() {
+        var index = 0
 
-    if (Inventario_Recebido.vidro > 0) {
-        document.getElementById('b' + index).innerHTML = '<img src="img/vidro.png" id="ib' + index + '">'
-        document.getElementById('ib' + index).title = Inventario_Recebido.vidro
-        index++
-    }
-    if (Inventario_Recebido.polvora > 0) {
-        document.getElementById('b' + index).innerHTML = '<img src="img/polvora.png" id="ib' + index + '">'
-        document.getElementById('ib' + index).title = Inventario_Recebido.polvora
-        index++
+        if (Inventario_Recebido.vidro > 0) {
+            document.getElementById('b' + index).innerHTML = '<img src="img/vidro.png" id="ib' + index + '">'
+            document.getElementById('ib' + index).title = Inventario_Recebido.vidro
+            index++
+        }
+        if (Inventario_Recebido.polvora > 0) {
+            document.getElementById('b' + index).innerHTML = '<img src="img/polvora.png" id="ib' + index + '">'
+            document.getElementById('ib' + index).title = Inventario_Recebido.polvora
+            index++
+        }
+
+        if (Inventario_Recebido.plastico > 0) {
+            document.getElementById('b' + index).innerHTML = '<img src="img/plastico.png" id="ib' + index + '">'
+            document.getElementById('ib' + index).title = Inventario_Recebido.plastico
+            index++
+        }
+
+        if (Inventario_Recebido.papel > 0) {
+            document.getElementById('b' + index).innerHTML = '<img src="img/papel.png" id="ib' + index + '">'
+            document.getElementById('ib' + index).title = Inventario_Recebido.papel
+            index++
+        }
+
+        if (Inventario_Recebido.pano > 0) {
+            document.getElementById('b' + index).innerHTML = '<img src="img/pano.png" id="ib' + index + '">'
+            document.getElementById('ib' + index).title = Inventario_Recebido.pano
+            index++
+        }
+
+        if (Inventario_Recebido.madeira > 0) {
+            document.getElementById('b' + index).innerHTML = '<img src="img/madeira.png" id="ib' + index + '">'
+            document.getElementById('ib' + index).title = Inventario_Recebido.madeira
+            index++
+        }
+
+        if (Inventario_Recebido.gasolina > 0) {
+            document.getElementById('b' + index).innerHTML = '<img src="img/gasolina.png" id="ib' + index + '">'
+            document.getElementById('ib' + index).title = Inventario_Recebido.gasolina
+            index++
+        }
+
+        if (Inventario_Recebido.ferro > 0) {
+            document.getElementById('b' + index).innerHTML = '<img src="img/ferro.png" id="ib' + index + '">'
+            document.getElementById('ib' + index).title = Inventario_Recebido.ferro
+            index++
+        }
+
+        if (Inventario_Recebido.agua > 0) {
+            document.getElementById('b' + index).innerHTML = '<img src="img/agua.png" id="ib' + index + '">'
+            document.getElementById('ib' + index).title = Inventario_Recebido.agua
+            console.log('recebeu agua')
+            index++
+        }
+
+        if (Inventario_Recebido.cabana > 0) {
+            document.getElementById('b' + index).innerHTML = '<img src="img/cabana.png" id="ib' + index + '">'
+            document.getElementById('ib' + index).title = Inventario_Recebido.cabana
+            index++
+        }
+
+        if (Inventario_Recebido.corda > 0) {
+            document.getElementById('b' + index).innerHTML = '<img src="img/corda.png" id="ib' + index + '">'
+            document.getElementById('ib' + index).title = Inventario_Recebido.corda
+            index++
+        }
+
+
+
+
+        if (Inventario_Recebido.kit_reparo > 0) {
+            document.getElementById('b' + index).innerHTML = '<img src="img/kit_reparo.png" id="ib' + index + '">'
+            document.getElementById('ib' + index).title = Inventario_Recebido.kit_reparo
+            index++
+        }
+
+
+        if (Inventario_Recebido.fogueira > 0) {
+            document.getElementById('b' + index).innerHTML = '<img src="img/fogueira.png" id="ib' + index + '">'
+            document.getElementById('ib' + index).title = Inventario_Recebido.fogueira
+            index++
+        }
+
+        if (Inventario_Recebido.luz > 0) {
+            document.getElementById('b' + index).innerHTML = '<img src="img/luz.png" id="ib' + index + '">'
+            document.getElementById('ib' + index).title = Inventario_Recebido.luz
+            index++
+        }
+
+        if (Inventario_Recebido.mesa_trabalho > 0) {
+            document.getElementById('b' + index).innerHTML = '<img src="img/mesa.png" id="ib' + index + '">'
+            document.getElementById('ib' + index).title = Inventario_Recebido.mesa_trabalho
+            index++
+        }
+
+        if (Inventario_Recebido.grade > 0) {
+            document.getElementById('b' + index).innerHTML = '<img src="img/grade.png" id="ib' + index + '">'
+            document.getElementById('ib' + index).title = Inventario_Recebido.grade
+            index++
+        }
+
+        //----------------------------------
+
+        index = 0
+
+        if (Bau_Recebido.vidro > 0) {
+            document.getElementById('bau_b' + index).innerHTML = '<img src="img/vidro.png" id="bau_ib' + index + '">'
+            document.getElementById('bau_ib' + index).title = Bau_Recebido.vidro
+            index++
+        }
+        if (Bau_Recebido.polvora > 0) {
+            document.getElementById('bau_b' + index).innerHTML = '<img src="img/polvora.png" id="bau_ib' + index + '">'
+            document.getElementById('bau_ib' + index).title = Bau_Recebido.polvora
+            index++
+        }
+
+        if (Bau_Recebido.plastico > 0) {
+            document.getElementById('bau_b' + index).innerHTML = '<img src="img/plastico.png" id="bau_ib' + index + '">'
+            document.getElementById('bau_ib' + index).title = Bau_Recebido.plastico
+            index++
+        }
+
+        if (Bau_Recebido.papel > 0) {
+            document.getElementById('bau_b' + index).innerHTML = '<img src="img/papel.png" id="bau_ib' + index + '">'
+            document.getElementById('bau_ib' + index).title = Bau_Recebido.papel
+            index++
+        }
+
+        if (Bau_Recebido.pano > 0) {
+            document.getElementById('bau_b' + index).innerHTML = '<img src="img/pano.png" id="bau_ib' + index + '">'
+            document.getElementById('bau_ib' + index).title = Bau_Recebido.pano
+            index++
+        }
+
+        if (Bau_Recebido.madeira > 0) {
+            document.getElementById('bau_b' + index).innerHTML = '<img src="img/madeira.png" id="bau_ib' + index + '">'
+            document.getElementById('bau_ib' + index).title = Bau_Recebido.madeira
+            index++
+        }
+
+        if (Bau_Recebido.gasolina > 0) {
+            document.getElementById('bau_b' + index).innerHTML = '<img src="img/gasolina.png" id="bau_ib' + index + '">'
+            document.getElementById('bau_ib' + index).title = Bau_Recebido.gasolina
+            index++
+        }
+
+        if (Bau_Recebido.ferro > 0) {
+            document.getElementById('bau_b' + index).innerHTML = '<img src="img/ferro.png" id="bau_ib' + index + '">'
+            document.getElementById('bau_ib' + index).title = Bau_Recebido.ferro
+            index++
+        }
+
+        if (Bau_Recebido.agua > 0) {
+            document.getElementById('bau_b' + index).innerHTML = '<img src="img/agua.png" id="bau_ib' + index + '">'
+            document.getElementById('bau_ib' + index).title = Bau_Recebido.agua
+            index++
+        }
+
+        if (Bau_Recebido.cabana > 0) {
+            document.getElementById('bau_b' + index).innerHTML = '<img src="img/cabana.png" id="bau_ib' + index + '">'
+            document.getElementById('bau_ib' + index).title = Bau_Recebido.cabana
+            index++
+        }
+
+        if (Bau_Recebido.corda > 0) {
+            document.getElementById('bau_b' + index).innerHTML = '<img src="img/corda.png" id="bau_ib' + index + '">'
+            document.getElementById('bau_ib' + index).title = Bau_Recebido.corda
+            index++
+        }
+
+
+
+
+
+
+        if (Bau_Recebido.kit_reparo > 0) {
+            document.getElementById('bau_b' + index).innerHTML = '<img src="img/kit_reparo.png" id="bau_ib' + index + '">'
+            document.getElementById('bau_ib' + index).title = Bau_Recebido.kit_reparo
+            index++
+        }
+
+
+        if (Bau_Recebido.fogueira > 0) {
+            document.getElementById('bau_b' + index).innerHTML = '<img src="img/fogueira.png" id="bau_ib' + index + '">'
+            document.getElementById('bau_ib' + index).title = Bau_Recebido.fogueira
+            index++
+        }
+
+        if (Bau_Recebido.luz > 0) {
+            document.getElementById('bau_b' + index).innerHTML = '<img src="img/luz.png" id="bau_ib' + index + '">'
+            document.getElementById('bau_ib' + index).title = Bau_Recebido.luz
+            index++
+        }
+
+        if (Bau_Recebido.mesa_trabalho > 0) {
+            document.getElementById('bau_b' + index).innerHTML = '<img src="img/mesa.png" id="bau_ib' + index + '">'
+            document.getElementById('bau_ib' + index).title = Bau_Recebido.mesa_trabalho
+            index++
+        }
+
+        if (Bau_Recebido.grade > 0) {
+            document.getElementById('bau_b' + index).innerHTML = '<img src="img/grade.png" id="bau_ib' + index + '">'
+            document.getElementById('bau_ib' + index).title = Bau_Recebido.grade
+            index++
+        }
+
+
     }
 
-    if (Inventario_Recebido.plastico > 0) {
-        document.getElementById('b' + index).innerHTML = '<img src="img/plastico.png" id="ib' + index + '">'
-        document.getElementById('ib' + index).title = Inventario_Recebido.plastico
-        index++
-    }
 
-    if (Inventario_Recebido.papel > 0) {
-        document.getElementById('b' + index).innerHTML = '<img src="img/papel.png" id="ib' + index + '">'
-        document.getElementById('ib' + index).title = Inventario_Recebido.papel
-        index++
-    }
-
-    if (Inventario_Recebido.pano > 0) {
-        document.getElementById('b' + index).innerHTML = '<img src="img/pano.png" id="ib' + index + '">'
-        document.getElementById('ib' + index).title = Inventario_Recebido.pano
-        index++
-    }
-
-    if (Inventario_Recebido.madeira > 0) {
-        document.getElementById('b' + index).innerHTML = '<img src="img/madeira.png" id="ib' + index + '">'
-        document.getElementById('ib' + index).title = Inventario_Recebido.madeira
-        index++
-    }
-
-    if (Inventario_Recebido.gasolina > 0) {
-        document.getElementById('b' + index).innerHTML = '<img src="img/gasolina.png" id="ib' + index + '">'
-        document.getElementById('ib' + index).title = Inventario_Recebido.gasolina
-        index++
-    }
-
-    if (Inventario_Recebido.ferro > 0) {
-        document.getElementById('b' + index).innerHTML = '<img src="img/ferro.png" id="ib' + index + '">'
-        document.getElementById('ib' + index).title = Inventario_Recebido.ferro
-        index++
-    }
-
-    if (Inventario_Recebido.agua > 0) {
-        document.getElementById('b' + index).innerHTML = '<img src="img/agua.png" id="ib' + index + '">'
-        document.getElementById('ib' + index).title = Inventario_Recebido.agua
-		console.log('recebeu agua')
-        index++
-    }
-
-    if (Inventario_Recebido.cabana > 0) {
-        document.getElementById('b' + index).innerHTML = '<img src="img/cabana.png" id="ib' + index + '">'
-        document.getElementById('ib' + index).title = Inventario_Recebido.cabana
-        index++
-    }
-
-    if (Inventario_Recebido.corda > 0) {
-        document.getElementById('b' + index).innerHTML = '<img src="img/corda.png" id="ib' + index + '">'
-        document.getElementById('ib' + index).title = Inventario_Recebido.corda
-        index++
-    }
-
-    index = 0
-
-    if (Bau_Recebido.vidro > 0) {
-        document.getElementById('bau_b' + index).innerHTML = '<img src="img/vidro.png" id="bau_ib' + index + '">'
-        document.getElementById('bau_ib' + index).title = Bau_Recebido.vidro
-        index++
-    }
-    if (Bau_Recebido.polvora > 0) {
-        document.getElementById('bau_b' + index).innerHTML = '<img src="img/polvora.png" id="bau_ib' + index + '">'
-        document.getElementById('bau_ib' + index).title = Bau_Recebido.polvora
-        index++
-    }
-
-    if (Bau_Recebido.plastico > 0) {
-        document.getElementById('bau_b' + index).innerHTML = '<img src="img/plastico.png" id="bau_ib' + index + '">'
-        document.getElementById('bau_ib' + index).title = Bau_Recebido.plastico
-        index++
-    }
-
-    if (Bau_Recebido.papel > 0) {
-        document.getElementById('bau_b' + index).innerHTML = '<img src="img/papel.png" id="bau_ib' + index + '">'
-        document.getElementById('bau_ib' + index).title = Bau_Recebido.papel
-        index++
-    }
-
-    if (Bau_Recebido.pano > 0) {
-        document.getElementById('bau_b' + index).innerHTML = '<img src="img/pano.png" id="bau_ib' + index + '">'
-        document.getElementById('bau_ib' + index).title = Bau_Recebido.pano
-        index++
-    }
-
-    if (Bau_Recebido.madeira > 0) {
-        document.getElementById('bau_b' + index).innerHTML = '<img src="img/madeira.png" id="bau_ib' + index + '">'
-        document.getElementById('bau_ib' + index).title = Bau_Recebido.madeira
-        index++
-    }
-
-    if (Bau_Recebido.gasolina > 0) {
-        document.getElementById('bau_b' + index).innerHTML = '<img src="img/gasolina.png" id="bau_ib' + index + '">'
-        document.getElementById('bau_ib' + index).title = Bau_Recebido.gasolina
-        index++
-    }
-
-    if (Bau_Recebido.ferro > 0) {
-        document.getElementById('bau_b' + index).innerHTML = '<img src="img/ferro.png" id="bau_ib' + index + '">'
-        document.getElementById('bau_ib' + index).title = Bau_Recebido.ferro
-        index++
-    }
-
-    if (Bau_Recebido.agua > 0) {
-        document.getElementById('bau_b' + index).innerHTML = '<img src="img/agua.png" id="bau_ib' + index + '">'
-        document.getElementById('bau_ib' + index).title = Bau_Recebido.agua
-        index++
-    }
-
-    if (Bau_Recebido.cabana > 0) {
-        document.getElementById('bau_b' + index).innerHTML = '<img src="img/cabana.png" id="bau_ib' + index + '">'
-        document.getElementById('bau_ib' + index).title = Bau_Recebido.cabana
-        index++
-    }
-
-    if (Bau_Recebido.corda > 0) {
-        document.getElementById('bau_b' + index).innerHTML = '<img src="img/corda.png" id="bau_ib' + index + '">'
-        document.getElementById('bau_ib' + index).title = Bau_Recebido.corda
-        index++
-    }
-
-}
-   
-     
 
 
 
@@ -400,6 +495,11 @@ function Alimentar(){
             plastico: 0,
             polvora: 0,
             vidro: 0,
+            kit_reparo: 0,
+            fogueira: 0,
+            luz: 0,
+            mesa_trabalho: 0,
+            grade: 0,
         }
         for (let i = 0; i < 100; i++) {
             if (document.getElementById('bau_ib' + i)) {
@@ -448,6 +548,27 @@ function Alimentar(){
                     bau.vidro = bau.vidro + parseInt(document.getElementById('bau_ib' + i).title)
                 }
 
+
+                if (src.includes('kit_reparo')) {
+                    bau.kit_reparo = bau.kit_reparo + parseInt(document.getElementById('bau_ib' + i).title)
+                }
+
+                if (src.includes('fogueira')) {
+                    bau.fogueira = bau.fogueira + parseInt(document.getElementById('bau_ib' + i).title)
+                }
+
+                if (src.includes('luz')) {
+                    bau.luz = bau.luz + parseInt(document.getElementById('bau_ib' + i).title)
+                }
+
+                if (src.includes('mesa')) {
+                    bau.mesa_trabalho = bau.mesa_trabalho + parseInt(document.getElementById('bau_ib' + i).title)
+                }
+
+                if (src.includes('grade')) {
+                    bau.grade = bau.grade + parseInt(document.getElementById('bau_ib' + i).title)
+                }
+
             }
         }
 
@@ -466,6 +587,11 @@ function Alimentar(){
             plastico: 0,
             polvora: 0,
             vidro: 0,
+            kit_reparo: 0,
+            fogueira: 0,
+            luz: 0,
+            mesa_trabalho: 0,
+            grade: 0,
         }
 
         for (let i = 0; i < 100; i++) {
@@ -515,6 +641,30 @@ function Alimentar(){
                     inventario.vidro = inventario.vidro + parseInt(document.getElementById('ib' + i).title)
                 }
 
+
+
+
+                if (src.includes('kit_reparo')) {
+                    inventario.kit_reparo = inventario.kit_reparo + parseInt(document.getElementById('ib' + i).title)
+                }
+
+                if (src.includes('fogueira')) {
+                    inventario.fogueira = inventario.fogueira + parseInt(document.getElementById('ib' + i).title)
+                }
+
+                if (src.includes('luz')) {
+                    inventario.luz = inventario.luz + parseInt(document.getElementById('ib' + i).title)
+                }
+
+                if (src.includes('mesa')) {
+                    inventario.mesa_trabalho = inventario.mesa_trabalho + parseInt(document.getElementById('ib' + i).title)
+                }
+
+                if (src.includes('grade')) {
+                    inventario.grade = inventario.grade + parseInt(document.getElementById('ib' + i).title)
+                }
+
+
             }
 
         }
@@ -538,6 +688,14 @@ function Alimentar(){
             inventario_polvora: inventario.polvora,
             inventario_vidro: inventario.vidro,
 
+            inventario_kit_reparo : inventario.kit_reparo,
+            inventario_fogueira  :  inventario.fogueira,
+            inventario_luz :  inventario.luz,
+            inventario_mesa_trabalho  :  inventario.mesa_trabalho,
+            inventario_grade  :  inventario.grade,
+
+
+
             bau_agua: bau.agua,
             bau_cabana: bau.cabana,
             bau_corda: bau.corda,
@@ -550,9 +708,16 @@ function Alimentar(){
             bau_polvora: bau.polvora,
             bau_vidro: bau.vidro,
 
+            bau_kit_reparo :  bau.kit_reparo,
+            bau_fogueira  :  bau.fogueira,
+            bau_luz :  bau.luz,
+            bau_mesa_trabalho  :  bau.mesa_trabalho,
+            bau_grade  :  bau.grade,
+
+
         }));
 
-
+            
 
     })
 
@@ -684,6 +849,9 @@ function Alimentar(){
 
     }
 
+
+    Alimentar()
+    eventoPegarDoBau()
 </script>
 
 </html>

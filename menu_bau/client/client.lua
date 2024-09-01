@@ -23,6 +23,12 @@ function SetDisplay(bool)
     local _, inventario_agua = StatGetInt('MPPLY_CREW_LOCAL_TIME_0', -1)
     local _, inventario_pano = StatGetInt('MPPLY_CREW_LOCAL_XP_4', -1)
     local _, inventario_corda = StatGetInt('MPPLY_CREW_LOCAL_XP_3', -1)
+
+    local _,inventario_kit_reparo  = StatGetInt('MPPLY_CREW_LOCAL_XP_1', -1)
+    local _,inventario_fogueira  = StatGetInt('MPPLY_CREW_LOCAL_XP_0', -1)
+    local _,inventario_luz  = StatGetInt('MPPLY_CREW_NO_HEISTS_4', -1)
+    local _,inventario_mesa_trabalho  = StatGetInt('MPPLY_CREW_NO_HEISTS_3', -1)
+    local _,inventario_grade  = StatGetInt('MPPLY_CREW_NO_HEISTS_2', -1)
     
     SendNUIMessage({
         type = "bau",
@@ -39,6 +45,12 @@ function SetDisplay(bool)
         inventario_agua = inventario_agua,
         inventario_pano = inventario_pano,
         inventario_corda = inventario_corda,
+
+        inventario_kit_reparo  = inventario_kit_reparo,
+        inventario_fogueira  = inventario_fogueira,
+        inventario_luz  = inventario_luz,
+        inventario_mesa_trabalho = inventario_mesa_trabalho,
+        inventario_grade  = inventario_grade,
     })
     
 end
@@ -60,6 +72,12 @@ RegisterNUICallback("salvar", function(data)
     StatSetInt('MPPLY_CREW_LOCAL_TIME_0', tonumber(data.inventario_agua), true)
     StatSetInt('MPPLY_CREW_LOCAL_XP_4', tonumber(data.inventario_pano), true)
     StatSetInt('MPPLY_CREW_LOCAL_XP_3', tonumber(data.inventario_corda), true)
+
+    StatSetInt('MPPLY_CREW_LOCAL_XP_1', tonumber(data.inventario_kit_reparo), true)
+    StatSetInt('MPPLY_CREW_LOCAL_XP_0', tonumber(data.inventario_fogueira), true)
+    StatSetInt('MPPLY_CREW_NO_HEISTS_4', tonumber(data.inventario_luz), true)
+    StatSetInt('MPPLY_CREW_NO_HEISTS_3', tonumber(data.inventario_mesa_trabalho), true)
+    StatSetInt('MPPLY_CREW_NO_HEISTS_2', tonumber(data.inventario_grade), true)
 end)
 
 

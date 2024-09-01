@@ -162,6 +162,8 @@ function iniciar()
         FloatingHelpText(textos.t1, 1, 3000) -- Entre no ~b~veiculo de entrega
     end
 
+    SetVehicleDirtLevel(vehicle,0.0)
+
     local entrouNoVeiculo = false;
 
     while IsPedInVehicle(PlayerPedId(), vehicle, 1) == false do
