@@ -331,7 +331,12 @@ function spawnAmigo(nome)
     local my_group = GetPlayerGroup(PlayerPedId())
     SetPedAsGroupLeader(PlayerPedId(), my_group)
     SetPedAsGroupMember(pedSpawnado, my_group)
-    GiveWeaponToPed(pedSpawnado, 984333226, 9999, 0, 1)
+	
+	if IsPedHuman(pedSpawnado) then
+		GiveWeaponToPed(pedSpawnado, 984333226, 9999, 0, 1)
+	end
+	 
+    
     SetPedNeverLeavesGroup(pedSpawnado, my_group)
     SetPedCombatAbility(pedSpawnado, 100000)
     SetPedCanSwitchWeapon(pedSpawnado, 1)
