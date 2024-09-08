@@ -168,10 +168,17 @@ function iniciar()
 
     while IsPedInVehicle(PlayerPedId(), vehicle, 1) == false do
         Wait(5)
-        DrawMarker(2, veiculos[indiceCarros], coordSpawnCaminhao.x, coordSpawnCaminhao.y, coordSpawnCaminhao.z + 5.0,
+        DrawMarker(2, coordSpawnCaminhao.x, coordSpawnCaminhao.y, coordSpawnCaminhao.z + 5.0,
             0.0, 0.0, 0.0, 0.0, 180.0, 0.0, 2.0, 2.0, 2.0, 0, 255, 0, 100, true, true, 2, nil, nil, false)
-
+			
+			--DrawMarker(2, pedCoords.x, pedCoords.y, pedCoords.z + 2, 0.0, 0.0, 0.0, 0.0, 180.0, 0.0, 2.0, 2.0, 2.0, 255, 128, 0, 50, false, true, 2, nil, nil, false)
+ 
+			
+		
+		
     end
+
+
 
     entrouNoVeiculo = true
     local concluiu = false
@@ -209,13 +216,17 @@ function iniciar()
     end
 
     if concluiu == true then
-        FloatingHelpText(textos.t3) -- "~g~Missao Concluida"
+	
+	--Alerta_Scaleform('~g~Missao Concluida','A Missao foi Concluida',200)
+	
+       FloatingHelpText(textos.t3) -- "~g~Missao Concluida"
 
         local _, pm = StatGetInt("MP0_WALLET_BALANCE", -1)
         local final = tonumber(pm) + tonumber(recompensas[indiceCoordEntrega])
         StatSetInt('MP0_WALLET_BALANCE', tonumber(final), true)
 
     else
+		--Alerta_Scaleform('~r~Missao Fracassada','A Missao foi Fracassada',200)
         FloatingHelpText(textos.t4) -- ~r~Missao Fracassada
     end
 

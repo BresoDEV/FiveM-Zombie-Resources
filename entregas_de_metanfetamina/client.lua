@@ -169,7 +169,7 @@ function iniciar()
 
     while IsPedInVehicle(PlayerPedId(), vehicle, 1) == false do
         Wait(5)
-        DrawMarker(2, veiculos[indiceCarros], coordSpawnCaminhao.x, coordSpawnCaminhao.y, coordSpawnCaminhao.z + 5.0,
+        DrawMarker(2,  coordSpawnCaminhao.x, coordSpawnCaminhao.y, coordSpawnCaminhao.z + 5.0,
             0.0, 0.0, 0.0, 0.0, 180.0, 0.0, 2.0, 2.0, 2.0, 0, 255, 0, 100, true, true, 2, nil, nil, false)
 
     end
