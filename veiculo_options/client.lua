@@ -49,7 +49,7 @@ function opcoesCarro()
         for _, carro in pairs(VehiclePool) do
 
 			 
-            if trim(tostring(numeroHexadecimal)) == trim(GetVehicleNumberPlateText(carro)) then
+            if tostring(numeroHexadecimal) == trim(GetVehicleNumberPlateText(carro)) then
 				 
                 local minha_pos = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 0.0, 0.0)
                 local carro_pos = GetOffsetFromEntityInWorldCoords(carro, 0.0, 0.0, 0.0)
