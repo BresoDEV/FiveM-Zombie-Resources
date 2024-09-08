@@ -124,7 +124,8 @@ RegisterNUICallback("spawn_prop", function(data)
     if HasModelLoaded(GetHashKey(data.prop)) then
         propSpawnado = CreateObject(GetHashKey(data.prop), cord2.x, cord2.y, cord2.z,true, true, true)
         SetEntityHeading(propSpawnado, GetEntityHeading(PlayerPedId()) + tonumber(data.a))
-        SetEntityDynamic(propSpawnado, true)
+        --SetEntityDynamic(propSpawnado, true)
+		FreezeEntityPosition(propSpawnado, true)
     else
         print('Modelo '..data.prop..' nao foi carregado')
     end
