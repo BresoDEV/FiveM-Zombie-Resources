@@ -1,12 +1,36 @@
 
+TriggerServerEvent('spawnarPed')
+
+RegisterNetEvent('aplicarScenarioPed')
+AddEventHandler('aplicarScenarioPed', function( e,scenario)  
+    while not NetworkDoesEntityExistWithNetworkId(tonumber(e)) do
+        Citizen.Wait(100)  
+    end
+    local ped = NetworkGetEntityFromNetworkId(tonumber(e))
+    if DoesEntityExist(ped) then
+        TaskStartScenarioInPlace(ped,scenario,0,0)
+        SetEntityInvincible(ped, true)
+        SetBlockingOfNonTemporaryEvents(ped, true)  
+
+    end
+
+end)
 
 
 
 
 
 
-
-
+RegisterCommand("meuid", function(source, args)
+    
+    local id = NetworkGetNetworkIdFromEntity(PlayerPedId())
+    local ped = NetworkGetEntityFromNetworkId(id)
+    if DoesEntityExist(ped) then
+        DeleteEntity(ped)
+        print('ue')
+    end
+    
+end)
 
 RegisterCommand("tp", function(source, args)
     local WaypointHandle = GetFirstBlipInfoId(8)

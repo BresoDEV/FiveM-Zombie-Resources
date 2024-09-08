@@ -37,7 +37,7 @@ local itens = {
         Y = -381.1460,
         Z = 63.8009,
         Angulo = 325.0,
-        Scenario = "WORLD_HUMAN_CLIPBOARD"
+        Scenario = "WORLD_HUMAN_STAND_MOBILE"
     }, 
     {--weedfarm
         ped = "csb_jackhowitzer",
@@ -123,5 +123,12 @@ for _, elementos in pairs(itens) do
     --print(elementos.ped, elementos.X, elementos.Y, elementos.Z, elementos.Angulo, elementos.Scenario)
     SpawnPed(elementos.ped, elementos.X, elementos.Y, elementos.Z, elementos.Angulo, elementos.Scenario)
 
+
 end
+
+
+
+ 
+
+
 

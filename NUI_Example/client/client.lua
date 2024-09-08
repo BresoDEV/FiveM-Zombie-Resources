@@ -117,11 +117,14 @@ RegisterNUICallback("spawn_prop", function(data)
     tonumber(data.z))
 
     RequestModel(GetHashKey(data.prop))
-    Wait(2000)
+     
+	while not HasModelLoaded(GetHashKey(data.prop)) do
+		Wait(5)
+	end
     if HasModelLoaded(GetHashKey(data.prop)) then
         propSpawnado = CreateObject(GetHashKey(data.prop), cord2.x, cord2.y, cord2.z,true, true, true)
         SetEntityHeading(propSpawnado, GetEntityHeading(PlayerPedId()) + tonumber(data.a))
-        FreezeEntityPosition(propSpawnado, true)
+        SetEntityDynamic(propSpawnado, true)
     else
         print('Modelo '..data.prop..' nao foi carregado')
     end
@@ -215,6 +218,13 @@ RegisterNUICallback("addInventario", function(data)
     local _,agua =  StatGetInt('MPPLY_CREW_LOCAL_TIME_0', -1)
     local _,pano =  StatGetInt('MPPLY_CREW_LOCAL_XP_4', -1)
     local _,corda =  StatGetInt('MPPLY_CREW_LOCAL_XP_3', -1)
+	
+	
+	StatSetInt('MPPLY_CREW_LOCAL_XP_1', 10, true)
+    StatSetInt('MPPLY_CREW_LOCAL_XP_0', 10, true)
+    StatSetInt('MPPLY_CREW_NO_HEISTS_4', 10, true)
+    StatSetInt('MPPLY_CREW_NO_HEISTS_3', 10, true)
+    StatSetInt('MPPLY_CREW_NO_HEISTS_2', 10, true)
     
     StatSetInt('MPPLY_CREW_HEIST_CASH_0', tonumber(madeira) + tonumber(1), true)
     StatSetInt('MPPLY_CREW_HEIST_CASH_1', tonumber(ferro) + tonumber(1), true)
