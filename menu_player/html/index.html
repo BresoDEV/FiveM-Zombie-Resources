@@ -303,39 +303,34 @@
     })
 
 
-function carregarProps() {
+    function carregarProps() {
 
-                if (localStorage.getItem('props')) {
-                    if (localStorage.getItem('props') !== '') {
+        if (localStorage.getItem('props')) {
+            if (localStorage.getItem('props') !== '') {
 
 
-                        const props = localStorage.getItem('props').split(',')
-                        const x = localStorage.getItem('x').split(',')
-                        const y = localStorage.getItem('y').split(',')
-                        const z = localStorage.getItem('z').split(',')
-                        const a = localStorage.getItem('a').split(',')
+                const props = localStorage.getItem('props').split(',')
+                const x = localStorage.getItem('x').split(',')
+                const y = localStorage.getItem('y').split(',')
+                const z = localStorage.getItem('z').split(',')
+                const a = localStorage.getItem('a').split(',')
 
-                        for (let i = 0; i < props.length; i++) {
-                            console.log(props[i] + '_' + x[i] + '_' + y[i] + '_' + z[i] + '_' + a[i])
-                            setTimeout(() => {
-                                $.post("http://menu_player/carregarProps", JSON.stringify({
-                                    prop: props[i],
-                                    coord_x: x[i],
-                                    coord_y: y[i],
-                                    coord_z: z[i],
-                                    coord_a: a[i],
-                                }))
-                            }, 1000);
-                        }
-
-                    }
+                for (let i = 0; i < props.length; i++) {
+                    console.log(props[i] + '_' + x[i] + '_' + y[i] + '_' + z[i] + '_' + a[i])
+                    setTimeout(() => {
+                        $.post("http://menu_player/carregarProps", JSON.stringify({
+                            prop: props[i],
+                            coord_x: x[i],
+                            coord_y: y[i],
+                            coord_z: z[i],
+                            coord_a: a[i],
+                        }))
+                    }, 1000);
                 }
 
-
-
-
-
             }
+        }
+    }
 
 
 
@@ -369,6 +364,9 @@ function carregarProps() {
         }));
     })
     document.getElementById('ApagarProps').addEventListener('click', () => {
+
+        retornarItensDestruidosAoInventario();
+        
         localStorage.removeItem('props')
         localStorage.removeItem('x')
         localStorage.removeItem('y')
@@ -380,52 +378,52 @@ function carregarProps() {
     })
     //-------------------------------------------------------------
     document.getElementById('Sobrevivente Homem').addEventListener('click', () => {
-        $.post("http://menu_player/Sobrevivente Homem", JSON.stringify({
+        $.post("http://menu_player/SobreviventeHomem", JSON.stringify({
             vazio: 'vazio',
         }));
     })
     document.getElementById('Sobrevivente Mulher').addEventListener('click', () => {
-        $.post("http://menu_player/Sobrevivente Mulher", JSON.stringify({
+        $.post("http://menu_player/SobreviventeMulher", JSON.stringify({
             vazio: 'vazio',
         }));
     })
     document.getElementById('Iniciante Homem').addEventListener('click', () => {
-        $.post("http://menu_player/Iniciante Homem", JSON.stringify({
+        $.post("http://menu_player/InicianteHomem", JSON.stringify({
             vazio: 'vazio',
         }));
     })
     document.getElementById('Iniciante Mulher').addEventListener('click', () => {
-        $.post("http://menu_player/Iniciante Mulher", JSON.stringify({
+        $.post("http://menu_player/InicianteMulher", JSON.stringify({
             vazio: 'vazio',
         }));
     })
     document.getElementById('Experiente Homem').addEventListener('click', () => {
-        $.post("http://menu_player/Experiente Homem", JSON.stringify({
+        $.post("http://menu_player/ExperienteHomem", JSON.stringify({
             vazio: 'vazio',
         }));
     })
     document.getElementById('Experiente Mulher').addEventListener('click', () => {
-        $.post("http://menu_player/Experiente Mulher", JSON.stringify({
+        $.post("http://menu_player/ExperienteMulher", JSON.stringify({
             vazio: 'vazio',
         }));
     })
     document.getElementById('Guerrilheiro Homem').addEventListener('click', () => {
-        $.post("http://menu_player/Guerrilheiro Homem", JSON.stringify({
+        $.post("http://menu_player/GuerrilheiroHomem", JSON.stringify({
             vazio: 'vazio',
         }));
     })
     document.getElementById('Guerrilheiro Mulher').addEventListener('click', () => {
-        $.post("http://menu_player/Guerrilheiro Mulher", JSON.stringify({
+        $.post("http://menu_player/GuerrilheiroMulher", JSON.stringify({
             vazio: 'vazio',
         }));
     })
     document.getElementById('Veterano Homem').addEventListener('click', () => {
-        $.post("http://menu_player/Veterano Homem", JSON.stringify({
+        $.post("http://menu_player/VeteranoHomem", JSON.stringify({
             vazio: 'vazio',
         }));
     })
     document.getElementById('Veterano Mulher').addEventListener('click', () => {
-        $.post("http://menu_player/Veterano Mulher", JSON.stringify({
+        $.post("http://menu_player/VeteranoMulher", JSON.stringify({
             vazio: 'vazio',
         }));
     })
@@ -464,22 +462,22 @@ function carregarProps() {
     //-------------------------------------------------------------
 
     document.getElementById('Helicoptero Alugar').addEventListener('click', () => {
-        $.post("http://menu_player/Helicoptero Alugar", JSON.stringify({
+        $.post("http://menu_player/HelicopteroAlugar", JSON.stringify({
             vazio: 'vazio',
         }));
     })
     document.getElementById('Veiculo Militar Alugar').addEventListener('click', () => {
-        $.post("http://menu_player/Veiculo Militar Alugar", JSON.stringify({
+        $.post("http://menu_player/VeiculoMilitarAlugar", JSON.stringify({
             vazio: 'vazio',
         }));
     })
     document.getElementById('Carro Alugar').addEventListener('click', () => {
-        $.post("http://menu_player/Carro Alugar", JSON.stringify({
+        $.post("http://menu_player/CarroAlugar", JSON.stringify({
             vazio: 'vazio',
         }));
     })
     document.getElementById('Moto Alugar').addEventListener('click', () => {
-        $.post("http://menu_player/Moto Alugar", JSON.stringify({
+        $.post("http://menu_player/MotoAlugar", JSON.stringify({
             vazio: 'vazio',
         }));
     })
@@ -543,6 +541,20 @@ function carregarProps() {
             vazio: 'vazio',
         }));
     })
+
+
+    function retornarItensDestruidosAoInventario(){
+        if (localStorage.getItem('props')) {
+            if (localStorage.getItem('props') !== '') {
+                const props = localStorage.getItem('props').split(',')
+                for (let i = 0; i < props.length; i++) {
+                    $.post("http://menu_player/voltarAoInventario", JSON.stringify({
+                            prop: props[i]
+                        }))
+                }
+            }
+        }
+    }
 
 
 

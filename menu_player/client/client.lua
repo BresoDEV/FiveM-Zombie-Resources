@@ -35,6 +35,44 @@ function AlertaNUI(_cor,_msg)
 end
 
 
+function Retornar_Ao_Inventario(obj)
+    local stat = ''
+
+    if obj == 'prop_beach_fire' then
+        stat = 'MPPLY_CREW_LOCAL_XP_0'
+    end
+
+    if obj == 'prop_gazebo_01' then
+        stat = 'MPPLY_CREW_HEIST_CASH_2'
+    end
+
+    if obj == 'prop_tool_bench02' then
+        stat = 'MPPLY_CREW_NO_HEISTS_3'
+    end
+
+    if obj == 'prop_fnclink_02gate5' then
+        stat = 'MPPLY_CREW_NO_HEISTS_2'
+    end
+
+    if obj == 'prop_worklight_03a' then
+        stat = 'MPPLY_CREW_NO_HEISTS_4'
+    end
+
+    local _, pm = StatGetInt(stat, -1)
+    local final = tonumber(pm) + 1
+    StatSetInt(stat, tonumber(final), true)
+
+end
+
+
+RegisterNUICallback("voltarAoInventario", function(data)
+    ---RequestModel(GetHashKey(data.prop))
+    Retornar_Ao_Inventario(data.prop)
+end)
+
+
+
+
 RegisterNUICallback("carregarProps", function(data)
     print('Chamou a void')
     RequestModel(GetHashKey(data.prop))
@@ -214,6 +252,8 @@ RegisterNUICallback("ApagarUltimoProp", function()
         
         DeleteEntity(Objeto_spawn)
 
+        Retornar_Ao_Inventario(GetEntityArchetypeName(Objeto_spawn))
+
         SendNUIMessage({
             type = "alerta",
             texto = 'Objeto deletado',
@@ -285,16 +325,16 @@ function spawnCar(carro)
     SetModelAsNoLongerNeeded(vehicleName)
 end
 
-RegisterNUICallback("Helicoptero Alugar", function()
+RegisterNUICallback("HelicopteroAlugar", function()
    
 end)
-RegisterNUICallback("Veiculo Militar Alugar", function()
+RegisterNUICallback("VeiculoMilitarAlugar", function()
    
 end)
-RegisterNUICallback("Carro Alugar", function()
+RegisterNUICallback("CarroAlugar", function()
    
 end)
-RegisterNUICallback("Moto Alugar", function()
+RegisterNUICallback("MotoAlugar", function()
    
 end)
 RegisterNUICallback("TransporteBasicoAlugar", function()
@@ -372,34 +412,34 @@ RegisterNUICallback("Policial", function()
    
 end)
 ---------------------------------------------
-RegisterNUICallback("Sobrevivente Homem", function()
+RegisterNUICallback("SobreviventeHomem", function()
    
 end)
-RegisterNUICallback("Sobrevivente Mulher", function()
+RegisterNUICallback("SobreviventeMulher", function()
    
 end)
-RegisterNUICallback("Iniciante Homem", function()
+RegisterNUICallback("InicianteHomem", function()
    
 end)
-RegisterNUICallback("Iniciante Mulher", function()
+RegisterNUICallback("InicianteMulher", function()
    
 end)
-RegisterNUICallback("Experiente Homem", function()
+RegisterNUICallback("ExperienteHomem", function()
    
 end)
-RegisterNUICallback("Experiente Mulher", function()
+RegisterNUICallback("ExperienteMulher", function()
    
 end)
-RegisterNUICallback("Guerrilheiro Homem", function()
+RegisterNUICallback("GuerrilheiroHomem", function()
    
 end)
-RegisterNUICallback("Guerrilheiro Mulher", function()
+RegisterNUICallback("GuerrilheiroMulher", function()
    
 end)
-RegisterNUICallback("Veterano Homem", function()
+RegisterNUICallback("VeteranoHomem", function()
    
 end)
-RegisterNUICallback("Veterano Mulher", function()
+RegisterNUICallback("VeteranoMulher", function()
    
 end)
 ---------------------------------------------

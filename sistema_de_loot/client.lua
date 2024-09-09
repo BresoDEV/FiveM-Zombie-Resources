@@ -192,25 +192,23 @@ function lootZumbis()
 		end
 		
 		
-		
-		local cord = GetOffsetFromEntityInWorldCoords(prop,0.0,0.0,0.0)
-		if IsEntityAtCoord(PlayerPedId(), cord.x, cord.y, cord.z, 20.0, 20.0,20.0, 0, 1, 0) then
-			 
-			DrawText3D(GetEntityArchetypeName(prop),cord.x,cord.y,cord.z)
-        end
     end
 
 
 	for _, mortos in pairs(zumbisMortos) do
 		if DoesEntityExist(mortos) then
-			local cord = GetOffsetFromEntityInWorldCoords(mortos,0.0,0.0,0.0)
-			if IsEntityAtCoord(PlayerPedId(), cord.x, cord.y, cord.z, 20.0, 20.0,20.0, 0, 1, 0) then
-				 
-				DrawText3D('Aproxime-se para coletar',cord.x,cord.y,cord.z)
-				if IsEntityAtCoord(PlayerPedId(), cord.x, cord.y, cord.z, 1.0, 1.0,1.0, 0, 1, 0) then
-					DeleteEntity(mortos)
-					addLootAleatorio()
-				end
+            if IsPedOnFoot(PlayerPedId()) then
+			    local cord = GetOffsetFromEntityInWorldCoords(mortos,0.0,0.0,0.0)
+			    if IsEntityAtCoord(PlayerPedId(), cord.x, cord.y, cord.z, 20.0, 20.0,20.0, 0, 1, 0) then
+                
+			    	DrawText3D('Aperte [E] para coletar',cord.x,cord.y,cord.z)
+			    	if IsEntityAtCoord(PlayerPedId(), cord.x, cord.y, cord.z, 1.0, 1.0,1.0, 0, 1, 0) then
+			    		if IsControlJustPressed(0,38) then
+                            DeleteEntity(mortos)
+			    		    addLootAleatorio()
+			    	    end
+			    	end
+			    end
 			end
 		end
     end

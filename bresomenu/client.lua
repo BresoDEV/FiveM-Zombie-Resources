@@ -1,3 +1,5 @@
+--wait da velocidade dos addfloat e addint
+local waitVel = 50
 -- topo
 local corFundoTopoR = {
     valor = 0
@@ -108,7 +110,7 @@ local FonteOpcoesY = {
 
 --------------
 local tempoWait = {
-    valor = 250
+    valor = 50
 }
 
 -- nao modificar esses valores
@@ -212,6 +214,7 @@ function addFloatOption(txt, variavel, incremento, min, max)
     --if IsDisabledControlJustPressed(2, 109) or IsDisabledControlJustPressed(2, 175) then -- 6 addint
     if IsDisabledControlPressed(2, 109) or IsDisabledControlPressed(2, 175) then -- 6 addint
         if numOpcoes == optionIndex then
+            Wait(waitVel)
             if (variavel.valor + incremento) <= max then
                 variavel.valor = variavel.valor + incremento
                 return true
@@ -225,6 +228,7 @@ function addFloatOption(txt, variavel, incremento, min, max)
     --if IsDisabledControlJustPressed(2, 108) or IsDisabledControlJustPressed(2, 174) then -- 4 removeint
     if IsDisabledControlPressed(2, 108) or IsDisabledControlPressed(2, 174) then -- 4 removeint
         if numOpcoes == optionIndex then
+            Wait(waitVel)
             if (variavel.valor - incremento) >= min then
                 variavel.valor = variavel.valor - incremento
                 return true
@@ -265,6 +269,7 @@ function addIntOption(txt, variavel, incremento, min, max)
     --if IsDisabledControlJustPressed(2, 109) or IsDisabledControlJustPressed(2, 175) then -- 6 addint
     if IsDisabledControlPressed(2, 109) or IsDisabledControlPressed(2, 175) then -- 6 addint
         if numOpcoes == optionIndex then
+            Wait(waitVel)
             if (variavel.valor + incremento) <= max then
                 variavel.valor = variavel.valor + incremento
                 return true
@@ -278,6 +283,7 @@ function addIntOption(txt, variavel, incremento, min, max)
     --if IsDisabledControlJustPressed(2, 108) or IsDisabledControlJustPressed(2, 174) then -- 4 removeint
     if IsDisabledControlPressed(2, 108) or IsDisabledControlPressed(2, 174) then -- 4 removeint
         if numOpcoes == optionIndex then
+            Wait(waitVel)
             if (variavel.valor - incremento) >= min then
                 variavel.valor = variavel.valor - incremento
                 return true
@@ -354,7 +360,7 @@ function addTitle(titulo, menuatual, menuVoltar)
     -- backspace
     if keyPressed(TECLAS.BACKSPACE) then -- backspace
 		PlaySoundFrontend(-1, "BACK", "HUD_FRONTEND_DEFAULT_SOUNDSET", 0)
-        Citizen.Wait(50)
+        Citizen.Wait(tempoWait.valor)
         menuIndex = menuAnterior
         optionIndex = 1
     end

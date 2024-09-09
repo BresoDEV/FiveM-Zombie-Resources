@@ -239,26 +239,8 @@ RegisterCommand('info', function(source, args, rawCommand)
 end, false)
 
 ---------------------------------------------------------------------
-local pedJaFoiCriado = false
 
-RegisterNetEvent('spawnarPed')
 
-AddEventHandler('spawnarPed', function()
-    if not pedJaFoiCriado then
-        local hash = GetHashKey('mp_f_meth_01')
-        local Ped = CreatePed(26, hash, 50.2941, -381.1460, 63.8009, 0, 1, 0)
-        while not DoesEntityExist(Ped) do
-            Wait(500)
-        end 
-        SetEntityHeading(Ped, 325.0)
-        FreezeEntityPosition(Ped, true)
-        local vehNetId = NetworkGetNetworkIdFromEntity(Ped)
-        pedJaFoiCriado = true 
-        local source = source 
-        local scenario = 'WORLD_HUMAN_SMOKING'
-        TriggerClientEvent('aplicarScenarioPed',source,  vehNetId,scenario)
-    end
-end)
 
 ----------------------------------------------
 

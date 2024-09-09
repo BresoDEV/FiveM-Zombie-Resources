@@ -56,21 +56,37 @@ AddEventHandler('onClientGameTypeStart', function()
 
 end)
 
-
-
+-----------------------------
 --ao morrer
 local spawnPosMorrer = {
     vector3(49.0876, -373.3907, 64.8009),
     vector3(47.9125, -376.2928, 64.8009),
     vector3(47.1110, -379.0600, 64.8009)
 }
-AddEventHandler('playerSpawned', function()
-    local sc = spawnPosMorrer[math.random(1,#spawnPosMorrer)]
-    SetEntityCoords(PlayerPedId(),sc.x,sc.y,sc.z,false,false,false,true)
-    SetEntityHeading(PlayerPedId(),244.0)
-end)
+
+local morreu = false
+
+function RespawnAoMorrer()
+    if IsEntityDead(PlayerPedId(), true) then
+        morreu = true
+    end
+    if morreu == true then
+        if IsEntityAtCoord(PlayerPedId(), 273.4642, -1116.2220, 88.8147, 5.0, 5.0, 5.0, 0, 1, 0) then
+            local sc = spawnPosMorrer[math.random(1,#spawnPosMorrer)]
+            SetEntityCoords(PlayerPedId(),sc.x,sc.y,sc.z,false,false,false,true)
+            SetEntityHeading(PlayerPedId(),244.0)
+            morreu = false
+        end
+    end
+end
 
 
+
+
+
+
+
+--------------------------------------------------
 
 -- icone da base
 AddTextEntry('MYBLIP', 'Base')
@@ -126,6 +142,8 @@ Citizen.CreateThread(function()
 
         DisableIdleCamera(true)
 		
+
+        RespawnAoMorrer()
 
     end
 end)
@@ -314,7 +332,7 @@ Citizen.CreateThread(function()
                                         c.x, 
                                         c.y,
                                         c.z, 
-                                        0.0, 0.0, 0.0, 0.3, 0, 0, 0)
+                                        0.0, 0.0, 0.0, 0.2, 0, 0, 0)
 
                                                       
                                         UseParticleFxAsset("scr_michael2")

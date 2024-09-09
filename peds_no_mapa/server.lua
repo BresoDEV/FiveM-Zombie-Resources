@@ -61,74 +61,47 @@ local itens = {
         Y = -1641.3240,
         Z = 3.6405,
         Angulo = 294.5190,
-        Scenario = "WORLD_HUMAN_DRINKING"
+        Scenario = "WORLD_HUMAN_STAND_MOBILE"
     }
 }
 
-function SpawnPed(pedsss, x, y, z, a, scenario)
-    --local hash = GetHashKey(pedsss)
-    --RequestModel(hash)
-    --while not HasModelLoaded(hash) do
-    --    Wait(500)
-    --end
-    --local Ped = CreatePed(26, hash, x, y, z, 0, 1, 0)
-    --while not DoesEntityExist(Ped) do
-    --    Wait(500)
-    --end
-    --SetEntityHeading(Ped, a)
-    --FreezeEntityPosition(Ped, true)
-    --SetEntityInvincible(Ped, true)
-    --SetBlockingOfNonTemporaryEvents(Ped, true)
-    --SetModelAsNoLongerNeeded(hash)
-	
-	local hash = GetHashKey(pedsss)
-    RequestModel(hash)
-    
-
-    while not HasModelLoaded(hash) do
-        Wait(500)
-    end
-    local Ped = CreatePed(26, hash, x, y , z, 0, 1, 0)
-    while not DoesEntityExist(Ped) do
-        Wait(500)
-    end
-    SetModelAsNoLongerNeeded(hash)
-
-    while not NetworkRequestControlOfEntity(Ped) do
-        Wait(500)
-    end
-    
-    SetEntityHeading(Ped, a)
-    FreezeEntityPosition(Ped, true)
-    SetEntityInvincible(Ped, true)
-    SetBlockingOfNonTemporaryEvents(Ped, true)
-    SetModelAsNoLongerNeeded(hash)
-    --SetPedRelationshipGroupHash(Ped, 'PLAYER')
-	
-	--local my_group = GetPlayerGroup(PlayerPedId())
-    --SetPedAsGroupLeader(PlayerPedId(), my_group)
-    --SetPedAsGroupMember(Ped, my_group)
-    --GiveWeaponToPed(Ped, 453432689, 9999, 0, 1)
-    --SetPedNeverLeavesGroup(Ped, my_group)
-    --SetPedCombatAbility(Ped, 100000)
-    --SetPedCanSwitchWeapon(Ped, 1)
-	
-	 
-	TaskStartScenarioInPlace(Ped,scenario,0,0)
-
-end
-
-for _, elementos in pairs(itens) do
-
-    --print(elementos.ped, elementos.X, elementos.Y, elementos.Z, elementos.Angulo, elementos.Scenario)
-    SpawnPed(elementos.ped, elementos.X, elementos.Y, elementos.Z, elementos.Angulo, elementos.Scenario)
 
 
-end
+local pedsForamCriados = false
+
+RegisterNetEvent('spawnarPed')
 
 
 
+
+AddEventHandler('spawnarPed', function()
  
+    if pedsForamCriados == false then
+        for _, elementos in pairs(itens) do
+             
+    
+                local hash = GetHashKey(elementos.ped)
+                local Ped = CreatePed(26, hash, elementos.X, elementos.Y, elementos.Z, 0, 1, 0)
+    
+                while not DoesEntityExist(Ped) do
+                    Wait(500)
+                end  
+                SetEntityHeading(Ped, elementos.Angulo)
+                FreezeEntityPosition(Ped, true)
+                local vehNetId = NetworkGetNetworkIdFromEntity(Ped)
+                local sources = source 
 
+                 
+                print('vehNetId: '..vehNetId)
+                print('Scenario: '..elementos.Scenario)
 
-
+                TriggerClientEvent('aplicarScenarioPed',-1, vehNetId, elementos.Scenario)
+                
+                Wait(500)
+            
+        end
+        pedsForamCriados = true
+    end
+ 
+    
+end)
