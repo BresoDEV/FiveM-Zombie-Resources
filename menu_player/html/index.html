@@ -112,6 +112,7 @@
             </div>
 
             <div class="ct-lateral" id="lateral Armas">
+                <p class="opt" id="Lanterna">Lanterna</p>
                 <p class="opt" id="Facao">Facao</p>
                 <p class="opt" id="Taco">Pe de Cabra</p>
             </div>
@@ -154,26 +155,26 @@
                 </center>
             </div>
             <div class="ct-lateral-do-lateral" id="lateral Moto">
-                <p class="opt" id="Moto Alugar">Alugar</p>
+                <p class="opt" id="Moto Alugar">Alugar $1000</p>
                 <center>
                     <img src="imgs/ratbike.jpg" alt="">
                 </center>
             </div>
             <div class="ct-lateral-do-lateral" id="lateral Carro">
-                <p class="opt" id="Carro Alugar">Alugar</p>
+                <p class="opt" id="Carro Alugar">Alugar $3000</p>
                 <center>
                     <img src="imgs/dukes2.jpg" alt="">
                 </center>
             </div>
             <div class="ct-lateral-do-lateral" id="lateral Veiculo Militar">
-                <p class="opt" id="Veiculo Militar Alugar">Alugar</p>
+                <p class="opt" id="Veiculo Militar Alugar">Alugar $4000</p>
                 <center>
                     <img src="imgs/dune3.jpg" alt="">
                 </center>
             </div>
 
             <div class="ct-lateral-do-lateral" id="lateral Helicoptero">
-                <p class="opt" id="Helicoptero Alugar">Alugar</p>
+                <p class="opt" id="Helicoptero Alugar">Alugar $25000</p>
                 <center>
                     <img src="imgs/havok.jpg" alt="">
                 </center>
@@ -528,6 +529,13 @@
     })
     document.getElementById('Fogueira').addEventListener('click', () => {
         $.post("http://menu_player/Fogueira", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+
+    //---------------------------------
+    document.getElementById('Lanterna').addEventListener('click', () => {
+        $.post("http://menu_player/Lanterna", JSON.stringify({
             vazio: 'vazio',
         }));
     })

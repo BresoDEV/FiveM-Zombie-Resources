@@ -62,6 +62,16 @@ function Retornar_Ao_Inventario(obj)
     local final = tonumber(pm) + 1
     StatSetInt(stat, tonumber(final), true)
 
+    print('obj: -'..obj..'-')
+    print('stat: -'..stat..'-')
+
+    SendNUIMessage({
+        type = "alerta",
+        texto = 'Itens de criação do objeto deletado, voltaram ao inventario',
+        tempo = 3,
+        cor = 'lime'
+    })
+
 end
 
 
@@ -103,11 +113,17 @@ RegisterNUICallback("Sair", function()
     SetDisplay(false)
 end)
 
+RegisterNUICallback("Lanterna", function()
+    GiveWeaponToPed(PlayerPedId(), -1951375401, 1, 0, 1)
+    AlertaNUI('lime','Lanterna obtida')
+end)
+
 RegisterNUICallback("Facao", function()
-   
+    GiveWeaponToPed(PlayerPedId(),-581044007 , 1, 0, 1)
+    AlertaNUI('lime','Arma obtida')
 end)
 RegisterNUICallback("Taco", function()
-    GiveWeaponToPed(PlayerPedId(), 2067956739, 1, 0, 1)
+    GiveWeaponToPed(PlayerPedId(), -1786099057, 1, 0, 1)
     AlertaNUI('lime','Arma obtida')
 end)
 -----------------------------------------------
@@ -260,12 +276,7 @@ RegisterNUICallback("ApagarUltimoProp", function()
             tempo = 3,
             cor = 'lime'
         })
-        SendNUIMessage({
-            type = "alerta",
-            texto = 'Itens de criação do objeto deletado, voltaram ao inventario',
-            tempo = 3,
-            cor = 'lime'
-        })
+       
     else
         SendNUIMessage({
             type = "alerta",
@@ -297,7 +308,9 @@ RegisterNUICallback("Agua", function()
     end
 end)
 RegisterNUICallback("Fumar", function()
-   
+    TaskStartScenarioInPlace(PlayerPedId(),'WORLD_HUMAN_SMOKING_POT',0,0)
+    Wait(7000)
+    ClearPedTasks(PlayerPedId())
 end)
 -------------------------------------
 function spawnCar(carro)
@@ -325,31 +338,37 @@ function spawnCar(carro)
     SetModelAsNoLongerNeeded(vehicleName)
 end
 
-RegisterNUICallback("HelicopteroAlugar", function()
-   
-end)
-RegisterNUICallback("VeiculoMilitarAlugar", function()
-   
-end)
-RegisterNUICallback("CarroAlugar", function()
-   
-end)
-RegisterNUICallback("MotoAlugar", function()
-   
-end)
-RegisterNUICallback("TransporteBasicoAlugar", function()
+function AlugarCarro(carro,valor)
     local _, pm = StatGetInt("MP0_WALLET_BALANCE", -1)
-    if tonumber(pm) >= 500 then
+    if tonumber(pm) >= valor then
         ---------------------
-        spawnCar('caddy3')
+        spawnCar(carro)
         ---------------------
-        local final = tonumber(pm) - 500
+        local final = tonumber(pm) - valor
         StatSetInt('MP0_WALLET_BALANCE', tonumber(final), true)
         AlertaNUI('lime','Veiculo alugado')
     else
-        AlertaNUI('red','Aluguel custa $500')
+        AlertaNUI('red','Aluguel custa $'..valor)
     end
+end
+
+RegisterNUICallback("HelicopteroAlugar", function()
+   AlugarCarro('havok',25000)
 end)
+RegisterNUICallback("VeiculoMilitarAlugar", function()
+   AlugarCarro('dune3',4000)
+end)
+RegisterNUICallback("CarroAlugar", function()
+   AlugarCarro('dukes2',3000)
+end)
+RegisterNUICallback("MotoAlugar", function()
+    AlugarCarro('ratbike',1000)
+end)
+RegisterNUICallback("TransporteBasicoAlugar", function()
+    AlugarCarro('caddy3',500)
+end)
+
+
 ----------------------------------------------
 function spawnAmigo(nome)
     local hash = GetHashKey(nome)
@@ -413,37 +432,62 @@ RegisterNUICallback("Policial", function()
 end)
 ---------------------------------------------
 RegisterNUICallback("SobreviventeHomem", function()
-   
+    ResetarTraje()
+
 end)
 RegisterNUICallback("SobreviventeMulher", function()
-   
+   ResetarTraje()
+
 end)
 RegisterNUICallback("InicianteHomem", function()
-   
+   ResetarTraje()
+
 end)
 RegisterNUICallback("InicianteMulher", function()
-   
+   ResetarTraje()
+
 end)
 RegisterNUICallback("ExperienteHomem", function()
-   
+    ResetarTraje()
+
 end)
 RegisterNUICallback("ExperienteMulher", function()
-   
+   ResetarTraje()
+
 end)
 RegisterNUICallback("GuerrilheiroHomem", function()
-   
+    ResetarTraje()
+
 end)
 RegisterNUICallback("GuerrilheiroMulher", function()
-   
+    ResetarTraje()
+
 end)
 RegisterNUICallback("VeteranoHomem", function()
-   
+    ResetarTraje()
+
 end)
 RegisterNUICallback("VeteranoMulher", function()
-   
+    ResetarTraje()
+
 end)
 ---------------------------------------------
-
+function ResetarTraje()
+	SetPedComponentVariation(PlayerPedId(), 0, 0, 0, 2)--face
+	SetPedComponentVariation(PlayerPedId(), 1, 0, 0, 2)--head
+	SetPedComponentVariation(PlayerPedId(), 2, 0, 0, 2)--aircut
+	SetPedComponentVariation(PlayerPedId(), 3, 0, 0, 2)--torso
+	SetPedComponentVariation(PlayerPedId(), 4, 0, 0, 2)--legs
+	SetPedComponentVariation(PlayerPedId(), 5, 0, 0, 2)--hands
+	SetPedComponentVariation(PlayerPedId(), 6, 0, 0, 2)--shoes
+	SetPedComponentVariation(PlayerPedId(), 7, 0, 0, 2)--sp1
+	SetPedComponentVariation(PlayerPedId(), 8, 0, 0, 2)--sp2
+	SetPedComponentVariation(PlayerPedId(), 9, 0, 0, 2)--sp3
+	SetPedComponentVariation(PlayerPedId(), 10, 0, 0, 2)--decals
+	SetPedComponentVariation(PlayerPedId(), 11, 0, 0, 2)--tors2
+	ClearAllPedProps(PlayerPedId())
+	ClearPedDecorations(PlayerPedId())
+end
 
  
 ----------------
