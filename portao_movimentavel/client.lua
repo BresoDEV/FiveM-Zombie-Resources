@@ -29,10 +29,10 @@ RegisterCommand("portao", function(source, args)
         -- SetEntityDynamic(propSpawnado, true)
         FreezeEntityPosition(propSpawnado, true)
         SetEntityMaxHealth(propSpawnado,meuID)
-    else
-        print('Modelo ' .. data.prop .. ' nao foi carregado')
+    --else
+        --print('Modelo ' .. data.prop .. ' nao foi carregado')
     end
-    print('meuID: '..meuID)
+    --print('meuID: '..meuID)
 end)
 
 local grade = false
@@ -50,7 +50,7 @@ CreateThread(function()
 
             if grade then
 
-                local cord2 = GetOffsetFromEntityInWorldCoords(propSpawnado, 0.0, 0.0, 0.0)
+                local cord2 = GetOffsetFromEntityInWorldCoords(propSpawnado, -3.0, 0.0, 0.0)
                 if IsEntityAtCoord(PlayerPedId(), cord2.x, cord2.y, cord2.z, 10.0, 10.0, 10.0, 0, 1, 0) then
 
                     DrawText3D('Aperte [E] para abrir e fechar', cord2.x, cord2.y, cord2.z)
@@ -64,7 +64,7 @@ CreateThread(function()
                         end
                         local abrindo = true
 
-                        print('GetEntityMaxHealth: '..GetEntityMaxHealth(propSpawnado))
+                        --print('GetEntityMaxHealth: '..GetEntityMaxHealth(propSpawnado))
                         while abrindo do
 
                             SetEntityCollision(propSpawnado, false, false)
@@ -84,8 +84,9 @@ CreateThread(function()
                 end
 
             end
+            grade = false
         end
-        grade = false
+        
     end
 end)
 
