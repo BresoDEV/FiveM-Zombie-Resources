@@ -140,7 +140,8 @@ RegisterNUICallback("posicionar_ja_spawnado", function(data)
         tonumber(data.x), 
         tonumber(data.y), 
         tonumber(data.z))
-
+		
+		 
         SetEntityCoords(propSpawnado, cord2.x, cord2.y, cord2.z, 1, 0, 0, 0)
         
         SetEntityHeading(propSpawnado, GetEntityHeading(PlayerPedId()) + tonumber(data.a))
