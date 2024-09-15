@@ -92,16 +92,22 @@ RegisterNUICallback("carregarProps", function(data)
     --baixar um pouco as coord do portao
     if data.prop == 'prop_fnclink_03gate4' then
         data.coord_z = data.coord_z - 2.0
+        FreezeEntityPosition(props, true);
     end
 
     --baixar um pouco as coord da cerca
     if data.prop == 'prop_fnclink_02gate5' then
-        data.coord_z = data.coord_z - 2.0
+        data.coord_z = data.coord_z - 1.5
+        FreezeEntityPosition(props, true);
     end
      --baixar um pouco as coord da fogueira
     if data.prop == 'prop_beach_fire' then
-        data.coord_z = data.coord_z - 1.0
+        data.coord_z = data.coord_z - 0.8
+        FreezeEntityPosition(props, true);
     end
+
+   
+    
     
 
     local props = CreateObject(GetHashKey(data.prop), tonumber(data.coord_x), tonumber(data.coord_y),
@@ -109,7 +115,13 @@ RegisterNUICallback("carregarProps", function(data)
 
     SetEntityHeading(props, tonumber(data.coord_a))
 
-    FreezeEntityPosition(props, true);
+    
+    if data.prop == 'prop_gazebo_01' or  data.prop == 'prop_tool_bench02' or  data.prop == 'prop_worklight_03a' then
+        SetEntityDynamic(props, true);
+    else
+        FreezeEntityPosition(props, true);
+    end
+    
 
     SetEntityMaxHealth(props,PlayerPedId())--seta como meu
 
