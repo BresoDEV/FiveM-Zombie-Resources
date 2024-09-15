@@ -96,6 +96,8 @@ RegisterNUICallback("carregarProps", function(data)
 
     FreezeEntityPosition(props, true);
 
+    SetEntityMaxHealth(props,PlayerPedId())--seta como meu
+
     if data.prop == 'prop_beach_fire' then
         AddTextEntry('MYBLIP', 'Fogueira')
         local base = AddBlipForCoord(tonumber(data.coord_x), tonumber(data.coord_y), tonumber(data.coord_z))
@@ -217,6 +219,29 @@ RegisterNUICallback("Cerca", function()
         AlertaNUI('red','Voce nao possue uma cerca em seu inventario')
     end
 end)
+
+
+RegisterNUICallback("Portao", function()
+    local _,cerca  = StatGetInt('MPPLY_CREW_NO_HEISTS_2', -1)
+    if tonumber(cerca) >= 1 then
+        ----------------------------
+        local cord2 = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 3.0, 0.5, -1.0)
+        Objeto_spawn = CreateObject(GetHashKey("prop_fnclink_03gate4"), cord2.x, cord2.y, cord2.z,
+        GetEntityHeading(PlayerPedId()), true, true);
+        SetEntityHeading(Objeto_spawn, GetEntityHeading(PlayerPedId()))
+        FreezeEntityPosition(Objeto_spawn, true);
+        SetEntityMaxHealth(Objeto_spawn,PlayerPedId())--seta como meu pra poder movimentar
+        ----------------------------
+        cerca = tonumber(cerca)-1
+        StatSetInt('MPPLY_CREW_NO_HEISTS_2', tonumber(cerca), true)
+
+        AlertaNUI('lime','Cerca criada com sucesso')
+        
+    else
+        AlertaNUI('red','Voce nao possue uma cerca em seu inventario')
+    end
+end)
+
 
 RegisterNUICallback("Iluminacao", function()
     local _,luz  = StatGetInt('MPPLY_CREW_NO_HEISTS_4', -1)

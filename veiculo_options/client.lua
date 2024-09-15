@@ -23,11 +23,13 @@ function DrawText3D(text, x, y, z)
 end
 
 function trim(placa)
-    return (string.gsub(placa,"^%s*(.-)%s*$","%1"))
+    return string.gsub(placa, "%s+", "")
 end
 
 local timerLoop = 5
 
+local numeroDecimal
+local numeroHexadecimal
 
 function joaat(str)
     local hash = 0
@@ -37,8 +39,7 @@ function joaat(str)
     end
     return hash
 end
-local numeroDecimal = joaat(GetPlayerName(GetPlayerIndex()))
-local numeroHexadecimal = string.format("%X", numeroDecimal)
+
  
 
 
@@ -48,8 +49,11 @@ function opcoesCarro()
         local VehiclePool = GetGamePool("CVehicle")  
         for _, carro in pairs(VehiclePool) do
 
+            numeroDecimal = joaat(GetPlayerName(GetPlayerIndex()))
+            numeroHexadecimal = string.format("%X", numeroDecimal)
+
 			 
-            if tostring(numeroHexadecimal) == GetVehicleNumberPlateText(carro) then
+            if tostring(trim(numeroHexadecimal)) == trim(GetVehicleNumberPlateText(carro)) then
 				 
                 local minha_pos = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 0.0, 0.0)
                 local carro_pos = GetOffsetFromEntityInWorldCoords(carro, 0.0, 0.0, 0.0)

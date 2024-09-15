@@ -92,8 +92,8 @@ AddEventHandler('spawnarPed', function()
                 local sources = source 
 
                  
-                print('vehNetId: '..vehNetId)
-                print('Scenario: '..elementos.Scenario)
+                --print('vehNetId: '..vehNetId)
+                --print('Scenario: '..elementos.Scenario)
 
                 TriggerClientEvent('aplicarScenarioPed',-1, vehNetId, elementos.Scenario)
                 

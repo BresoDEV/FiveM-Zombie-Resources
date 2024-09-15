@@ -12,8 +12,8 @@ AddEventHandler('aplicarScenarioPed', function(e,scenario)
         TaskStartScenarioInPlace(ped,scenario,0,0)
         SetEntityInvincible(ped, true)
         SetBlockingOfNonTemporaryEvents(ped, true)  
-        print('Id recebido: '..e)
-        print('scenario recebido: '..scenario)
+        --print('Id recebido: '..e)
+        --print('scenario recebido: '..scenario)
     end
  
 end)

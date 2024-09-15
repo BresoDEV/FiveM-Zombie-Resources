@@ -121,7 +121,8 @@
                 <p class="opt" id="Fogueira">Fogueira</p>
                 <p class="opt" id="Cabana">Cabana</p>
                 <p class="opt" id="MesadeTrabalho">Mesa de Trabalho</p>
-                <p class="opt" id="Cerca">Cerca de Proteção</p>
+                <p class="opt" id="Cerca">Cerca de Proteção Fixa</p>
+                <p class="opt" id="Portao">Portao Movimentavel</p>
                 <p class="opt" id="Iluminacao">Iluminação</p>
                 <p>
                     <hr>
@@ -514,6 +515,11 @@
     })
     document.getElementById('Cerca').addEventListener('click', () => {
         $.post("http://menu_player/Cerca", JSON.stringify({
+            vazio: 'vazio',
+        }));
+    })
+    document.getElementById('Portao').addEventListener('click', () => {
+        $.post("http://menu_player/Portao", JSON.stringify({
             vazio: 'vazio',
         }));
     })
