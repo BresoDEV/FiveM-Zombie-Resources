@@ -61,6 +61,14 @@ RegisterCommand("alerta", function(source, args)
 	EndTextCommandPrint(4000, 1)
 end)
 
+RegisterCommand("delete", function(source, args)
+    local objPool = GetGamePool("CObject")
+        for _, propSpawnado in pairs(objPool) do
+            DeleteEntity(propSpawnado)
+            
+        end
+end)
+
 RegisterCommand("camera", function(source, args)
    
 	local hash = GetHashKey('csb_ramp_marine')

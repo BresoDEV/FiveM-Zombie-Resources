@@ -12,7 +12,7 @@ function DrawText3D(text, x, y, z)
 
 end
 
-local meuID = PlayerPedId()
+ 
 
 RegisterCommand("portao", function(source, args)
     local cord2 = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 3.0, 0.5, -1.0)
@@ -28,7 +28,7 @@ RegisterCommand("portao", function(source, args)
         SetEntityHeading(propSpawnado, GetEntityHeading(PlayerPedId()))
         -- SetEntityDynamic(propSpawnado, true)
         FreezeEntityPosition(propSpawnado, true)
-        SetEntityMaxHealth(propSpawnado,meuID)
+        SetEntityMaxHealth(propSpawnado,PlayerPedId())
     --else
         --print('Modelo ' .. data.prop .. ' nao foi carregado')
     end
@@ -44,7 +44,7 @@ CreateThread(function()
         local objPool = GetGamePool("CObject")
         for _, propSpawnado in pairs(objPool) do
 
-            if (GetEntityModel(propSpawnado) == GetHashKey('prop_fnclink_03gate4')) and GetEntityMaxHealth(propSpawnado) == meuID then
+            if (GetEntityModel(propSpawnado) == GetHashKey('prop_fnclink_03gate4')) and GetEntityMaxHealth(propSpawnado) == PlayerPedId() then
                 grade = true
             end
 

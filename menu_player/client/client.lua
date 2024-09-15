@@ -89,6 +89,21 @@ RegisterNUICallback("carregarProps", function(data)
     while not HasModelLoaded(GetHashKey(data.prop)) do
         Wait(500)
     end
+    --baixar um pouco as coord do portao
+    if data.prop == 'prop_fnclink_03gate4' then
+        data.coord_z = data.coord_z - 2.0
+    end
+
+    --baixar um pouco as coord da cerca
+    if data.prop == 'prop_fnclink_02gate5' then
+        data.coord_z = data.coord_z - 2.0
+    end
+     --baixar um pouco as coord da fogueira
+    if data.prop == 'prop_beach_fire' then
+        data.coord_z = data.coord_z - 1.0
+    end
+    
+
     local props = CreateObject(GetHashKey(data.prop), tonumber(data.coord_x), tonumber(data.coord_y),
         tonumber(data.coord_z), true, true, true);
 
