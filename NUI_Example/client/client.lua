@@ -133,19 +133,50 @@ RegisterNUICallback("spawn_prop", function(data)
     
 end)
 
+local spawn_mapa = true
+local spawn_veh = false
+
+RegisterNUICallback("SpawnPropNormal", function(data)
+    spawn_mapa = true
+    spawn_veh = false
+end)
+RegisterNUICallback("AttachPropVeiculo", function(data)
+    spawn_mapa = false
+    spawn_veh = true   
+end)
+
 RegisterNUICallback("posicionar_ja_spawnado", function(data)
     if DoesEntityExist(propSpawnado) then
 
-        local cord2 = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 
-        tonumber(data.x), 
-        tonumber(data.y), 
-        tonumber(data.z))
-		
-		 
-        SetEntityCoords(propSpawnado, cord2.x, cord2.y, cord2.z, 1, 0, 0, 0)
+        if spawn_mapa == true then
+            local cord2 = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 
+            tonumber(data.x), 
+            tonumber(data.y), 
+            tonumber(data.z))
+
+            SetEntityCoords(propSpawnado, cord2.x, cord2.y, cord2.z, 1, 0, 0, 0)
+            SetEntityHeading(propSpawnado, GetEntityHeading(PlayerPedId()) + tonumber(data.a))
+            FreezeEntityPosition(propSpawnado, true)
+        end
+
+        if spawn_veh == true then
+
+            local meucarro = GetVehiclePedIsIn(PlayerPedId(), 0)
+		    local cord2 = GetOffsetFromEntityInWorldCoords(meucarro, 
+            tonumber(data.x), 
+            tonumber(data.y), 
+            tonumber(data.z))
+
+            AttachEntityToEntity(
+	        propSpawnado, meucarro,0, 
+	        tonumber(data.x), 
+	        tonumber(data.y), 
+	        tonumber(data.z), 
+	        0.0,0.0,tonumber(data.a), 
+	        true, true, false, false, 1, true)
+
+        end
         
-        SetEntityHeading(propSpawnado, GetEntityHeading(PlayerPedId()) + tonumber(data.a))
-        FreezeEntityPosition(propSpawnado, true)
     end
     
 end)
@@ -154,7 +185,6 @@ RegisterNUICallback("deletarProp", function(data)
     if DoesEntityExist(propSpawnado) then
         DeleteEntity(propSpawnado)
     end
-    
 end)
 
 

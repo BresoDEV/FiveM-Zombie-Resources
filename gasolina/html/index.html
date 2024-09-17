@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css" type="text/css">
+    <link rel="stylesheet" href="reset.css" type="text/css">
+
+    <title>PenisMans</title>
+</head>
+<style>
+    p {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .barra {
+        width: 150px;
+        min-height: 25px;
+        border: 1px solid white;
+
+    }
+
+    .barra2 {
+        background-color: rgb(100, 237, 141);
+        width: 30px;
+        min-height: 25px;
+
+    }
+</style>
+
+<body>
+
+
+
+
+    <div class="menu" id="container">
+        <form id="form">
+            <div style="display: flex;">
+                <p id="X">&#9981;</p>
+                <div class="barra">
+                    <div class="barra2" id="gasolina"></div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
+</body>
+<script>
+
+    var valorRecebido = 0
+
+    setInterval(() => {
+
+        var valorFinal = 0
+
+        switch (parseInt(valorRecebido)) {
+            case 0: valorFinal = 150; break
+            case 1: valorFinal = 140; break
+            case 2: valorFinal = 130; break
+            case 3: valorFinal = 120; break
+            case 4: valorFinal = 110; break
+            case 5: valorFinal = 100; break
+            case 6: valorFinal = 90; break
+            case 7: valorFinal = 80; break
+            case 8: valorFinal = 70; break
+            case 9: valorFinal = 60; break
+            case 10: valorFinal = 50; break
+            case 11: valorFinal = 40; break
+            case 12: valorFinal = 30; break
+            case 13: valorFinal = 20; break
+            case 14: valorFinal = 10; break
+            case 15: valorFinal = 0; break
+        }
+
+
+        document.getElementById('gasolina').style.width = valorFinal + 'px'
+
+        const w = document.getElementById('gasolina').offsetWidth
+        if (w >= 0 && w < 50) {
+            document.getElementById('gasolina').style.background = 'red'
+        }
+        else if (w >= 50 && w < 100) {
+            document.getElementById('gasolina').style.background = 'orange'
+        }
+        else if (w >= 100 && w < 140) {
+            document.getElementById('gasolina').style.background = 'green'
+        }
+        else if (w >= 140) {
+            document.getElementById('gasolina').style.background = 'green'
+        }
+
+    }, 1);
+
+    function display(bool) {
+
+        if (bool) {
+            document.getElementById('container').style.display = 'block'
+        } else {
+            document.getElementById('container').style.display = 'none'
+        }
+    }
+
+
+
+    window.addEventListener('message', function (event) {
+        var item = event.data;
+        if (item.status == true) {
+
+            valorRecebido= parseInt(Math.floor(item.gasolina))
+
+            document.getElementById('container').style.display = 'block'
+
+        } else {
+            document.getElementById('container').style.display = 'none'
+        }
+
+    })
+    document.getElementById('container').style.display = 'none'
+
+</script>
+
+</html>

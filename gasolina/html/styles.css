@@ -1,0 +1,73 @@
+body {
+    background: none !important;
+}
+
+* {
+    color: rgb(255, 255, 255);
+    background-color: transparent;
+    border: 1px solid rgb(255, 255, 255);
+}
+
+.menu {
+    font-family: monospace;
+    font-size: 26px;
+    padding: 10px;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(17, 17, 17, 0.767);
+    border-radius: 10px;
+}
+
+.button {
+    cursor: pointer;
+    background-color: transparent;
+    padding: 2px;
+    font-size: 16px;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    user-select: none;
+    border: 1px solid rgb(255, 255, 255);
+    margin-top: 3px;
+    
+}
+ 
+
+.Sair {
+    background-color: rgb(207, 68, 105);
+    padding: 3px; 
+    border-radius: 7px;
+    color: aliceblue;
+    float: right;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 10px;
+    border: none;
+}
+
+select {
+    padding: 3px;
+    width: 100%;
+    border-radius: 7px;
+}
+option {
+    background-color: rgba(17, 17, 17, 0.767);
+}
+
+ 
+
+.menu-lateral {
+    font-family: monospace;
+    font-size: 16px;
+    padding: 10px;
+    position: fixed;
+    top: 10px;
+    left: 233px;
+    background-color: rgba(17, 17, 17, 0.767);
+     
+     
+    border-radius: 10px;
+}
+ 
+ 
