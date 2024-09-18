@@ -403,15 +403,87 @@ function drawOption(texto, x, y)
     EndTextCommandDisplayText(x, y);
 end
 
- 
 
+local mesaX = {
+    valor = 0.0
+}
+local mesaY = {
+    valor = 0.0
+}
+local mesaZ = {
+    valor = 0.0
+}
  
+local comidasX = {
+    valor = 0.0
+}
+local comidasY = {
+    valor = 0.0
+}
+local comidasZ = {
+    valor = 0.0
+}
+
+local tamanhoX = {
+    valor = 0.0
+}
+ 
+local tamanhoY = {
+    valor = 0.0
+}
+ 
+local tamanhoZ = {
+    valor = 0.0
+}
+ 
+ 
+ 
+function pool()
+
+    local objPool = GetGamePool("CObject")
+    for _, prop in pairs(objPool) do
+
+        if (GetEntityModel(prop) == GetHashKey('prop_tool_bench02')) then
+            local propCoord = GetOffsetFromEntityInWorldCoords(prop, mesaX.valor, mesaY.valor, mesaZ.valor)
+            DrawMarker(2, 
+            propCoord.x, propCoord.y, propCoord.z, 
+            0.0, 0.0, 0.0, 
+            0.0, 180.0, 0.0, 
+            tamanhoX.valor, tamanhoY.valor, tamanhoZ.valor, 
+            255, 0, 0,200, false, true, 2, nil, nil, false)
+        end
+        if (GetEntityModel(prop) == GetHashKey('v_ret_247shelves01')) then
+            local propCoord = GetOffsetFromEntityInWorldCoords(prop, comidasX.valor, comidasY.valor, comidasZ.valor)
+            DrawMarker(2, 
+            propCoord.x, propCoord.y, propCoord.z, 
+            0.0, 0.0, 0.0, 
+            0.0, 180.0, 0.0, 
+            tamanhoX.valor, tamanhoY.valor, tamanhoZ.valor, 
+            255, 0, 0,200, false, true, 2, nil, nil, false)
+        end
+
+    end
+end
 
 
 function DevMenu()
 
 
     addTitle('Dev Menu', 1, 0)
+
+    pool()
+
+    addFloatOption('mesaX', mesaX, 0.05, -10, 10)
+    addFloatOption('mesaY', mesaY, 0.05, -10, 10)
+    addFloatOption('mesaZ', mesaZ, 0.05, -10, 10)
+
+    addFloatOption('comidasX', comidasX, 0.05, -10, 10)
+    addFloatOption('comidasY', comidasY, 0.05, -10, 10)
+    addFloatOption('comidasZ', comidasZ, 0.05, -10, 10)
+	
+    addFloatOption('tamanhoX', tamanhoX, 0.05, -10, 10)
+    addFloatOption('tamanhoY', tamanhoY, 0.05, -10, 10)
+    addFloatOption('tamanhoZ', tamanhoZ, 0.05, -10, 10)
 	
 	 
      
@@ -432,27 +504,27 @@ function DevMenu()
 
     end
 
-    if addOption('grade') then
-
-        local cord2 = GetOffsetFromEntityInWorldCoords(PlayerPedId(),-2.0,0.6,0.0)
-        local Objeto_spawn = CreateObject(GetHashKey("prop_fnclink_02gate5"), cord2.x, cord2.y, cord2.z - 1,
-            GetEntityHeading(PlayerPedId()), true, true);
-       
-        SetEntityHeading(Objeto_spawn,GetEntityHeading(PlayerPedId()))
-
-        FreezeEntityPosition(Objeto_spawn, true);
-
-    end
+    --if addOption('grade') then
+--
+    --    local cord2 = GetOffsetFromEntityInWorldCoords(PlayerPedId(),-2.0,0.6,0.0)
+    --    local Objeto_spawn = CreateObject(GetHashKey("prop_fnclink_02gate5"), cord2.x, cord2.y, cord2.z - 1,
+    --        GetEntityHeading(PlayerPedId()), true, true);
+    --   
+    --    SetEntityHeading(Objeto_spawn,GetEntityHeading(PlayerPedId()))
+--
+    --    FreezeEntityPosition(Objeto_spawn, true);
+--
+    --end
     
 
-    if addOption('Teleport para Base') then
-        local i = PlayerPedId()
-        if IsPedInAnyVehicle(PlayerPedId(), 0) then
-            i = GetVehiclePedIsIn(PlayerPedId(), 0)
-        end
-        SetEntityCoords(i, -118.53456115723, -964.60687255859, 114.136655771484, 1, 0, 0, 0)
+   --if addOption('Teleport para Base') then
+   --    local i = PlayerPedId()
+   --    if IsPedInAnyVehicle(PlayerPedId(), 0) then
+   --        i = GetVehiclePedIsIn(PlayerPedId(), 0)
+   --    end
+   --    SetEntityCoords(i, -118.53456115723, -964.60687255859, 114.136655771484, 1, 0, 0, 0)
 
-    end
+   --end
     
 
     buttonMonitor();
