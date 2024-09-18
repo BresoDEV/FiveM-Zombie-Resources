@@ -22,15 +22,18 @@ local boleta = true
 Citizen.CreateThread(function()
     while boleta do
         Citizen.Wait(5)
+        print('rodando')
 
         if IsEntityOnScreen(PlayerPedId()) then
 
             if IsPedWalking(PlayerPedId()) then
 
-                if IsPlayerPlaying(PlayerPedId()) then
+                --if IsPlayerPlaying(PlayerPedId()) then
+                    print('trigando')
                     TriggerServerEvent('spawnarPed')
+                    print('trigado')
                     boleta = false
-                end
+                --end
             end
         end
 
